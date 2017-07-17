@@ -1,0 +1,8 @@
+--via D:\Winners\ePDK\includes\cfgs\sunii\compiler.via
+-DEPDK_DEBUG_LEVEL=EPDK_DEBUG_LEVEL_LOG_ALL
+-O3
+-I "D:\Winners\ePDK\interinc"
+-I "D:\Winners\ePDK\eLibs"
+-I "D:\Winners\ePDK\eLibs\libc"
+-I "D:\Winners\ePDK\eLibs\libc\misc\pub1\common"
+-I "D:\Winners\ePDK\eLibs\libc\misc\pub1\reg"

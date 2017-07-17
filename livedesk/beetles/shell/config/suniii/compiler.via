@@ -1,0 +1,12 @@
+--via D:\Winners\ePDK\includes\cfgs\sunii\compiler.via
+-O3
+-DEPDK_DEBUG_LEVEL=EPDK_DEBUG_LEVEL_LOG_ALL
+-I "D:\winners\ePDK\includes"
+-I "D:\winners\ePDK\includes\emod"
+-I "D:\winners\ePDK\livedesk\compass\include"
+-I "D:\winners\ePDK\livedesk\compass\shell"
+-I "D:\winners\ePDK\livedesk\compass\shell\Esh_builtins"
+-I "D:\winners\ePDK\livedesk\compass\shell\Esh_builtins\commands"
+-I "D:\winners\ePDK\livedesk\compass\shell\Esh_builtins\commands\doscript"
+-I "D:\winners\ePDK\livedesk\compass\shell\Esh_error"
+-I "D:\winners\ePDK\livedesk\compass\shell\Esh_support"

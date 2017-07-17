@@ -1,0 +1,54 @@
+
+注意：
+    1. 使用卡量产之前必须将eStudio更新到最新的版本。
+
+
+================================================================================
+sys_config.fex启动卡配置示例：
+
+[card_boot]
+;启动卡逻辑起始扇区
+logical_start   = 40960
+
+[card_boot0_para]
+;指定启动卡
+card_ctrl       = 0
+;1表示高速卡，0表示低速卡
+card_high_speed = 1
+;1表示1线卡，4表示4线卡
+card_line       = 1
+;启动卡的IO脚配置
+SDC_CLK	        = port:PA2<2><default><default><default>
+SDC_CMD		    = port:PA3<2><default><default><default>
+SDC_D0		    = port:PA1<2><default><default><default>
+;SDC_D1		    = port:PA0<2><default><default><default>
+;SDC_D2		    = port:PA5<2><default><default><default>
+;SDC_D3		    = port:PA4<2><default><default><default>
+
+
+================================================================================
+cardscript.fex是启动卡分区配置的文件，一般不建议用户修改。
+
+
+================================================================================
+卡量产的打包环境
+    目前卡量产系统包括内核（即epos.img）、驱动、shell（精简版）、量产程序和
+固件，用户需要将其打包烧到量产卡上，这个打包环境在phoenix目录下。下面简要说明
+一下目录的结构和各个文件的作用。
+    目录结构：
+    \ramfs                              内存分区（C盘）
+    \rootfs                             系统分区（D盘）
+    \fsbuild.bat                        量产卡文件系统生成脚本
+    \image.bat                          打包脚本
+    \image.cfg                          打包配置脚本
+    \part_config.fex                    量产卡分区配置文件，主要用于生成mbr
+    \ramfs.ini                          C盘配置文件
+    \rootfs.ini                         D盘配置文件
+    \update.bat                         内核、驱动更新脚本
+
+    C盘主要存放一些内核启动时使用的驱动和shell，D盘的内容包括驱动文件、模块
+文件、资源文件、量产程序、内核和用于量产的固件，其中用于量产的固件需要用户
+手动拷贝到rootfs目录下。
+
+    一般情况下，用户执行image.bat脚本即可得到ePDKv100.img，通过PhoenixCard工具
+将其烧到卡上就做成了一张量产卡。

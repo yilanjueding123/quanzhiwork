@@ -1,0 +1,26 @@
+;/*
+;********************************************************************************************************
+;*											        ePDK
+;*						            the Easy Portable/Player Develop Kits
+;*									           standby sample
+;*
+;*						        (c) Copyright 2006-2010, kevin.z China
+;*											All	Rights Reserved
+;*
+;* File    : scatter.sct
+;* By      : kevin.z
+;* Version : V1.00
+;********************************************************************************************************
+;*/
+
+
+LO_FIRST 0xffff8000 0x3000
+{
+    EXEC_MOD  0xffff8000
+    {
+        * ( ENTRY, +FIRST )
+        * (+RO)
+        * (+RW)
+        * (+ZI)
+	}
+}

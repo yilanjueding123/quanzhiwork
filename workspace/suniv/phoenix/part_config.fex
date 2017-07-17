@@ -1,0 +1,43 @@
+;--------------------------------------------------------
+;                   分区配置
+;  当前分区的个数.
+;
+;  [part_num]
+;      num     = 1        ;//有1个分区
+;
+;  partition 定义范例:
+;    [partition0]         ;//第0个分区
+;    class_name  = DISK   ;//设备类名, 如:"DISK".
+;    name        = ROOTFS ;//设备节点名.  如:"ROOTFS".
+;    size_hi     = 0      ;//分区大小的高32位, 单位: Kbyte.
+;    size_lo     = 2696   ;//分区大小的低32位, 单位: Kbyte.
+;
+; 注：1、name唯一, 不允许同名
+;     2、最大分区号为6
+;     3、class_name和name最大12个字符
+;     4、size_hi + size_lo = 0, 表示此分区不存在
+;--------------------------------------------------------
+[part_num]
+num = 2
+
+[partition0]
+    class_name  = DISK
+    name        = ROOTFS
+    size_hi     = 0
+    size_lo     = 65536
+
+
+[partition1]
+    class_name  = DISK
+    name        = SYSDATAFS
+    size_hi     = 0
+    size_lo     = 65536
+
+
+[down_num]
+down_num        = 1
+
+[download0]
+part_name       = ROOTFS
+pkt_name        = ROOTFS_000000000
+encrypt         = 0

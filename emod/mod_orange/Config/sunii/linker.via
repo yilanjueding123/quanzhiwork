@@ -1,0 +1,3 @@
+--symdefs=D:\Winners\ePDK\libs\sunii\orange.sym
+--scatter=D:\Winners\ePDK\eMod\mod_orange\config\mod_orange.sct
+--entry 0xe1800000

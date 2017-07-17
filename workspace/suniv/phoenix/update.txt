@@ -1,0 +1,47 @@
+update ramfs
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+系统找不到指定的文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+.\..\beetles\rootfs\apps\app_root.axf
+.\..\beetles\rootfs\apps\bg_default0.bgd
+.\..\beetles\rootfs\apps\init.axf
+.\..\beetles\rootfs\apps\lang.bin
+.\..\beetles\rootfs\apps\theme.bin
+.\..\beetles\rootfs\apps\desktop\app_root.desktop
+复制了 6 个文件
+.\..\beetles\rootfs\res\boot_ui\0.bmp
+.\..\beetles\rootfs\res\boot_ui\1.bmp
+.\..\beetles\rootfs\res\boot_ui\2.bmp
+.\..\beetles\rootfs\res\boot_ui\3.bmp
+.\..\beetles\rootfs\res\boot_ui\4.bmp
+.\..\beetles\rootfs\res\boot_ui\5.bmp
+.\..\beetles\rootfs\res\boot_ui\6.bmp
+.\..\beetles\rootfs\res\boot_ui\7.bmp
+.\..\beetles\rootfs\res\boot_ui\logo.bmp
+.\..\beetles\rootfs\res\fonts\font16.sft
+.\..\beetles\rootfs\res\sounds\chord.wav
+复制了 11 个文件
+update rootfs
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+系统找不到指定的文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。

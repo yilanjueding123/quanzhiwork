@@ -1,0 +1,17 @@
+--via D:\Winners\ePDK\includes\cfgs\sunii\compiler.via
+-DEPDK_DEBUG_LEVEL=EPDK_DEBUG_LEVEL_LOG_ALL
+-O3
+-I "D:\winners\ePDK\eLibs\CUnit\include"
+
+--diag_suppress=1293
+--diag_suppress=177
+--diag_suppress=550
+--diag_suppress=111
+--diag_suppress=68
+--diag_suppress=188
+--diag_suppress=223
+--diag_suppress=870
+--diag_suppress=1134
+--diag_suppress=2874
+--diag_suppress=186
+

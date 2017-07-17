@@ -1,0 +1,6 @@
+--via D:\Winners\ePDK\includes\cfgs\sunii\compiler.via
+-DEPDK_DEBUG_LEVEL=EPDK_DEBUG_LEVEL_LOG_ALL
+-O3
+-I "D:\Winners\ePDK\includes"
+-I "D:\winners\ePDK\includes\emod"
+-I "D:\winners\ePDK\livedesk\compass\include"

@@ -1,0 +1,19 @@
+---- eLIBs_mkdir Matches (18 in 14 files) ----
+Bmktable.c (f:\pri_f25\zhibo\work\livedesk\beetles\elibs\lib_ex\monkey\bookmark):        eLIBs_mkdir("z:\\txt\\");
+Bmktable.c (f:\pri_f25\zhibo\work\livedesk\beetles\elibs\lib_ex\monkey\bookmark):        eLIBs_mkdir("z:\\txt\\bmk");
+Doxcopy.c (f:\pri_f25\zhibo\work\livedesk\beetles\shell\esh_builtins\commands):    eLIBs_mkdir(dpath);
+Dsk_wkm_redef.h (f:\pri_f25\zhibo\work\livedesk\beetles\mod_desktop\engine\walkman\lib):#define g_mkdir               eLIBs_mkdir
+Elibs_stdio.c (f:\pri_f25\zhibo\work\elibs\libc\ansic):int eLIBs_mkdir(const char *dirname)
+Elibs_stdio.h (f:\pri_f25\zhibo\work\includes\elibs\libc):extern int eLIBs_mkdir(const char * /*dirname*/);
+Esh_platform_epos.h (f:\pri_f25\zhibo\work\livedesk\beetles\shell\esh_support):#define Esh_mkdir(dirname)                      eLIBs_mkdir(dirname)
+Gp_def.h (f:\pri_f25\zhibo\work\livedesk\beetles\applets\lib\fifo_db):#define g_mkdir               eLIBs_mkdir
+G_os_related.h (f:\pri_f25\zhibo\work\elibs\libc\misc\pub1\common):#define g_mkdir               eLIBs_mkdir
+Image.txt (f:\pri_f25\zhibo\work\emod\mod_orange):    4506  eLIBs_mkdir                0xe1828d78   Gb    1  Code  Hi   0xc
+Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):        0x00029370:    eb00b639    9...    BL       eLIBs_mkdir  ; 0x56c5c
+Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):        0x0004cfc8:    eb002723    #'..    BL       eLIBs_mkdir  ; 0x56c5c
+Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):    eLIBs_mkdir
+Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):    7754  eLIBs_mkdir                0x00056c5c   Gb    1  Code  Hi   0xc
+Os_related.c (f:\pri_f25\zhibo\work\emod\mod_orange\resreader\them):    return eLIBs_mkdir( dirname);
+Record_view_doc.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\record\record_doc\record_view):        if(eLIBs_mkdir(precord_doc->curSearchPath))
+Robin_redef.h (f:\pri_f25\zhibo\work\livedesk\beetles\elibs\lib_ex\robin\lib):#define g_mkdir               eLIBs_mkdir
+Sfte_os.h (f:\pri_f25\zhibo\work\emod\mod_orange\gui\core\font\sft\sfte\lib):#define g_mkdir               eLIBs_mkdir

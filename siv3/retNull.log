@@ -1,0 +1,10 @@
+GUI_CtrlWinGetAddData(H_WIN parm) 65
+GUI_ALLOC_h2p(GUI_HMEM parm) 48
+GUI_WinGetAttr(H_WIN parm) 8
+MemBlockAlloc(pmemblock parm) 5
+usb_mod_usb_get_intf_priv_data(struct usb_interface* parm) 2
+usb_mod_to_usb_interface(struct usb_host_virt_sub_dev* parm) 1
+usb_mod_interface_to_usbdev(struct usb_interface* parm) 1
+get_file_list_item(file_list_s* parm,int parm) 1
+dsk_reg_get_para_by_app(reg_app_e parm) 1
+GUI_WinGetParent(H_WIN parm) 1

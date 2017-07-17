@@ -1,0 +1,32 @@
+;/*
+;*******************************************************************************************************************
+;*                                                         				lemon module
+;*
+;*                             				Copyright(C), 2006-2008, Allwinner Microelectronic Co., Ltd.
+;*															 All Rights Reserved
+;*
+;*File Name£º mod_lemon.sct
+;*
+;*Author£º Steven.ZGJ
+;*
+;*Version 1.1.0
+;*
+;*Date  2008.5.23
+;*******************************************************************************************************************
+;*/
+;#include "syssct.sct"
+
+LO_FIRST 0xe1800000 0x100000
+{
+    EXEC_MOD  0xe1800000                           
+    {
+    	* (API_TBL, +first)
+        * (+RO) 
+        * (+RW) 
+        * (+ZI)
+	}
+    MAGIC  0xFFFF0000
+    {
+        * (MAGIC)
+    }
+}

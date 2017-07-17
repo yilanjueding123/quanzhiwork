@@ -1,0 +1,1 @@
+call cc screen_lock

@@ -1,0 +1,36 @@
+#**************************************************************************************************
+#                                  StartUp Script
+#
+#   Description : startup script for epdk platform.
+#   NOTE		: script syntax please refer to "ShellΩ≈±æ”Ô∑®.pdf"
+#				  under "winners\ePDK\apps\shell" directory.
+#
+#*************************************************************************************************
+
+# startup script work begin, notice information just for debug
+echo "Execute startup script begin.............."
+
+# first user disk will been formated if it is unformated
+# if you want modify volume name (daufalt is "MediaPlayer"),
+# you just need change "MediaPlayer" to what you want.
+
+update
+
+# Install modules
+startx
+
+# you can add your private process here
+# daufalt have nothing
+# ....
+
+# execute main desktop,
+# if have argument "/w", shell will wait "d:\\apps\\main.axf" until it exit,
+# if you don't want to wait,
+# you need delete argument "/w" by yourslef.
+# run  d:\\apps\\main.axf  /w
+
+# startup script work end, notice information just for debug
+echo "...............Execute startup script end"
+
+# quit shell
+# quit

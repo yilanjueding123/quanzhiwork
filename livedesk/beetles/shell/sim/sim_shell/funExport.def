@@ -1,0 +1,3 @@
+LIBRARY SIM_SHELL
+EXPORTS
+GetExecMgsInfo

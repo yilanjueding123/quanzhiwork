@@ -1,0 +1,14 @@
+call pk usb_host
+call pk usb_device
+call pk orchid
+call pk power
+call pk volume
+call pk keytone
+call pk fw_update
+call pk display
+call pk reg
+call pk audio_if
+call pk charset
+call pk langres
+call pk theme
+call pk auto_off

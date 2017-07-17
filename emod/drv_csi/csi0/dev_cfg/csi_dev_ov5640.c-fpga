@@ -1,0 +1,880 @@
+
+#include  "csi_dev_i.h"
+
+#if(CSI_DEV_TYPE == CSI_DEV_TYPE_OV5640)
+
+
+#define MIRROR  0//0 = normal, 1 = mirror
+#define FLIP        1//0 = normal, 1 = flip
+
+//每个device私有特性的配置都在此文件完成
+//包括reset pin，power down pin的操作
+//mclk的配置
+//各个模式下的i2c配置以及对应的csi配置
+//思路如下：
+//通常sensor的设置有
+//1.初始化
+//2.从任何模式到模式A
+//3.从任何模式到模式B
+//...
+//因此定义几个参数表：reg_init， reg_A，reg_B，...
+//在csi_dev_init函数中一次性配置reg_init
+//在需要的时候可以多次配置reg_A或reg_B...
+
+//==================全局变量dev_csi.c要调用========================
+//每个模组必须要有这些参数
+__bool				bProgressiveSrc= 1;    // Indicating the source is progressive or not
+__bool				bTopFieldFirst= 0;	   // VPO should check this flag when bProgressiveSrc is FALSE
+__u16				eAspectRatio=1000;		 //the source picture aspect ratio
+
+__u32 csi_mclk=24;//MHz
+
+__csi_mode_t csi_mode;//当前使用模式
+__csi_mode_all_t csi_mode_all;//支持的模式集
+__csi_conf_t conf;//csi配置参数
+
+__csi_color_effect_t csi_color_effect = CSI_COLOR_EFFECT_NORMAL;   //当前的csi_color_effect
+__csi_awb_t csi_awb = CSI_AWB_AUTO;   //当前的csi_awb
+__csi_ae_t csi_ae = CSI_AE_0;	//当前的csi_ae
+__csi_bright_t csi_bright = CSI_BRIGHT_0;	//当前的csi_bright
+__csi_contrast_t csi_contrast = CSI_CONTRAST_0;   //当前的csi_contrast
+__csi_band_t csi_band = CSI_BAND_50HZ;							//当前的csi_band
+//==================================================================================
+
+extern ES_FILE	 *fiic;//i2c句柄
+
+//==================全局变量但仅在此文件中用到========================
+__u32  last_mode_num = 0xff;
+__buf_scrab_mode_t	last_buf_mode = CSI_SC_NA;//区分单双csi工作状态，last_buf_mode为双，切换不reset power，单->单不reset，单->双reset一次
+
+static	__u8 da = 0x78>>1;//设备地址，为i2c写地址左移 1 bit
+static __u32 reg_step=2;//一次写操作所包含的寄存器地址+寄存器值的byte数
+//====================================================================
+#define COLORBAR 0
+#define RANDOM	 1
+#define SQUARE   2
+#define BLACK    3
+
+#define PAT      COLORBAR
+//#define TESTPAT_EN
+//#define ROLLING_EN
+
+#ifdef  TESTPAT_EN
+#define TEST_EN  (1<<7)
+#define ISP_CTL	 0x80
+#else
+#define TEST_EN  (0<<7)
+#define ISP_CTL  0xfb
+#endif
+
+#ifdef ROLLING_EN
+#define ROLLING  (1<<6)
+#else
+#define ROLLING  (0<<6)
+#endif
+
+
+static __u16 reg_5640[]=
+{
+	0x3103,0x11,//
+	0x3008,0x82,//reset
+	0xffff,0x1e,//delay 30ms
+	0x3008, 0x42, //power down
+	0x3103,0x03,//
+	0x3017,0xff,//
+	0x3018,0xff,//
+	0x3034,0x1a,//
+	0x3035,0x11,//
+	0x3036,0x46,//0x46->30fps
+	0x3037,0x13,//////div
+	0x3108,0x01,//
+	0x3824,0x01,//
+	0x3630,0x36,//
+	0x3631,0x0e,//
+	0x3632,0xe2,//
+	0x3633,0x12,//
+	0x3621,0xe0,//
+	0x3704,0xa0,//
+	0x3703,0x5a,//
+	0x3715,0x78,//
+	0x3717,0x01,//
+	0x370b,0x60,//
+	0x3705,0x1a,//
+	0x3905,0x02,//
+	0x3906,0x10,//
+	0x3901,0x0a,//
+	0x3731,0x12,//
+	0x3600,0x08,//
+	0x3601,0x33,//
+	0x3620,0x52,//
+	0x371b,0x20,//
+	0x471c,0x50,//
+	0x3a13,0x43,//
+	0x3a18,0x00,//
+	0x3a19,0xd8,//
+	0x3635,0x13,//
+	0x3636,0x03,//
+	0x3634,0x40,//
+	0x3622,0x01,//
+	0x3c01,0x34,//
+	0x3c04,0x28,//
+	0x3c05,0x98,//
+	0x3c06,0x00,//
+	0x3c07,0x08,//
+	0x3c08,0x00,//
+	0x3c09,0x1c,//
+	0x3c0a,0x9c,//
+	0x3c0b,0x40,//
+	0x3820,0x41,// binning
+	0x3821,0x01,// binning
+	0x3814,0x31,//
+	0x3815,0x31,//
+	0x3800,0x00,//
+	0x3801,0x00,//
+	0x3802,0x00,//
+	0x3803,0x04,//
+	0x3804,0x0a,//
+	0x3805,0x3f,//
+	0x3806,0x07,//
+	0x3807,0x9b,//
+	0x3808,0x02,//
+	0x3809,0x80,//
+	0x380a,0x01,//
+	0x380b,0xe0,//
+	0x380c,0x07,//
+	0x380d,0x68,//
+	0x380e,0x03,//
+	0x380f,0xd8,//
+	0x3810,0x00,//
+	0x3811,0x10,//
+	0x3812,0x00,//
+	0x3813,0x06,//
+	0x3618,0x00,//
+	0x3612,0x29,//
+	0x3708,0x64,//
+	0x3709,0x52,//
+	0x370c,0x03,//
+	0x3a00,0x78,
+	0x3a02,0x03,//
+	0x3a03,0xd8,//
+	0x3a08,0x01,//
+	0x3a09,0x27,//
+	0x3a0a,0x00,//
+	0x3a0b,0xf6,//
+	0x3a0e,0x03,//
+	0x3a0d,0x04,//
+	0x3a14,0x03,//
+	0x3a15,0xd8,//
+	0x4001,0x02,//
+	0x4004,0x02,//
+	0x3000,0x00,//
+	0x3002,0x1c,//
+	0x3004,0xff,//
+	0x3006,0xc3,//
+	0x300e,0x58,//
+	0x302c,0xc2,//bit[7:6]: output drive capability
+	0x4300,0x30,//
+	0x501f,0x00,//
+	0x4713,0x03,//
+	0x4407,0x04,//
+	0x440e,0x00,//
+	0x460b,0x35,//
+	0x460c,0x20,//
+	0x4837,0x22,
+	0x5000,0xa7,//
+	0x5001,0xa3,//
+	0x4740,0x02,//hsync,vsync,clock pol,reference to application note,spec is wrong 0x21
+									
+	//AWB   
+	0x3406,0x00,
+	0x5180,0xff,
+	0x5181,0x50,                	
+	0x5182,0x11,                	
+	0x5183,0x14,                	
+	0x5184,0x25,                	
+	0x5185,0x24,                	
+	0x5186,0x1c,                	
+	0x5187,0x18,                	
+	0x5188,0x18,                	
+	0x5189,0x6e,                	
+	0x518a,0x68,                	
+	0x518b,0xa8,                	
+	0x518c,0xa8,                	
+	0x518d,0x3d,                	
+	0x518e,0x3d,                	
+	0x518f,0x54,                	
+	0x5190,0x54,                	
+	0x5191,0xf8,                	
+	0x5192,0x04,                	
+	0x5193,0x70,                	
+	0x5194,0xf0,                	
+	0x5195,0xf0,                	
+	0x5196,0x03,                	
+	0x5197,0x01,                	
+	0x5198,0x05,                	
+	0x5199,0x7c, 
+	0x519a,0x04, 
+	0x519b,0x00, 
+	0x519c,0x06, 
+	0x519d,0x79, 
+	0x519e,0x38, 
+        	                         
+	 //Color                           
+	0x5381,0x1e, 
+	0x5382,0x5b, 
+	0x5383,0x08, 
+	0x5384,0x05, 
+	0x5385,0x72, 
+	0x5386,0x77, 
+	0x5387,0x6d, 
+	0x5388,0x4d, 
+	0x5389,0x20, 
+	0x538a,0x01, 
+	0x538b,0x98, 
+	//Sharpness/Denoise 	  
+	0x5300,0x08, 
+	0x5301,0x30,      
+	0x5302,0x2c, 
+	0x5303,0x1c, 
+	0x5304,0x08, 
+	0x5305,0x30, 
+	0x5306,0x1c, 
+	0x5307,0x2c, 
+	0x5309,0x08, 
+	0x530a,0x30, 
+	0x530b,0x04, 
+	0x530c,0x06, 
+
+	//Gamma        
+	0x5480,0x01, 
+	0x5481,0x06,  
+	0x5482,0x15,  
+	0x5483,0x28,  
+	0x5484,0x3b,  
+	0x5485,0x50,  
+	0x5486,0x5d,  
+	0x5487,0x6a,  
+	0x5488,0x75,  
+	0x5489,0x80,  
+	0x548a,0x8a,  
+	0x548b,0x9b,  
+	0x548c,0xaa,  
+	0x548d,0xc0,  
+	0x548e,0xd5,  
+	0x548f,0xe8,  
+	0x5490,0x20,  
+	  
+	//UV  
+	0x5580,0x04, 
+	0x5583,0x40, 
+	0x5584,0x10, 
+	0x5589,0x10, 
+	0x558a,0x00, 
+	0x558b,0xf8, 
+	
+//	{0x55,0x87,0x05},
+//	{0x55,0x88,0x09},
+	//Lens Shading 
+	0x5000,0xa7, 
+	0x5800,0x17, 
+	0x5801,0x10, 
+	0x5802,0x0e, 
+	0x5803,0x0e, 
+	0x5804,0x11, 
+	0x5805,0x1b, 
+	0x5806,0x0b, 
+	0x5807,0x07, 
+	0x5808,0x05, 
+	0x5809,0x06, 
+	0x580A,0x09, 
+	0x580B,0x0e, 
+	0x580C,0x06, 
+	0x580D,0x02, 
+	0x580E,0x00, 
+	0x580F,0x00, 
+	0x5810,0x03, 
+	0x5811,0x09, 
+	0x5812,0x06, 
+	0x5813,0x03, 
+	0x5814,0x00, 
+	0x5815,0x00, 
+	0x5816,0x03, 
+	0x5817,0x09, 
+	0x5818,0x0b, 
+	0x5819,0x08, 
+	0x581A,0x05, 
+	0x581B,0x05, 
+	0x581C,0x08, 
+	0x581D,0x0e, 
+	0x581E,0x18, 
+	0x581F,0x12, 
+	0x5820,0x0f, 
+	0x5821,0x0f, 
+	0x5822,0x12, 
+	0x5823,0x1a, 
+	0x5824,0x0a, 
+	0x5825,0x0a, 
+	0x5826,0x0a, 
+	0x5827,0x0a, 
+	0x5828,0x46, 
+	0x5829,0x2a, 
+	0x582A,0x24, 
+	0x582B,0x44, 
+	0x582C,0x24, 
+	0x582D,0x28, 
+	0x582E,0x08, 
+	0x582F,0x42, 
+	0x5830,0x40, 
+	0x5831,0x42, 
+	0x5832,0x28, 
+	0x5833,0x0a, 
+	0x5834,0x26, 
+	0x5835,0x24, 
+	0x5836,0x26, 
+	0x5837,0x28, 
+	0x5838,0x4a, 
+	0x5839,0x0a, 
+	0x583A,0x0c, 
+	0x583B,0x2a, 
+	0x583C,0x28, 
+	0x583D,0xce, 
+	 
+//	{0x50,0x25,0x00}, 
+	
+	//EV
+	0x3a0f,0x40, 
+	0x3a10,0x38, 
+	0x3a1b,0x40, 
+	0x3a1e,0x38, 
+	0x3a11,0x70, 
+	0x3a1f,0x14, 
+	
+	//yuyv seq
+	0x4300,0x30,	//YUYV
+	//0x4300,0x31,	//YVYU
+	//0x4300,0x32,	//UYVY
+	//0x4300,0x33,	//VYUY
+
+	0x503d,0x40&0x3c|TEST_EN|ROLLING|PAT,
+
+	//power down release
+	0x3008, 0x02,  
+};
+
+static __u16 reg_5640_VGA[]=
+{ //VGA:  640*480
+	
+	//timing                             
+	//640x480   
+	//power down
+	0x3008, 0x42,
+	//pll and clock setting
+	0x3034, 0x1a,                
+	0x3035, 0x31,
+	0x3036, 0x46,                
+	0x3037, 0x13,                
+	0x3108, 0x01,                
+	0x3824, 0x01,                
+	//0xffff, 0x64, //delay 100ms 
+	                         
+	0x3808, 0x02, //H size MSB   
+	0x3809, 0x80, //H size LSB   
+	0x380a, 0x01, //V size MSB   
+	0x380b, 0xe0, //V size LSB   
+	0x380c, 0x07, //HTS MSB      
+	0x380d, 0x68, //HTS LSB      
+	0x380e, 0x03, //VTS MSB      
+	0x380f, 0xd8, //LSB          
+	//banding step                
+	0x3a08, 0x01,//50HZ step MSB 
+	0x3a09, 0x27,//50HZ step LSB 
+	0x3a0a, 0x00,//60HZ step MSB 
+	0x3a0b, 0xf6,//60HZ step LSB 
+	0x3a0e, 0x03,//50HZ step max 
+	0x3a0d, 0x04,//60HZ step max 
+	
+	0x3618, 0x00,      
+	0x3612, 0x29,      
+	0x3709, 0x52,      
+	0x370c, 0x03,      
+	0x3a02, 0x03,  //60HZ max exposure limit MSB 
+	0x3a03, 0xd8,  //60HZ max exposure limit LSB     
+	0x3a14, 0x03,  //50HZ max exposure limit MSB     
+	0x3a15, 0xd8,  //50HZ max exposure limit LSB     
+	0x4004, 0x02,  //BLC line number 
+	
+	0x3503, 0x00,  //AEC eanble
+	0x3c07, 0x08,   //light meter 1 thereshold   
+  
+	0x3814, 0x31, //horizton subsample
+	0x3815, 0x31, //vertical subsample
+	0x3800, 0x00, //x address start high byte
+	0x3801, 0x00, //x address start low byte  
+	0x3802, 0x00,	//y address start high byte 
+	0x3803, 0x04+1, //y address start low byte 
+	0x3804, 0x0a, //x address end high byte
+	0x3805, 0x3f, //x address end low byte 
+	0x3806, 0x07, //y address end high byte
+	0x3807, 0x9b+1, //y address end low byte 
+	0x3810, 0x00, //isp hortizontal offset high byte
+	0x3811, 0x10, //isp hortizontal offset low byte
+	0x3812, 0x00, //isp vertical offset high byte
+	0x3813, 0x06,	//isp vertical offset low byte
+	
+	0x5308, 0x65,		//sharpen manual
+	0x5302, 0x00,		//sharpen offset 1
+	0x4002, 0x45,		//BLC related
+	0x4005, 0x18,		//BLC related
+	   
+   
+	
+	0x4837, 0x22,  //PCLK period    
+	0x5001, 0xa3,  //ISP effect
+	
+	0x302c, 0x82,//bit[7:6]: output drive capability
+						//00: 1x   01: 2x  10: 3x  11: 4x 
+	//power down release
+	0x3008, 0x02,
+//	//0xffff, 0x64,//delay 100ms
+};
+static __u16 reg_5640_HD[]=
+{
+//power down
+	0x3008,0x42,
+//	//pll and clock setting
+	0x3034,0x18,
+	0x3035,0xf1,	//0x11:60fps 0x21:30fps 0x41:15fps
+	0x3036,0x54,
+	0x3037,0x13,
+	0x3108,0x01, //0x01
+	0x3824,0x01,
+	0xffff,0x05,//delay 5ms
+	0x3808,0x05,	//H size MSB
+	0x3809,0x00,	//H size LSB
+	0x380a,0x02,	//V size MSB
+	0x380b,0xd0,	//V size LSB
+	0x380c,0x07,	//HTS MSB        
+	0x380d,0x64,	//HTS LSB   
+	0x380e,0x02,	//VTS MSB        
+	0x380f,0xe4,	//LSB       
+	0x3a08,0x00, //50HZ step MSB 
+	0x3a09,0xdd, //50HZ step LSB 
+	0x3a0a,0x00, //60HZ step MSB 
+	0x3a0b,0xb8, //60HZ step LSB 
+	0x3a0e,0x03, //50HZ step max 
+	0x3a0d,0x04, //60HZ step max 
+	0x3c07,0x07, //light meter 1 thereshold   
+	0x3814,0x31, //horizton subsample
+	0x3815,0x31, //vertical subsample
+	0x3800,0x00, //x address start high byte
+	0x3801,0x00, //x address start low byte  
+	0x3802,0x00,	//y address start high byte 
+	0x3803,0xfa, //y address start low byte 
+	0x3804,0x0a, //x address end high byte
+	0x3805,0x3f, //x address end low byte 
+	0x3806,0x06, //y address end high byte
+	0x3807,0xa9, //y address end low byte 
+	0x3810,0x00, //isp hortizontal offset high byte
+	0x3811,0x10, //isp hortizontal offset low byte
+	0x3812,0x00, //isp vertical offset high byte
+	0x3813,0x04,	//isp vertical offset low byte
+	0x4002,0x45,		//BLC related
+	0x4005,0x18,		//BLC related
+	0x3618,0x00,
+	0x3612,0x29,
+	0x3709,0x52,
+	0x370c,0x03,
+	0x3a02,0x02, //60HZ max exposure limit MSB 
+	0x3a03,0xe0, //60HZ max exposure limit LSB 
+	0x3a14,0x02, //50HZ max exposure limit MSB 
+	0x3a15,0xe0, //50HZ max exposure limit LSB 
+	0x4004,0x02, //BLC line number
+	0x3002,0x1c, //reset JFIFO SFIFO JPG
+	0x3006,0xc3, //enable xx clock
+	0x460b,0x37,	//debug mode
+	0x460c,0x20, //PCLK Manuale
+	0x4837,0x16, //PCLK period
+	0x5001,0x83, //ISP effect
+	0x302c,0x42,//bit[7:6]: output drive capability
+	
+	//power down release
+	0x3008, 0x02,
+};
+
+static __u16 reg_5640_FHD[]=
+{ //1080: 1920*1080 
+	//power down
+	0x3008, 0x42,
+	//pll and clock setting
+	0x3034, 0x1a,
+	0x3035, 0x11,	//0x11:30fps 0x21:15fps
+	0x3036, 0x69,  //0x69 0x46
+	0x3037, 0x13,
+	0x3108, 0x01,
+	0x3824, 0x01,
+	//0xffff, 0xc8,//delay 200ms,//delay 100ms
+	//timing
+	//1920x1080
+	0x3808, 0x07,	//H size MSB
+	0x3809, 0x80,	//H size LSB
+	0x380a, 0x04,	//V size MSB
+	0x380b, 0x38,	//V size LSB
+	0x380c, 0x09,	//HTS MSB        0x9c4 0x7d0
+	0x380d, 0xc4,	//HTS LSB
+	0x380e, 0x04,	//VTS MSB      0x460 0x448
+	0x380f, 0x60,	//VTS LSB
+	//banding step
+	0x3a08, 0x01, //50HZ step MSB 
+	0x3a09, 0x50, //50HZ step LSB 
+	0x3a0a, 0x01, //60HZ step MSB 
+	0x3a0b, 0x18, //60HZ step LSB 
+	0x3a0e, 0x03, //50HZ step max 
+	0x3a0d, 0x04, //60HZ step max 
+	
+	0x3c07, 0x07, //light meter 1 thereshold   
+	0x3814, 0x11, //horizton subsample
+	0x3815, 0x11, //vertical subsample
+	0x3800, 0x01, //x address start high byte
+	0x3801, 0x50, //x address start low byte  
+	0x3802, 0x01,	//y address start high byte 
+	0x3803, 0xb2+1, //y address start low byte 
+	0x3804, 0x08, //x address end high byte
+	0x3805, 0xef, //x address end low byte 
+	0x3806, 0x05, //y address end high byte
+	0x3807, 0xf1+1, //y address end low byte 
+	0x3810, 0x00, //isp hortizontal offset high byte
+	0x3811, 0x10, //isp hortizontal offset low byte
+	0x3812, 0x00, //isp vertical offset high byte
+	0x3813, 0x04,	//isp vertical offset low byte
+	
+	0x5308, 0x65,		//sharpen manual
+	0x5302, 0x00,		//sharpen offset 1
+	0x4002, 0x45,		//BLC related
+	0x4005, 0x18,		//BLC related
+	
+	0x3618, 0x04,
+	0x3612, 0x2b,
+	0x3709, 0x12,
+	0x370c, 0x00,
+	0x3a02, 0x04, //60HZ max exposure limit MSB 
+	0x3a03, 0x60, //60HZ max exposure limit LSB 
+	0x3a14, 0x04, //50HZ max exposure limit MSB 
+	0x3a15, 0x60, //50HZ max exposure limit LSB 
+	
+	0x4004, 0x06, //BLC line number
+	0x3002, 0x1c, //reset JFIFO SFIFO JPG
+	0x3006, 0xc3, //enable xx clock
+	0x460b, 0x37,	//debug mode
+	0x460c, 0x20, //PCLK Manuale
+	0x4837, 0x16, //PCLK period
+	0x5001, 0x83, //ISP effect
+	0x3503, 0x00,//AEC enable
+	
+	0x302c, 0x42,//bit[7:6]: output drive capability
+						//00: 1x   01: 2x  10: 3x  11: 4x 
+	//power down release
+	0x3008, 0x02,     
+	//0xffff, 0x64,//delay 100ms
+};
+
+__s32  csi_power_on(void)
+{		
+		
+//	csi_pwdn(1);//pwdn=1
+//	csi_rst(1);//rst=1
+		
+//	csi_pwren(0);//pwr=0
+//	esKRNL_TimeDly(1);//shut sensor power first in case system already open power before pull pwdn and reset
+//	csi_pwren(1);//pwr=1
+	esKRNL_TimeDly(1);
+	csi_pwdn(0);//pwdn=0
+	esKRNL_TimeDly(1);
+	csi_rst(1);//rst=1
+	esKRNL_TimeDly(1);	
+	csi_rst(0);//rst=0
+	esKRNL_TimeDly(1);
+	csi_rst(1);//rst=1
+
+	return EPDK_OK;
+}
+
+__s32  csi_power_off(void)
+{
+	csi_pwdn(1);//pwdn=1 
+	csi_rst(0);//rst=0
+//	csi_pwren(0);//pwr=0
+	esKRNL_TimeDly(1);	
+	return EPDK_OK;
+}
+
+__s32  csi_clk_on(void)
+{
+	csi_mclk_on_off(1);
+	return EPDK_OK;
+}
+
+__s32  csi_clk_off(void)
+{
+	csi_mclk_on_off(0);
+	return EPDK_OK;
+}
+
+__s32 block_write(ES_FILE * hdl_iic, __u16 slv_addr, __u16 *reg, __u32 length)
+{
+	__u32 i=0;
+	__s32 ret=EPDK_FAIL;
+  
+	for (i=0;i<length;i+=reg_step)
+	{
+		if(iic_write_16_8_onetime(hdl_iic,slv_addr,reg[i],reg[i+1])!= EPDK_OK)
+		{
+			__wrn("csi[0] iic write fail 0x%02X%02X = 0x%02X\n",reg[i],reg[i+1],reg[i+2]);
+		}
+		if (i==0)esKRNL_TimeDly(1);//must wait
+		//__inf("csi iic write %d, %x = %x\n", ret, reg[i],reg[i+1]);
+	}
+  
+	return ret;
+}
+
+
+//设备模式设置函数，配置设备，同时根据设备配置相应的csi设置
+__s32 csi_dev_set_mode(__u32 mode)
+{
+	//__u32 i = 0;
+	__u16 *reg_table;//根据sensor的iic宽度而定__u8还是__u16或其他
+	__u32 reg_table_len;
+  
+	if (last_mode_num==mode){
+		__inf("no need to change csi[0] mode!\n");
+	}	
+  
+	else {
+		__inf("csi[0] csi_dev_set_mode[%d]!\n", mode);		   
+		csi_mode = csi_mode_all.csi_mode[mode]; 
+
+		switch (mode){
+			case 0:{
+				reg_table = reg_5640_VGA;
+				reg_table_len = sizeof(reg_5640_VGA);
+				conf.input_fmt	= CSI_YUV422;
+				conf.output_fmt = CSI_UV_CB_YUV422;//CSI_PLANAR_YUV422;//420 for encode;422 for picture
+				conf.field_sel	= CSI_EVEN;
+				conf.seq		= CSI_YUYV;
+				conf.vref		= CSI_HIGH;
+				conf.href		= CSI_HIGH;
+				conf.clock	= CSI_RISING;
+				CSI_set_base((CSI_PORT==0x00)?0x00:0x01);
+				CSI_configure(&conf);
+				CSI_set_size(0, csi_mode.size.width*2, 0, csi_mode.size.height, csi_mode.size.width);
+				break;
+			}
+			case 1:{
+				reg_table = reg_5640_VGA;
+				reg_table_len = sizeof(reg_5640_VGA);
+				conf.input_fmt	= CSI_YUV422;
+				conf.output_fmt = CSI_UV_CB_YUV420;//CSI_PLANAR_YUV420;//420 for encode;422 for picture
+				conf.field_sel	= CSI_EVEN;
+				conf.seq		= CSI_YUYV;
+				conf.vref		= CSI_HIGH;
+				conf.href		= CSI_HIGH;
+				conf.clock	= CSI_RISING;
+				CSI_set_base((CSI_PORT==0x00)?0x00:0x01);
+				CSI_configure(&conf);
+				CSI_set_size(0, csi_mode.size.width*2, 0, csi_mode.size.height, csi_mode.size.width);
+				break;
+			}
+			case 2:{
+				reg_table = reg_5640_HD;
+				reg_table_len = sizeof(reg_5640_HD);
+				conf.input_fmt	= CSI_YUV422;
+				conf.output_fmt = CSI_UV_CB_YUV420;//CSI_PLANAR_YUV422;//420 for encode;422 for picture
+				conf.field_sel	= CSI_EVEN;
+				conf.seq		= CSI_YUYV;
+				conf.vref		= CSI_HIGH;
+				conf.href		= CSI_HIGH;
+				conf.clock	= CSI_RISING;
+				CSI_set_base((CSI_PORT==0x00)?0x00:0x01);
+				CSI_configure(&conf);
+				CSI_set_size(0, csi_mode.size.width*2, 0, csi_mode.size.height, csi_mode.size.width);
+				break;
+			}
+			case 3:{
+				reg_table = reg_5640_FHD;
+				reg_table_len = sizeof(reg_5640_FHD);			
+				conf.input_fmt	= CSI_YUV422;
+				conf.output_fmt = CSI_UV_CB_YUV420;//CSI_PLANAR_YUV420;//420 for encode;422 for picture
+				conf.field_sel	= CSI_EVEN;
+				conf.seq		= CSI_YUYV;
+				conf.vref		= CSI_HIGH;
+				conf.href		= CSI_HIGH;
+				conf.clock	= CSI_RISING;
+				CSI_set_base((CSI_PORT==0x00)?0x00:0x01);
+				CSI_configure(&conf);
+				CSI_set_size(0, csi_mode.size.width*2, 0, csi_mode.size.height, csi_mode.size.width);
+				break;
+			}
+		}
+
+	
+		//设备的设置
+		block_write(fiic,da,reg_table,reg_table_len);
+	
+		last_buf_mode=csi_mode.csi_buf_scrab_mode;
+		last_mode_num=mode;
+		__inf("set mode %d finished! buf_scrab_mode=%d (0=CSI0, 2=01LR, 4=01UD, 5/7=TDM_2/4CH)\n", mode, last_buf_mode);
+	}
+	return EPDK_OK;
+}
+
+
+__s32  csi_dev_init(void)
+{
+	//__u32 i = 0;
+	
+	iic_set_clock(fiic, 200*1000);//200*1000=200kHz
+  
+	//=======针对5642，init中暂时只做mode structure的初始化，不配置sensor，电源、使能等操作全部在set_mode中配置========
+	__inf("OV5640 csi_0_dev_init......\n");
+
+	//填写本设备支持的模式
+	csi_mode_all.number = 4;//所支持模式数量
+	//这些设置都是指输出的数据参数，为了传递给显示或者编码时的帧参数
+	//640*480@30#yuv422
+	csi_mode_all.csi_mode[0].color_format = PIXEL_YUV422;//格式
+	csi_mode_all.csi_mode[0].component_seq = YUV_SEQ_UVUV;//排列顺序
+	csi_mode_all.csi_mode[0].store_mode = YUV_MOD_UV_NON_MB_COMBINED;//YUV_MOD_NON_MB_PLANAR;//存储格式
+	csi_mode_all.csi_mode[0].size.width = 640;//宽
+	csi_mode_all.csi_mode[0].size.height = 480;//高
+	csi_mode_all.csi_mode[0].frame_rate = 30000;//帧率，单位Hz
+	csi_mode_all.csi_mode[0].frame_period = 33333;//帧长（=1/帧率，单位us）
+	csi_mode_all.csi_mode[0].color_space = BT601;//色彩空间
+	csi_mode_all.csi_mode[0].csi_buf_scrab_mode = CSI0_FULL;
+	//640*480@30#yuv420
+	csi_mode_all.csi_mode[1].color_format = PIXEL_YUV420;
+	csi_mode_all.csi_mode[1].component_seq = YUV_SEQ_UVUV;
+	csi_mode_all.csi_mode[1].store_mode = YUV_MOD_UV_NON_MB_COMBINED;
+	csi_mode_all.csi_mode[1].size.width = 640;
+	csi_mode_all.csi_mode[1].size.height = 480;
+	csi_mode_all.csi_mode[1].frame_rate = 30000;
+	csi_mode_all.csi_mode[1].frame_period = 33333;
+	csi_mode_all.csi_mode[1].color_space = BT601;
+	csi_mode_all.csi_mode[1].csi_buf_scrab_mode = CSI0_FULL;
+	//1280*720@30#yuv420
+	csi_mode_all.csi_mode[2].color_format = PIXEL_YUV420;
+	csi_mode_all.csi_mode[2].component_seq = YUV_SEQ_UVUV;
+	csi_mode_all.csi_mode[2].store_mode = YUV_MOD_UV_NON_MB_COMBINED;
+	csi_mode_all.csi_mode[2].size.width = 1280;
+	csi_mode_all.csi_mode[2].size.height = 720;
+	csi_mode_all.csi_mode[2].frame_rate = 30000;
+	csi_mode_all.csi_mode[2].frame_period = 33333;
+	csi_mode_all.csi_mode[2].color_space = BT601;
+	csi_mode_all.csi_mode[2].csi_buf_scrab_mode = CSI0_FULL;
+	//1920*1080@30#yuv420
+	
+	csi_mode_all.csi_mode[3].color_format = PIXEL_YUV420;
+	csi_mode_all.csi_mode[3].component_seq = YUV_SEQ_UVUV;
+	csi_mode_all.csi_mode[3].store_mode = YUV_MOD_UV_NON_MB_COMBINED;
+	csi_mode_all.csi_mode[3].size.width = 1920;
+	csi_mode_all.csi_mode[3].size.height = 1080;
+	csi_mode_all.csi_mode[3].frame_rate = 30000;
+	csi_mode_all.csi_mode[3].frame_period = 33333;
+	csi_mode_all.csi_mode[3].color_space = BT601;
+	csi_mode_all.csi_mode[3].csi_buf_scrab_mode = CSI0_FULL;
+/*
+	//2592*1944@7.5#yuv422
+	csi_mode_all.csi_mode[4].color_format = PIXEL_YUV422;//格式
+	csi_mode_all.csi_mode[4].component_seq = YUV_SEQ_UVUV;//排列顺序
+	csi_mode_all.csi_mode[4].store_mode = YUV_MOD_NON_MB_PLANAR;//存储格式
+	csi_mode_all.csi_mode[4].size.width = 2560;//宽
+	csi_mode_all.csi_mode[4].size.height = 1920;//高
+	csi_mode_all.csi_mode[4].frame_rate = 7500;//帧率，单位Hz
+	csi_mode_all.csi_mode[4].frame_period = 133333;//帧长（=1/帧率，单位us）
+	csi_mode_all.csi_mode[4].color_space = BT601;//色彩空间   
+	//=================mode 6 7 for pc cam============================
+	//640*480@30#yuv422
+	csi_mode_all.csi_mode[6].color_format = PIXEL_YUV422;//格式
+	csi_mode_all.csi_mode[6].component_seq = YUV_SEQ_YUYV;//排列顺序
+	csi_mode_all.csi_mode[6].store_mode = YUV_MOD_INTERLEAVED;//存储格式
+	csi_mode_all.csi_mode[6].size.width = 640;//宽
+	csi_mode_all.csi_mode[6].size.height = 480;//高
+	csi_mode_all.csi_mode[6].frame_rate = 30000;//帧率，单位Hz
+	csi_mode_all.csi_mode[6].frame_period = 33333;//帧长（=1/帧率，单位us）
+	csi_mode_all.csi_mode[6].color_space = BT601;//色彩空间
+*/	
+	
+	csi_clk_off();
+	csi_power_off();
+	esKRNL_TimeDly(1);
+	
+	csi_clk_on();
+	csi_power_on();
+	esKRNL_TimeDly(1);
+	
+	csi_clk_on();
+	
+	//-----------------------------------------------------------------------------------------------------------
+	//配置设备的初始化设置
+	// Debug sensor ID
+	{
+		__u8 reg_value ;
+		__s32 ret ;
+		ret = iic_read_16_8(fiic,da,0x30,0x0a,&reg_value);	// read reg value 0x300a(0X56) to debug whether sensor is ready or not
+		__msg("ret=%d ov5640 sensor id High Byte is:%x\n",ret,reg_value);
+		ret = iic_read_16_8(fiic,da,0x30,0x0b,&reg_value);	// read reg value 0x300B(0X40) to debug whether sensor is ready or not
+		__msg("ret=%d ov5640 sensor id Low Byte is:%x\n",ret,reg_value);
+
+	}
+	block_write(fiic,da,reg_5640, sizeof(reg_5640));//视sensor的配置看是否需要，且注意size是按__u8还是__u16来计算
+
+	csi_dev_set_mode(2);//不要忘记设置一个默认模式
+
+	
+	return EPDK_OK;
+}
+
+__s32  csi_dev_exit(void)
+{
+	__inf("OV5640 csi_dev_exit......\n");
+	csi_clk_off();
+	csi_power_off();
+
+	return EPDK_OK;
+}
+//设备color effect设置函数
+__s32 csi_dev_set_color_effect(__csi_color_effect_t color_effect)
+{
+	return EPDK_OK;
+}
+//设备awb设置函数
+__s32 csi_dev_set_awb(__csi_awb_t awb)
+{
+	return EPDK_OK;
+}
+//设备ae设置函数
+__s32 csi_dev_set_ae(__csi_ae_t ae)
+{
+	return EPDK_OK;
+}
+//设备bright设置函数
+__s32 csi_dev_set_bright(__csi_bright_t bright)
+{
+	return EPDK_OK;
+}
+
+//设备contrast设置函数
+__s32 csi_dev_set_contrast(__csi_contrast_t contrast)
+{
+	return EPDK_OK;
+}
+
+//设备band设置函数
+__s32 csi_dev_set_band(__csi_band_t band)
+{
+	return EPDK_OK;
+}
+
+
+
+#endif
+

@@ -1,0 +1,23 @@
+--via D:\Winners\ePDK\includes\cfgs\suni\compiler.via
+-O3
+-DEPDK_DEBUG_LEVEL=EPDK_DEBUG_LEVEL_LOG_ALL
+-I "D:\Winners\ePDK\includes"
+-I "D:\Winners\ePDK\includes\emod"
+-I "D:\Winners\ePDK\eMod\mod_orange"
+-I "D:\Winners\ePDK\eMod\mod_orange\Config"
+-I "D:\Winners\ePDK\eMod\mod_orange\GUI"
+-I "D:\Winners\ePDK\eMod\mod_orange\GUI\Core"
+-I "D:\Winners\ePDK\eMod\mod_orange\GUI\core\MemDev"
+-I "D:\Winners\ePDK\eMod\mod_orange\GUI\core\LCDDriver"
+-I "D:\Winners\ePDK\eMod\mod_orange\GUI\core\AntiAlias"
+-I "D:\Winners\ePDK\eMod\mod_orange\GUI\core\font\AWF"
+-I "D:\Winners\ePDK\eMod\mod_orange\GUI\core\kernel"
+-I "D:\Winners\ePDK\eMod\mod_orange\GUI\core\cc"
+-I "D:\Winners\ePDK\eMod\mod_orange\GUI\core\cc\ConvertColor"
+-I "D:\Winners\ePDK\eMod\mod_orange\GUI\core\cc\ConvertMono"
+-I "D:\Winners\ePDK\eLibs\misc\pub1\common"
+-I "D:\Winners\ePDK\eLibs"
+-I "D:\Winners\ePDK\eMod\mod_orange\GUI\core\font\TrueType\include"
+-I ""
+-I ""
+-I ""

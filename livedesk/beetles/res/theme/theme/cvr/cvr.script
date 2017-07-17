@@ -1,0 +1,618 @@
+[res_1]
+name	  	=CVR_DEL_FCS_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\del_fcs.bmp
+commentCN 	=DEL_FCS
+commentEN 	=DEL_FCS
+
+[res_2]
+name	  	=CVR_DEL_UFCS_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\del_ufcs.bmp
+commentCN 	=DEL_UFCS
+commentEN 	=DEL_UFCS
+
+[res_3]
+name	  	=CVR_HBAR_BACK_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\hbar_back.bmp
+commentCN 	=HBAR_BACK
+commentEN 	=HBAR_BACK
+
+[res_4]
+name	  	=CVR_HBAR_TEXT_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\hbar_text.bmp
+commentCN 	=HBAR_TEXT
+commentEN 	=HBAR_TEXT
+
+[res_5]
+name	  	=CVR_ITEM_BACK2_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\item_back2.bmp
+commentCN 	=ITEM_BACK2
+commentEN 	=ITEM_BACK2
+
+[res_6]
+name	  	=CVR_ITEM_BACK3_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\item_back3.bmp
+commentCN 	=ITEM_BACK3
+commentEN 	=ITEM_BACK3
+
+[res_7]
+name	  	=CVR_ITEM_BACK4_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\item_back4.bmp
+commentCN 	=ITEM_BACK4
+commentEN 	=ITEM_BACK4
+
+[res_8]
+name	  	=CVR_ITEM_BACK5_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\item_back5.bmp
+commentCN 	=ITEM_BACK5
+commentEN 	=ITEM_BACK5
+
+[res_9]
+name	  	=CVR_ITEM_FCS_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\item_fcs.bmp
+commentCN 	=ITEM_FCS
+commentEN 	=ITEM_FCS
+
+[res_10]
+name	  	=CVR_ITEM_UFCS1_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\item_ufcs1.bmp
+commentCN 	=ITEM_UFCS1
+commentEN 	=ITEM_UFCS1
+
+[res_11]
+name	  	=CVR_ITEM_UFCS2_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\item_ufcs2.bmp
+commentCN 	=ITEM_UFCS2
+commentEN 	=ITEM_UFCS2
+
+[res_12]
+name	  	=CVR_MEMERY_NULL_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\memery_null.bmp
+commentCN 	=MEMERY_NULL
+commentEN 	=MEMERY_NULL
+
+[res_13]
+name	  	=CVR_MEMERY_SD_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\memery_sd.bmp
+commentCN 	=MEMERY_SD
+commentEN 	=MEMERY_SD
+
+[res_14]
+name	  	=CVR_MENU_BACK_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\menu_back.bmp
+commentCN 	=MENU_BACK
+commentEN 	=MENU_BACK
+
+[res_15]
+name	  	=CVR_MP_FCS_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\mp_fcs.bmp
+commentCN 	=MP_FCS
+commentEN 	=MP_FCS
+
+[res_16]
+name	  	=CVR_MP_UFCS_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\mp_ufcs.bmp
+commentCN 	=MP_UFCS
+commentEN 	=MP_UFCS
+
+[res_17]
+name	  	=CVR_MSG_BACK_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\msg_back.bmp
+commentCN 	=MSG_BACK
+commentEN 	=MSG_BACK
+
+[res_18]
+name	  	=CVR_MSG_FOCUS_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\msg_focus.bmp
+commentCN 	=MSG_FOCUS
+commentEN 	=MSG_FOCUS
+
+[res_19]
+name	  	=CVR_MSG_UNFOCUS_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\msg_unfocus.bmp
+commentCN 	=MSG_UNFOCUS
+commentEN 	=MSG_UNFOCUS
+
+[res_20]
+name	  	=CVR_OPT1_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\opt1.bmp
+commentCN 	=OPT1
+commentEN 	=OPT1
+
+[res_21]
+name	  	=CVR_OPT2_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\opt2.bmp
+commentCN 	=OPT2
+commentEN 	=OPT2
+
+[res_22]
+name	  	=CVR_OPT3_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\opt3.bmp
+commentCN 	=OPT3
+commentEN 	=OPT3
+
+[res_23]
+name	  	=CVR_PC_CAMERA_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\pc_camera.bmp
+commentCN 	=PC_CAMERA
+commentEN 	=PC_CAMERA
+
+[res_24]
+name	  	=CVR_PLAY_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\play.bmp
+commentCN 	=PLAY
+commentEN 	=PLAY
+
+[res_25]
+name	  	=CVR_POWER1_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\power1.bmp
+commentCN 	=POWER1
+commentEN 	=POWER1
+
+[res_26]
+name	  	=CVR_POWER2_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\power2.bmp
+commentCN 	=POWER2
+commentEN 	=POWER2
+
+[res_27]
+name	  	=CVR_POWER3_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\power3.bmp
+commentCN 	=POWER3
+commentEN 	=POWER3
+
+[res_28]
+name	  	=CVR_POWER4_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\power4.bmp
+commentCN 	=POWER4
+commentEN 	=POWER4
+
+[res_29]
+name	  	=CVR_POWER5_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\power5.bmp
+commentCN 	=POWER5
+commentEN 	=POWER5
+
+[res_30]
+name	  	=CVR_POWER6_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\power6.bmp
+commentCN 	=POWER6
+commentEN 	=POWER6
+
+[res_31]
+name	  	=CVR_REC_FLASH1_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\rec_flash1.bmp
+commentCN 	=REC_FLASH1
+commentEN 	=REC_FLASH1
+
+[res_32]
+name	  	=CVR_REC_FLASH2_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\rec_flash2.bmp
+commentCN 	=REC_FLASH2
+commentEN 	=REC_FLASH2
+
+[res_33]
+name	  	=CVR_REPLAY_BACK_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\replay_back.bmp
+commentCN 	=REPLAY_BACK
+commentEN 	=REPLAY_BACK
+
+[res_34]
+name	  	=CVR_RT_FCS_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\rt_fcs.bmp
+commentCN 	=RT_FCS
+commentEN 	=RT_FCS
+
+[res_35]
+name	  	=CVR_RT_UFCS_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\rt_ufcs.bmp
+commentCN 	=RT_UFCS
+commentEN 	=RT_UFCS
+
+[res_36]
+name	  	=CVR_SAVE_FCS_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\save_fcs.bmp
+commentCN 	=SAVE_FCS
+commentEN 	=SAVE_FCS
+
+[res_37]
+name	  	=CVR_SAVE_UFCS_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\save_ufcs.bmp
+commentCN 	=SAVE_UFCS
+commentEN 	=SAVE_UFCS
+
+[res_38]
+name	  	=CVR_SELECT_FCS_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\select_fcs.bmp
+commentCN 	=SELECT_FCS
+commentEN 	=SELECT_FCS
+
+[res_39]
+name	  	=CVR_SELECT_UFCS_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\select_ufcs.bmp
+commentCN 	=SELECT_UFCS
+commentEN 	=SELECT_UFCS
+
+[res_40]
+name	  	=CVR_SENSE1_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\sense1.bmp
+commentCN 	=SENSE1
+commentEN 	=SENSE1
+
+[res_41]
+name	  	=CVR_SENSE2_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\sense2.bmp
+commentCN 	=SENSE2
+commentEN 	=SENSE2
+
+[res_42]
+name	  	=CVR_SENSE3_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\sense3.bmp
+commentCN 	=SENSE3
+commentEN 	=SENSE3
+
+[res_43]
+name	  	=CVR_SET_FCS_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\set_fcs.bmp
+commentCN 	=SET_FCS
+commentEN 	=SET_FCS
+
+[res_44]
+name	  	=CVR_SET_UFCS_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\set_ufcs.bmp
+commentCN 	=SET_UFCS
+commentEN 	=SET_UFCS
+
+[res_45]
+name	  	=CVR_SHOW_STATUS_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\show_status.bmp
+commentCN 	=SHOW_STATUS
+commentEN 	=SHOW_STATUS
+
+[res_46]
+name	  	=CVR_SLIDER_CURSOR_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\slider_cursor.bmp
+commentCN 	=SLIDER_CURSOR
+commentEN 	=SLIDER_CURSOR
+
+[res_47]
+name	  	=CVR_SLIDER_HEAD_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\slider_head.bmp
+commentCN 	=SLIDER_HEAD
+commentEN 	=SLIDER_HEAD
+
+[res_48]
+name	  	=CVR_SLIDER_TAIL_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\slider_tail.bmp
+commentCN 	=SLIDER_TAIL
+commentEN 	=SLIDER_TAIL
+
+[res_49]
+name	  	=CVR_TBAR_BACK_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\tbar_back.bmp
+commentCN 	=TBAR_BACK
+commentEN 	=TBAR_BACK
+
+[res_50]
+name	  	=CVR_TEXT_TIME_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\text_time.bmp
+commentCN 	=TEXT_TIME
+commentEN 	=TEXT_TIME
+
+[res_51]
+name	  	=CVR_TIME_0_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\time_0.bmp
+commentCN 	=TIME_0
+commentEN 	=TIME_0
+
+[res_52]
+name	  	=CVR_TIME_0R_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\time_0r.bmp
+commentCN 	=TIME_0R
+commentEN 	=TIME_0R
+
+[res_53]
+name	  	=CVR_TIME_1_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\time_1.bmp
+commentCN 	=TIME_1
+commentEN 	=TIME_1
+
+[res_54]
+name	  	=CVR_TIME_10_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\time_10.bmp
+commentCN 	=TIME_10
+commentEN 	=TIME_10
+
+[res_55]
+name	  	=CVR_TIME_11_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\time_11.bmp
+commentCN 	=TIME_11
+commentEN 	=TIME_11
+
+[res_56]
+name	  	=CVR_TIME_12_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\time_12.bmp
+commentCN 	=TIME_12
+commentEN 	=TIME_12
+
+[res_57]
+name	  	=CVR_TIME_1R_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\time_1r.bmp
+commentCN 	=TIME_1R
+commentEN 	=TIME_1R
+
+[res_58]
+name	  	=CVR_TIME_2_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\time_2.bmp
+commentCN 	=TIME_2
+commentEN 	=TIME_2
+
+[res_59]
+name	  	=CVR_TIME_2R_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\time_2r.bmp
+commentCN 	=TIME_2R
+commentEN 	=TIME_2R
+
+[res_60]
+name	  	=CVR_TIME_3_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\time_3.bmp
+commentCN 	=TIME_3
+commentEN 	=TIME_3
+
+[res_61]
+name	  	=CVR_TIME_3R_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\time_3r.bmp
+commentCN 	=TIME_3R
+commentEN 	=TIME_3R
+
+[res_62]
+name	  	=CVR_TIME_4_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\time_4.bmp
+commentCN 	=TIME_4
+commentEN 	=TIME_4
+
+[res_63]
+name	  	=CVR_TIME_4R_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\time_4r.bmp
+commentCN 	=TIME_4R
+commentEN 	=TIME_4R
+
+[res_64]
+name	  	=CVR_TIME_5_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\time_5.bmp
+commentCN 	=TIME_5
+commentEN 	=TIME_5
+
+[res_65]
+name	  	=CVR_TIME_5R_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\time_5r.bmp
+commentCN 	=TIME_5R
+commentEN 	=TIME_5R
+
+[res_66]
+name	  	=CVR_TIME_6_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\time_6.bmp
+commentCN 	=TIME_6
+commentEN 	=TIME_6
+
+[res_67]
+name	  	=CVR_TIME_6R_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\time_6r.bmp
+commentCN 	=TIME_6R
+commentEN 	=TIME_6R
+
+[res_68]
+name	  	=CVR_TIME_7_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\time_7.bmp
+commentCN 	=TIME_7
+commentEN 	=TIME_7
+
+[res_69]
+name	  	=CVR_TIME_7R_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\time_7r.bmp
+commentCN 	=TIME_7R
+commentEN 	=TIME_7R
+
+[res_70]
+name	  	=CVR_TIME_8_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\time_8.bmp
+commentCN 	=TIME_8
+commentEN 	=TIME_8
+
+[res_71]
+name	  	=CVR_TIME_8R_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\time_8r.bmp
+commentCN 	=TIME_8R
+commentEN 	=TIME_8R
+
+[res_72]
+name	  	=CVR_TIME_9_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\time_9.bmp
+commentCN 	=TIME_9
+commentEN 	=TIME_9
+
+[res_73]
+name	  	=CVR_TIME_9R_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\time_9r.bmp
+commentCN 	=TIME_9R
+commentEN 	=TIME_9R
+
+[res_74]
+name	  	=CVR_USB_MODE_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\usb_mode.bmp
+commentCN 	=USB_MODE
+commentEN 	=USB_MODE
+
+[res_75]
+name	  	=CVR_VS_720_WATER_MARK_0_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\vs_720_water_mark_0.bmp
+commentCN 	=VS_720_WATER_MARK_0
+commentEN 	=VS_720_WATER_MARK_0
+
+[res_76]
+name	  	=CVR_VS_720_WATER_MARK_1_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\vs_720_water_mark_1.bmp
+commentCN 	=VS_720_WATER_MARK_1
+commentEN 	=VS_720_WATER_MARK_1
+
+[res_77]
+name	  	=CVR_VS_720_WATER_MARK_2_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\vs_720_water_mark_2.bmp
+commentCN 	=VS_720_WATER_MARK_2
+commentEN 	=VS_720_WATER_MARK_2
+
+[res_78]
+name	  	=CVR_VS_720_WATER_MARK_3_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\vs_720_water_mark_3.bmp
+commentCN 	=VS_720_WATER_MARK_3
+commentEN 	=VS_720_WATER_MARK_3
+
+[res_79]
+name	  	=CVR_VS_720_WATER_MARK_4_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\vs_720_water_mark_4.bmp
+commentCN 	=VS_720_WATER_MARK_4
+commentEN 	=VS_720_WATER_MARK_4
+
+[res_80]
+name	  	=CVR_VS_720_WATER_MARK_5_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\vs_720_water_mark_5.bmp
+commentCN 	=VS_720_WATER_MARK_5
+commentEN 	=VS_720_WATER_MARK_5
+
+[res_81]
+name	  	=CVR_VS_720_WATER_MARK_6_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\vs_720_water_mark_6.bmp
+commentCN 	=VS_720_WATER_MARK_6
+commentEN 	=VS_720_WATER_MARK_6
+
+[res_82]
+name	  	=CVR_VS_720_WATER_MARK_7_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\vs_720_water_mark_7.bmp
+commentCN 	=VS_720_WATER_MARK_7
+commentEN 	=VS_720_WATER_MARK_7
+
+[res_83]
+name	  	=CVR_VS_720_WATER_MARK_8_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\vs_720_water_mark_8.bmp
+commentCN 	=VS_720_WATER_MARK_8
+commentEN 	=VS_720_WATER_MARK_8
+
+[res_84]
+name	  	=CVR_VS_720_WATER_MARK_9_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\vs_720_water_mark_9.bmp
+commentCN 	=VS_720_WATER_MARK_9
+commentEN 	=VS_720_WATER_MARK_9
+
+[res_85]
+name	  	=CVR_VS_720_WATER_MARK_BLANK_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\vs_720_water_mark_blank.bmp
+commentCN 	=VS_720_WATER_MARK_BLANK
+commentEN 	=VS_720_WATER_MARK_BLANK
+
+[res_86]
+name	  	=CVR_VS_720_WATER_MARK_DEC_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\vs_720_water_mark_dec.bmp
+commentCN 	=VS_720_WATER_MARK_DEC
+commentEN 	=VS_720_WATER_MARK_DEC
+
+[res_87]
+name	  	=CVR_VS_720_WATER_MARK_MAOHAO_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\vs_720_water_mark_maohao.bmp
+commentCN 	=VS_720_WATER_MARK_MAOHAO
+commentEN 	=VS_720_WATER_MARK_MAOHAO
+
+[res_88]
+name	  	=CVR_VS_VGA_WATER_MARK_0_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\vs_vga_water_mark_0.bmp
+commentCN 	=VS_VGA_WATER_MARK_0
+commentEN 	=VS_VGA_WATER_MARK_0
+
+[res_89]
+name	  	=CVR_VS_VGA_WATER_MARK_1_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\vs_vga_water_mark_1.bmp
+commentCN 	=VS_VGA_WATER_MARK_1
+commentEN 	=VS_VGA_WATER_MARK_1
+
+[res_90]
+name	  	=CVR_VS_VGA_WATER_MARK_2_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\vs_vga_water_mark_2.bmp
+commentCN 	=VS_VGA_WATER_MARK_2
+commentEN 	=VS_VGA_WATER_MARK_2
+
+[res_91]
+name	  	=CVR_VS_VGA_WATER_MARK_3_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\vs_vga_water_mark_3.bmp
+commentCN 	=VS_VGA_WATER_MARK_3
+commentEN 	=VS_VGA_WATER_MARK_3
+
+[res_92]
+name	  	=CVR_VS_VGA_WATER_MARK_4_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\vs_vga_water_mark_4.bmp
+commentCN 	=VS_VGA_WATER_MARK_4
+commentEN 	=VS_VGA_WATER_MARK_4
+
+[res_93]
+name	  	=CVR_VS_VGA_WATER_MARK_5_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\vs_vga_water_mark_5.bmp
+commentCN 	=VS_VGA_WATER_MARK_5
+commentEN 	=VS_VGA_WATER_MARK_5
+
+[res_94]
+name	  	=CVR_VS_VGA_WATER_MARK_6_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\vs_vga_water_mark_6.bmp
+commentCN 	=VS_VGA_WATER_MARK_6
+commentEN 	=VS_VGA_WATER_MARK_6
+
+[res_95]
+name	  	=CVR_VS_VGA_WATER_MARK_7_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\vs_vga_water_mark_7.bmp
+commentCN 	=VS_VGA_WATER_MARK_7
+commentEN 	=VS_VGA_WATER_MARK_7
+
+[res_96]
+name	  	=CVR_VS_VGA_WATER_MARK_8_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\vs_vga_water_mark_8.bmp
+commentCN 	=VS_VGA_WATER_MARK_8
+commentEN 	=VS_VGA_WATER_MARK_8
+
+[res_97]
+name	  	=CVR_VS_VGA_WATER_MARK_9_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\vs_vga_water_mark_9.bmp
+commentCN 	=VS_VGA_WATER_MARK_9
+commentEN 	=VS_VGA_WATER_MARK_9
+
+[res_98]
+name	  	=CVR_VS_VGA_WATER_MARK_BLANK_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\vs_vga_water_mark_blank.bmp
+commentCN 	=VS_VGA_WATER_MARK_BLANK
+commentEN 	=VS_VGA_WATER_MARK_BLANK
+
+[res_99]
+name	  	=CVR_VS_VGA_WATER_MARK_DEC_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\vs_vga_water_mark_dec.bmp
+commentCN 	=VS_VGA_WATER_MARK_DEC
+commentEN 	=VS_VGA_WATER_MARK_DEC
+
+[res_100]
+name	  	=CVR_VS_VGA_WATER_MARK_MAOHAO_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\vs_vga_water_mark_maohao.bmp
+commentCN 	=VS_VGA_WATER_MARK_MAOHAO
+commentEN 	=VS_VGA_WATER_MARK_MAOHAO
+
+[res_101]
+name	  	=CVR_WORK_CAM_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\work_cam.bmp
+commentCN 	=WORK_CAM
+commentEN 	=WORK_CAM
+
+[res_102]
+name	  	=CVR_WORK_PLAY_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\work_play.bmp
+commentCN 	=WORK_PLAY
+commentEN 	=WORK_PLAY
+
+[res_103]
+name	  	=CVR_WORK_REC_BMP
+file	  	=d:\AW1620\F20_CVR\livedesk\cvr_v2.0\res\theme\./cvr\work_rec.bmp
+commentCN 	=WORK_REC
+commentEN 	=WORK_REC
+

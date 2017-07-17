@@ -1,0 +1,50 @@
+@echo off
+	goto START
+
+:START
+    @echo *********************************************
+    @echo *   select board                            *
+    @echo *********************************************
+    @echo  0: ChiHsin_1w500
+    @echo  1: TPO_td043m_p2
+    @echo  2: InnoLux_at043
+    @echo  3: R61059_cpupanel
+    @echo  4: R61059_cpupanel_car
+    @echo *********************************************
+    
+    set /p SEL=Please Select:
+    if %SEL%==0     goto LCD0
+    if %SEL%==1     goto LCD1
+    if %SEL%==2     goto LCD2
+    if %SEL%==3     goto LCD3
+    if %SEL%==4     goto LCD4
+    goto ERROR
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:LCD0
+	  copy lcd_bak\ChiHsin_lw500.c lcd_panel_cfg.c
+    goto conti
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:LCD1
+	  copy lcd_bak\TPO_td043m_p2.c lcd_panel_cfg.c
+    goto conti
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:LCD2
+	  copy lcd_bak\InnoLux_at043.c lcd_panel_cfg.c
+    goto conti
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:LCD3
+	  copy lcd_bak\R61059.c lcd_panel_cfg.c
+    goto conti
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:LCD4
+	  copy lcd_bak\R61059_car.c lcd_panel_cfg.c
+    goto conti
+:ERROR
+    @echo sel error!!
+    goto conti
+    
+:conti
+    @echo *********************************************
+    pause
+

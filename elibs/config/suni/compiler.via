@@ -1,0 +1,19 @@
+--via D:\Winners\ePDK\includes\cfgs\suni\compiler.via
+-DEPDK_DEBUG_LEVEL=EPDK_DEBUG_LEVEL_LOG_ALL
+-O3
+-I "D:\Winners\ePDK\interinc"
+-I "D:\Winners\ePDK\eLibs"
+-I "D:\Winners\ePDK\eLibs\libc"
+
+-I "D:\winners\ePDK\eLibs\libc\azlib"
+-I "D:\winners\ePDK\eLibs\libc\azlib\Methods"
+-I "D:\winners\ePDK\eLibs\libc\azlib\Methods\Lzma"
+-I "D:\winners\ePDK\eLibs\libc\azlib\Stream"
+-I "D:\winners\ePDK\eLibs\libc\azlib\Stream\BlkDevStream"
+-I "D:\winners\ePDK\eLibs\libc\azlib\Stream\FileStream"
+-I "D:\winners\ePDK\eLibs\libc\azlib\Stream\RAMDevStream"
+
+-I "D:\Winners\ePDK\eLibs\libc\misc\pub1\common"
+-I "D:\Winners\ePDK\eLibs\libc\misc\pub1\reg"
+
+-I "D:\Winners\ePDK\eLibs\monkey"

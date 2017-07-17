@@ -1,0 +1,38 @@
+[key_para]
+;;;;K14 K12... 这些名称只要与数组g_key_pad_name2val\matrix_keymapping定义一致即可，具体是什么名字不限
+
+
+SW4=string:EPG
+SW7=string:RIGHT
+SW9=string:PREVIEW_LIST
+SW5=string:SCAN
+SW8=string:ENTER
+SW6=string:MENU
+
+
+
+[system]
+;fm search thread hold, (1-63) default is 4
+fm_th=4
+
+;default volume 0-30
+volume=30
+
+;default language 0x400/0x410/0x420 en/chs/cht
+lang=0x410
+
+;default background 0-1
+style=0
+
+;default back light 0-15
+light=12
+
+;default keytone off/on 0/1
+keytone=0
+
+;default cvbs output ntsc/pal 0/1
+cvbs=0
+
+[client]
+clientid=4C4E
+

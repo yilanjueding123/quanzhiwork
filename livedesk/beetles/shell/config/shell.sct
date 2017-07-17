@@ -1,0 +1,43 @@
+;/*
+;*******************************************************************************************************************
+;*                                                         				display driver 
+;*                                         				the display dirver support module
+;*
+;*                             				Copyright(C), 2006-2008, Allwinner Microelectronic Co., Ltd.
+;*											       																	 All Rights Reserved
+;*
+;*File Name： scatter.sct
+;*
+;*Author： William Wang
+;*
+;*Version 1.1.0
+;*
+;*Date  2008.5.23
+;*
+;*Description : display driver scatter file description
+;*
+;*Others : None at present.
+;*
+;* History :
+;*
+;* <Author>          <time>      <version>     <description>
+;*
+;* William Wang     2008.5.23         1.1.0       Create File
+;*  
+;*******************************************************************************************************************
+;*/
+;#include "syssct.sct"
+
+LO_FIRST 0x0000 0x2000000
+{
+    EXEC_APP  0x00000000                           ;// 内核代码和数据区,其中30是用于存放KRNL_HEAD代码
+    {
+        * (+RO) 
+        * (+RW) 
+        * (+ZI)
+	}
+    MAGIC  0xFFFF0000
+    {
+        * (MAGIC)
+    }
+}

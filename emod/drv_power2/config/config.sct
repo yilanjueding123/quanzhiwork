@@ -1,0 +1,28 @@
+;/*
+;********************************************************************************************************
+;*											        ePDK
+;*						            the Easy Portable/Player Develop Kits
+;*									           hello world sample
+;*
+;*						        (c) Copyright 2006-2007, Steven.ZGJ China
+;*											All	Rights Reserved
+;*
+;* File    : scatter.sct
+;* By      : Steven.ZGJ
+;* Version : V1.00
+;********************************************************************************************************
+;*/
+
+LO_FIRST 0xe1300000 0x20000
+{
+    EXEC_MOD  0xe1300000                           ;// 内核代码和数据区,其中30是用于存放KRNL_HEAD代码
+    {
+        * (+RO) 
+        * (+RW) 
+        * (+ZI)
+    }        
+    MAGIC  0xFFFF0000
+    {
+        *(MAGIC)
+    }
+}

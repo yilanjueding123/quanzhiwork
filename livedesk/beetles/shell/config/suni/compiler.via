@@ -1,0 +1,12 @@
+--via D:\Winners\ePDK\includes\cfgs\suni\compiler.via
+-O3
+-DEPDK_DEBUG_LEVEL=EPDK_DEBUG_LEVEL_LOG_ALL
+-I "D:\winners\ePDK\includes"
+-I "D:\winners\ePDK\includes\emod"
+-I "D:\winners\ePDK\livedesk\livetouch\include"
+-I "D:\winners\ePDK\livedesk\livetouch\shell"
+-I "D:\winners\ePDK\livedesk\livetouch\shell\Esh_builtins"
+-I "D:\winners\ePDK\livedesk\livetouch\shell\Esh_builtins\commands"
+-I "D:\winners\ePDK\livedesk\livetouch\shell\Esh_builtins\commands\doscript"
+-I "D:\winners\ePDK\livedesk\livetouch\shell\Esh_error"
+-I "D:\winners\ePDK\livedesk\livetouch\shell\Esh_support"

@@ -1,0 +1,108 @@
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+系统找不到指定的文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+已复制         1 个文件。
+.\..\rootfs\mod\cedar\adec_aac.drv
+.\..\rootfs\mod\cedar\adec_ac3.drv
+.\..\rootfs\mod\cedar\adec_alac.drv
+.\..\rootfs\mod\cedar\adec_amr.drv
+.\..\rootfs\mod\cedar\adec_ape.drv
+.\..\rootfs\mod\cedar\adec_atr.drv
+.\..\rootfs\mod\cedar\adec_cok.drv
+.\..\rootfs\mod\cedar\adec_com.plg
+.\..\rootfs\mod\cedar\adec_dts.drv
+.\..\rootfs\mod\cedar\adec_flc.drv
+.\..\rootfs\mod\cedar\adec_mid.drv
+.\..\rootfs\mod\cedar\adec_mp3.drv
+.\..\rootfs\mod\cedar\adec_ogg.drv
+.\..\rootfs\mod\cedar\adec_pcm.drv
+.\..\rootfs\mod\cedar\adec_ra.drv
+.\..\rootfs\mod\cedar\adec_spr.drv
+.\..\rootfs\mod\cedar\adec_wma.drv
+.\..\rootfs\mod\cedar\adec_xxa3.drv
+.\..\rootfs\mod\cedar\adec_xxaa.drv
+.\..\rootfs\mod\cedar\adec_xxam.drv
+.\..\rootfs\mod\cedar\adec_xxas.drv
+.\..\rootfs\mod\cedar\aenc.plg
+.\..\rootfs\mod\cedar\aenc_mp3.drv
+.\..\rootfs\mod\cedar\aenc_pcm.drv
+.\..\rootfs\mod\cedar\aenc_wma.drv
+.\..\rootfs\mod\cedar\aenc_xxam.drv
+.\..\rootfs\mod\cedar\aply.plg
+.\..\rootfs\mod\cedar\araw_ac3.drv
+.\..\rootfs\mod\cedar\araw_dts.drv
+.\..\rootfs\mod\cedar\ardr_sw.plg
+.\..\rootfs\mod\cedar\arec.plg
+.\..\rootfs\mod\cedar\avs.drv
+.\..\rootfs\mod\cedar\cedar.ini
+.\..\rootfs\mod\cedar\ldec_itx.plg
+.\..\rootfs\mod\cedar\ldec_lrc.plg
+.\..\rootfs\mod\cedar\ldec_smi.plg
+.\..\rootfs\mod\cedar\ldec_srt.plg
+.\..\rootfs\mod\cedar\ldec_ssa.plg
+.\..\rootfs\mod\cedar\ldec_sub.plg
+.\..\rootfs\mod\cedar\ldec_txt.plg
+.\..\rootfs\mod\cedar\muxer.plg
+.\..\rootfs\mod\cedar\psr_asf.plg
+.\..\rootfs\mod\cedar\psr_audio.plg
+.\..\rootfs\mod\cedar\psr_avi.plg
+.\..\rootfs\mod\cedar\psr_dev.plg
+.\..\rootfs\mod\cedar\psr_flv.plg
+.\..\rootfs\mod\cedar\psr_mkv.plg
+.\..\rootfs\mod\cedar\psr_mov.plg
+.\..\rootfs\mod\cedar\psr_mpg.plg
+.\..\rootfs\mod\cedar\psr_pmp.plg
+.\..\rootfs\mod\cedar\psr_rm.plg
+.\..\rootfs\mod\cedar\psr_ts.plg
+.\..\rootfs\mod\cedar\psr_xxvb.plg
+.\..\rootfs\mod\cedar\vdecoder.drv
+.\..\rootfs\mod\cedar\vdec_com.plg
+.\..\rootfs\mod\cedar\vply.plg
+复制了 56 个文件
+.\..\rootfs\mod\willow\pdec_bmp.plg
+.\..\rootfs\mod\willow\pdec_gif.plg
+.\..\rootfs\mod\willow\pdec_jpg.plg
+.\..\rootfs\mod\willow\pdec_png.plg
+.\..\rootfs\mod\willow\pshow.plg
+.\..\rootfs\mod\willow\psr_bmp.plg
+.\..\rootfs\mod\willow\psr_gif.plg
+.\..\rootfs\mod\willow\psr_jpg.plg
+.\..\rootfs\mod\willow\psr_png.plg
+.\..\rootfs\mod\willow\willow.mod
+复制了 10 个文件
+.\..\rootfs\mod\lotus\lotus.mod
+.\..\rootfs\mod\lotus\vply.plg
+.\..\rootfs\mod\lotus\core\aenc_aac.drv
+.\..\rootfs\mod\lotus\core\aenc_adpcm.drv
+.\..\rootfs\mod\lotus\core\aenc_pcm.drv
+.\..\rootfs\mod\lotus\core\arec.plg
+.\..\rootfs\mod\lotus\core\muxer.plg
+.\..\rootfs\mod\lotus\core\venc_framework.plg
+.\..\rootfs\mod\lotus\core\venc_mjp.drv
+.\..\rootfs\mod\lotus\core\vrec.plg
+复制了 10 个文件

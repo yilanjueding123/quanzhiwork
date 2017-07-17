@@ -1,0 +1,19 @@
+--via D:\Winners\ePDK\includes\cfgs\suniii\compiler.via
+-O3
+-DEPDK_DEBUG_LEVEL=EPDK_DEBUG_LEVEL_LOG_ALL
+-I "D:\Winners\ePDK\eMod\drv_usbh"
+-I "D:\Winners\ePDK\eMod\drv_usbh\usb_core"
+
+-I "D:\Winners\ePDK\eMod\drv_usbh\include"
+-I "D:\Winners\ePDK\eMod\drv_usbh\misc"
+-I "D:\Winners\ePDK\eMod\drv_usbh\misc\usb_mod"
+-I "D:\Winners\ePDK\eMod\drv_usbh\misc\utils"
+-I "D:\Winners\ePDK\eMod\drv_usbh\misc\debug"
+
+-I "D:\winners\ePDK\eMod\drv_usbh\func_drv\Storage\Include"
+-I "D:\winners\ePDK\eMod\drv_usbh\func_drv\Hid\Include"
+
+-I "D:\Winners\ePDK\eMod\drv_usbh\usb_hcd"
+-I "D:\Winners\ePDK\eMod\drv_usbh\usb_hcd\arch"
+
+

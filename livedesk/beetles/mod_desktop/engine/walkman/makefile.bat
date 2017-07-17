@@ -1,0 +1,15 @@
+call cc dsk_walkman
+call cc dsk_walkman_i
+call cc dsk_wkm_monitor
+call pk lyric
+call pk eq
+call pk ab
+call pk spectrum
+call pk play_speed
+call pk star
+call pk media_info
+call pk foundation
+call pk npl
+call pk play_mode
+call pk ff_rr_speed
+call pk fsm_ctrl

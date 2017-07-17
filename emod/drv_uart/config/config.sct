@@ -1,0 +1,33 @@
+;/*
+;****************************************************************************************************
+;*                                               MELIS
+;*                               the Easy Portable/Player Develop Kits
+;*                                           UART Driver
+;*
+;*                           (c) Copyright 2011-2014, All winners Co,Ld.
+;*                                       All Rights Reserved
+;*
+;* File    : config.sct
+;* By      : james.deng
+;* Version : 1.0.0
+;* Date    : 2011-12-25
+;* Descript: 
+;* Update  : <date>          <author>            <version>           <notes>
+;*           2011-12-25      james.deng          1.0.0               build the file.
+;****************************************************************************************************
+;*/
+
+LO_FIRST 0xe2000000 0xD000
+{
+    EXEC_MOD 0xe2000000                 ;// 内核代码和数据区,其中30是用于存放KRNL_HEAD代码
+    {
+        * (+RO)
+        * (+RW)
+        * (+ZI)
+    }
+    
+    MAGIC 0xFFFF0000
+    {
+        * (MAGIC)
+    }
+}
