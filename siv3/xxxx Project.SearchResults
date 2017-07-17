@@ -1,19 +1,63 @@
----- eLIBs_mkdir Matches (18 in 14 files) ----
-Bmktable.c (f:\pri_f25\zhibo\work\livedesk\beetles\elibs\lib_ex\monkey\bookmark):        eLIBs_mkdir("z:\\txt\\");
-Bmktable.c (f:\pri_f25\zhibo\work\livedesk\beetles\elibs\lib_ex\monkey\bookmark):        eLIBs_mkdir("z:\\txt\\bmk");
-Doxcopy.c (f:\pri_f25\zhibo\work\livedesk\beetles\shell\esh_builtins\commands):    eLIBs_mkdir(dpath);
-Dsk_wkm_redef.h (f:\pri_f25\zhibo\work\livedesk\beetles\mod_desktop\engine\walkman\lib):#define g_mkdir               eLIBs_mkdir
-Elibs_stdio.c (f:\pri_f25\zhibo\work\elibs\libc\ansic):int eLIBs_mkdir(const char *dirname)
-Elibs_stdio.h (f:\pri_f25\zhibo\work\includes\elibs\libc):extern int eLIBs_mkdir(const char * /*dirname*/);
-Esh_platform_epos.h (f:\pri_f25\zhibo\work\livedesk\beetles\shell\esh_support):#define Esh_mkdir(dirname)                      eLIBs_mkdir(dirname)
-Gp_def.h (f:\pri_f25\zhibo\work\livedesk\beetles\applets\lib\fifo_db):#define g_mkdir               eLIBs_mkdir
-G_os_related.h (f:\pri_f25\zhibo\work\elibs\libc\misc\pub1\common):#define g_mkdir               eLIBs_mkdir
-Image.txt (f:\pri_f25\zhibo\work\emod\mod_orange):    4506  eLIBs_mkdir                0xe1828d78   Gb    1  Code  Hi   0xc
-Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):        0x00029370:    eb00b639    9...    BL       eLIBs_mkdir  ; 0x56c5c
-Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):        0x0004cfc8:    eb002723    #'..    BL       eLIBs_mkdir  ; 0x56c5c
-Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):    eLIBs_mkdir
-Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):    7754  eLIBs_mkdir                0x00056c5c   Gb    1  Code  Hi   0xc
-Os_related.c (f:\pri_f25\zhibo\work\emod\mod_orange\resreader\them):    return eLIBs_mkdir( dirname);
-Record_view_doc.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\record\record_doc\record_view):        if(eLIBs_mkdir(precord_doc->curSearchPath))
-Robin_redef.h (f:\pri_f25\zhibo\work\livedesk\beetles\elibs\lib_ex\robin\lib):#define g_mkdir               eLIBs_mkdir
-Sfte_os.h (f:\pri_f25\zhibo\work\emod\mod_orange\gui\core\font\sft\sfte\lib):#define g_mkdir               eLIBs_mkdir
+---- item_w Matches (63 in 15 files) ----
+ListLayer.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\listmenu):__u32 ListLayer_AdjustFb(LIST_LAYER_MAN_t *plist_layer, __u32 item_w, __u32 foucs_w)
+ListLayer.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\listmenu):    if(item_w != 0)
+ListLayer.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\listmenu):        if(plist_layer->viewrect.height %  item_w)
+ListLayer.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\listmenu):                                            plist_layer->viewrect.height %  item_w) + item_w;
+ListLayer.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\listmenu):            if((foucs_w - item_w) > plist_layer->viewrect.height %  item_w)
+ListLayer.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\listmenu):                extend_w = foucs_w - item_w;
+ListLayer.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\listmenu):            //valid_w = plist_layer->viewrect.height - plist_layer->viewrect.height %  item_w;
+ListLayer.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\listmenu):            plist_layer->scnnum = (plist_layer->viewrect.height) / item_w;
+ListLayer.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\listmenu):            extend_w = foucs_w - item_w;
+ListLayer.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\listmenu):            plist_layer->scnnum = (plist_layer->viewrect.height) / item_w;
+ListLayer.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\listmenu):__hdle ListLayer_Create(H_LYR listlayer, __hdle listmenu, __u32 item_w, __u32 foucs_w)
+ListLayer.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\listmenu):    if(item_w != 0)
+ListLayer.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\listmenu):        if(plist_layer->viewrect.height %  item_w)
+ListLayer.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\listmenu):                                            plist_layer->viewrect.height %  item_w) + item_w;
+ListLayer.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\listmenu):            if((foucs_w - item_w) > plist_layer->viewrect.height %  item_w)
+ListLayer.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\listmenu):                extend_w = foucs_w - item_w;
+ListLayer.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\listmenu):            //valid_w = plist_layer->viewrect.height - plist_layer->viewrect.height %  item_w;
+ListLayer.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\listmenu):            plist_layer->scnnum = (plist_layer->viewrect.height) / item_w;
+ListLayer.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\listmenu):            extend_w = foucs_w - item_w;
+ListLayer.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\listmenu):            plist_layer->scnnum = (plist_layer->viewrect.height) / item_w;
+ListLayer.h (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\listmenu):__hdle         ListLayer_Create         (H_LYR listlayer, __hdle listmenu, __u32 item_w, __u32 foucs_w);
+Main_menu.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\home):    __s32 item_w;
+Main_menu.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\home):    __msg("mmenu_attr->item_w = %d， mmenu_attr->first_item = %d\n",mmenu_attr->item_w,mmenu_attr->first_item);
+Main_menu.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\home):	gui_rect.x0 = mmenu_attr->item_w * (index - mmenu_attr->first_item)
+Main_menu.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\home):                  + (mmenu_attr->item_w - home_ui_para->max_main_bmp_width) / 2;
+Main_menu.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\home):    gui_rect.x0 = mmenu_attr->item_w * (index - mmenu_attr->first_item)
+Main_menu.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\home):        mmenu_attr->item_w = home_ui_para->item_width;
+Sicons.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\sicons):        picons->scnnum = win_rect.width / para->items[0].item_w;
+Sicons.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\sicons):            sitem_attr.rect.x           = num * iconitem->item_w;
+Sicons.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\sicons):            sitem_attr.rect.width       = iconitem->item_w;
+Sicons.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\sicons):        picons->scnnum = win_rect.width / icons_priv->items[0].item_w;
+Sicons.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\sicons):            sitem_attr.rect.x           = win_rect.x + num * curitem->item_w;
+Sicons.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\sicons):            sitem_attr.rect.width       = curitem->item_w;
+Sicons.h (f:\pri_f25\zhibo\work\includes\emod\mod_orange\gui\widget):    __u32                          item_w;              /* item的宽度                                                 */
+Sicons_i.h (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\sicons):    __u32                               item_w;
+Slistbox.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\slistbox):        plistbox->scnnum = win_rect.height / para->items[0].item_w;
+Slistbox.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\slistbox):            sitem_attr.rect.y           = num * menuitem->item_w;
+Slistbox.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\slistbox):            sitem_attr.rect.height      = menuitem->item_w;
+Slistbox.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\slistbox):        plistbox->scnnum = win_rect.height / listbox_priv->items[0].item_w;
+Slistbox.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\slistbox):            sitem_attr.rect.y           = win_rect.y + num * curitem->item_w;
+Slistbox.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\slistbox):            sitem_attr.rect.height      = curitem->item_w;
+Slistbox.h (f:\pri_f25\zhibo\work\includes\emod\mod_orange\gui\widget):    __u32                          item_w;              /* item的宽度                                                 */
+Slistbox_i.h (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\slistbox):    __u32                               item_w;
+Smenuitem.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\sicons):    newitem->item_w         = item_attr->item_w;
+Smenuitem.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\slistbox):    newitem->item_w         = item_attr->item_w;
+Txtbox.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\txtbox):    __u32                                   item_w;
+Txtbox.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\txtbox):    item_w                              = txtbox_priv->font_size + 2 * txtbox_priv->dist;
+Txtbox.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\txtbox):    ptxtbox->item_w					    = item_w;
+Txtbox.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\txtbox):        ptxtbox->txtlayer               = (txtlayer_man_t *)TxtLayer_Create(GUI_WinGetLyrWin(htxtbox), (__hdle)ptxtbox, item_w * txtbox_priv->nitem);
+Txtbox.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\txtbox):        rect.height                    = item_w;
+Txtbox.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\txtbox):    ptxtbox->txtlayer->scnnum            = ptxtbox->txtlayer->scnrect.height / item_w;
+Txtbox.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\txtbox):    __u32                                   item_w;
+Txtbox.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\txtbox):    item_w                              = txtbox_priv->font_size + 2 * txtbox_priv->dist;
+Txtbox.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\txtbox):    ptxtbox->item_w					    = item_w;
+Txtbox.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\txtbox):        rect.height                    = item_w;
+Txtbox.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\txtbox):    ptxtbox->txtlayer->scnnum            = ptxtbox->txtlayer->scnrect.height / item_w;
+Txtbox_i.h (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\txtbox):    __u32                    item_w;
+Txtlayer.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\txtbox):    foucs_FB.size.height                        = ptxtlayer->ptxtbox->item_w * 2;
+Txtlayer.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\txtbox):txtlayer_man_t *TxtLayer_Create(H_LYR TxtLayer, __hdle txtbox, __u32 item_w)
+Txtlayer.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\txtbox):    if(item_w != 0)
+Txtlayer.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\txtbox):        if(ptxtlayer->txtbuffer->rectsz.height < item_w)
+Txtlayer.h (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\txtbox):txtlayer_man_t     *TxtLayer_Create  (H_LYR txtlayer, __hdle listmenu, __u32 item_w);

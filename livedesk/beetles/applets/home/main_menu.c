@@ -19,12 +19,12 @@
 #include "app_home_i.h"
 #include "main_menu.h"
 
-#if  0
+#if  1
 //#define __here__            eLIBs_printf("@L%d(%s)\n", __LINE__, __FILE__);
 #define __msg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
 						     eLIBs_printf(__VA_ARGS__)									        )
-#define __log(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
-								 eLIBs_printf(__VA_ARGS__)											)
+//#define __log(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
+//								 eLIBs_printf(__VA_ARGS__)											)
 #else
 #define __msg(...)   
 #define __log(...)
@@ -410,8 +410,7 @@ static void paint_mmain_item_ex(mmenu_attr_t *mmenu_attr, __s32 index
     GUI_UC_SetEncodeUTF8();
     GUI_SetBkColor(0);
 
-    GUI_SetDrawMode(GUI_DRAWMODE_NORMAL); //GUI_DRAWMODE_NORMAL
-    //GUI_SetFontMode( GUI_FONTMODE_8BPP32 );
+    GUI_SetDrawMode(GUI_DRAWMODE_NORMAL); 
 
     if(bfocus)
     {
@@ -437,6 +436,7 @@ static void paint_mmain_item_ex(mmenu_attr_t *mmenu_attr, __s32 index
 
     bmp_width = bmp_get_width(hbmp);
     bmp_height = bmp_get_height(hbmp);
+	//__msg("bmp_width = %d, bmp_height = %d\n", bmp_width, bmp_height);
     bmp_close(hbmp);
     hbmp = 0;
     if(bmp_width > home_ui_para->max_main_bmp_width || bmp_height > home_ui_para->max_main_bmp_height)
@@ -446,18 +446,30 @@ static void paint_mmain_item_ex(mmenu_attr_t *mmenu_attr, __s32 index
     }
 
     //clear bg rect
-    gui_rect.x0 = mmenu_attr->item_w * (index - mmenu_attr->first_item)
-                  + (mmenu_attr->item_w - home_ui_para->max_main_bmp_width) / 2;
-    gui_rect.y0 = 0;
+//    __msg("mmenu_attr->item_w = %d， mmenu_attr->first_item = %d\n",mmenu_attr->item_w,mmenu_attr->first_item);
+//	__msg("home_ui_para->max_main_bmp_width=%d\n", home_ui_para->max_main_bmp_width);
+	
+//	gui_rect.x0 = mmenu_attr->item_w * (index - mmenu_attr->first_item)
+//                  + (mmenu_attr->item_w - home_ui_para->max_main_bmp_width) / 2;
+//    gui_rect.y0 = 0;
+//    gui_rect.x1 = gui_rect.x0 + home_ui_para->max_main_bmp_width;
+//    gui_rect.y1 = gui_rect.y0 + home_ui_para->max_main_bmp_height;
+
+	
+	gui_rect.x0 = 10;
+    gui_rect.y0 = mmenu_attr->item_w * (index - mmenu_attr->first_item)
+                  + 2/*(mmenu_attr->item_w - home_ui_para->max_main_bmp_height) / 2*/;
     gui_rect.x1 = gui_rect.x0 + home_ui_para->max_main_bmp_width;
     gui_rect.y1 = gui_rect.y0 + home_ui_para->max_main_bmp_height;
+	__msg("DrawBmpRect:x0:%d,y0:%d,x1:%d,y1:%d\n",gui_rect.x0, gui_rect.y0, gui_rect.x1, gui_rect.y1);
     GUI_ClearRectEx(&gui_rect);
 
     //draw bmp
     bmp_x = gui_rect.x0 + (home_ui_para->max_main_bmp_width - bmp_width) / 2;
     bmp_y = gui_rect.y0 + (home_ui_para->max_main_bmp_height - bmp_height) / 2;
+	//__msg("bmp_x = %d, bmp_y = %d\n", bmp_x, bmp_y);
     GUI_BMP_Draw(pbmp, bmp_x, bmp_y);
-    __log("--------x0%d:%d----------", bmp_width, bmp_height);
+
     //draw text
     if(bfocus)
     {
@@ -469,37 +481,20 @@ static void paint_mmain_item_ex(mmenu_attr_t *mmenu_attr, __s32 index
         GUI_SetColor(GUI_DARKYELLOW);
         // GUI_SetColor(mmenu_attr->unfocus_txt_color);
     }
-    /*
-      {
-      //0, 185, 480, 272-185
-      0,108,480,272-108
-      // 0,129,480,272-129
-    },
-    {
-        0, 56, 118, 123
-      // 0, 0, 118, 123
-    },
-    480/4,//一屏5个
-    4,//总共7个图标
-    4,//一屏5个
-    56,// 45,//最大图标宽度
-    56,// 45,//最大图标高度
 
-    118,//item width
-    24,//item height
-    118,//line width
-    3,//line height
-    118,//top width
-    2,//top height
-    118,//bottom width
-    6//bottom height
-    */
-    gui_rect.x0 = mmenu_attr->item_w * (index - mmenu_attr->first_item)
-                  + (home_ui_para->item_width - 70/*home_ui_para->max_main_bmp_width*/) / 2;
-    gui_rect.y0 = home_ui_para->max_main_bmp_height;
-    gui_rect.x1 = gui_rect.x0 + 70; //home_ui_para->max_main_bmp_width;
-    gui_rect.y1 = gui_rect.y0 + 32; //16;
-    __log("----num1=%d,num2=%d,num3=%d,num4=%d---\n", gui_rect.x0, gui_rect.y0, gui_rect.x1, gui_rect.y1 );
+//    gui_rect.x0 = mmenu_attr->item_w * (index - mmenu_attr->first_item)
+//                  + (home_ui_para->item_width - home_ui_para->max_main_bmp_width) / 2;
+//    gui_rect.y0 = home_ui_para->max_main_bmp_height;
+//    gui_rect.x1 = gui_rect.x0 + home_ui_para->max_main_bmp_width;
+//    gui_rect.y1 = gui_rect.y0 + 32; 
+
+	gui_rect.x0 = (480 - home_ui_para->max_main_bmp_width)/2;
+    gui_rect.y0 = mmenu_attr->item_w * (index - mmenu_attr->first_item)
+                  + 2/*(mmenu_attr->item_w - home_ui_para->max_main_bmp_height) / 2*/;
+    gui_rect.x1 = gui_rect.x0 + home_ui_para->max_main_bmp_width + 20;
+    gui_rect.y1 = gui_rect.y0 + home_ui_para->max_main_bmp_height;
+	
+	__msg("DrawTextRect:x0:%d,y0:%d,x1:%d,y1:%d\n",gui_rect.x0, gui_rect.y0, gui_rect.x1, gui_rect.y1);
     GUI_ClearRectEx(&gui_rect);
     dsk_langres_get_menu_text(main_ui_para[index].lang_id, mmenu_attr->item_str[index], GUI_TITLE_MAX);
     GUI_DispStringInRect(mmenu_attr->item_str[index], &gui_rect, GUI_TA_HCENTER | GUI_TA_VCENTER);
@@ -680,7 +675,7 @@ static __s32 _main_menu_Proc(__gui_msg_t *msg)
         mmenu_attr_t *mmenu_attr;
         mmenu_para_t *mmenu_para;
 		
-        __log("menu_GUI_MSG_CREATE: %d\n", home_ui_para->item_width);
+        __msg("menu_GUI_MSG_CREATE: %d\n", home_ui_para->item_width);
         mmenu_para = (mmenu_para_t *)GUI_WinGetAttr(msg->h_deswin);
 
         mmenu_attr = (mmenu_attr_t *)esMEMS_Balloc(sizeof(mmenu_attr_t));
