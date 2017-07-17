@@ -446,9 +446,15 @@ static void paint_mmain_item_ex(mmenu_attr_t *mmenu_attr, __s32 index
     }
 
     //clear bg rect
-    gui_rect.x0 = mmenu_attr->item_w * (index - mmenu_attr->first_item)
-                  + (mmenu_attr->item_w - home_ui_para->max_main_bmp_width) / 2;
-    gui_rect.y0 = 0;
+//    gui_rect.x0 = mmenu_attr->item_w * (index - mmenu_attr->first_item)
+//                  + (mmenu_attr->item_w - home_ui_para->max_main_bmp_width) / 2;
+//    gui_rect.y0 = 0;
+//    gui_rect.x1 = gui_rect.x0 + home_ui_para->max_main_bmp_width;
+//    gui_rect.y1 = gui_rect.y0 + home_ui_para->max_main_bmp_height;
+	
+    gui_rect.x0 = 15;
+    gui_rect.y0 = mmenu_attr->item_w * (index - mmenu_attr->first_item)
+                  + 2/*(mmenu_attr->item_w - home_ui_para->max_main_bmp_width) / 2*/;
     gui_rect.x1 = gui_rect.x0 + home_ui_para->max_main_bmp_width;
     gui_rect.y1 = gui_rect.y0 + home_ui_para->max_main_bmp_height;
     GUI_ClearRectEx(&gui_rect);
@@ -469,36 +475,18 @@ static void paint_mmain_item_ex(mmenu_attr_t *mmenu_attr, __s32 index
         GUI_SetColor(GUI_DARKYELLOW);
         // GUI_SetColor(mmenu_attr->unfocus_txt_color);
     }
-    /*
-      {
-      //0, 185, 480, 272-185
-      0,108,480,272-108
-      // 0,129,480,272-129
-    },
-    {
-        0, 56, 118, 123
-      // 0, 0, 118, 123
-    },
-    480/4,//一屏5个
-    4,//总共7个图标
-    4,//一屏5个
-    56,// 45,//最大图标宽度
-    56,// 45,//最大图标高度
 
-    118,//item width
-    24,//item height
-    118,//line width
-    3,//line height
-    118,//top width
-    2,//top height
-    118,//bottom width
-    6//bottom height
-    */
-    gui_rect.x0 = mmenu_attr->item_w * (index - mmenu_attr->first_item)
-                  + (home_ui_para->item_width - 70/*home_ui_para->max_main_bmp_width*/) / 2;
-    gui_rect.y0 = home_ui_para->max_main_bmp_height;
-    gui_rect.x1 = gui_rect.x0 + 70; //home_ui_para->max_main_bmp_width;
-    gui_rect.y1 = gui_rect.y0 + 32; //16;
+//    gui_rect.x0 = mmenu_attr->item_w * (index - mmenu_attr->first_item)
+//                  + (home_ui_para->item_width - 70/*home_ui_para->max_main_bmp_width*/) / 2;
+//    gui_rect.y0 = home_ui_para->max_main_bmp_height;
+//    gui_rect.x1 = gui_rect.x0 + 70; //home_ui_para->max_main_bmp_width;
+//    gui_rect.y1 = gui_rect.y0 + 32; //16;
+    
+    gui_rect.x0 = (480 - home_ui_para->max_main_bmp_width)/2;
+    gui_rect.y0 = mmenu_attr->item_w * (index - mmenu_attr->first_item)
+                  + 2;
+    gui_rect.x1 = gui_rect.x0 + 70; 
+    gui_rect.y1 = gui_rect.y0 + 32; 
     __log("----num1=%d,num2=%d,num3=%d,num4=%d---\n", gui_rect.x0, gui_rect.y0, gui_rect.x1, gui_rect.y1 );
     GUI_ClearRectEx(&gui_rect);
     dsk_langres_get_menu_text(main_ui_para[index].lang_id, mmenu_attr->item_str[index], GUI_TITLE_MAX);
