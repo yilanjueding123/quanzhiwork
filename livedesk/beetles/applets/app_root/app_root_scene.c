@@ -289,7 +289,7 @@ static void __app_home_restore(__gui_msg_t *msg)
     if (root_ctrl->h_app_home)
     {
         __gui_msg_t mymsg;
-        __msg("__app_home_restore, if ture\n");
+        __log("----jh_dbg1020_1---\n");
 
         mymsg.h_deswin = root_ctrl->h_app_home;
         mymsg.id = DSK_APP_RESTORE;
@@ -307,7 +307,7 @@ static void __app_home_restore(__gui_msg_t *msg)
     }
     else
     {
-        __msg("__app_home_restore, else phase\n");
+        __log("----jh_dbg1020_2---\n");
         root_ctrl->h_app_home = app_home_create(root_ctrl->root_para);
         __app_set_focus_child(root_ctrl->h_app_home, 0);
     }

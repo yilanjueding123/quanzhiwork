@@ -24,7 +24,7 @@
 #include "msgbox.h"
 #include "app_home_i.h"
 
-#if  1
+#if  0
 //#define __here__            eLIBs_printf("@L%d(%s)\n", __LINE__, __FILE__);
 #define __msg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
 						     eLIBs_printf(__VA_ARGS__)									        )
@@ -309,7 +309,6 @@ static __s32 app_home_proc(__gui_msg_t *msg)
         home_para = (home_para_t *)esMEMS_Balloc(sizeof(home_para_t));
         if(!home_para)
         {
-        	__err("Malloc resource failed\n");
             return EPDK_FAIL;
         }
 		
