@@ -19,12 +19,12 @@
 #include "app_home_i.h"
 #include "main_menu.h"
 
-#if  0
+#if  1
 //#define __here__            eLIBs_printf("@L%d(%s)\n", __LINE__, __FILE__);
 #define __msg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
 						     eLIBs_printf(__VA_ARGS__)									        )
-#define __log(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
-								 eLIBs_printf(__VA_ARGS__)											)
+//#define __log(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
+//								 eLIBs_printf(__VA_ARGS__)											)
 #else
 #define __msg(...)   
 #define __log(...)
@@ -50,6 +50,9 @@ typedef struct tag_mmenu_attr
 {
     HTHEME focus_bmp[MAX_ITEM_NUM];
     HTHEME unfocus_bmp[MAX_ITEM_NUM];
+#ifdef MENU_BAR_ITEM
+	HTHEME item_bar[2];			// 0:lose, 1:focus
+#endif
     char item_str[MAX_ITEM_NUM][128];
 
     __s32 first_item;
@@ -84,13 +87,11 @@ static mm_res_id_t uipara_400_240[] =
 
 static mm_res_id_t uipara_480_272[] =
 {
-    //{STRING_HOME_FM, ID_HOME_MAIN_FM_LOSE_BMP, ID_HOME_MAIN_FM_FOCUS_BMP},
-    //{STRING_HOME_RECORD, ID_HOME_MAIN_RECORD_LOSE_BMP, ID_HOME_MAIN_RECORD_FOCUS_BMP},
     {STRING_HOME_MOVIE, ID_HOME_MAIN_MOVIE_LOSE_BMP, ID_HOME_MAIN_MOVIE_FOCUS_BMP},
     {STRING_HOME_PHOTO, ID_HOME_MAIN_PHOTO_LOSE_BMP, ID_HOME_MAIN_PHOTO_FOCUS_BMP},
     {STRING_HOME_CAPTURE, ID_HOME_MAIN_MUSIC_LOSE_BMP, ID_HOME_MAIN_MUSIC_FOCUS_BMP},
-    //{STRING_HOME_EBOOK, ID_HOME_MAIN_EBOOK_LOSE_BMP, ID_HOME_MAIN_EBOOK_FOCUS_BMP},
     {STRING_HOME_OTHERS, ID_HOME_MAIN_OTHERS_LOSE_BMP, ID_HOME_MAIN_OTHERS_FOCUS_BMP},
+    
 };
 
 static mm_res_id_t *main_get_ui_para(__s32 rotate)
@@ -337,6 +338,11 @@ static __s32 init_mmenu_res(mmenu_attr_t *mmenu_attr)
 
         mmenu_attr->focus_bmp[i] = dsk_theme_open(main_ui_para[i].focus_bmp_id);
     }
+#ifdef MENU_BAR_ITEM
+	mmenu_attr->item_bar[0] = dsk_theme_open(ID_HOME_MENU_BAR_LOSE_BMP);
+	mmenu_attr->item_bar[1] = dsk_theme_open(ID_HOME_MENU_BAR_FOCUS_BMP );
+	
+#endif
 
     mmenu_attr->res_init = EPDK_TRUE;
 
@@ -360,6 +366,18 @@ static __s32 uninit_mmenu_res(mmenu_attr_t *mmenu_attr)
         dsk_theme_close(mmenu_attr->unfocus_bmp[i]);
         dsk_theme_close(mmenu_attr->focus_bmp[i]);
     }
+#ifdef MENU_BAR_ITEM
+	if(mmenu_attr->item_bar[0])
+	{
+		__msg("release mmenu_attr->item_bar[0]\n");
+		dsk_theme_close(mmenu_attr->item_bar[0]);
+	}
+	if(mmenu_attr->item_bar[1])
+	{
+		__msg("release mmenu_attr->item_bar[1]\n");
+		dsk_theme_close(mmenu_attr->item_bar[1] );
+	}
+#endif
 
     mmenu_attr->res_init = EPDK_FALSE;
 
@@ -371,10 +389,10 @@ static void paint_mmain_item_ex(mmenu_attr_t *mmenu_attr, __s32 index
 {
     GUI_RECT gui_rect;
     __u32   i;
-    void *pbmp;
-    __s32 bmp_width;
-    __s32 bmp_height;
-    HBMP hbmp;
+    void *pbmp, *pbmp1;
+    __s32 bmp_width, bmp_width1;
+    __s32 bmp_height, bmp_height1;
+    HBMP hbmp, hbmp1;
     __s32 bmp_x;
     __s32 bmp_y;
     home_uipara_t *home_ui_para;
@@ -411,25 +429,26 @@ static void paint_mmain_item_ex(mmenu_attr_t *mmenu_attr, __s32 index
     GUI_SetBkColor(0);
 
     GUI_SetDrawMode(GUI_DRAWMODE_NORMAL); //GUI_DRAWMODE_NORMAL
-    //GUI_SetFontMode( GUI_FONTMODE_8BPP32 );
-
     if(bfocus)
     {
         pbmp = dsk_theme_hdl2buf(mmenu_attr->focus_bmp[index]);
+		pbmp1 = dsk_theme_hdl2buf(mmenu_attr->item_bar[1]);
     }
     else
     {
         pbmp = dsk_theme_hdl2buf(mmenu_attr->unfocus_bmp[index]);
+		pbmp1 = dsk_theme_hdl2buf(mmenu_attr->item_bar[0]);
     }
 
-    if(NULL == pbmp)
+    if((NULL == pbmp)||(NULL == pbmp1))
     {
-        __msg("dsk_theme_hdl2buf fail\n");
+        __err("dsk_theme_hdl2buf fail\n");
         return ;
     }
 
     hbmp = bmp_open(pbmp);
-    if(NULL == hbmp)
+	hbmp1 = bmp_open(pbmp1);
+    if((NULL == hbmp)||(NULL == hbmp1))
     {
         __msg("open bmp fail\n");
         return;
@@ -437,60 +456,67 @@ static void paint_mmain_item_ex(mmenu_attr_t *mmenu_attr, __s32 index
 
     bmp_width = bmp_get_width(hbmp);
     bmp_height = bmp_get_height(hbmp);
+	
+    bmp_width1 = bmp_get_width(hbmp1);
+    bmp_height1 = bmp_get_height(hbmp1);
+	
     bmp_close(hbmp);
+    bmp_close(hbmp1);
     hbmp = 0;
+	hbmp1 = 0;
     if(bmp_width > home_ui_para->max_main_bmp_width || bmp_height > home_ui_para->max_main_bmp_height)
     {
-        __msg("width or height of bmp too big..\n");
+        __err("width or height of bmp too big..\n");
         return ;
     }
 
-    //clear bg rect
-//    gui_rect.x0 = mmenu_attr->item_w * (index - mmenu_attr->first_item)
-//                  + (mmenu_attr->item_w - home_ui_para->max_main_bmp_width) / 2;
-//    gui_rect.y0 = 0;
-//    gui_rect.x1 = gui_rect.x0 + home_ui_para->max_main_bmp_width;
-//    gui_rect.y1 = gui_rect.y0 + home_ui_para->max_main_bmp_height;
+    //clear bg rect	
+    __msg("\n----------------------1------------------------\n");
+	__msg("index = %d, mmenu_attr->first_item = %d\n", index, mmenu_attr->first_item);
+#ifdef MENU_BAR_ITEM
+	gui_rect.x0 = 2;
+	gui_rect.y0 = mmenu_attr->item_w * (index - mmenu_attr->first_item) + 2;
+	gui_rect.x1 = 476;
+	gui_rect.y1 = gui_rect.y0 + mmenu_attr->item_w;
+	GUI_ClearRectEx(&gui_rect);
+
 	
+    //draw bmp
+    bmp_x = gui_rect.x0;
+    bmp_y = gui_rect.y0;
+    GUI_BMP_Draw(pbmp1, bmp_x, bmp_y);
+#endif
     gui_rect.x0 = 15;
-    gui_rect.y0 = mmenu_attr->item_w * (index - mmenu_attr->first_item)
-                  + 2/*(mmenu_attr->item_w - home_ui_para->max_main_bmp_width) / 2*/;
-    gui_rect.x1 = gui_rect.x0 + home_ui_para->max_main_bmp_width;
-    gui_rect.y1 = gui_rect.y0 + home_ui_para->max_main_bmp_height;
-    GUI_ClearRectEx(&gui_rect);
+    gui_rect.y0 = mmenu_attr->item_w * (index - mmenu_attr->first_item) + 2;
+    gui_rect.x1 = gui_rect.x0 + home_ui_para->max_main_bmp_width + 5;
+    gui_rect.y1 = gui_rect.y0 + mmenu_attr->item_w;
+	
+    __msg("draw:gui_rect.x0=%d,gui_rect.y0=%d,gui_rect.x1=%d,gui_rect.y1=%d\n\n", gui_rect.x0, gui_rect.y0, gui_rect.x1, gui_rect.y1 );
+    //GUI_ClearRectEx(&gui_rect);
 
     //draw bmp
     bmp_x = gui_rect.x0 + (home_ui_para->max_main_bmp_width - bmp_width) / 2;
     bmp_y = gui_rect.y0 + (home_ui_para->max_main_bmp_height - bmp_height) / 2;
     GUI_BMP_Draw(pbmp, bmp_x, bmp_y);
-    __log("--------x0%d:%d----------", bmp_width, bmp_height);
     //draw text
     if(bfocus)
     {
         GUI_SetColor(GUI_BLACK);
-        //GUI_SetColor(mmenu_attr->focus_txt_color);
     }
     else
     {
         GUI_SetColor(GUI_DARKYELLOW);
-        // GUI_SetColor(mmenu_attr->unfocus_txt_color);
     }
-
-//    gui_rect.x0 = mmenu_attr->item_w * (index - mmenu_attr->first_item)
-//                  + (home_ui_para->item_width - 70/*home_ui_para->max_main_bmp_width*/) / 2;
-//    gui_rect.y0 = home_ui_para->max_main_bmp_height;
-//    gui_rect.x1 = gui_rect.x0 + 70; //home_ui_para->max_main_bmp_width;
-//    gui_rect.y1 = gui_rect.y0 + 32; //16;
     
-    gui_rect.x0 = (480 - home_ui_para->max_main_bmp_width)/2;
-    gui_rect.y0 = mmenu_attr->item_w * (index - mmenu_attr->first_item)
-                  + 2;
+    gui_rect.x0 = (480 - home_ui_para->max_main_bmp_width)/2 + 15;
+    gui_rect.y0 = mmenu_attr->item_w * (index - mmenu_attr->first_item)+10;
     gui_rect.x1 = gui_rect.x0 + 70; 
     gui_rect.y1 = gui_rect.y0 + 32; 
-    __log("----num1=%d,num2=%d,num3=%d,num4=%d---\n", gui_rect.x0, gui_rect.y0, gui_rect.x1, gui_rect.y1 );
-    GUI_ClearRectEx(&gui_rect);
+    __msg("txt:gui_rect.x0=%d,gui_rect.y0=%d,gui_rect.x1=%d,gui_rect.y1=%d\n\n", gui_rect.x0, gui_rect.y0, gui_rect.x1, gui_rect.y1 );
+    //GUI_ClearRectEx(&gui_rect);
     dsk_langres_get_menu_text(main_ui_para[index].lang_id, mmenu_attr->item_str[index], GUI_TITLE_MAX);
     GUI_DispStringInRect(mmenu_attr->item_str[index], &gui_rect, GUI_TA_HCENTER | GUI_TA_VCENTER);
+    __msg("\n--------------------2--------------------------\n");
 }
 
 /*
@@ -568,6 +594,7 @@ static __s32  mmenu_key_proc(__gui_msg_t *msg)
                 mmenu_attr->focus_item = mmenu_attr->item_nr - 1;
                 mmenu_attr->first_item = mmenu_attr->item_nr - mmenu_attr->item_per_screen;
                 paint_mmain_item_all(mmenu_attr);
+                
             }
             else
             {
@@ -590,11 +617,12 @@ static __s32  mmenu_key_proc(__gui_msg_t *msg)
         case GUI_MSG_KEY_RIGHT:
         case GUI_MSG_KEY_LONGRIGHT:
         {
+			__msg("GUI_MSG_KEY_RIGHT\n");
             if(mmenu_attr->focus_item >= mmenu_attr->item_nr - 1)
             {
                 mmenu_attr->focus_item = 0;
                 mmenu_attr->first_item = 0;
-                paint_mmain_item_all(mmenu_attr);
+                paint_mmain_item_all(mmenu_attr);				
             }
             else
             {
@@ -612,7 +640,6 @@ static __s32  mmenu_key_proc(__gui_msg_t *msg)
                 }
             }
 
-            //   test_read_nor_read(g_fsize, g_f, g_p);
             main_cmd2parent(msg->h_deswin, ID_SWITCH_ITEM, mmenu_attr->focus_item, mmenu_attr->first_item);
         }
         break;
@@ -659,8 +686,6 @@ static __s32 _main_menu_Proc(__gui_msg_t *msg)
         return ;
     }
 
-    //__msg("_main_menu_Proc msg->id=%d, msg->h_deswin=%x, msg->dwAddData1=%d, msg->dwAddData2=%d\n"
-     //     , msg->id, msg->h_deswin, msg->dwAddData1, msg->dwAddData2);
     switch(msg->id)
     {
     case GUI_MSG_CREATE:
@@ -694,10 +719,6 @@ static __s32 _main_menu_Proc(__gui_msg_t *msg)
 #if EPDK_AUTO_PLAY_MOVIE_ENABLE
         main_cmd2parent(msg->h_deswin, ID_OP_SUB_ENTER, mmenu_attr->focus_item, mmenu_attr->first_item);
 #endif
-        //eLIBs_printf("DRAM PLL=%x\n", *((volatile __u32 *)(0xf1c20000 + 0x20)));
-        //GUI_SetTimer(msg->h_deswin, main_menu_timmer_id, 200, NULL);
-
-        // g_ret = test_read_nor_open(&g_fsize, &g_f, &g_p);
     }
     return EPDK_OK;
     case GUI_MSG_CLOSE:
@@ -740,7 +761,6 @@ static __s32 _main_menu_Proc(__gui_msg_t *msg)
             __err("invalid para...\n");
             return EPDK_FAIL;
         }
-//        __msg("---menu_GUI_MSG_PAINT---\n");
 		__msg("mmenu_attr->focus_item = %d\n", mmenu_attr->focus_item);
 
         init_mmenu_res(mmenu_attr);

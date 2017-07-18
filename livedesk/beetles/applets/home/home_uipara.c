@@ -46,29 +46,25 @@ static home_uipara_t uipara_400_240 =
 static home_uipara_t uipara_480_272 =
 {
     {
-        //0, 185, 480, 272-185
-        0, 32, 480, 272 - 32
-        // 0,129,480,272-129
+        0, 40, 480, 272 - 40
     },
     {
         0, 50, 118, 50
-        //  0, 56, 118, 123
-        // 0, 0, 118, 123
     },
-    (272 - 32) / 4, //一屏5个
-    4,//总共7个图标
-    4,//一屏5个
-    56,// 45,//最大图标宽度
-    56,// 45,//最大图标高度
+    (272 - 40) / 4, //一屏5个
+    4,			//总共7个图标
+    4,			//一屏5个
+    56, 		//最大图标宽度
+    56, 		//最大图标高度
 
-    62,//item width
-    24,//item height
-    62,//line width
-    3,//line height
-    118,//top width
-    2,//top height
-    118,//bottom width
-    6//bottom height
+    58,			//item width
+    24,			//item height
+    58,			//line width
+    3,			//line height
+    62,			//top width
+    2,			//top height
+    62,			//bottom width
+    6			//bottom height
 };
 
 home_uipara_t *home_get_ui_para(__s32 rotate)

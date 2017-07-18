@@ -25,6 +25,7 @@
 #define MAIN_MENU_ID  	(APP_HOME_ID +1)
 #define SUB_MENU_ID		(APP_HOME_ID +2)
 #define MSGBOX_ID		(APP_HOME_ID +3)
+#define MENU_BAR_ITEM
 
 #define MOVIE_ID_SET_SHOWERR		(GUI_MSG_USER_DEF + 1)
 

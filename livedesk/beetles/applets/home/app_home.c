@@ -24,7 +24,7 @@
 #include "msgbox.h"
 #include "app_home_i.h"
 
-#if  0
+#if  1
 //#define __here__            eLIBs_printf("@L%d(%s)\n", __LINE__, __FILE__);
 #define __msg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
 						     eLIBs_printf(__VA_ARGS__)									        )
@@ -66,7 +66,7 @@ static H_LYR home_8bpp_layer_create(RECT *rect, __s32 pipe)
     {
         {0, 0},                                   		/* size      */
         {0, 0, 0},                                      /* buffer    */
-        {FB_TYPE_RGB, {/*PIXEL_MONO_8BPP*/PIXEL_COLOR_ARGB8888, 0, (__rgb_seq_t)0}},    /* fmt       */
+        {FB_TYPE_RGB, {PIXEL_COLOR_ARGB8888, 0, (__rgb_seq_t)0}},    /* fmt       */
     };
 
     __disp_layer_para_t lstlyr =
@@ -239,18 +239,19 @@ static void app_sub_menu_create(home_para_t *home_para)
         return ;
     }
     //根据当前选择项确定X起始参考坐标
-    rect.x = (home_para->focus_id - home_para->first_item) * home_ui_para->item_width;
+    __msg("home_para->focus_id:%d, home_para->first_item:%d\n", home_para->focus_id, home_para->first_item);
+	__msg("home_ui_para->item_width:%d\n", home_ui_para->item_width);
+	rect.x = 0;//home_ui_para->lyr_sub_item.x;//(home_para->focus_id - home_para->first_item) * home_ui_para->item_width;
     //2,0
-    __log("jh2:%d:%d", home_para->focus_id, home_para->first_item);
-    rect.y = home_ui_para->lyr_sub_item.y;
-    rect.width = home_ui_para->lyr_sub_item.w;
-    rect.height = home_ui_para->lyr_sub_item.h;
+    rect.y = 0;//(home_para->focus_id - home_para->first_item) * home_ui_para->item_width;//home_ui_para->lyr_sub_item.y;
+    rect.width = 1;//home_ui_para->lyr_sub_item.w;
+    rect.height = 1;//home_ui_para->lyr_sub_item.h;
 
-    if (rect.x + rect.width >= home_ui_para->lyr_main_menu.w)
+    if (rect.y + rect.height >= home_ui_para->lyr_main_menu.h)
     {
-        rect.x = home_ui_para->lyr_main_menu.w - rect.width;
+        rect.y = home_ui_para->lyr_main_menu.h - rect.height;
     }
-
+	__msg("rect.x = %d, rect.y = %d, rect.width = %d,rect.height = %d\n", rect.x,rect.y,rect.width,rect.height);
     home_para->lyr_smenu = home_8bpp_layer_create(&rect, 1);
 
     smenu_para.layer = home_para->lyr_smenu;
@@ -258,10 +259,8 @@ static void app_sub_menu_create(home_para_t *home_para)
     smenu_para.smenu_font = home_para->main_font;
     smenu_para.root_type = home_para->root_type;
     smenu_para.focus_item = home_para->focus_smenu_item;
-    __msg("home_para->focus_smenu_item=%d\n", home_para->focus_smenu_item);
 
     home_para->h_submenu = sub_menu_win_create(home_para->h_app_main, &smenu_para);
-    __msg("home_para->h_submenu=%x\n", home_para->h_submenu);
 }
 
 static void app_main_menu_create(home_para_t *home_para)
@@ -335,14 +334,11 @@ static __s32 app_home_proc(__gui_msg_t *msg)
 
         GUI_LyrWinSetSta(home_para->lyr_mmenu, GUI_LYRWIN_STA_ON);
         GUI_LyrWinSetSta(home_para->lyr_smenu, GUI_LYRWIN_STA_ON);
-        //  batt display     rtc display
         gscene_hbar_set_state(HBAR_ST_SHOW);
-
         gscene_bgd_set_bottom();
         GUI_WinSetFocusChild(home_para->h_mmenu);
         GUI_WinSetAddData(msg->h_deswin, (__u32)home_para);
 #endif
-        __here__;
     }
     return EPDK_OK;
     case GUI_MSG_CLOSE:
@@ -374,7 +370,6 @@ static __s32 app_home_proc(__gui_msg_t *msg)
     }
     return EPDK_OK;
     case GUI_MSG_KEY:
-        __log("----log_fk_0------\n");
         __msg("******app_home_proc GUI_MSG_KEY*****\n");
         break;
     case GUI_MSG_TOUCH:
@@ -390,24 +385,15 @@ static __s32 app_home_proc(__gui_msg_t *msg)
         home_para = (home_para_t *)GUI_WinGetAddData(msg->h_deswin);
 
         root_type = home_para->root_type;
-        __msg("home_para->root_type=%d\n", home_para->root_type);
         check_disk(home_para);
-        __msg("home_para->root_type=%d\n", home_para->root_type);
-        __here__;
         if (GUI_LYRWIN_STA_ON != GUI_LyrWinGetSta(home_para->lyr_mmenu))
             return EPDK_OK;
-        __here__;
         if (1/*home_para->root_type != root_type*/)
         {
-            __here__;
             if (home_para->focus_id == ID_HOME_MOVIE || home_para->focus_id == ID_HOME_PHOTO ||
-                    home_para->focus_id == ID_HOME_DV /*|| home_para->focus_id == ID_HOME_EBOOK
-	|| home_para->focus_id == ID_HOME_RECORD*/)
+                    home_para->focus_id == ID_HOME_DV)
             {
                 //先挡住子菜单，解决子菜单切换时闪的问题。
-                //GUI_LyrWinSetTop(home_para->lyr_mmenu);//112357
-                //gscene_hbar_set_state(HBAR_ST_SHOW);//112357
-
                 if (home_para->lyr_smenu)
                 {
                     GUI_LyrWinDelete(home_para->lyr_smenu);
@@ -462,9 +448,7 @@ static __s32 app_home_proc(__gui_msg_t *msg)
             case ID_SWITCH_ITEM:
             {
                 //先挡住子菜单，解决子菜单切换时闪的问题。
-                //GUI_LyrWinSetTop(home_para->lyr_mmenu);//112357
-                //gscene_hbar_set_state(HBAR_ST_SHOW);//112357
-
+				__msg("ID_SWITCH_ITEM\n");
                 if (home_para->lyr_smenu)
                 {
                     GUI_LyrWinDelete(home_para->lyr_smenu);
@@ -475,8 +459,6 @@ static __s32 app_home_proc(__gui_msg_t *msg)
                 app_sub_menu_create(home_para);
                 GUI_LyrWinSetSta(home_para->lyr_smenu, GUI_LYRWIN_STA_ON);
                 GUI_LyrWinSetTop(home_para->lyr_smenu);
-
-
             }
             break;
             case ID_OP_SUB_UP:

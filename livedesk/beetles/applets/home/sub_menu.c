@@ -19,6 +19,14 @@
 #include "sub_menu.h"
 #include "app_home_i.h"
 
+#if  1
+#define __msg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
+						     eLIBs_printf(__VA_ARGS__)									        )
+#else
+#define __msg(...)   
+#endif
+
+
 enum
 {
     SMENU_PAINT_ALL,
@@ -347,7 +355,7 @@ static __s32 sub_menu_paint(__gui_msg_t *msg)
     RECT rect;
     GUI_RECT gui_rect;
     home_uipara_t *ui_para;
-    return;
+    return EPDK_OK;
     ui_para = home_get_ui_para(GUI_GetScnDir());
     if(!ui_para)
     {
@@ -500,7 +508,6 @@ static void sub_menu_create(__gui_msg_t *msg)
     smenu_init_res(smenu_attr);
 
     GUI_WinSetAddData(msg->h_deswin, (__u32)smenu_attr);
-    //GUI_InvalidateRect(msg->h_deswin, 0, EPDK_TRUE);
 }
 
 /*
@@ -508,8 +515,8 @@ static void sub_menu_create(__gui_msg_t *msg)
 */
 static __s32 _sub_menu_Proc(__gui_msg_t *msg)
 {
-    __msg("_sub_menu_Proc msg->id=%d, msg->h_deswin=%x, msg->dwAddData1=%d, msg->dwAddData2=%d\n"
-          , msg->id, msg->h_deswin, msg->dwAddData1, msg->dwAddData2);
+    //__msg("_sub_menu_Proc msg->id=%d, msg->h_deswin=%x, msg->dwAddData1=%d, msg->dwAddData2=%d\n"
+         // , msg->id, msg->h_deswin, msg->dwAddData1, msg->dwAddData2);
     switch(msg->id)
     {
     case GUI_MSG_CREATE:
@@ -536,9 +543,10 @@ static __s32 _sub_menu_Proc(__gui_msg_t *msg)
     }
     return EPDK_OK;
     case GUI_MSG_PAINT:
-
+	{
         sub_menu_paint( msg);
         return EPDK_OK;
+	}
     case GUI_MSG_KEY:
         break;
     case GUI_MSG_TOUCH:
@@ -549,11 +557,15 @@ static __s32 _sub_menu_Proc(__gui_msg_t *msg)
     {
         smenu_attr_t *smenu_attr;
         smenu_attr = (smenu_attr_t *)GUI_WinGetAddData(msg->h_deswin);
-
+		__msg("MSG_SUB_OP_UP\n");
         if (smenu_attr->focus_item <= 0)
+        {
             smenu_attr->focus_item = smenu_attr->item_nr - 1;
+        }
         else
+        {
             smenu_attr->focus_item--;
+        }
         sub_menu_paint( msg);
     }
     return EPDK_OK;
@@ -561,7 +573,8 @@ static __s32 _sub_menu_Proc(__gui_msg_t *msg)
     {
         smenu_attr_t *smenu_attr;
         smenu_attr = (smenu_attr_t *)GUI_WinGetAddData(msg->h_deswin);
-
+		
+		__msg("MSG_SUB_OP_DOWN\n");
         if (smenu_attr->focus_item >= smenu_attr->item_nr - 1)
             smenu_attr->focus_item = 0;
         else
@@ -572,15 +585,17 @@ static __s32 _sub_menu_Proc(__gui_msg_t *msg)
     case MSG_SUB_OP_ENTER:
     {
         smenu_attr_t *smenu_attr;
-
+		__msg("MSG_SUB_OP_ENTER\n");
         smenu_attr = (smenu_attr_t *)GUI_WinGetAddData(msg->h_deswin);
         main_cmd2parent(msg->h_deswin, SMENU_APP_SWITCH, smenu_attr->focus_item, 0);
-        __log("---jh_fk_6------%d", smenu_attr->focus_item);
     }
     return EPDK_OK;
     case MSG_SUB_OP_LIST:
+	{
+		__msg("MSG_SUB_OP_LIST\n");
         main_cmd2parent(msg->h_deswin, SMENU_APP_SWITCH, 4, 0);
         return EPDK_OK;
+    }
     default:
         break;
     }
@@ -609,7 +624,7 @@ H_WIN sub_menu_win_create(H_WIN h_parent, smenu_para_t *para)
     smenu_para->sub_menu_id = para->sub_menu_id;
     smenu_para->root_type = para->root_type;
     smenu_para->focus_item = para->focus_item;
-
+	__msg("w:%d, h:%d\n", fb.size.width, fb.size.height);
     eLIBs_memset(&framewin_para, 0, sizeof(__gui_framewincreate_para_t));
 
     framewin_para.name =	"sub_menu_win",
@@ -620,10 +635,10 @@ H_WIN sub_menu_win_create(H_WIN h_parent, smenu_para_t *para)
     framewin_para.hHosting = h_parent;
     framewin_para.id         = SUB_MENU_ID;
     framewin_para.FrameWinProc = (__pGUI_WIN_CB)esKRNL_GetCallBack((__pCBK_t)_sub_menu_Proc);
-    framewin_para.rect.x = 0;// 0;
-    framewin_para.rect.y = 0;//0;
-    framewin_para.rect.width =  fb.size.width; //movie_layout.spsc_scnwin.width; //800
-    framewin_para.rect.height =  fb.size.height;//movie_layout.spsc_scnwin.height;//300
+    framewin_para.rect.x = 0;
+    framewin_para.rect.y = 0;
+    framewin_para.rect.width =  fb.size.width; 
+    framewin_para.rect.height =  fb.size.height;
     framewin_para.BkColor.alpha =  0;
     framewin_para.BkColor.red = 0;
     framewin_para.BkColor.green = 0;
