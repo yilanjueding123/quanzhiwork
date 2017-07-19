@@ -57,6 +57,7 @@ typedef enum explr_list_icon_id_s
 
     ID_EXP_LONG_STR_SCROLL_BG,
     ID_EXP_ERROR_BMP ,
+    ID_EXP_LIST_ITEM_UNFOCUS_BG,
     BROWSER_ICON_MAX,
 } explr_list_icon_id_e;							//e:代表enum,  s:代表struct
 

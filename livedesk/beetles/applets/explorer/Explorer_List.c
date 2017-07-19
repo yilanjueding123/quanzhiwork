@@ -1797,8 +1797,29 @@ static __s32 draw_square_item_focus_icon(__lbar_draw_para_t *draw_param)
     return ret;
 }
 
+//Draw focus icon, 可将上下两个函数优化为一个函数
+static __s32 draw_list_item_unfocus_icon(__lbar_draw_para_t *draw_param)
+{
+    RECT FocusIconRect;
+    void *pic_buf;
+    int ret;
+    __s32 picX, picY;
+    explr_list_para_t *list_para;
+	__msg("draw_list_item_unfocus_icon\n");
+    list_para = (explr_list_para_t *)draw_param->attr;
 
-//Draw focus icon, 颗将上下两个函数优化为一个函数
+    ret = explorer_get_item_focus_icon_rect(list_para, &FocusIconRect);
+
+    pic_buf = explorer_get_listview_icon_res(ID_EXP_LIST_ITEM_UNFOCUS_BG);			//draw select border
+    picX = draw_param->rect.x + FocusIconRect.x;
+    picY = draw_param->rect.y + FocusIconRect.y;
+
+    GUI_BMP_Draw(pic_buf, picX, picY);
+    return ret;
+}
+
+
+//Draw focus icon, 可将上下两个函数优化为一个函数
 static __s32 draw_list_item_focus_icon(__lbar_draw_para_t *draw_param)
 {
     RECT FocusIconRect;
@@ -1812,7 +1833,9 @@ static __s32 draw_list_item_focus_icon(__lbar_draw_para_t *draw_param)
     ret = explorer_get_item_focus_icon_rect(list_para, &FocusIconRect);
 
     pic_buf = explorer_get_listview_icon_res(ID_EXP_LIST_ITEM_FOCUS_BG);			//draw select border
-
+	__msg("FocusIconRect.x = %d, FocusIconRect.y = %d\n", FocusIconRect.x, FocusIconRect.y);
+	
+	__msg("x = %d, y = %d, w = %d, h = %d\n", draw_param->rect.x, draw_param->rect.y, draw_param->rect.width, draw_param->rect.height);
     picX = draw_param->rect.x + FocusIconRect.x;
     picY = draw_param->rect.y + FocusIconRect.y;
 	__msg("picX = %d, picY = %d\n", picX, picY);
@@ -1964,6 +1987,10 @@ static __s32 draw_listview_item(__lbar_draw_para_t *draw_param)
             draw_square_item_focus_icon(draw_param);
         }
     }
+	else
+	{
+		draw_list_item_unfocus_icon(draw_param);
+	}
 
     if((list_para->view_mode == EXPLR_SQUARE_MODE)
             && (list_para->media_type == RAT_MEDIA_TYPE_PIC))

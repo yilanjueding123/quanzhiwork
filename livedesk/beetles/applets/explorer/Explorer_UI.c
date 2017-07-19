@@ -23,39 +23,41 @@ static explorer_viewer_ui_t  explr_viewer_ui_400_240 =
     //layer window
     {
         PIXEL_COLOR_ARGB8888,       //fmt
-        { 480, 272 - 40 },               //fb size
-        { 0, 40, 480, 272 - 40},         //src rect
-        { 0, 40, 480, 272 - 40 },         //scn rect
+        { 480, 232},               //fb size
+        { 0, 40, 480, 272},         //src rect
+        { 0, 40, 480, 272},         //scn rect
         { 0 },                      //reserved
     },
 
     //menuview attribute
-    { 0, 40, 480, 272 - 40 },             //menuview(frame window)
-    { 0, 40, 480, 272 - 40 },             //browser bg
-    { 0, 40, 480, 20  },              //browser bg top
+    { 0, 40, 480, 272 },             //menuview(frame window)
+    { 0, 40, 480, 272 },             //browser bg
+    { 0, 0, 480, 20  },              //browser bg top
     { 0, 0, 0, 	0 },                 //browser bg bottom
     { 0, 0, 0,  0 },              //browser bg left
 
-    { 471,	48,	7,	224 - 40},            //scroll bg rect
-    { 473,	62,	3,	194 - 40},      		 //scroll rect
-    6, 	1, 	6,                        //scroll head/body/tail height
+    { 465,	42,	8,	220},            //scroll bg rect
+    { 467,	41,	8,	218},      		 //scroll rect
+    6, 								//scroll head
+    1, 								//scroll body
+    6,                        		//tail height
 
-    { 0, 48, 480, 272 - 48},        //(the whole listbar rectangle)
+    { 0, 40, 465, 260},        //(the whole listbar rectangle)
 
     //list item attribute，以下坐标为点对于listbar rectangle的相对坐标
     {
-        { 10, 48, 470, 272 - 48},				//item rect
-        { 0, 0, 460, 55 },       			//item rect
-        { 0 , 0, 460, 2 },        			//item_top_line;
-        { 0 , 0, 460, 2 },        			//item_bottom_line;
-        { 0 , 2, 2, 38},       				//item_dividing_line;
+        { 0, 40, 460, 220},				//item rect
+        { 0, 0, 460, 44 },       				//item rect
+        { 0 , 0, 460, 2 },        				//item_top_line;
+        { 0 , 0, 460, 2 },        				//item_bottom_line;
+        { 0 , 2, 2, 38},       					//item_dividing_line;
 
-        { 24, 4, 15, 15 },        			//icon rect
-        { 0, 0, 50, 30 },       			//miniature rect, 缩略图 UI 参数
+        { 24, 4, 15, 15 },        				//icon rect
+        { 0, 0, 50, 30 },       				//miniature rect, 缩略图 UI 参数
 
-        { 24 + 35, 0, 254 - 24 - 35 - 2 - 7, 30 }, //text rect
+        { 310, 0, 166, 40 }, 					//text rect
 
-        { 7, 2, 254, 30 },      			//focus icon rect(select picture)
+        { 7, 2, 445, 44 },      			//focus icon rect(select picture)
         { 24, 53, 88, 110},					//媒体类型图标位置(显示在左边区域的大图标)
 
         {0, 12, 120, 20 },      			//title rect, only for file manager
@@ -127,7 +129,8 @@ static explorer_viewer_ui_t  explr_viewer_ui_400_240 =
 
         { ID_EXPLORER_LONG_STR_SCROLL_BG_BMP,     NULL,  				 NULL }, 	// 长字符串滚动背景
         {ID_EXPLORER_ERROR_BMP ,				 NULL,				 NULL } ,
-        { 0,                                    NULL,  				 NULL }      //browser_icon_max
+		{ID_EXPLORER_LIST_ITEM_UNFOCUS_BG_BMP ,				 NULL,				 NULL } ,
+		{ 0,                                    NULL,  				 NULL }      //browser_icon_max
     },
 };
 

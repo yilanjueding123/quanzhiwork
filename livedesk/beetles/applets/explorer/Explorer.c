@@ -45,7 +45,9 @@ typedef enum
 typedef struct tag_explorer_ctrl
 {
     H_WIN h_explr;
+#ifdef EXPLORE_BG_ON
     H_LYR BG_layer;			//background layer 8bpp(注意背景图需要设置为8bpp)
+#endif
     H_LYR list_layer;		//layer for listbar, 32bpp(32bpp,因为listbar缩略图为32bpp)
     H_WIN h_list_framewin;
 
@@ -235,13 +237,14 @@ static __s32 app_explorer_on_destroy(H_WIN h_exp_win)
     explr_ctrl	 = (explorer_ctrl_t *)GUI_WinGetAttr(h_exp_win);
 
     explorer_layer_delete(explr_ctrl->list_layer);
-
+#ifdef EXPLORE_BG_ON
     if(explr_ctrl->BG_layer)
     {
         GUI_LyrWinSetTop(explr_ctrl->BG_layer);
     }
     gscene_bgd_set_state(BGD_STATUS_SHOW);
     explorer_layer_delete(explr_ctrl->BG_layer);
+#endif	
 
     esMEMS_Bfree(explr_ctrl, sizeof(explorer_ctrl_t));
 
@@ -621,7 +624,7 @@ static __s32 explorer_layer_delete(H_LYR layer)
     }
     return EPDK_OK;
 }
-
+#ifdef EXPLORE_BG_ON
 static __s32 explorer_draw_bg(explorer_ctrl_t	*explr_ctrl)
 {
     if(!explr_ctrl || !explr_ctrl->BG_layer)
@@ -692,7 +695,7 @@ static __s32 explorer_draw_bg(explorer_ctrl_t	*explr_ctrl)
 
     return EPDK_OK;
 }
-
+#endif
 
 
 /*
@@ -737,18 +740,22 @@ static __s32 explorer_scene_create(__gui_msg_t *msg)
         ExplorerGetSearchPath(explr_ctrl->root_type, explr_ctrl->root);
         __msg("explr_ctrl->root=%s\n", explr_ctrl->root);
     }
-
+#ifdef EXPLORE_BG_ON
     explr_ctrl->BG_layer = explorer_8bpp_layer_create();
+#endif
     explr_ctrl->list_layer = explorer_32bpp_layer_create();
 
+#ifdef EXPLORE_BG_ON
     explorer_draw_bg(explr_ctrl);
-
     ListPara.BG_layer = explr_ctrl->BG_layer;		//背景图层
+#endif
     ListPara.list_layer = explr_ctrl->list_layer;	//listbar layer
 
     explr_ctrl->h_list_framewin = explorer_list_win_create(msg->h_deswin, &ListPara);
     GUI_WinSetFocusChild(explr_ctrl->h_list_framewin);		//frame win get focus.					//set picture layer as top level
+#ifdef EXPLORE_BG_ON
     GUI_LyrWinSetSta(explr_ctrl->BG_layer, GUI_LYRWIN_STA_ON);
+#endif
     GUI_LyrWinSetSta(explr_ctrl->list_layer, GUI_LYRWIN_STA_ON);
 
     return EPDK_OK;

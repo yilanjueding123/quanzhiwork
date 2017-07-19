@@ -6,6 +6,7 @@
 
 #include "Beetles_app.h"
 
+#define EXPLORE_BG_ON
 /*
 typedef enum explorer_cmd_s
 {

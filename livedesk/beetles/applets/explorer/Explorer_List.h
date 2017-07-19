@@ -27,7 +27,9 @@ typedef struct tag_explr_list_para
 {
     H_WIN      			list_win;			//´°¿Ú¾ä±ú
     GUI_FONT 			*explr_list_font;
+#ifdef EXPLORE_BG_ON	
     H_LYR 				BG_layer;			//±³¾°Í¼²ã
+#endif    
     H_LYR 				list_layer;				//listbar Í¼²ã
     void 				*core;
     __s32				root_type;

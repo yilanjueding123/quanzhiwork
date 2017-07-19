@@ -1,4 +1,4 @@
----- draw_list_item_focus_icon Matches (3 in 1 files) ----
-Explorer_List.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):static __s32 draw_list_item_focus_icon(__lbar_draw_para_t *draw_param)
-Explorer_List.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):	__msg("draw_list_item_focus_icon\n");
-Explorer_List.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):            draw_list_item_focus_icon(draw_param);		//»­focus item ±³¾°¿òÍ¼
+---- explorer_get_listbar_pagenum Matches (3 in 3 files) ----
+Explorer_List.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):    page_item_cnt = explorer_get_listbar_pagenum(list_para);
+Explorer_UI.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):__u32 explorer_get_listbar_pagenum(explr_list_para_t *list_para)
+Explorer_UI.h (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):extern __u32 explorer_get_listbar_pagenum(explr_list_para_t *list_para);
