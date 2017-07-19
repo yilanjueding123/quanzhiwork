@@ -20,8 +20,12 @@
 #include "Explorer_List.h"
 #include "Explorer_UI.h"
 
-
-
+#if  1
+#define __msg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
+						     eLIBs_printf(__VA_ARGS__)									        )
+#else
+#define __msg(...)    	
+#endif
 
 
 typedef enum
@@ -96,108 +100,52 @@ __s32 app_explorer_create(root_para_t  *para)
 {
     __gui_manwincreate_para_t create_info;
     explorer_ctrl_t	*explr_ctrl;
-    //reg_root_para_t *root_para = NULL;
-
 
     __inf("****************************************************************************************\n");
     __inf("********  enter explorer app  **************\n");
     __inf("****************************************************************************************\n");
 
-    //__wait__;
     explr_ctrl = (explorer_ctrl_t *)esMEMS_Balloc(sizeof(explorer_ctrl_t));		//为私有属性申请内存
     eLIBs_memset(explr_ctrl, 0, sizeof(explorer_ctrl_t));
 	rat_set_modify_flag_all(1);
-    //root_para = dsk_reg_get_para_by_app(REG_APP_ROOT);
+
     explr_ctrl->root_para = para ;
     explr_ctrl->explr_font = para->font;
+	
     __msg("para->root_type = %d\n", para->root_type);
+	
     switch(para->data)
     {
     case ID_EXPLORER_ALL:
         explr_ctrl->view_mode = EXPLR_LIST_MODE;
         explr_ctrl->media_type = RAT_MEDIA_TYPE_ALL;
         explr_ctrl->root_type = para->root_type;
-        //explr_ctrl->last_start_id = 0;
-        //explr_ctrl->last_focused_id = 0;
-        //explr_ctrl->last_filename = NULL;
         break;
+		
     case ID_EXPLORER_MOVIE:
         explr_ctrl->view_mode = EXPLR_LIST_MODE;
         explr_ctrl->media_type = RAT_MEDIA_TYPE_VIDEO;
         explr_ctrl->root_type = para->root_type;
-        /*
-        if(para->root_type == RAT_TF)
-        {
-        	explr_ctrl->last_start_id = root_para->last_movie_start_index_sd;
-        	explr_ctrl->last_focused_id = root_para->last_movie_index_sd;
-        	explr_ctrl->last_filename = root_para->last_movie_path_sd;
-        }
-        else if(para->root_type == RAT_USB)
-        {
-        	explr_ctrl->last_start_id = root_para->last_movie_start_index_ud;
-        	explr_ctrl->last_focused_id = root_para->last_movie_index_ud;
-        	explr_ctrl->last_filename = root_para->last_movie_path_ud;
-        }
-        */
         break;
+		
     case ID_EXPLORER_PHOTO:
         explr_ctrl->view_mode = EXPLR_LIST_MODE;		//EXPLR_SQUARE_MODE;
         explr_ctrl->media_type = RAT_MEDIA_TYPE_PIC;
         explr_ctrl->root_type = para->root_type;
-        /*
-        if(para->root_type == RAT_TF)
-        {
-        	explr_ctrl->last_start_id = root_para->last_photo_start_index_sd;
-        	explr_ctrl->last_focused_id = root_para->last_photo_index_sd;
-        	explr_ctrl->last_filename = root_para->last_photo_path_sd;
-        }
-        else if(para->root_type == RAT_USB)
-        {
-        	explr_ctrl->last_start_id = root_para->last_photo_start_index_ud;
-        	explr_ctrl->last_focused_id = root_para->last_photo_index_ud;
-        	explr_ctrl->last_filename = root_para->last_photo_path_ud;
-        }
-        */
         break;
+		
     case ID_EXPLORER_EBOOK:
         explr_ctrl->view_mode = EXPLR_LIST_MODE;
         explr_ctrl->media_type = RAT_MEDIA_TYPE_EBOOK;
         explr_ctrl->root_type = para->root_type;
-        /*
-        if(para->root_type == RAT_TF)
-        {
-        	explr_ctrl->last_start_id = root_para->last_ebook_start_index_sd;
-        	explr_ctrl->last_focused_id = root_para->last_ebook_index_sd;
-        	explr_ctrl->last_filename = root_para->last_ebook_path_sd;
-        }
-        else if(para->root_type == RAT_USB)
-        {
-        	explr_ctrl->last_start_id = root_para->last_ebook_start_index_ud;
-        	explr_ctrl->last_focused_id = root_para->last_ebook_index_ud;
-        	explr_ctrl->last_filename = root_para->last_ebook_path_ud;
-        }
-        */
         break;
+		
     case ID_EXPLORER_MUSIC:
-        __here__;
         explr_ctrl->view_mode = EXPLR_LIST_MODE;
         explr_ctrl->media_type = RAT_MEDIA_TYPE_AUDIO;
         explr_ctrl->root_type = para->root_type;
-        /*
-        if(para->root_type == RAT_TF)
-        {
-        	explr_ctrl->last_start_id = root_para->last_music_start_index_sd;
-        	explr_ctrl->last_focused_id = root_para->last_music_index_sd;
-        	explr_ctrl->last_filename = root_para->last_music_path_sd;
-        }
-        else if(para->root_type == RAT_USB)
-        {
-        	explr_ctrl->last_start_id = root_para->last_music_start_index_ud;
-        	explr_ctrl->last_focused_id = root_para->last_music_index_ud;
-        	explr_ctrl->last_filename = root_para->last_music_path_ud;
-        }
-        */
         break;
+		
     case ID_EXPLORER_RESTORE:
         explr_ctrl->media_type = RAT_MEDIA_TYPE_UNKNOWN;
         break;
@@ -432,42 +380,26 @@ static __s32 _explorer_manager_win_cb(__gui_msg_t *msg)
     switch(msg->id)
     {
     case GUI_MSG_CREATE:
-        __log("-----jh_dbg1019_1-----\n");
-        // __msg("----explorer manager window GUI_MSG_CREATE begin----\n");
+        __msg("----explorer manager window GUI_MSG_CREATE begin----\n");
+		gscene_hbar_set_state(HBAR_ST_SHOW);
         explorer_scene_create(msg);
-        //  __msg("----explorer manager window GUI_MSG_CREATE end----\n");
         return EPDK_OK;
     case GUI_MSG_CLOSE:
-        //__msg("----explorer manager window GUI_MSG_CLOSE begin----\n");
+        __msg("----explorer manager window GUI_MSG_CLOSE begin----\n");
         app_explorer_on_close(msg);
         return EPDK_OK;
     case GUI_MSG_DESTROY:
-        //__msg("----explorer manager window GUI_MSG_DESTROY begin----\n");
+        __msg("----explorer manager window GUI_MSG_DESTROY begin----\n");
+		gscene_hbar_set_state(HBAR_ST_HIDE);
         app_explorer_on_destroy(msg->h_deswin);			//release  layer,memory
-        //__msg("----explorer manager window GUI_MSG_DESTROY end----\n");
         return EPDK_OK;
     case GUI_MSG_KEY:
         break;
     case GUI_MSG_TOUCH:
         break;
     case GUI_MSG_COMMAND:
-
-        __here__;
-        //__msg("----explorer manager window GUI_MSG_CLOSE begin----\n");
-        app_explorer_on_command(msg);
-        __here__;
-        {
-            /*
-            if (LOWORD(msg->dwAddData1) == EXPLR_LIST_ID)
-            {
-            	//explorer_list_command_proc(msg);
-            }
-            else if (LOWORD(msg->dwAddData1) == EXPLR_SQUARE_ID)
-            {
-
-            }
-            */
-        }
+        __msg("----explorer manager window GUI_MSG_CLOSE begin----\n");
+        app_explorer_on_command(msg);        
         return EPDK_OK;
     case DSK_MSG_FS_PART_PLUGOUT:
     {
@@ -784,8 +716,8 @@ static __s32 explorer_scene_create(__gui_msg_t *msg)
 
     eLIBs_memset(&ListPara, 0, sizeof(explr_list_para_t));
 
-    //__cat_item_t  *cat_cur_item;
-
+	__msg("explorer_scene_create\n");
+	
     explr_ctrl = (explorer_ctrl_t *)GUI_WinGetAttr(msg->h_deswin);
 
     ListPara.root_type = explr_ctrl->root_type;
@@ -816,14 +748,8 @@ static __s32 explorer_scene_create(__gui_msg_t *msg)
 
     explr_ctrl->h_list_framewin = explorer_list_win_create(msg->h_deswin, &ListPara);
     GUI_WinSetFocusChild(explr_ctrl->h_list_framewin);		//frame win get focus.					//set picture layer as top level
-    //GUI_LyrWinCacheOn();		//cache on
-    //GUI_LyrWinSel(explr_ctrl->lyr_explr);
-
     GUI_LyrWinSetSta(explr_ctrl->BG_layer, GUI_LYRWIN_STA_ON);
     GUI_LyrWinSetSta(explr_ctrl->list_layer, GUI_LYRWIN_STA_ON);
-    //GUI_LyrWinSetTop(ListPara.layer);						//set picture layer as top level
-
-    //GUI_LyrWinCacheOff();		//cache off
 
     return EPDK_OK;
 }

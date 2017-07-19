@@ -19,7 +19,7 @@
 #include "app_home_i.h"
 #include "main_menu.h"
 
-#if  1
+#if  0
 //#define __here__            eLIBs_printf("@L%d(%s)\n", __LINE__, __FILE__);
 #define __msg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
 						     eLIBs_printf(__VA_ARGS__)									        )
@@ -474,9 +474,9 @@ static void paint_mmain_item_ex(mmenu_attr_t *mmenu_attr, __s32 index
     __msg("\n----------------------1------------------------\n");
 	__msg("index = %d, mmenu_attr->first_item = %d\n", index, mmenu_attr->first_item);
 #ifdef MENU_BAR_ITEM
-	gui_rect.x0 = 2;
+	gui_rect.x0 = 6;
 	gui_rect.y0 = mmenu_attr->item_w * (index - mmenu_attr->first_item) + 2;
-	gui_rect.x1 = 476;
+	gui_rect.x1 = 472;
 	gui_rect.y1 = gui_rect.y0 + mmenu_attr->item_w;
 	GUI_ClearRectEx(&gui_rect);
 
@@ -501,11 +501,11 @@ static void paint_mmain_item_ex(mmenu_attr_t *mmenu_attr, __s32 index
     //draw text
     if(bfocus)
     {
-        GUI_SetColor(GUI_BLACK);
+        GUI_SetColor(GUI_WHITE);
     }
     else
     {
-        GUI_SetColor(GUI_DARKYELLOW);
+        GUI_SetColor(GUI_DARKBLUE);
     }
     
     gui_rect.x0 = (480 - home_ui_para->max_main_bmp_width)/2 + 15;
@@ -591,9 +591,11 @@ static __s32  mmenu_key_proc(__gui_msg_t *msg)
         {
             if(mmenu_attr->focus_item <= 0)
             {
+            	paint_mmain_item_ex(mmenu_attr, 0, 0);
                 mmenu_attr->focus_item = mmenu_attr->item_nr - 1;
                 mmenu_attr->first_item = mmenu_attr->item_nr - mmenu_attr->item_per_screen;
-                paint_mmain_item_all(mmenu_attr);
+                //paint_mmain_item_all(mmenu_attr);
+                paint_mmain_item_ex(mmenu_attr, mmenu_attr->focus_item, 1);
                 
             }
             else
@@ -620,9 +622,12 @@ static __s32  mmenu_key_proc(__gui_msg_t *msg)
 			__msg("GUI_MSG_KEY_RIGHT\n");
             if(mmenu_attr->focus_item >= mmenu_attr->item_nr - 1)
             {
+				paint_mmain_item_ex(mmenu_attr, mmenu_attr->item_nr - 1, 0);
                 mmenu_attr->focus_item = 0;
                 mmenu_attr->first_item = 0;
-                paint_mmain_item_all(mmenu_attr);				
+                //paint_mmain_item_all(mmenu_attr);		
+                paint_mmain_item_ex(mmenu_attr, mmenu_attr->focus_item, 1);
+                
             }
             else
             {

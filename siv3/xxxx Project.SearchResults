@@ -1,8 +1,4 @@
----- paint_mmain_item_ex Matches (7 in 1 files) ----
-Main_menu.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\home):static void paint_mmain_item_ex(mmenu_attr_t *mmenu_attr, __s32 index
-Main_menu.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\home):            paint_mmain_item_ex(mmenu_attr, i, 1);		//»­½¹µãÍ¼Æ¬
-Main_menu.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\home):            paint_mmain_item_ex(mmenu_attr, i, 0);		//»­·Ç½¹µãÍ¼Æ¬
-Main_menu.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\home):                    paint_mmain_item_ex(mmenu_attr, mmenu_attr->focus_item, 0);
-Main_menu.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\home):                    paint_mmain_item_ex(mmenu_attr, mmenu_attr->focus_item, 1);
-Main_menu.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\home):                    paint_mmain_item_ex(mmenu_attr, mmenu_attr->focus_item, 0);
-Main_menu.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\home):                    paint_mmain_item_ex(mmenu_attr, mmenu_attr->focus_item, 1);
+---- draw_list_item_focus_icon Matches (3 in 1 files) ----
+Explorer_List.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):static __s32 draw_list_item_focus_icon(__lbar_draw_para_t *draw_param)
+Explorer_List.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):	__msg("draw_list_item_focus_icon\n");
+Explorer_List.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):            draw_list_item_focus_icon(draw_param);		//»­focus item ±³¾°¿òÍ¼

@@ -23,31 +23,31 @@ static explorer_viewer_ui_t  explr_viewer_ui_400_240 =
     //layer window
     {
         PIXEL_COLOR_ARGB8888,       //fmt
-        { 480, 272 },               //fb size
-        { 0, 0, 480, 272},         //src rect
-        { 0, 0, 480, 272 },         //scn rect
+        { 480, 272 - 40 },               //fb size
+        { 0, 40, 480, 272 - 40},         //src rect
+        { 0, 40, 480, 272 - 40 },         //scn rect
         { 0 },                      //reserved
     },
 
     //menuview attribute
-    { 0, 0, 480, 272 },             //menuview(frame window)
-    { 0, 0, 480, 272 },             //browser bg
-    { 0, 0, 480, 20  },              //browser bg top
+    { 0, 40, 480, 272 - 40 },             //menuview(frame window)
+    { 0, 40, 480, 272 - 40 },             //browser bg
+    { 0, 40, 480, 20  },              //browser bg top
     { 0, 0, 0, 	0 },                 //browser bg bottom
     { 0, 0, 0,  0 },              //browser bg left
 
-    { 471,	8,	7,	224},            //scroll bg rect
-    { 473,	22,	3,	194},      		 //scroll rect
+    { 471,	48,	7,	224 - 40},            //scroll bg rect
+    { 473,	62,	3,	194 - 40},      		 //scroll rect
     6, 	1, 	6,                        //scroll head/body/tail height
 
-    { 0, 8, 390, 230},        //(the whole listbar rectangle)
+    { 0, 48, 480, 272 - 48},        //(the whole listbar rectangle)
 
     //list item attribute，以下坐标为点对于listbar rectangle的相对坐标
     {
-        { 136, 8, 254, 210},				//item rect
-        { 0, 0, 254, 35 },       			//item rect
-        { 0 , 0, 254, 2 },        			//item_top_line;
-        { 0 , 0, 254, 2 },        			//item_bottom_line;
+        { 10, 48, 470, 272 - 48},				//item rect
+        { 0, 0, 460, 55 },       			//item rect
+        { 0 , 0, 460, 2 },        			//item_top_line;
+        { 0 , 0, 460, 2 },        			//item_bottom_line;
         { 0 , 2, 2, 38},       				//item_dividing_line;
 
         { 24, 4, 15, 15 },        			//icon rect
@@ -66,12 +66,6 @@ static explorer_viewer_ui_t  explr_viewer_ui_400_240 =
 
     //square item attribute，以下坐标为点对于menu的相对坐标
     {
-        //    { 0, 8, 390, 200},        			//(the whole listbar rectangle)
-        //    { 0, 0, 130, 80 },       			//item rect in listbar
-        //    { 8, 0, 112, 71 },      			//focus rect
-        //    { 55, 20, 106, 65 },       			//icon rect
-        //     { 11, 3, 106, 65 },       			//miniature rect
-        //     { 13, 3 + 71 - 35, 100, 30},      	//title rect
         { 0, 8, 390, 230},        			//(the whole listbar rectangle)
         { 0, 0, 130, 76 },       			//item rect in listbar
         { 8, 0, 114, 76 },      			//focus rect
@@ -436,9 +430,8 @@ __s32 explorer_draw_FileTypeIcon(explr_list_para_t *list_para, rat_media_type_t 
     __s32 picX = 0, picY = 0;
     explorer_viewer_ui_t *ui_param;
     ui_param = explorer_get_viewer_ui_param();
-    //GUI_LyrWinSel(list_para->BG_layer);
-    //com_set_palette_by_id(ID_EXPLORER_PALETTE_BMP);
-    //ret = explorer_get_item_focus_icon_rect(list_para, &FocusIconRect);
+
+	__msg("explorer_draw_FileTypeIcon\n");
     picX = ui_param->list_item_ui_param.media_type_rect.x;		//24
     picY = ui_param->list_item_ui_param.media_type_rect.y;		//73
     switch(media_type)
@@ -769,6 +762,7 @@ __s32 explorer_draw_file_manager_title(void)
     char str[30];
     explorer_viewer_ui_t *ui_param;
     GUI_RECT rect;
+	return EPDK_OK;
     ui_param = explorer_get_viewer_ui_param();
     rect.x0 = ui_param->list_item_ui_param.title_rect.x;
     rect.y0 = ui_param->list_item_ui_param.title_rect.y;

@@ -19,14 +19,6 @@
 #include "sub_menu.h"
 #include "app_home_i.h"
 
-#if  1
-#define __msg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
-						     eLIBs_printf(__VA_ARGS__)									        )
-#else
-#define __msg(...)   
-#endif
-
-
 enum
 {
     SMENU_PAINT_ALL,

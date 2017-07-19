@@ -474,9 +474,8 @@ static __s32 app_root_command_proc(__gui_msg_t *msg)
                 gscene_hbar_set_state(HBAR_ST_HIDE);
                 __app_root_change_to_default_bg();
 
-                __msg("enter movie explorer\n");
+                __msg("ID_HOME_MOVIE: enter movie explorer\n");
 
-                __msg("root type=%d\n", msg->dwReserved);
                 //esMEMS_Info();
                 to_move_from = 0;
                 if(msg->dwReserved & 0x80)
@@ -485,14 +484,15 @@ static __s32 app_root_command_proc(__gui_msg_t *msg)
                     to_move_from = 1;
                 }
                 else
+                {              	
                     root_para->data = ID_EXPLORER_MOVIE;
+                }
                 msg->dwReserved = msg->dwReserved & 0x7f;
                 root_para->root_type = msg->dwReserved;//RAT_TF;
                 root_para->explr_root = msg->dwReserved;
                 // root_para->data = ID_EXPLORER_MOVIE;
                 root_ctrl->root_para->h_parent = GUI_WinGetParent(root_ctrl->h_app_home);
                 root_ctrl->h_app_explorer =  app_explorer_create(root_para);
-                __msg("root_ctrl->h_app_explorer = %x\n", root_ctrl->h_app_explorer);
                 GUI_WinSetFocusChild(root_ctrl->h_app_explorer);
 #if EPDK_AUTO_PLAY_MOVIE_ENABLE
                 {
@@ -1466,7 +1466,7 @@ __s32 app_root_win_proc(__gui_msg_t *msg)
             return EPDK_OK;
         }
 
-        __msg("GUI_MSG_KEY, msg->dwAddData1 = 0x%x\n", msg->dwAddData1);
+        //__msg("GUI_MSG_KEY, msg->dwAddData1 = 0x%x\n", msg->dwAddData1);
 				
 		if((GUI_MSG_KEY_SEETING == msg->dwAddData1)&&(KEY_UP_ACTION == msg->dwAddData2))
 		{

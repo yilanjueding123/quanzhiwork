@@ -24,7 +24,7 @@
 #include "msgbox.h"
 #include "app_home_i.h"
 
-#if  1
+#if  0
 //#define __here__            eLIBs_printf("@L%d(%s)\n", __LINE__, __FILE__);
 #define __msg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
 						     eLIBs_printf(__VA_ARGS__)									        )
@@ -583,7 +583,7 @@ static __s32 app_home_proc(__gui_msg_t *msg)
                         }
                         else if (home_para->root_type & 0xff00) //TF
                         {
-                            __log("----log_0227_9-----\n");
+                            __msg("home to explore, index = %d\n", index);
                             if(index == 4)
                             {
                                 main_cmd2parent(msg->h_deswin, SWITCH_TO_OTHER_APP

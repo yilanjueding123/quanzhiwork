@@ -24,6 +24,14 @@
 
 #include "FileList.h"
 
+#if  1
+#define __msg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
+						     eLIBs_printf(__VA_ARGS__)									        )
+#else
+#define __msg(...)    	
+#endif
+
+
 static   __u32 ExplorerTimerId = 0x16;
 #define	 C_EXP_TIMER_INTERVAL	300				// 2second
 
@@ -251,29 +259,21 @@ H_WIN explorer_list_win_create(H_WIN h_parent, explr_list_para_t *para)
     explr_list_para_t *list_para;
     FB fb;
 
+	__msg("explorer_list_win_create\n");
+	
     GUI_LyrWinGetFB(para->list_layer, &fb);
 
     list_para = (explr_list_para_t *)esMEMS_Balloc(sizeof(explr_list_para_t));
     eLIBs_memset((void *)list_para, 0, sizeof(explr_list_para_t));
 
     list_para->explr_list_font = para->explr_list_font;
-    //list_para->BG_layer = para->BG_layer;
     list_para->list_layer = para->list_layer;
     list_para->core = para->core;
-
     list_para->media_type = para->media_type;		//photo, music, movie
-
     list_para->root_type = para->root_type;			//SD or USB device
-
-    //list_para->last_focused_id = para->last_focused_id;
-    //list_para->last_start_id = para->last_start_id;
-    //list_para->last_filename = para->last_filename;
-
     list_para->view_mode = para->view_mode;			//list or square
     list_para->root_para = para->root_para ;
     ExplorerListWinGetSearchPath(list_para);
-
-    //eLIBs_memcpy(list_para->search_path,"e:", sizeof("e:"));
 
     eLIBs_memset(&framewin_para, 0, sizeof(__gui_framewincreate_para_t));
     framewin_para.name =	"Explorer List window",
@@ -324,63 +324,17 @@ static __s32 explorer_listview_onpaint(H_WIN  list_win)
 
     }
 
-    //__wait__;
-
-    //if (GUI_LyrWinGetSta(list_para->BG_layer) == GUI_LYRWIN_STA_SUSPEND)
-    //	return EPDK_FAIL;
-    //__wait__;
-    //eLIBs_memset(explorer_title_str, 0,sizeof(explorer_title_str));
-
-    //GUI_LyrWinSetBottom(list_para->BG_layer);
     GUI_LyrWinSetTop(list_para->list_layer);
-
-    //GUI_LyrWinSel(list_para->BG_layer);
-
-    //get_menu_text(STRING_EXPLR_TITLE,explorer_title_str, GUI_TITLE_MAX);
-
     GUI_SetFont(SWFFont);
-    //GUI_SetFont(GUI_GetDefaultFont());
     GUI_UC_SetEncodeUTF8();
-    //GUI_SetBkColor(GUI_LIGHTGREEN);
-    //GUI_SetColor(GUI_RED);
     GUI_SetDrawMode(GUI_DRAWMODE_NORMAL);
 
-    //GUI_SetColor(APP_COLOR_WHITE);
-
-    //GUI_ClearRect(0,0, 400, 240);
-
-    //title_rect.x0 = 0;
-    //title_rect.y0 = 0;
-    //title_rect.x1 = 400;
-    //title_rect.y1 = 20;
-
-    //ret = com_set_palette_by_id(ID_EXPLORER_PALETTE_BMP);
-    //__msg("set palette return value = %d", ret);
-
-    //explorer_draw_background(list_para);			//8bpp背景图在Draw时需要先设置palette
-
-    //GUI_DrawLine(0,100,400,100);			//only for test
-
-    //GUI_ClearRect(title_rect.x0,title_rect.y0, title_rect.x1, title_rect.y1);
-    //GUI_DispStringInRect(explorer_title_str, &title_rect, GUI_TA_HCENTER|GUI_TA_VCENTER);//水平和垂直方向居中
-    //GUI_LyrWinFlushFB(list_para->list_layer);     //flush display data to frame buffer
-
-    //__wait__;
-    //GUI_BMP_Draw(theme_hdl2buf(explorer_list_bmp[0]), 0, 50);
     GUI_WinSetFocusChild(list_win);		//frame win get focus
-
-    //GUI_LyrWinSetSta(list_para->list_layer, GUI_LYRWIN_STA_ON);	//set picture layer status as ON
-    //GUI_LyrWinSetTop(list_para->list_layer);						//set picture layer as top level
-    //create listbar component
-    //LISTBAR_Config
-    //explorer_listbar_init(list_win);
     GUI_LyrWinSel(list_para->list_layer);
 
 
     //显示文件名称在这里
     LISTBAR_ShowPage(list_para->listbar_handle);
-    //LISTBAR_LostFocus(list_para->listbar_handle);
-    //LISTBAR_SetFocusItem(list_para->listbar_handle, list_para->rat.index);
 
     if(list_para->media_type == RAT_MEDIA_TYPE_ALL)
     {
@@ -388,6 +342,7 @@ static __s32 explorer_listview_onpaint(H_WIN  list_win)
     }
     else
     {
+    	__msg("explorer_draw_FileTypeIcon\n");
         explorer_draw_FileTypeIcon(list_para, list_para->media_type);
     }
     return EPDK_OK;
@@ -1718,7 +1673,7 @@ static __s32 draw_miniature_view_item(__lbar_draw_para_t *draw_param)
     out_para.miniature.buf = pBuf;
 
     ret = rat_get_pic_info(&in_para, &out_para);
-
+	__msg("draw_miniature_view_item, ret = %d\n", ret);
     //rat_stop_miniature_decode();
     if (EPDK_OK == ret)
     {
@@ -1744,25 +1699,7 @@ static __s32 draw_miniature_view_item(__lbar_draw_para_t *draw_param)
             __msg("get error bmp res fail\n" );
         }
         GUI_BMP_Draw(p_bmp_buf , miniature_rect.x + draw_param->rect.x, miniature_rect.y + draw_param->rect.y );
-        /*
-        FB fb;
-        eLIBs_memset(&fb, 0, sizeof(FB));
-        __msg( "ge miniature fail \n" );
-        	fb.size.width = in_para.width;
-            fb.size.height = in_para.height;
-            fb.addr[0] = explorer_get_listview_icon_res( ID_EXP_ERROR_BMP );
-        if( !fb.addr[0] )
-        {
-        	__msg( "get error bmp fail\n" );
-        }
-            fb.fmt.type = FB_TYPE_RGB;
-            fb.fmt.fmt.rgb.pixelfmt = PIXEL_COLOR_ARGB8888;
-            fb.fmt.fmt.rgb.br_swap = 0;
-            fb.fmt.fmt.rgb.pixseq = (__rgb_seq_t)0;
-            GUI_BitString_DrawEx(&fb, 	miniature_rect.x + draw_param->rect.x, miniature_rect.y +draw_param->rect.y);
-        */
     }
-    //tractFileName(FileName, FilePath);
     esMEMS_Bfree(pBuf, in_para.width * in_para.height * 4);
     return EPDK_OK;
 }
@@ -1791,16 +1728,6 @@ static __s32 draw_listview_item_icon(__lbar_draw_para_t *draw_param, rat_media_t
     this = (explr_list_para_t *)draw_param->attr;
     explorer_get_item_icon_rect(this, &IconRect);
 
-    /*
-    if(this->media_type == RAT_MEDIA_TYPE_ALL)		//文件管理
-    {
-    	//media_type = get_file_list_item_file_type(this->cur_file_list->cur_item);
-    }
-    else
-    {
-    	media_type = GetListItemFileMediaType(this->rat.handle, draw_param->index);
-    }
-    */
     if(draw_param->mode == LBAR_MODE_NORMAL)
     {
         pic_buf = explorer_get_file_item_icon(this->view_mode, media_type, UNFOCUSED);
@@ -1814,6 +1741,7 @@ static __s32 draw_listview_item_icon(__lbar_draw_para_t *draw_param, rat_media_t
     {
         picX = draw_param->rect.x + IconRect.x;
         picY = draw_param->rect.y + IconRect.y;
+		__msg("picX = %d, picY = %d\n", picX, picY);
         GUI_BMP_Draw(pic_buf, picX, picY);
     }
     return EPDK_OK;
@@ -1843,17 +1771,7 @@ static __s32 draw_square_item_focus_icon(__lbar_draw_para_t *draw_param)
 
     ret = explorer_get_item_focus_icon_rect(list_para, &FocusIconRect);
 
-    /*
-    pic_buf = explorer_get_listview_icon_res(ID_EXP_SQUARE_FOCUS);			//draw select border
-
-    //picW =  GUI_BMP_GetXSize(pic_buf);										//获得图片宽
-    //picH =  GUI_BMP_GetYSize(pic_buf);										//获得图片高度
-
-    picX = draw_param->rect.x + FocusIconRect.x;
-    picY = draw_param->rect.y + FocusIconRect.y;
-    GUI_BMP_Draw(pic_buf, picX, picY);
-    */
-
+	__msg("draw_square_item_focus_icon\n");
     //画焦点方框
     GUI_SetColor(GUI_YELLOW);
     X0 = draw_param->rect.x + FocusIconRect.x;
@@ -1888,17 +1806,16 @@ static __s32 draw_list_item_focus_icon(__lbar_draw_para_t *draw_param)
     int ret;
     __s32 picX, picY;
     explr_list_para_t *list_para;
-
+	__msg("draw_list_item_focus_icon\n");
     list_para = (explr_list_para_t *)draw_param->attr;
 
     ret = explorer_get_item_focus_icon_rect(list_para, &FocusIconRect);
 
     pic_buf = explorer_get_listview_icon_res(ID_EXP_LIST_ITEM_FOCUS_BG);			//draw select border
-    //picW =  GUI_BMP_GetXSize(pic_buf);										//获得图片宽
-    //picH =  GUI_BMP_GetYSize(pic_buf);										//获得图片高度
 
     picX = draw_param->rect.x + FocusIconRect.x;
     picY = draw_param->rect.y + FocusIconRect.y;
+	__msg("picX = %d, picY = %d\n", picX, picY);
     GUI_BMP_Draw(pic_buf, picX, picY);
     return ret;
 }
@@ -1928,7 +1845,6 @@ static __s32 draw_listview_item_text(__lbar_draw_para_t *draw_param)
 
     if(list_para->media_type == RAT_MEDIA_TYPE_ALL)
     {
-        //name = get_file_list_item_name(list_para->cur_file_list, draw_param->index);
         file_item = get_file_list_item(list_para->cur_file_list, draw_param->index);
         if(file_item != NULL)
         {
@@ -1998,12 +1914,13 @@ __s32 explorer_draw_file_info(explr_list_para_t *list_para)
     {
         return EPDK_FAIL;
     }
-
+	return EPDK_OK;
     cur_item = list_para->cur_file_list->cur_item;
     if(cur_item == NULL)
     {
         return EPDK_FAIL;
     }
+	__msg("explorer_draw_file_info\n");
     media_type = get_file_list_item_file_type(cur_item);
     explorer_draw_FileTypeIcon(list_para, media_type);
 
@@ -2034,33 +1951,24 @@ static __s32 draw_listview_item(__lbar_draw_para_t *draw_param)
     __msg("listbar item id =: %d\n", draw_param->index);		//focus id
     list_para = (explr_list_para_t *)draw_param->attr;				//for draw the picture  in different media type
 
-    //GUI_ClearRect(draw_param->rect.x,draw_param->rect.y, draw_param->rect.x + draw_param->rect.width, draw_param->rect.y + draw_param->rect.height);
-
     if(draw_param->mode == LBAR_MODE_FOCUS)
     {
         if(list_para->view_mode == EXPLR_LIST_MODE)
         {
+        	__msg("draw_list_item_focus_icon\n");
             draw_list_item_focus_icon(draw_param);		//画focus item 背景框图
         }
         else if(list_para->view_mode == EXPLR_SQUARE_MODE)
         {
+        	__msg("draw_square_item_focus_icon");
             draw_square_item_focus_icon(draw_param);
         }
-
-
     }
 
-    //if((list_para->view_mode != EXPLR_LIST_MODE)
-    //	&&(list_para->media_type != ))
-    {
-        //draw_listview_item_icon(draw_param);
-    }
-
-    //if(list_para->media_type != RAT_MEDIA_TYPE_PIC)	//picture mode 不需要显示文字
-    //if(list_para->view_mode == EXPLR_LIST_MODE)
     if((list_para->view_mode == EXPLR_SQUARE_MODE)
             && (list_para->media_type == RAT_MEDIA_TYPE_PIC))
     {
+    	__msg("explorer_list_long_string_stop_roll\n");
         explorer_list_long_string_stop_roll(list_para);		//停止长文件名滚动
     }
     else
@@ -2069,17 +1977,17 @@ static __s32 draw_listview_item(__lbar_draw_para_t *draw_param)
         draw_listview_item_text(draw_param);
         if(list_para->media_type != RAT_MEDIA_TYPE_ALL)
         {
+        	__msg("GetListItemFileMediaType\n");
             media_type = GetListItemFileMediaType(list_para->rat.handle, draw_param->index);
         }
         else
         {
+        	__msg("get_file_list_item_file_type\n");
             media_type = get_file_list_item_file_type(list_para->file_item);
         }
         {
             draw_listview_item_icon(draw_param, media_type);
         }
-
-        //explorer_draw_FileTypeIcon(list_para);
     }
 
     if(draw_param->mode == LBAR_MODE_FOCUS)
@@ -2087,34 +1995,6 @@ static __s32 draw_listview_item(__lbar_draw_para_t *draw_param)
         if(list_para->media_type == RAT_MEDIA_TYPE_ALL)		//文件管理
         {
             explorer_draw_file_info(list_para);
-            /*
-            {
-            	char filename[RAT_MAX_FULL_PATH_LEN];
-            	file_item_t *cur_item = list_para->cur_file_list->cur_item;
-            	if(cur_item == NULL)
-            	{
-            		return EPDK_FAIL;
-            	}
-            	media_type = get_file_list_item_file_type(cur_item);
-            	explorer_draw_FileTypeIcon(list_para, media_type);
-
-            	if((media_type & FSYS_ATTR_DIRECTORY)
-            		||(media_type == RAT_MEDIA_TYPE_SD_DEVICE)
-            		||(media_type == RAT_MEDIA_TYPE_USB_DEVICE))
-            	{
-            		explorer_clear_filesize_area();
-            		explorer_clear_file_create_time_area();
-            	}
-            	else		//文件属性时显示文件信息
-            	{
-            		explorer_draw_FileSize(cur_item);
-            		eLIBs_strcpy(filename, list_para->cur_file_list->file_path);
-            		eLIBs_strcat(filename, "\\");
-            		eLIBs_strcat(filename, cur_item->name);
-            		explorer_draw_file_create_time(filename);
-            	}
-            }
-            */
         }
     }
 
@@ -2138,12 +2018,7 @@ static __s32 _explorer_listbar_item_draw(__lbar_draw_para_t *draw_param)
 
     explr_list_para_t *list_para;
     list_para = (explr_list_para_t *)draw_param->attr;		//for draw the picture  in different media type
-    //__wait__;
-    //__msg("###########  item index X =: %d\n", draw_param->index);
-    //__msg("###########  item X =: %d\n", draw_param->rect.x);
-    //__msg("###########  item Y =: %d\n", draw_param->rect.y);
-    //__msg("###########  item width =: %d\n", draw_param->rect.width);
-    //__msg("###########  item Height =: %d\n", draw_param->rect.height);
+
     if(list_para->rat.total <= 0)
     {
         return EPDK_FAIL;
@@ -2152,28 +2027,28 @@ static __s32 _explorer_listbar_item_draw(__lbar_draw_para_t *draw_param)
     switch(draw_param->mode)
     {
     case LBAR_MODE_NORMAL:
-        __msg("\n~~~~draw listbar in normal mode!~~~~");
+        //__msg("~~~~draw listbar in normal mode!~~~~\n");
         draw_listview_item(draw_param);
         break;
     case LBAR_MODE_FOCUS:
-        __msg("\n~~~~draw focus item in listbar!~~~~");
+        //__msg("~~~~draw focus item in listbar!~~~~\n");
         //GUI_LyrWinCacheOn();
         draw_listview_item(draw_param);
         draw_miniature_view_item(draw_param);
         //GUI_LyrWinCacheOff();
         break;
     case LBAR_MODE_INVALID:
-        __msg("\n~~~~draw invalid item in listbar!~~~~");
+        //__msg("~~~~draw invalid item in listbar!~~~~\n");
         break;
     case LBAR_MODE_VACANT:
-        __msg("\n~~~~draw vacant item in listbar!~~~~");
+        //__msg("~~~~draw vacant item in listbar!~~~~\n");
         //draw_list_vacant_item(draw_param);
         break;
     case LBAR_MODE_DIFFUSE:
-        __msg("listbar item id =: %d\n", draw_param->index);		//focus id
+        //__msg("listbar item id =: %d\n", draw_param->index);		//focus id
         //draw_listview_item(draw_param);
         draw_miniature_view_item(draw_param);
-        __msg("\n~~~~draw diffuse item in listbar!~~~~");
+        //__msg("~~~~draw diffuse item in listbar!~~~~\n");
         break;
     }
     return EPDK_OK;
@@ -2200,12 +2075,12 @@ static void explorer_listbar_init(H_WIN  list_win)
 
     explorer_viewer_ui_t *ui_param = explorer_get_viewer_ui_param();			//获得整个AP的UI设计参数
 
-    __msg("\n~~~~~~~~~~Listbar is initializing~~~~~~~~~~~\n");
 
     eLIBs_memset(&config, 0, sizeof(__listbar_config_t));
     eLIBs_memset(&scroll_param, 0, sizeof(__scroll_bar_t));
 
     list_para = (explr_list_para_t *)GUI_WinGetAttr(list_win);
+    __msg("Listbar is initializing, list_para->view_mode = %d\n", list_para->view_mode);
 
     if(list_para->view_mode == EXPLR_LIST_MODE)
     {
@@ -2228,17 +2103,12 @@ static void explorer_listbar_init(H_WIN  list_win)
 
     config.item_width = item_width;
     config.item_height = item_height;				//these are numbers only for test
-
-    //__msg("----view_param->playing_media_type: %d\n", view_param->playing_media_type);
     config.start_id = list_para->last_start_id;
     //config.focus_id = list_para->rat.index; 				//removed by libaiao, 2010.6.6
     config.focus_id = list_para->last_focused_id;
     config.bk_color = 0;
     config.alpha_status = 1;						//打开Alpha开关
     config.list_attr = (void *)list_para;
-
-    //list_para->rat.index = 0;		//初始化起始条目
-    //view_param->total_num = cat_get_explr_num(view_param->cat_handle, view_param->cat_explr);
     config.item_cnt = list_para->rat.total;   //Rat.total必须已经获得
 
     scroll_param.show_rect.x = ui_param->scroll_bg_rect.x;
@@ -2258,11 +2128,6 @@ static void explorer_listbar_init(H_WIN  list_win)
     scroll_param.head_bmp = explorer_get_listview_icon_res(ID_EXP_LIST_SCROLL_HEAD);
     scroll_param.body_bmp = explorer_get_listview_icon_res(ID_EXP_LIST_SCROLL_BODY);
     scroll_param.tail_bmp = explorer_get_listview_icon_res(ID_EXP_LIST_SCROLL_TAIL);
-
-    __msg("----back_bmp: %x, head_bmp: %x, body_bmp: %x, tail_bmp: %x\n", scroll_param.back_bmp, scroll_param.head_bmp, scroll_param.body_bmp, scroll_param.tail_bmp);
-
-    //TestTimerReport(__FILE__, __LINE__);
-    //rat_start_miniature_decode();
 
     list_para->listbar_handle = LISTBAR_Create(list_win);    				//new listbar
     LISTBAR_Config(list_para->listbar_handle, _explorer_listbar_item_draw, &config);    //config parametters for listbar
@@ -2335,6 +2200,7 @@ void ExplorerSetViewMode(explr_list_para_t *list_para, explorer_view_mode_e view
     //LISTBAR_UpdatePage(list_para->listbar_handle);
     if(list_para->view_mode == EXPLR_LIST_MODE)
     {
+    	__msg("ExplorerSetViewMode\n");
         explorer_draw_FileTypeIcon(list_para, list_para->media_type);
     }
     return;
@@ -2348,7 +2214,7 @@ static __s32 explorer_file_list_init(explr_list_para_t *list_para)
     {
         return EPDK_FAIL;
     }
-
+	__msg("explorer_file_list_init\n");
     if(list_para->top_file_list == NULL)
     {
 #if 1
@@ -2679,7 +2545,6 @@ static __s32 explorer_listview_create(H_WIN  list_win)
 
     list_para->font = SWFFont;
     __msg("explorer is initializing!\n");
-    //__wait__;
 
     if(list_para->media_type == RAT_MEDIA_TYPE_ALL)
     {
@@ -2688,14 +2553,12 @@ static __s32 explorer_listview_create(H_WIN  list_win)
     }
     else
     {
-
         explorer_rat_init(list_para);
         explorer_get_last_para(list_para);
     }
 
     explorer_listbar_init(list_win);
     explorer_list_long_string_init(list_para);
-    //GUI_WinSetFocusChild(list_win);		//frame win get focus.
 
     return 0;
 }
@@ -2720,11 +2583,11 @@ void explorer_list_on_timer(__gui_msg_t *msg)
     	explorer_draw_file_info(list_para);
     }
     */
-    __msg("explorer list on timer\n");
+    //__msg("explorer list on timer\n");
     if(list_para->del_dlg_open)
     {
         list_para->del_dlg_open = EPDK_FALSE;
-        __msg("2explorer list on timer-draw file info\n");
+        //__msg("2explorer list on timer-draw file info\n");
         explorer_draw_file_info(list_para);
     }
     //LISTBAR_ShowPage(list_para->listbar_handle);
@@ -2753,28 +2616,26 @@ static __s32 _explorer_list_win_cb(__gui_msg_t *msg)
     switch(msg->id)
     {
     case GUI_MSG_CREATE:
-        //__msg("----explorer frame window GUI_MSG_CREATE begin----\n");
+        __msg("----explorer frame window GUI_MSG_CREATE begin----\n");
         explorer_listview_create(msg->h_deswin);
         return EPDK_OK;
     case GUI_MSG_PAINT:
-        //__msg("----explorer frame window GUI_MSG_ONPAINT----\n");
+        __msg("----explorer frame window GUI_MSG_ONPAINT----\n");
         explorer_listview_onpaint(msg->h_deswin);
         return EPDK_OK;
     case GUI_MSG_CLOSE:
-        //__msg("----explorer frame window GUI_MSG_CLOSE begin----\n");
+        __msg("----explorer frame window GUI_MSG_CLOSE begin----\n");
         explorer_list_win_on_close(msg);
         return EPDK_OK;
     case GUI_MSG_DESTROY:
-        //__msg("----explorer frame window GUI_MSG_DESTROY begin----\n");
+        __msg("----explorer frame window GUI_MSG_DESTROY begin----\n");
         explorer_list_win_on_destroy(msg);
-        //__msg("----explorer frame window GUI_MSG_DESTROY end----\n");
         return EPDK_OK;
     case GUI_MSG_COMMAND:
-        __here__;
         explorer_list_win_on_command(msg);
         return EPDK_OK;
     case GUI_MSG_KEY:
-        __log("-----jh_dbg1019_4-----\n");
+        __msg("_explorer_list_win_cb:GUI_MSG_KEY\n");
         explorer_list_win_key_proc(msg);
         return EPDK_OK;
     case GUI_MSG_TIMER:
