@@ -20,6 +20,14 @@
 #include "setting_para.h"
 
 
+#if  1
+#define __msg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
+						     eLIBs_printf(__VA_ARGS__)									        )
+#else
+#define __msg(...)    	
+#endif
+
+
 #define   UDISK_NAME			"f:\\"
 #define     USER_DISK           "F:"
 
@@ -89,12 +97,6 @@ typedef struct tag_setting_general_attr
     H_THEME     h_bmp_inf, h_bmp_format;
 
     setting_item_res_t res_language;
-    //setting_item_res_t res_backlight_level;//res_topic;
-    //setting_item_res_t res_product_info;
-    //setting_item_res_t res_factory;
-    //setting_item_res_t res_backlight_off;//res_output;
-    //setting_item_res_t res_verson;//res_keytone;
-
 
     setting_item_res_t  res_jh_display;
     setting_item_res_t  res_jh_language;
@@ -167,17 +169,6 @@ static __s32 content_backlight_level_id[] = //ITEM1 (背光亮度)
     STRING_SET_POWER_BGT_LEVEL3_CON,
     STRING_SET_POWER_BGT_LEVEL4_CON,
     STRING_SET_POWER_BGT_LEVEL5_CON
-    //STRING_SET_POWER_BGT_LEVEL6_CON,
-    //STRING_SET_POWER_BGT_LEVEL7_CON,
-    //STRING_SET_POWER_BGT_LEVEL8_CON,
-    //STRING_SET_POWER_BGT_LEVEL9_CON,
-    //STRING_SET_POWER_BGT_LEVEL10_CON,
-    //STRING_SET_POWER_BGT_LEVEL11_CON,
-    //STRING_SET_POWER_BGT_LEVEL12_CON,
-    //STRING_SET_POWER_BGT_LEVEL13_CON,
-    //STRING_SET_POWER_BGT_LEVEL14_CON,
-    //STRING_SET_POWER_BGT_LEVEL15_CON
-
 };
 static __s32 content_backlight_off_id[] = //ITEM2 (关闭背光)
 {
@@ -217,35 +208,6 @@ static __s32 content_keytone_id[] = //按键音
     STRING_SET_KEYTONE_ON_CON,
     STRING_SET_KEYTONE_OFF_CON
 };
-#if 0
-static setting_focus_item_id_t setting_focus_item_res_id[] =
-{
-    { STRING_SET_COMMON_LANGUAGE_EX, ID_SETTING_SET_ITEM_F_BMP},	// 0
-    { STRING_SET_POWER_BGT_EX, ID_SETTING_SET_ITEM_F_BMP},	// 1
-    { STRING_SET_COMMON_PRODUCTINFO_EX, ID_SETTING_SET_ITEM_F_BMP},		// 2
-    { STRING_SET_COMMON_FACTORY_DEFAULT_EX, ID_SETTING_SET_ITEM_F_BMP},	// 3
-    { STRING_SET_POWER_BGT_OFF_EX, ID_SETTING_SET_ITEM_F_BMP},	// 4
-    { STRING_SET_TIPS_SVERS, ID_SETTING_SET_ITEM_F_BMP}	// 5
-};
-#endif
-#if 0
-static setting_item_id_t setting_general_res_id[] =
-{
-    //{STRING_SET_COMMON_TOPIC_STYLE_EX,STRING_SET_COMMON_TOPIC_STYLE_DE, STRING_SET_COMMON_TOPIC_STYLE_TITLE,STRING_SET_COMMON_TOPIC_STYLE1_CON,ID_SETTING_SET_BUTT_LF_BMP,ID_SETTING_SET_BUTT_RF_BMP},	// 1
-    {STRING_SET_DISPLAY_LCD_EX, STRING_SET_POWER_BGT_DE, STRING_SET_COMMON_DISPLAY_TITLE, STRING_SET_POWER_BGT_LEVEL1_CON, ID_SETTING_SET_BUTT_LF_BMP, ID_SETTING_SET_BUTT_RF_BMP},	// 0
-    {STRING_SET_COMMON_LANGUAGE_EX, STRING_SET_COMMON_LANGUAGE_DE, STRING_SET_COMMON_LANGUAGE_TITLE, STRING_SET_COMMON_LANGUAGE_CHINESE_CON, ID_SETTING_SET_BUTT_LF_BMP, ID_SETTING_SET_BUTT_RF_BMP},	// 0
-
-
-    {STRING_SET_SENIOR_LCD_EX, STRING_SET_COMMON_PRODUCTINFO_DE, STRING_SET_COMMON_SENIOR_TITLE, NULL, NULL, ID_SETTING_SET_BUTT_RF_BMP},		// 2
-    //{STRING_SET_COMMON_FACTORY_DEFAULT_EX,STRING_SET_COMMON_FACTORY_DEFAULT_DE, STRING_SET_COMMON_FACTORY_DEFAULT_TITLE,NULL,NULL,ID_SETTING_SET_BUTT_RF_BMP},	// 5
-    //{STRING_SET_OUTPUT_EX,STRING_SET_OUTPUT_DE, STRING_SET_OUTPUT_TITLE,STRING_SET_OUTPUT_PAL_CON,ID_SETTING_SET_BUTT_LF_BMP,ID_SETTING_SET_BUTT_RF_BMP},	// 输出
-    //{STRING_SET_POWER_BGT_OFF_EX, STRING_SET_POWER_BGT_OFF_DE,STRING_SET_POWER_BGT_OFF_TITLE,STRING_SET_POWER_BGT_NEVER_CON,ID_SETTING_SET_BUTT_LF_BMP,ID_SETTING_SET_BUTT_RF_BMP},	// 1
-
-    //{STRING_SET_TIPS_SVERS, STRING_SET_TIPS_SVERS,STRING_SET_TIPS_SVERS,NULL,NULL,ID_SETTING_SET_BUTT_RF_BMP},		// 2
-
-    //{STRING_SET_KEYTONE_EX,STRING_SET_KEYTONE_DE, STRING_SET_KEYTONE_TITLE,STRING_SET_KEYTONE_ON_CON,ID_SETTING_SET_BUTT_LF_BMP,ID_SETTING_SET_BUTT_RF_BMP}	// 按键音
-};
-#endif
 static __s32 one_list_str_title[] =
 {
     STRING_SET_COMMON_DISPLAY_TITLE,
@@ -284,7 +246,7 @@ static __s32 pop_inf_title[] =
 
 };
 u8 current_list_layer = MAIN_LIST_LAYER;
-#define SET_PAGE_NUM    3
+#define SET_PAGE_NUM    6
 u8 current_page = 0;
 u8 prev_page = 0;
 
@@ -421,10 +383,10 @@ static void _setting_pop_general_res_init(setting_general_attr_t *general_attr)
 
         }
         p_item_res->string_title_pos = general_attr->general_uipara->item[i].item_string_title_pos;
-        p_item_res->bmp_right_pos = general_attr->general_uipara->item[i].item_bmp_right_pos;
+#ifdef SET_ITEM_RIGHT_BMP
+		p_item_res->bmp_right_pos = general_attr->general_uipara->item[i].item_bmp_right_pos;
+#endif
         p_item_res->bmp_focus_pos = general_attr->general_uipara->item[i].item_bmp_focus_pos;
-        //p_item_res->h_bmp_right= theme_open(ID_SETTING_SET_BUTT_RF_BMP);
-        //__log("---------jh_x=%d,jh_y=%d-----------\n",p_item_res->string_title_pos.x,p_item_res->string_title_pos.y);
     }
 
 }
@@ -433,31 +395,53 @@ static void _setting_general_res_init(setting_general_attr_t *general_attr)
     __u32 	i;
     __bool  restore_flag;
     setting_item_res_t  *p_item_res;
-
-    //general_attr->h_bmp_unselect=theme_open(ID_SETTING_SET_ITEM_BMP);
-
+	__msg("_setting_general_res_init\n");
     general_attr->item_nr = SET_PAGE_NUM;
     for(i = 0; i < SET_PAGE_NUM; i++)
     {
         switch(i)
         {
         case 0:
-            p_item_res = &general_attr->res_jh_display; //显示设置
+            p_item_res = &general_attr->res_jh_display; 		//显示设置
             break;
         case 1:
-            p_item_res = &general_attr->res_jh_language; //语音支持
+            p_item_res = &general_attr->res_jh_language; 		//语音支持
             break;
-        case 2:
-            p_item_res = &general_attr->res_jh_senior; //高级
+#ifdef SET_ITEM_SENSOR
+		case 2:
+            p_item_res = &general_attr->res_jh_senior; 		//高级
             break;
+#endif			
+#ifdef SET_ITEM_PRO_INF
+		case 3:
+		{
+			p_item_res = &general_attr->res_jh_inf; 		//产品信息
+			break;
+		}
+#endif		
+#ifdef SET_ITEM_CARD_INF
+		case 4:
+		{
+			p_item_res = &general_attr->res_jh_cardformat; 			//卡信息
+			break;
+		}
+#endif		
+#ifdef SET_ITEM_FACT_DEF
+		case 5:
+		{
+			p_item_res = &general_attr->res_jh_defaultset; 			//出厂设置
+			break;
+		}
+#endif		
         default:
             break;
         }
 
         p_item_res->string_title_pos = general_attr->general_uipara->item[i].item_string_title_pos;
-        p_item_res->bmp_right_pos = general_attr->general_uipara->item[i].item_bmp_right_pos;
+#ifdef SET_ITEM_RIGHT_BMP
+		p_item_res->bmp_right_pos = general_attr->general_uipara->item[i].item_bmp_right_pos;
+#endif		
         p_item_res->bmp_focus_pos = general_attr->general_uipara->item[i].item_bmp_focus_pos;
-        // p_item_res->h_bmp_right= theme_open(ID_SETTING_SET_BUTT_RF_BMP);
     }
 
 
@@ -491,7 +475,9 @@ static void _setting_general_popinf_init(setting_general_attr_t *general_attr)
         }
 
         p_item_res->string_title_pos = general_attr->general_uipara->item[i].item_string_title_pos;
+#ifdef SET_ITEM_RIGHT_BMP
         p_item_res->bmp_right_pos = general_attr->general_uipara->item[i].item_bmp_right_pos;
+#endif
         p_item_res->bmp_focus_pos = general_attr->general_uipara->item[i].item_bmp_focus_pos;
 
 
@@ -587,6 +573,27 @@ static void _setting_general_res_uninit(setting_general_attr_t *general_attr)
         case 2:
             p_item_res = &general_attr->res_jh_senior; //高级
             break;
+#ifdef SET_ITEM_PRO_INF
+		case 3:
+		{
+			p_item_res = &general_attr->res_jh_inf; 		//产品信息
+			break;
+		}
+#endif		
+#ifdef SET_ITEM_CARD_INF
+		case 4:
+		{
+			p_item_res = &general_attr->res_jh_cardformat; 			//卡信息
+			break;
+		}
+#endif		
+#ifdef SET_ITEM_FACT_DEF
+		case 5:
+		{
+			p_item_res = &general_attr->res_jh_defaultset; 			//出厂设置
+			break;
+		}
+#endif				
         default:
             break;
         }
@@ -782,9 +789,33 @@ static void _setting_general_content_res_reset(setting_general_attr_t *general_a
         content_id = content_lang_id;
         get_menu_text(content_id[p_item_res->content_num], p_item_res->string_content, 128); ///
         break;
+#ifdef SET_ITEM_SENSOR		
     case 2:
         p_item_res = &general_attr->res_jh_senior; //高级
         break;
+#endif	
+#ifdef SET_ITEM_PRO_INF
+		case 3:
+		{
+			p_item_res = &general_attr->res_jh_inf; 		//产品信息
+			break;
+		}
+#endif		
+#ifdef SET_ITEM_CARD_INF
+		case 4:
+		{
+			p_item_res = &general_attr->res_jh_cardformat;			//卡信息
+			break;
+		}
+#endif		
+#ifdef SET_ITEM_FACT_DEF
+		case 5:
+		{
+			p_item_res = &general_attr->res_jh_defaultset;			//出厂设置
+			break;
+		}
+#endif	
+
     default:
         break;
     }
@@ -829,8 +860,9 @@ static __s32 setting_generl_popinf_content_paint(__gui_msg_t *msg)
     GUI_SetBkColor(0x00);
     GUI_SetColor(general_attr->focus_txt_color);
     GUI_BMP_Draw(theme_hdl2buf(/*p_item_res->h_bmp_focus*/general_attr->h_bmp_jh_focus), p_item_res->bmp_focus_pos.x, p_item_res->bmp_focus_pos.y);
-
-    GUI_BMP_Draw(theme_hdl2buf(/*p_item_res->h_bmp_right*/general_attr->h_bmp_jh_right), p_item_res->bmp_right_pos.x, p_item_res->bmp_right_pos.y);
+#ifdef SET_ITEM_RIGHT_BMP
+	GUI_BMP_Draw(theme_hdl2buf(/*p_item_res->h_bmp_right*/general_attr->h_bmp_jh_right), p_item_res->bmp_right_pos.x, p_item_res->bmp_right_pos.y);
+#endif
     GUI_DispStringAt(p_item_res->string_title, p_item_res->string_title_pos.x, p_item_res->string_title_pos.y);
 
     GUI_DispStringAt(p_item_res->string_content, p_item_res->string_title_pos.x + 200, p_item_res->string_title_pos.y);
@@ -922,33 +954,32 @@ static __s32 setting_general_pop_content_paint(__gui_msg_t *msg)
     GUI_SetBkColor(0x00);
     GUI_SetColor(general_attr->focus_txt_color);
     GUI_BMP_Draw(theme_hdl2buf(/*p_item_res->h_bmp_focus*/general_attr->h_bmp_jh_focus), p_item_res->bmp_focus_pos.x, p_item_res->bmp_focus_pos.y);
-
-    GUI_BMP_Draw(theme_hdl2buf(/*p_item_res->h_bmp_right*/general_attr->h_bmp_jh_right), p_item_res->bmp_right_pos.x, p_item_res->bmp_right_pos.y);
-
-
+#ifdef SET_ITEM_RIGHT_BMP
+	GUI_BMP_Draw(theme_hdl2buf(/*p_item_res->h_bmp_right*/general_attr->h_bmp_jh_right), p_item_res->bmp_right_pos.x, p_item_res->bmp_right_pos.y);
+#endif
     if(general_attr->new_focus == 0)
         GUI_DispStringAt(p_item_res->string_title, p_item_res->string_title_pos.x, p_item_res->string_title_pos.y - 12);
     else if(general_attr->new_focus == 1)
     {
-        if(current_language_set == general_attr->pop_new_focus)
-        {
-            GUI_BMP_Draw(theme_hdl2buf(general_attr->h_bmp_jh_point), p_item_res->string_title_pos.x, p_item_res->bmp_right_pos.y);
+    
+#ifdef SET_ITEM_RIGHT_BMP
+		if(current_language_set == general_attr->pop_new_focus)
+		{
+			GUI_BMP_Draw(theme_hdl2buf(general_attr->h_bmp_jh_point), p_item_res->string_title_pos.x, p_item_res->bmp_right_pos.y);
 
-        }
+		}
+#endif
 
         GUI_DispStringAt(p_item_res->string_title, p_item_res->string_title_pos.x + 32, p_item_res->string_title_pos.y);
     }
     else
 
         GUI_DispStringAt(p_item_res->string_title, p_item_res->string_title_pos.x, p_item_res->string_title_pos.y);
-    //__log("----jh_y3=%d,jh_y4=%d,jh_y5=%d-------\n",p_item_res->bmp_focus_pos.y, p_item_res->bmp_right_pos.y,p_item_res->string_title_pos.y);
 #if 0
     GUI_DispStringInRect(p_item_res->string_content, &gui_rect, GUI_TA_HCENTER | GUI_TA_VCENTER);
 #endif
     if(general_attr->new_focus == 0)
         GUI_DispStringAt(p_item_res->string_content, p_item_res->string_title_pos.x, p_item_res->string_title_pos.y + 8);
-    //GUI_DispStringInRect(p_item_res->string_content, &gui_rect, GUI_TA_HCENTER|GUI_TA_VCENTER);
-    //__log("---x=%d,y=%d---\n",p_item_res->string_title_pos.x,p_item_res->string_title_pos.y);
 
     GUI_CloseAlphaBlend();
     GUI_LyrWinCacheOff();
@@ -961,7 +992,9 @@ static __s32 setting_general_content_paint(__gui_msg_t *msg)
     setting_item_res_t  *p_item_res;
     RECT rect;
     GUI_RECT gui_rect;
-
+	
+	__msg("setting_general_content_paint\n");
+	
     general_attr = (setting_general_attr_t *)GUI_WinGetAddData(msg->h_deswin);
     if (general_attr == NULL)
         return EPDK_FAIL;
@@ -988,45 +1021,63 @@ static __s32 setting_general_content_paint(__gui_msg_t *msg)
     case 1:
         p_item_res = &general_attr->res_jh_language; //语音支持
         break;
-    case 2:
-        p_item_res = &general_attr->res_jh_senior; //高级
-        break;
+#ifdef SET_ITEM_SENSOR		
+		case 2:
+		{
+			p_item_res = &general_attr->res_jh_senior; //高级
+			break;
+		}
+#endif	
+#ifdef SET_ITEM_PRO_INF
+		case 3:
+		{
+			p_item_res = &general_attr->res_jh_inf; 		//产品信息
+			break;
+		}
+#endif		
+#ifdef SET_ITEM_CARD_INF
+		case 4:
+		{
+			p_item_res = &general_attr->res_jh_cardformat;			//卡信息
+			break;
+		}
+#endif		
+#ifdef SET_ITEM_FACT_DEF
+		case 5:
+		{
+			p_item_res = &general_attr->res_jh_defaultset;			//出厂设置
+			break;
+		}
+#endif	
     default:
         break;
     }
 
 
     GUI_SetBkColor(0x00);
-    // if(prev_page == current_page)
-#if 0
-    GUI_ClearRect(p_item_res->string_content_rect.x, p_item_res->string_content_rect.y, p_item_res->string_content_rect.x + p_item_res->string_content_rect.width, p_item_res->string_content_rect.y + p_item_res->string_content_rect.height);
-#endif
     GUI_SetColor(general_attr->focus_txt_color);
-#if 0
-    gui_rect.x0 = SET_CONT_START_X;
-    gui_rect.y0 = SET_CONT_START_Y + (SET_CONT_H + SET_CONT_H_CAP) * ((general_attr->new_focus) % SET_PAGE_NUM);
-    gui_rect.x1 = gui_rect.x0 + SET_CONT_W;
-    gui_rect.y1 = gui_rect.y0 + SET_CONT_H;
-#endif
     //菜单里面的选择条
-    GUI_BMP_Draw(theme_hdl2buf(/*p_item_res->h_bmp_focus*/general_attr->h_bmp_jh_focus), p_item_res->bmp_focus_pos.x, p_item_res->bmp_focus_pos.y);
+    GUI_BMP_Draw(theme_hdl2buf(general_attr->h_bmp_jh_focus), p_item_res->bmp_focus_pos.x, p_item_res->bmp_focus_pos.y);
+#ifdef SET_ITEM_RIGHT_BMP
+	GUI_BMP_Draw(theme_hdl2buf(general_attr->h_bmp_jh_right), p_item_res->bmp_right_pos.x, p_item_res->bmp_right_pos.y);
+#endif
 
-    //GUI_BMP_Draw(theme_hdl2buf(p_item_res->h_bmp_left), p_item_res->bmp_left_pos.x, p_item_res->bmp_left_pos.y);
-    // __log("bmp_x=%d\n",p_item_res->bmp_left_pos.x);
-    GUI_BMP_Draw(theme_hdl2buf(general_attr->h_bmp_jh_right), p_item_res->bmp_right_pos.x, p_item_res->bmp_right_pos.y);
-    if(general_attr->new_focus == 1)
-
-        GUI_DispStringAt(p_item_res->string_title, p_item_res->string_title_pos.x, p_item_res->string_title_pos.y - 12);
-    else
-
-        GUI_DispStringAt(p_item_res->string_title, p_item_res->string_title_pos.x, p_item_res->string_title_pos.y);
+//    if(general_attr->new_focus == 1)
+//    {
+//        GUI_DispStringAt(p_item_res->string_title, p_item_res->string_title_pos.x, p_item_res->string_title_pos.y - 12);
+//    }
+//    else
+//    {
+    GUI_DispStringAt(p_item_res->string_title, p_item_res->string_title_pos.x, p_item_res->string_title_pos.y);
+//    }
 #if 0
     GUI_DispStringInRect(p_item_res->string_content, &gui_rect, GUI_TA_HCENTER | GUI_TA_VCENTER);
 #endif
-    if(general_attr->new_focus == 1)
-        GUI_DispStringAt(p_item_res->string_content, p_item_res->string_title_pos.x, p_item_res->string_title_pos.y + 8);
-    //GUI_DispStringInRect(p_item_res->string_content, &gui_rect, GUI_TA_HCENTER|GUI_TA_VCENTER);
-    //__log("---xc=%d,yc=%d---\n",p_item_res->string_title_pos.x,p_item_res->string_title_pos.y);
+//    if(general_attr->new_focus == 1)
+//    {
+//    	__msg("p_item_res->string_content:%s\n", p_item_res->string_content);
+//        GUI_DispStringAt(p_item_res->string_content, p_item_res->string_title_pos.x, p_item_res->string_title_pos.y + 8);
+//    }
 
     GUI_CloseAlphaBlend();
     GUI_LyrWinCacheOff();
@@ -1193,10 +1244,12 @@ static __s32 setting_general_pop_item_paint(__gui_msg_t *msg)
             GUI_SetColor(general_attr->unfocus_txt_color);
             if(general_attr->new_focus == 1)
             {
-                if(i == current_language_set)
-                {
-                    GUI_BMP_Draw(theme_hdl2buf(general_attr->h_bmp_jh_point_1), p_item_res->string_title_pos.x, p_item_res->bmp_right_pos.y);
-                }
+#ifdef SET_ITEM_RIGHT_BMP
+				if(i == current_language_set)
+				{
+					GUI_BMP_Draw(theme_hdl2buf(general_attr->h_bmp_jh_point_1), p_item_res->string_title_pos.x, p_item_res->bmp_right_pos.y);
+				}
+#endif
 
                 GUI_DispStringAt(p_item_res->string_title, p_item_res->string_title_pos.x + 32, p_item_res->string_title_pos.y);
             }
@@ -1217,7 +1270,7 @@ static __s32 setting_general_item_paint(__gui_msg_t *msg)
     __s32 i;
     RECT rect;
     GUI_RECT gui_rect;
-
+	__msg("setting_general_item_paint\n");
     general_attr = (setting_general_attr_t *)GUI_WinGetAddData(msg->h_deswin);
     if (general_attr == NULL)
         return EPDK_FAIL;
@@ -1233,21 +1286,6 @@ static __s32 setting_general_item_paint(__gui_msg_t *msg)
     GUI_OpenAlphaBlend();
     GUI_LyrWinGetScnWindow(general_attr->layer, &rect);
 
-    //_setting_general_focus_res_reset(general_attr);
-#if 0
-
-    GUI_SetBkColor(0x00);
-    GUI_SetColor(general_attr->focus_txt_color);
-    GUI_ClearRect(general_attr->general_uipara->string_detail_prompt_rect.x, general_attr->general_uipara->string_detail_prompt_rect.y, general_attr->general_uipara->string_detail_prompt_rect.x + general_attr->general_uipara->string_detail_prompt_rect.width - 1, general_attr->general_uipara->string_detail_prompt_rect.y + general_attr->general_uipara->string_detail_prompt_rect.height - 1);
-    GUI_DispStringAt(general_attr->string_detail_prompt, general_attr->general_uipara->string_detail_prompt_rect.x, general_attr->general_uipara->string_detail_prompt_rect.y);
-
-    gui_rect.x0 = general_attr->general_uipara->string_detail_prompt_rect_ex.x;
-    gui_rect.y0 = general_attr->general_uipara->string_detail_prompt_rect_ex.y;
-    gui_rect.x1 = gui_rect.x0 + general_attr->general_uipara->string_detail_prompt_rect_ex.width;
-    gui_rect.y1 = gui_rect.y0 + general_attr->general_uipara->string_detail_prompt_rect_ex.height;
-    GUI_ClearRectEx(&gui_rect);
-    GUI_DispStringInRect(general_attr->string_detail_prompt_ex, &gui_rect, GUI_TA_LEFT | GUI_TA_VCENTER);
-#endif
     for(i = 0; i < general_attr->item_nr; i++)
     {
         switch (i)
@@ -1258,17 +1296,40 @@ static __s32 setting_general_item_paint(__gui_msg_t *msg)
         case 1:
             p_item_res = &general_attr->res_jh_language; //语音支持
             break;
-        case 2:
-            p_item_res = &general_attr->res_jh_senior; //高级
-            break;
+			
+#ifdef SET_ITEM_SENSOR		
+		case 2:
+			p_item_res = &general_attr->res_jh_senior; //高级
+			break;
+#endif	
+#ifdef SET_ITEM_PRO_INF
+			case 3:
+			{
+				p_item_res = &general_attr->res_jh_inf; 		//产品信息
+				break;
+			}
+#endif		
+#ifdef SET_ITEM_CARD_INF
+			case 4:
+			{
+				p_item_res = &general_attr->res_jh_cardformat;			//卡信息
+				break;
+			}
+#endif		
+#ifdef SET_ITEM_FACT_DEF
+			case 5:
+			{
+				p_item_res = &general_attr->res_jh_defaultset;			//出厂设置
+				break;
+			}
+#endif	
         default:
             break;
         }
 
         if(i == general_attr->new_focus)
         {
-            // if(i==5)
-            //	get_menu_text(STRING_SET_VER_NUM, p_item_res->string_content, 128); ///
+        	__msg("general_attr->new_focus:%d\n", general_attr->new_focus);
             setting_general_content_paint( msg);
         }
         else if(i == general_attr->old_focus)
@@ -1278,25 +1339,12 @@ static __s32 setting_general_item_paint(__gui_msg_t *msg)
             gui_rect.y0 = SET_ITEM_START_Y + SET_ITEM_H * (i % SET_PAGE_NUM);
             gui_rect.x1 = gui_rect.x0 + SET_ITEM_W;
             gui_rect.y1 = gui_rect.y0 + SET_ITEM_H;
-#if 0
-            GUI_ClearRectEx(&gui_rect);
-#endif
-
+			__msg("general_attr->old_focus:%d\n", general_attr->old_focus);
+			GUI_ClearRect(gui_rect.x0, gui_rect.y0, gui_rect.x1, gui_rect.y1);
             GUI_BMP_Draw(theme_hdl2buf(general_attr->h_bmp_unselect), 10, gui_rect.y0);
 
             GUI_SetColor(general_attr->unfocus_txt_color);
             GUI_DispStringAt(p_item_res->string_title, p_item_res->string_title_pos.x, p_item_res->string_title_pos.y);
-            __log("--y0=%d\n", gui_rect.y0);
-#if 0
-            gui_rect.x0 = SET_CONT_START_X;
-            gui_rect.y0 = SET_CONT_START_Y + (SET_CONT_H + SET_CONT_H_CAP) * (i % SET_PAGE_NUM);
-            gui_rect.x1 = gui_rect.x0 + SET_CONT_W;
-            gui_rect.y1 = gui_rect.y0 + SET_CONT_H;
-
-            //if(i== 5)
-            //	eLIBs_memset(p_item_res->string_content, 0, 128);
-            GUI_DispStringInRect(p_item_res->string_content, &gui_rect, GUI_TA_VCENTER | GUI_TA_HCENTER);
-#endif
         }
     }
     GUI_CloseAlphaBlend();
@@ -1614,16 +1662,16 @@ static __s32 setting_pop_general_paint(__gui_msg_t *msg)
             GUI_SetColor(general_attr->unfocus_txt_color);
             if(general_attr->new_focus == 1)
             {
-                if(i == current_language_set)
-                {
-                    GUI_BMP_Draw(theme_hdl2buf(general_attr->h_bmp_jh_point_1), p_item_res->string_title_pos.x, p_item_res->bmp_right_pos.y);
-                }
-
+#ifdef SET_ITEM_RIGHT_BMP
+				if(i == current_language_set)
+				{
+					GUI_BMP_Draw(theme_hdl2buf(general_attr->h_bmp_jh_point_1), p_item_res->string_title_pos.x, p_item_res->bmp_right_pos.y);
+				}
+#endif
                 GUI_DispStringAt(p_item_res->string_title, p_item_res->string_title_pos.x + 32, p_item_res->string_title_pos.y);
             }
             else
                 GUI_DispStringAt(p_item_res->string_title, p_item_res->string_title_pos.x, p_item_res->string_title_pos.y);
-            //__log("-----jh_y1=%d,jh_y2=%d------\n",gui_rect.y0,p_item_res->string_title_pos.y);
         }
     }
     GUI_CloseAlphaBlend();
@@ -1640,6 +1688,7 @@ static __s32 setting_general_paint(__gui_msg_t *msg)
     GUI_RECT gui_rect;
     RECT rect;
 
+	__msg("setting_general_paint\n");
     general_attr = (setting_general_attr_t *)GUI_WinGetAddData(msg->h_deswin);
     if (general_attr == NULL)
         return EPDK_FAIL;
@@ -1655,18 +1704,21 @@ static __s32 setting_general_paint(__gui_msg_t *msg)
     GUI_LyrWinCacheOn();
     GUI_OpenAlphaBlend();
 
-    gui_rect.x0 = SET_ITEM_START_X;
-    gui_rect.y0 = SET_ITEM_START_Y + SET_ITEM_H * 2;
-    gui_rect.x1 = gui_rect.x0 + SET_ITEM_W;
-    gui_rect.y1 = gui_rect.y0 + SET_ITEM_H;
-#if 1
-    GUI_ClearRectEx(&gui_rect);
-#endif
+//    gui_rect.x0 = SET_ITEM_START_X;
+//    gui_rect.y0 = SET_ITEM_START_Y + SET_ITEM_H * 2;
+//    gui_rect.x1 = gui_rect.x0 + SET_ITEM_W;
+//    gui_rect.y1 = gui_rect.y0 + SET_ITEM_H;
+//	__msg("gui_rect.x0;%d, gui_rect.y0:%d, gui_rect.x1:%d, gui_rect.y1:%d\n", gui_rect.x0, gui_rect.y0, gui_rect.x1, gui_rect.y1);
+//    GUI_ClearRectEx(&gui_rect);
 
     if(general_attr->new_focus > 2)
+    {
         current_page = 1;
+    }
     else
+    {
         current_page = 0;
+    }
 
     for (i = 0; i < SET_PAGE_NUM; i++)
     {
@@ -1700,9 +1752,32 @@ static __s32 setting_general_paint(__gui_msg_t *msg)
             p_item_res->content_nr = sizeof(content_lang_id) / sizeof(__s32);
             get_menu_text(content_lang_id[p_item_res->content_num], p_item_res->string_content, 128);
             break;
-        case 2:
-            p_item_res = &general_attr->res_jh_senior; //高级
-            break;
+#ifdef SET_ITEM_SENSOR		
+		case 2:
+			p_item_res = &general_attr->res_jh_senior; //高级
+			break;
+#endif	
+#ifdef SET_ITEM_PRO_INF
+			case 3:
+			{
+				p_item_res = &general_attr->res_jh_inf; 		//产品信息
+				break;
+			}
+#endif		
+#ifdef SET_ITEM_CARD_INF
+			case 4:
+			{
+				p_item_res = &general_attr->res_jh_cardformat;			//卡信息
+				break;
+			}
+#endif		
+#ifdef SET_ITEM_FACT_DEF
+			case 5:
+			{
+				p_item_res = &general_attr->res_jh_defaultset;			//出厂设置
+				break;
+			}
+#endif	
         default:
             break;
         }
@@ -1710,10 +1785,7 @@ static __s32 setting_general_paint(__gui_msg_t *msg)
     }
 
     GUI_LyrWinGetScnWindow(general_attr->layer, &rect);
-    //设置左边那个大图标
-    //GUI_BMP_Draw(theme_hdl2buf(general_attr->h_bmp_big_setting), general_attr->general_uipara->bmp_big_setting_pos.x, general_attr->general_uipara->bmp_big_setting_pos.y);
     //设置大图标下面那串文字
-    //for(i=0; i<general_attr->item_nr; i++)
     for(i = 0; i < SET_PAGE_NUM; i++)
     {
         switch (i + SET_PAGE_NUM * current_page)
@@ -1724,9 +1796,32 @@ static __s32 setting_general_paint(__gui_msg_t *msg)
         case 1:
             p_item_res = &general_attr->res_jh_language; //语音支持
             break;
-        case 2:
-            p_item_res = &general_attr->res_jh_senior; //高级
-            break;
+#ifdef SET_ITEM_SENSOR		
+		case 2:
+			p_item_res = &general_attr->res_jh_senior; //高级
+			break;
+#endif	
+#ifdef SET_ITEM_PRO_INF
+			case 3:
+			{
+				p_item_res = &general_attr->res_jh_inf; 		//产品信息
+				break;
+			}
+#endif		
+#ifdef SET_ITEM_CARD_INF
+			case 4:
+			{
+				p_item_res = &general_attr->res_jh_cardformat;			//卡信息
+				break;
+			}
+#endif		
+#ifdef SET_ITEM_FACT_DEF
+			case 5:
+			{
+				p_item_res = &general_attr->res_jh_defaultset;			//出厂设置
+				break;
+			}
+#endif	
         default:
             break;
         }
@@ -1741,7 +1836,7 @@ static __s32 setting_general_paint(__gui_msg_t *msg)
             gui_rect.y0 = SET_ITEM_START_Y + SET_ITEM_H * i;
             gui_rect.x1 = gui_rect.x0 + SET_ITEM_W;
             gui_rect.y1 = gui_rect.y0 + SET_ITEM_H;
-
+			__msg("gui_rect.x0;%d, gui_rect.y0:%d, gui_rect.x1:%d, gui_rect.y1:%d\n", gui_rect.x0, gui_rect.y0, gui_rect.x1, gui_rect.y1);
             GUI_BMP_Draw(theme_hdl2buf(general_attr->h_bmp_unselect), 10, gui_rect.y0);
 
             GUI_SetColor(general_attr->unfocus_txt_color);
@@ -1837,6 +1932,7 @@ static __s32 _setting_general_Proc(__gui_msg_t *msg)
             __msg("memory balloc fail.........\n");
             return EPDK_FAIL;
         }
+		__msg("_setting_general_Proc, GUI_MSG_CREATE\n");
         eLIBs_memset(general_attr, 0, sizeof(setting_general_attr_t));
 
         dsk_display_get_size(&screen_size.width, &screen_size.height);
@@ -2237,7 +2333,9 @@ H_WIN setting_general_win_create(H_WIN h_parent, setting_general_para_t *para)
     FB fb;
 
     GUI_LyrWinGetFB(para->layer, &fb);
-
+	
+	__msg("setting_general_win_create\n");
+	
     general_para = (setting_general_para_t *)My_Balloc(sizeof(setting_general_para_t));
     if(!general_para)
     {
@@ -2245,6 +2343,7 @@ H_WIN setting_general_win_create(H_WIN h_parent, setting_general_para_t *para)
         __msg("memory balloc fail.........\n");
         return EPDK_FAIL;
     }
+	
     eLIBs_memset((void *)general_para, 0, sizeof(setting_general_para_t));
     general_para->font = para->font;
     general_para->layer = para->layer;

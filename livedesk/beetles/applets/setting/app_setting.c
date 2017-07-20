@@ -91,12 +91,21 @@ static __s32 setting_win_create(__gui_msg_t *msg)
     SIZE screen_size;
 
     setting_ctrl = (setting_ctrl_t *)GUI_WinGetAttr(msg->h_deswin);
-
+#ifdef HBAR_SHOW_BT
     rect.x = 0;
-    rect.y = 0;
+    rect.y = 40;
+#else
+	rect.x = 0;
+	rect.y = 0;
+#endif
     dsk_display_get_size(&screen_size.width, &screen_size.height);
+#ifdef HBAR_SHOW_BT
+	rect.width = screen_size.width;
+	rect.height = screen_size.height - 40;
+#else
     rect.width = screen_size.width;
     rect.height = screen_size.height;
+#endif
     setting_ctrl->lyr_setting = setting_layer_palette_create(&rect);
 
     if (setting_ctrl->root_type == SETTING_GENERAL)

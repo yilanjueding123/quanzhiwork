@@ -20,7 +20,7 @@
 #include "Explorer_List.h"
 #include "Explorer_UI.h"
 
-#if  1
+#if  0
 #define __msg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
 						     eLIBs_printf(__VA_ARGS__)									        )
 #else

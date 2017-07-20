@@ -166,11 +166,11 @@ static set_general_para setting_general_uipara_480_272 =
     {
         {
             //item0;
-            {10, 30},		// bmp_focus_pos;
-            {10, 30},		// bmp_unfocus_pos;
+            {10, 40},		// bmp_focus_pos;
+            {10, 40},		// bmp_unfocus_pos;
             {270, 53},		//bmp_left_pos;
             {380, 53},		//bmp_right_pos;
-            {17, 48},		//string_title_pos;
+            {220, 48},		//string_title_pos;
             {276, 30, 84, 36} //string_content_rect;
         },
         {
@@ -179,18 +179,19 @@ static set_general_para setting_general_uipara_480_272 =
             {10, 86},		// bmp_unfocus_pos;
             {270, 109},		//bmp_left_pos;
             {380, 109},		//bmp_right_pos;
-            {17, 104},		//string_title_pos;
+            {220, 104},		//string_title_pos;
             {276, 86, 84, 36} //string_content_rect;
         },
         {
             //item2;
-            {10, 142},		// bmp_focus_pos;
-            {10, 142},		// bmp_unfocus_pos;
+            {10, 132},		// bmp_focus_pos;
+            {10, 132},		// bmp_unfocus_pos;
             {270, 165},		//bmp_left_pos;
             {380, 165},		//bmp_right_pos;
-            {17, 160},		//string_title_pos;
+            {220, 150},		//string_title_pos;
             {276, 142, 84, 36} //string_content_rect;
         },
+#ifdef  SET_ITEM_PRO_INF    
         {
             //item0;
             {10, 30},		// bmp_focus_pos;
@@ -200,6 +201,9 @@ static set_general_para setting_general_uipara_480_272 =
             {17, 48},		//string_title_pos;
             {276, 30, 84, 36} //string_content_rect;
         },
+#endif  
+
+#ifdef  SET_ITEM_CARD_INF    
         {
             //item1;
             {10, 86},		// bmp_focus_pos;
@@ -209,6 +213,9 @@ static set_general_para setting_general_uipara_480_272 =
             {17, 104},		//string_title_pos;
             {276, 86, 84, 36} //string_content_rect;
         },
+#endif  
+        
+#ifdef  SET_ITEM_FACT_DEF    
         {
             //item2;
             {10, 142},		// bmp_focus_pos;
@@ -218,6 +225,7 @@ static set_general_para setting_general_uipara_480_272 =
             {17, 160},		//string_title_pos;
             {276, 142, 84, 36} //string_content_rect;
         }
+#endif
         /*
         {			//item3;
         	{10,126},		// bmp_focus_pos;
