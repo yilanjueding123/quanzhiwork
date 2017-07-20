@@ -21,7 +21,7 @@
 #include "beetles_app.h"
 
 #define SET_ITEM_START_X 10//150
-#define SET_ITEM_START_Y  40
+#define SET_ITEM_START_Y  40 - 38
 #define SET_ITEM_H 46
 #define SET_ITEM_W 462
 
@@ -60,9 +60,9 @@
 #define SUPPORT_KOREAN_LANGUAGE
 
 //#define SET_ITEM_RIGHT_BMP
-#define SET_ITEM_SENSOR
-//#define SET_ITEM_PRO_INF
-//#define SET_ITEM_CARD_INF
+//#define SET_ITEM_SENSOR
+#define SET_ITEM_PRO_INF
+#define SET_ITEM_CARD_INF
 //#define SET_ITEM_FACT_DEF
 
 typedef enum

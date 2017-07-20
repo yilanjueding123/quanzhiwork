@@ -185,6 +185,9 @@ static __s32 _app_setting_Proc(__gui_msg_t *msg)
             __here__ ;
             setting_ctrl->lyr_setting = NULL ;
         }
+#ifdef HBAR_SHOW_BT
+		gscene_hbar_set_state(HBAR_ST_HIDE);
+#endif		
         My_Bfree(setting_ctrl, sizeof(setting_ctrl_t));
         //	esKSRV_SysInfo();
     }
@@ -609,6 +612,11 @@ H_WIN app_setting_create(root_para_t *para)
     __inf("****************************************************************************************\n");
     __inf("********  enter setting app  **************\n");
     __inf("****************************************************************************************\n");
+//#ifdef HBAR_SHOW_BT
+//	gscene_hbar_set_state(HBAR_ST_SHOW);
+//#else
+//	gscene_hbar_set_state(HBAR_ST_HIDE);
+//#endif
 
     //__wait__;
     setting_ctrl = (setting_ctrl_t *)My_Balloc(sizeof(setting_ctrl_t));

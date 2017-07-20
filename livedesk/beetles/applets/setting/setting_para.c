@@ -20,6 +20,8 @@
 #define __SETTING_PARA_H__
 #include "setting_para.h"
 
+#define ITEM_Y	38
+
 static tips_uipara_t setting_tips_uipara_800_480 =
 {
     {0, 0},	//tips_bmp_pos
@@ -166,64 +168,64 @@ static set_general_para setting_general_uipara_480_272 =
     {
         {
             //item0;
-            {10, 40},		// bmp_focus_pos;
-            {10, 40},		// bmp_unfocus_pos;
-            {270, 53},		//bmp_left_pos;
-            {380, 53},		//bmp_right_pos;
-            {220, 48},		//string_title_pos;
+            {10, 40 - ITEM_Y},		// bmp_focus_pos;
+            {10, 40- ITEM_Y},		// bmp_unfocus_pos;
+            {270, 53- ITEM_Y},		//bmp_left_pos;
+            {380, 53- ITEM_Y},		//bmp_right_pos;
+            {220, 48- ITEM_Y},		//string_title_pos;
             {276, 30, 84, 36} //string_content_rect;
         },
         {
             //item1;
-            {10, 86},		// bmp_focus_pos;
-            {10, 86},		// bmp_unfocus_pos;
-            {270, 109},		//bmp_left_pos;
-            {380, 109},		//bmp_right_pos;
-            {220, 104},		//string_title_pos;
+            {10, 86- ITEM_Y},		// bmp_focus_pos;
+            {10, 86- ITEM_Y},		// bmp_unfocus_pos;
+            {270, 109- ITEM_Y},		//bmp_left_pos;
+            {380, 109- ITEM_Y},		//bmp_right_pos;
+            {220, 104- ITEM_Y},		//string_title_pos;
             {276, 86, 84, 36} //string_content_rect;
         },
         {
             //item2;
-            {10, 132},		// bmp_focus_pos;
-            {10, 132},		// bmp_unfocus_pos;
-            {270, 165},		//bmp_left_pos;
-            {380, 165},		//bmp_right_pos;
-            {220, 150},		//string_title_pos;
+            {10, 132- ITEM_Y},		// bmp_focus_pos;
+            {10, 132- ITEM_Y},		// bmp_unfocus_pos;
+            {270, 165- ITEM_Y},		//bmp_left_pos;
+            {380, 165- ITEM_Y},		//bmp_right_pos;
+            {220, 150- ITEM_Y},		//string_title_pos;
             {276, 142, 84, 36} //string_content_rect;
         },
 #ifdef  SET_ITEM_PRO_INF    
         {
             //item0;
-            {10, 30},		// bmp_focus_pos;
-            {10, 30},		// bmp_unfocus_pos;
-            {270, 53},		//bmp_left_pos;
-            {380, 53},		//bmp_right_pos;
-            {17, 48},		//string_title_pos;
-            {276, 30, 84, 36} //string_content_rect;
+            {10, 178- ITEM_Y},		// bmp_focus_pos;
+            {10, 178- ITEM_Y},		// bmp_unfocus_pos;
+            {270, 202- ITEM_Y},		//bmp_left_pos;
+            {380, 198- ITEM_Y},		//bmp_right_pos;
+            {220, 194- ITEM_Y},		//string_title_pos;
+            {276, 198, 84, 36} //string_content_rect;
         },
 #endif  
 
 #ifdef  SET_ITEM_CARD_INF    
         {
             //item1;
-            {10, 86},		// bmp_focus_pos;
-            {10, 86},		// bmp_unfocus_pos;
-            {270, 109},		//bmp_left_pos;
-            {380, 109},		//bmp_right_pos;
-            {17, 104},		//string_title_pos;
-            {276, 86, 84, 36} //string_content_rect;
+            {10, 224- ITEM_Y},		// bmp_focus_pos;
+            {10, 224- ITEM_Y},		// bmp_unfocus_pos;
+            {270, 249- ITEM_Y},		//bmp_left_pos;
+            {380, 259- ITEM_Y},		//bmp_right_pos;
+            {220, 240- ITEM_Y},		//string_title_pos;
+            {276, 246, 84, 36} //string_content_rect;
         },
 #endif  
         
 #ifdef  SET_ITEM_FACT_DEF    
         {
             //item2;
-            {10, 142},		// bmp_focus_pos;
-            {10, 142},		// bmp_unfocus_pos;
-            {270, 165},		//bmp_left_pos;
-            {380, 165},		//bmp_right_pos;
-            {17, 160},		//string_title_pos;
-            {276, 142, 84, 36} //string_content_rect;
+            {10, 280},		// bmp_focus_pos;
+            {10, 280},		// bmp_unfocus_pos;
+            {270, 315},		//bmp_left_pos;
+            {380, 325},		//bmp_right_pos;
+            {220, 300},		//string_title_pos;
+            {276, 292, 84, 36} //string_content_rect;
         }
 #endif
         /*

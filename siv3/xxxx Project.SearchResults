@@ -1,45 +1,8 @@
----- bmp_right_pos Matches (48 in 3 files) ----
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):    OFFSET   bmp_right_pos;
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):        p_item_res->bmp_right_pos = general_attr->general_uipara->item[i].item_bmp_right_pos;
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):        p_item_res->bmp_right_pos = general_attr->general_uipara->item[i].item_bmp_right_pos;
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):        p_item_res->bmp_right_pos = general_attr->general_uipara->item[i].item_bmp_right_pos;
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):    GUI_BMP_Draw(theme_hdl2buf(/*p_item_res->h_bmp_right*/general_attr->h_bmp_jh_right), p_item_res->bmp_right_pos.x, p_item_res->bmp_right_pos.y);
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):    GUI_BMP_Draw(theme_hdl2buf(/*p_item_res->h_bmp_right*/general_attr->h_bmp_jh_right), p_item_res->bmp_right_pos.x, p_item_res->bmp_right_pos.y);
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            GUI_BMP_Draw(theme_hdl2buf(general_attr->h_bmp_jh_point), p_item_res->string_title_pos.x, p_item_res->bmp_right_pos.y);
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):    //__log("----jh_y3=%d,jh_y4=%d,jh_y5=%d-------\n",p_item_res->bmp_focus_pos.y, p_item_res->bmp_right_pos.y,p_item_res->string_title_pos.y);
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):    GUI_BMP_Draw(theme_hdl2buf(general_attr->h_bmp_jh_right), p_item_res->bmp_right_pos.x, p_item_res->bmp_right_pos.y);
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):                    GUI_BMP_Draw(theme_hdl2buf(general_attr->h_bmp_jh_point_1), p_item_res->string_title_pos.x, p_item_res->bmp_right_pos.y);
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):                    GUI_BMP_Draw(theme_hdl2buf(general_attr->h_bmp_jh_point_1), p_item_res->string_title_pos.x, p_item_res->bmp_right_pos.y);
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {360, 15},		//bmp_right_pos;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {360, 46},		//bmp_right_pos;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {360, 75},		//bmp_right_pos;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {360, 105},		//bmp_right_pos;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {360, 135},		//bmp_right_pos;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {360, 165},		//bmp_right_pos;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {360, 195},		//bmp_right_pos;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {360, 37},		//bmp_right_pos;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {360, 61},		//bmp_right_pos;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {360, 85},		//bmp_right_pos;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {380, 53},		//bmp_right_pos;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {380, 109},		//bmp_right_pos;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {380, 165},		//bmp_right_pos;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {380, 53},		//bmp_right_pos;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {380, 109},		//bmp_right_pos;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {380, 165},		//bmp_right_pos;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):        	{380,133},		//bmp_right_pos;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):        	{380,165},		//bmp_right_pos;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):        	{380,197},		//bmp_right_pos;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):	{380,181},		//bmp_right_pos;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {360, 37},		//bmp_right_pos;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {360, 61},		//bmp_right_pos;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {360, 85},		//bmp_right_pos;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {360, 109},		//bmp_right_pos;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {360, 133},		//bmp_right_pos;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {360, 157},		//bmp_right_pos;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {360, 181},		//bmp_right_pos;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {360, 37},		//bmp_right_pos;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {360, 61},		//bmp_right_pos;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {360, 85},		//bmp_right_pos;
-Setting_power.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):    OFFSET  bmp_right_pos;
-Setting_power.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):        p_item_res->bmp_right_pos = power_attr->power_uipara->item[i].item_bmp_right_pos;
-Setting_power.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):    GUI_BMP_Draw(theme_hdl2buf(p_item_res->h_bmp_right), p_item_res->bmp_right_pos.x, p_item_res->bmp_right_pos.y);
+---- SET_ITEM_SENSOR Matches (7 in 2 files) ----
+App_setting_i.h (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting)://#define SET_ITEM_SENSOR
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):#ifdef SET_ITEM_SENSOR
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):#ifdef SET_ITEM_SENSOR		
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):#ifdef SET_ITEM_SENSOR		
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):#ifdef SET_ITEM_SENSOR		
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):#ifdef SET_ITEM_SENSOR		
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):#ifdef SET_ITEM_SENSOR		

@@ -246,7 +246,7 @@ static __s32 pop_inf_title[] =
 
 };
 u8 current_list_layer = MAIN_LIST_LAYER;
-#define SET_PAGE_NUM    6
+#define SET_PAGE_NUM    5
 u8 current_page = 0;
 u8 prev_page = 0;
 
@@ -411,6 +411,12 @@ static void _setting_general_res_init(setting_general_attr_t *general_attr)
 		case 2:
             p_item_res = &general_attr->res_jh_senior; 		//高级
             break;
+#else			
+		case 2:
+		{
+			p_item_res = &general_attr->res_jh_defaultset; //高级
+			break;
+		}			
 #endif			
 #ifdef SET_ITEM_PRO_INF
 		case 3:
@@ -793,27 +799,33 @@ static void _setting_general_content_res_reset(setting_general_attr_t *general_a
     case 2:
         p_item_res = &general_attr->res_jh_senior; //高级
         break;
+#else			
+	case 2:
+	{
+		p_item_res = &general_attr->res_jh_defaultset; //高级
+		break;
+	}		
 #endif	
 #ifdef SET_ITEM_PRO_INF
-		case 3:
-		{
-			p_item_res = &general_attr->res_jh_inf; 		//产品信息
-			break;
-		}
+	case 3:
+	{
+		p_item_res = &general_attr->res_jh_inf; 		//产品信息
+		break;
+	}
 #endif		
 #ifdef SET_ITEM_CARD_INF
-		case 4:
-		{
-			p_item_res = &general_attr->res_jh_cardformat;			//卡信息
-			break;
-		}
+	case 4:
+	{
+		p_item_res = &general_attr->res_jh_cardformat;			//卡信息
+		break;
+	}
 #endif		
 #ifdef SET_ITEM_FACT_DEF
-		case 5:
-		{
-			p_item_res = &general_attr->res_jh_defaultset;			//出厂设置
-			break;
-		}
+	case 5:
+	{
+		p_item_res = &general_attr->res_jh_defaultset;			//出厂设置
+		break;
+	}
 #endif	
 
     default:
@@ -1027,6 +1039,12 @@ static __s32 setting_general_content_paint(__gui_msg_t *msg)
 			p_item_res = &general_attr->res_jh_senior; //高级
 			break;
 		}
+#else			
+		case 2:
+		{
+			p_item_res = &general_attr->res_jh_defaultset; //高级
+			break;
+		}		
 #endif	
 #ifdef SET_ITEM_PRO_INF
 		case 3:
@@ -1301,6 +1319,12 @@ static __s32 setting_general_item_paint(__gui_msg_t *msg)
 		case 2:
 			p_item_res = &general_attr->res_jh_senior; //高级
 			break;
+#else			
+		case 2:
+		{
+			p_item_res = &general_attr->res_jh_defaultset; //高级
+			break;
+		}			
 #endif	
 #ifdef SET_ITEM_PRO_INF
 			case 3:
@@ -1756,6 +1780,12 @@ static __s32 setting_general_paint(__gui_msg_t *msg)
 		case 2:
 			p_item_res = &general_attr->res_jh_senior; //高级
 			break;
+#else			
+		case 2:
+		{
+			p_item_res = &general_attr->res_jh_defaultset; //高级
+			break;
+		}			
 #endif	
 #ifdef SET_ITEM_PRO_INF
 			case 3:
@@ -1800,6 +1830,12 @@ static __s32 setting_general_paint(__gui_msg_t *msg)
 		case 2:
 			p_item_res = &general_attr->res_jh_senior; //高级
 			break;
+#else			
+		case 2:
+		{
+			p_item_res = &general_attr->res_jh_defaultset; //高级
+			break;
+		}					
 #endif	
 #ifdef SET_ITEM_PRO_INF
 			case 3:
@@ -1828,6 +1864,7 @@ static __s32 setting_general_paint(__gui_msg_t *msg)
 
         if(i == general_attr->new_focus)
         {
+        	__msg("general_attr->new_focus:%d\n", general_attr->new_focus);
             setting_general_content_paint(msg);
         }
         else
@@ -1936,6 +1973,7 @@ static __s32 _setting_general_Proc(__gui_msg_t *msg)
         eLIBs_memset(general_attr, 0, sizeof(setting_general_attr_t));
 
         dsk_display_get_size(&screen_size.width, &screen_size.height);
+		__msg("screen_size.width:%d, screen_size.height:%d\n", screen_size.width, screen_size.height);
         //在这里把相关坐标导入
         general_attr->general_uipara = setting_get_general_para(screen_size);
 
