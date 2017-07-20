@@ -1,4 +1,8 @@
----- explorer_get_listbar_pagenum Matches (3 in 3 files) ----
-Explorer_List.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):    page_item_cnt = explorer_get_listbar_pagenum(list_para);
-Explorer_UI.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):__u32 explorer_get_listbar_pagenum(explr_list_para_t *list_para)
-Explorer_UI.h (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):extern __u32 explorer_get_listbar_pagenum(explr_list_para_t *list_para);
+---- explorer_draw_FileTypeIcon Matches (7 in 3 files) ----
+Explorer_List.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):    	__msg("explorer_draw_FileTypeIcon\n");
+Explorer_List.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):        explorer_draw_FileTypeIcon(list_para, list_para->media_type);
+Explorer_List.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):    explorer_draw_FileTypeIcon(list_para, media_type);
+Explorer_List.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):        explorer_draw_FileTypeIcon(list_para, list_para->media_type);
+Explorer_UI.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):__s32 explorer_draw_FileTypeIcon(explr_list_para_t *list_para, rat_media_type_t media_type)
+Explorer_UI.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):	__msg("explorer_draw_FileTypeIcon\n");
+Explorer_UI.h (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):extern __s32 explorer_draw_FileTypeIcon(explr_list_para_t *list_para, rat_media_type_t media_type);

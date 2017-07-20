@@ -343,7 +343,7 @@ static __s32 explorer_listview_onpaint(H_WIN  list_win)
     else
     {
     	__msg("explorer_draw_FileTypeIcon\n");
-        explorer_draw_FileTypeIcon(list_para, list_para->media_type);
+        //explorer_draw_FileTypeIcon(list_para, list_para->media_type);
     }
     return EPDK_OK;
 }

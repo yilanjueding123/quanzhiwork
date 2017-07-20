@@ -36,8 +36,8 @@ static explorer_viewer_ui_t  explr_viewer_ui_400_240 =
     { 0, 0, 0, 	0 },                 //browser bg bottom
     { 0, 0, 0,  0 },              //browser bg left
 
-    { 465,	42,	8,	220},            //scroll bg rect
-    { 467,	41,	8,	218},      		 //scroll rect
+    { 465,	42,	9,	220},            //scroll bg rect
+    { 467,	52,	7,	200},      		 //scroll rect
     6, 								//scroll head
     1, 								//scroll body
     6,                        		//tail height
@@ -52,7 +52,7 @@ static explorer_viewer_ui_t  explr_viewer_ui_400_240 =
         { 0 , 0, 460, 2 },        				//item_bottom_line;
         { 0 , 2, 2, 38},       					//item_dividing_line;
 
-        { 24, 4, 15, 15 },        				//icon rect
+        { 24, 8, 15, 15 },        				//icon rect
         { 0, 0, 50, 30 },       				//miniature rect, ËõÂÔÍ¼ UI ²ÎÊý
 
         { 310, 0, 166, 40 }, 					//text rect
