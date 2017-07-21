@@ -20,7 +20,7 @@ __u8   dialog_jh_tran_data;
 __u8   dialog_current_state;
 
 #if  0
-#define __log(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
+#define __msg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
 								 eLIBs_printf(__VA_ARGS__)											)
 #else
 #define __msg(...)   
@@ -1011,7 +1011,7 @@ H_WIN app_dialog_create(H_WIN h_parent, __s32 win_id, __u32 style,
     __inf("********  enter dialog app  **************\n");
     __inf("****************************************************************\n");
 
-
+	__msg("app_dialog_create\n");
     BallocType(wnd_para, dialog_wnd_t);
     if (wnd_para == NULL)
     {
@@ -1028,7 +1028,9 @@ H_WIN app_dialog_create(H_WIN h_parent, __s32 win_id, __u32 style,
     wnd_para->style   = style;
     wnd_para->timeout = timeout;
     if(jh_tran_num & 0x400)
+    {
         dialog_current_state = 6;
+    }
     else if(jh_tran_num & 0x200)
     {
         dialog_current_state = 5; //从非设置界面来的
@@ -1041,7 +1043,7 @@ H_WIN app_dialog_create(H_WIN h_parent, __s32 win_id, __u32 style,
     else
     {
         dialog_jh_tran_data = jh_tran_num;
-        //if((jh_tran_num & 0x80)&&(!(jh_tran_num & 0x40)))
+
         if((dialog_jh_tran_data & 0xc0) == 0x80)
         {
             dialog_current_state = 1; //背光时间
@@ -1056,13 +1058,13 @@ H_WIN app_dialog_create(H_WIN h_parent, __s32 win_id, __u32 style,
         else if((dialog_jh_tran_data & 0xc0) == 0xc0)
             dialog_current_state = 3; //卡格式化
     }
-    //dialog_current_state=jh_tran_num
-    __log("-----jh_dbg_1012_1:%d------\n", jh_tran_num);
-    __log("-----jh_dbg1014_2:%d\n", dialog_current_state);
+
+    __msg("jh_tran_num:%d, dialog_current_state = %d\n", jh_tran_num, dialog_current_state);
+
     app_dialog_data_init(wnd_para, bmp_id, str_id, NULL);
 
     app_dialog_layer_create(wnd_para->hlyr, &wnd_para->ui.rt);
-
+	__msg("ui_rt:%d,%d,%d,%d\n", wnd_para->ui.rt.x, wnd_para->ui.rt.y,wnd_para->ui.rt.width, wnd_para->ui.rt.height);
     if (wnd_para->hlyr == NULL)
     {
         //TODO:release mem
