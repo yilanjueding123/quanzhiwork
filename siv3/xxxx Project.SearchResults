@@ -1,8 +1,12 @@
----- SET_ITEM_SENSOR Matches (7 in 2 files) ----
-App_setting_i.h (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting)://#define SET_ITEM_SENSOR
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):#ifdef SET_ITEM_SENSOR
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):#ifdef SET_ITEM_SENSOR		
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):#ifdef SET_ITEM_SENSOR		
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):#ifdef SET_ITEM_SENSOR		
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):#ifdef SET_ITEM_SENSOR		
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):#ifdef SET_ITEM_SENSOR		
+---- ID_SWITCH_TO_TIPS Matches (11 in 4 files) ----
+App_av1_i.h (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):#define ID_SWITCH_TO_TIPS 	10
+App_setting.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            case ID_SWITCH_TO_TIPS:
+App_setting_i.h (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):#define ID_SWITCH_TO_TIPS 10
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):                    main_cmd2parent(msg->h_deswin, ID_SWITCH_TO_TIPS, TIPS_BACK_LIGHT, (p_item_res->content_num) & 0x7f);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):                    main_cmd2parent(msg->h_deswin, ID_SWITCH_TO_TIPS, TIPS_BACK_LIGHT, (p_item_res->content_num) | 0x80);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):						__msg("ID_SWITCH_TO_TIPS: TIPS_NOCARD_NOTE\n");
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):                        main_cmd2parent(msg->h_deswin, ID_SWITCH_TO_TIPS, TIPS_NOCARD_NOTE, 256);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):                    	__msg("ID_SWITCH_TO_TIPS: TIPS_FORMAT_CARD\n");
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):                        main_cmd2parent(msg->h_deswin, ID_SWITCH_TO_TIPS, TIPS_FORMAT_CARD, 192);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):                    __msg("ID_SWITCH_TO_TIPS: TIPS_FACTORY_DEFAULT\n");
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):                    main_cmd2parent(msg->h_deswin, ID_SWITCH_TO_TIPS, TIPS_FACTORY_DEFAULT, 64);

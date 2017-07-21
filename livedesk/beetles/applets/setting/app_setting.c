@@ -22,6 +22,15 @@
 #include "setting_general.h"
 #include "setting_power.h"
 #include "setting_tips.h"
+
+#if  1
+#define __msg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
+						     eLIBs_printf(__VA_ARGS__)									        )
+#else
+#define __msg(...)    	
+#endif
+
+
 /***********************************************************************************************************
 	½¨Á¢Í¼²ã
 ************************************************************************************************************/
@@ -287,6 +296,7 @@ static __s32 _app_setting_Proc(__gui_msg_t *msg)
             case ID_OP_ENTER:
             {
                 __gui_msg_t mymsg;
+				__msg("mymsg: ID_OP_ENTER, setting_ctrl->h_frm_general\n");
                 mymsg.h_deswin = setting_ctrl->h_frm_general;
                 mymsg.h_srcwin = NULL;
                 mymsg.id = MSG_OP_ENTER;
@@ -309,7 +319,7 @@ static __s32 _app_setting_Proc(__gui_msg_t *msg)
                 {
                     __s32 lang_id[] = {STRING_SET_COMMON_RESTORE , STRING_SET_COMMON_RESTORE };
                     back_set_atate = 2;
-                    __log("---jh_dbg1014_2----\n");
+                    __msg("TIPS_FACTORY_DEFAULT\n");
                     jh_default_dialog(setting_ctrl->h_dialoag_win , msg->h_deswin , SETTING_TIPS_ID, ADLG_YESNO, lang_id, msg->dwReserved);
                     // default_dialog(setting_ctrl->h_dialoag_win , msg->h_deswin , SETTING_TIPS_ID, ADLG_YESNO, lang_id);
                 }
@@ -319,6 +329,7 @@ static __s32 _app_setting_Proc(__gui_msg_t *msg)
                     //set_common_cardfomart_title
                     __s32 lang_id[] = {STRING_SET_COMMON_CARDFOMART_TITLE, STRING_SET_COMMON_CARDFOMART_TITLE };
                     back_set_atate = 3;
+					__msg("TIPS_FORMAT_CARD\n");
                     jh_default_dialog(setting_ctrl->h_dialoag_win , msg->h_deswin , SETTING_TIPS_ID, ADLG_YESNO, lang_id, msg->dwReserved);
                 }
                 else if(msg->dwAddData2 == TIPS_PRODUCT_INFO)
@@ -346,7 +357,7 @@ static __s32 _app_setting_Proc(__gui_msg_t *msg)
                     // black_light_level=msg->dwReserved;
 
                     // default_dialog(setting_ctrl->h_dialoag_win , msg->h_deswin , SETTING_TIPS_ID, ADLG_YESNO, lang_id);
-                    __log("-----jh_dbg_1012_2:%d------", msg->dwReserved);
+                    __msg("TIPS_BACK_LIGHT: %d\n", msg->dwReserved);
                     back_set_atate = 0;
                     if(msg->dwReserved & 0x80)
                     {
@@ -361,7 +372,7 @@ static __s32 _app_setting_Proc(__gui_msg_t *msg)
                 {
                     __s32 lang_id[] = {STRING_SET_COMMON_NOCARD_NOTE, STRING_SET_COMMON_CARDFOMART_TITLE };
                     back_set_atate = 4;
-                    __log("---jh_dbg1018_2----\n");
+                    __msg("TIPS_NOCARD_NOTE\n");
                     jh_default_dialog(setting_ctrl->h_dialoag_win , msg->h_deswin , SETTING_TIPS_ID, ADLG_YESNO, lang_id, msg->dwReserved);
                 }
                 else//soft verson
@@ -422,6 +433,7 @@ static __s32 _app_setting_Proc(__gui_msg_t *msg)
             case ID_OP_ENTER:
             {
                 __gui_msg_t mymsg;
+				__msg("mymsg: ID_OP_ENTER, setting_ctrl->h_frm_power\n");
                 mymsg.h_deswin = setting_ctrl->h_frm_power;
                 mymsg.h_srcwin = NULL;
                 mymsg.id = MSG_OP_ENTER;
@@ -487,6 +499,7 @@ static __s32 _app_setting_Proc(__gui_msg_t *msg)
             case ID_OP_ENTER:
             {
                 __gui_msg_t mymsg;
+				__msg("ID_OP_ENTER: setting_ctrl->h_frm_tips\n");
                 mymsg.h_deswin = setting_ctrl->h_frm_tips;
                 mymsg.h_srcwin = NULL;
                 mymsg.id = MSG_OP_ENTER;
