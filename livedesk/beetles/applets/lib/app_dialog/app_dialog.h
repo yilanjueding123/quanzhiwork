@@ -22,6 +22,8 @@
 
 #define ADLG_BIT_(_i)                     (1 << (_i))
 
+#define ADLG_BKLT_UI
+
 //消息框风格
 typedef enum tag_APP_DIALOG_E
 {

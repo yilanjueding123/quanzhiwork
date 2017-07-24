@@ -77,6 +77,10 @@ typedef struct tag_APP_DIALOG_RES
     load_bmp_res_t bmp_btn_yes;
     load_bmp_res_t bmp_btn_no;
     load_bmp_res_t bmp_storage;
+#ifdef ADLG_BKLT_UI
+	load_bmp_res_t bmp_bklt_select;
+	load_bmp_res_t bmp_bklt_unselect;
+#endif
     char           str_title[ADLG_STR_TITLE_MEM_SIZE];
     char           str_content[ADLG_STR_CONTENT_MEM_SIZE];
     char           str_btn[ADLG_MAX_BTN_COUNT][ADLG_STR_BTN_MEM_SIZE];
@@ -84,6 +88,9 @@ typedef struct tag_APP_DIALOG_RES
     __s16          btn_count;
     __s16          icon_enable;
     __s32          txt_clr;
+#ifdef ADLG_BKLT_UI
+	__s16			bklt_focus;
+#endif
 } APP_DIALOG_RES_T;
 
 //dialog window parameter

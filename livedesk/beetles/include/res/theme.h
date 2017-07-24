@@ -1470,455 +1470,461 @@
 #define    NAME_CALENDAR_TIME_PM_BMP                                  "CALENDAR_TIME_PM_BMP"
 #define    ID_CALENDAR_TIME_PM_BMP                                    485
 
+#define    NAME_DIALOG_BKLT_SELECT_BMP                                "DIALOG_BKLT_SELECT_BMP"
+#define    ID_DIALOG_BKLT_SELECT_BMP                                  486
+
+#define    NAME_DIALOG_BKLT_UNSELECT_BMP                              "DIALOG_BKLT_UNSELECT_BMP"
+#define    ID_DIALOG_BKLT_UNSELECT_BMP                                487
+
 #define    NAME_DIALOG_ICON_INFORMATION_BMP                           "DIALOG_ICON_INFORMATION_BMP"
-#define    ID_DIALOG_ICON_INFORMATION_BMP                             486
+#define    ID_DIALOG_ICON_INFORMATION_BMP                             488
 
 #define    NAME_DIALOG_MSGBOX_BMP                                     "DIALOG_MSGBOX_BMP"
-#define    ID_DIALOG_MSGBOX_BMP                                       487
+#define    ID_DIALOG_MSGBOX_BMP                                       489
 
 #define    NAME_DIALOG_MSGBOX_BTN_F_BMP                               "DIALOG_MSGBOX_BTN_F_BMP"
-#define    ID_DIALOG_MSGBOX_BTN_F_BMP                                 488
+#define    ID_DIALOG_MSGBOX_BTN_F_BMP                                 490
 
 #define    NAME_DIALOG_MSGBOX_BTN_N_BMP                               "DIALOG_MSGBOX_BTN_N_BMP"
-#define    ID_DIALOG_MSGBOX_BTN_N_BMP                                 489
+#define    ID_DIALOG_MSGBOX_BTN_N_BMP                                 491
 
 #define    NAME_DIALOG_MSGBOX_BTN_NO_BMP                              "DIALOG_MSGBOX_BTN_NO_BMP"
-#define    ID_DIALOG_MSGBOX_BTN_NO_BMP                                490
+#define    ID_DIALOG_MSGBOX_BTN_NO_BMP                                492
 
 #define    NAME_DIALOG_MSGBOX_BTN_YES_BMP                             "DIALOG_MSGBOX_BTN_YES_BMP"
-#define    ID_DIALOG_MSGBOX_BTN_YES_BMP                               491
+#define    ID_DIALOG_MSGBOX_BTN_YES_BMP                               493
 
 #define    NAME_DIALOG_MSGBOX_L_N_BMP                                 "DIALOG_MSGBOX_L_N_BMP"
-#define    ID_DIALOG_MSGBOX_L_N_BMP                                   492
+#define    ID_DIALOG_MSGBOX_L_N_BMP                                   494
 
 #define    NAME_DIALOG_MSGBOX_L_Y_BMP                                 "DIALOG_MSGBOX_L_Y_BMP"
-#define    ID_DIALOG_MSGBOX_L_Y_BMP                                   493
+#define    ID_DIALOG_MSGBOX_L_Y_BMP                                   495
 
 #define    NAME_DIALOG_MSGBOX_R_N_BMP                                 "DIALOG_MSGBOX_R_N_BMP"
-#define    ID_DIALOG_MSGBOX_R_N_BMP                                   494
+#define    ID_DIALOG_MSGBOX_R_N_BMP                                   496
 
 #define    NAME_DIALOG_MSGBOX_R_Y_BMP                                 "DIALOG_MSGBOX_R_Y_BMP"
-#define    ID_DIALOG_MSGBOX_R_Y_BMP                                   495
+#define    ID_DIALOG_MSGBOX_R_Y_BMP                                   497
 
 #define    NAME_DIALOG_MSGBOX_SELECT_BMP                              "DIALOG_MSGBOX_SELECT_BMP"
-#define    ID_DIALOG_MSGBOX_SELECT_BMP                                496
+#define    ID_DIALOG_MSGBOX_SELECT_BMP                                498
 
 #define    NAME_DIALOG_MSGBOX_STORAGE_BMP                             "DIALOG_MSGBOX_STORAGE_BMP"
-#define    ID_DIALOG_MSGBOX_STORAGE_BMP                               497
+#define    ID_DIALOG_MSGBOX_STORAGE_BMP                               499
 
 #define    NAME_RECORD_0_BMP                                          "RECORD_0_BMP"
-#define    ID_RECORD_0_BMP                                            498
+#define    ID_RECORD_0_BMP                                            500
 
 #define    NAME_RECORD_1_BMP                                          "RECORD_1_BMP"
-#define    ID_RECORD_1_BMP                                            499
+#define    ID_RECORD_1_BMP                                            501
 
 #define    NAME_RECORD_10_BMP                                         "RECORD_10_BMP"
-#define    ID_RECORD_10_BMP                                           500
+#define    ID_RECORD_10_BMP                                           502
 
 #define    NAME_RECORD_2_BMP                                          "RECORD_2_BMP"
-#define    ID_RECORD_2_BMP                                            501
+#define    ID_RECORD_2_BMP                                            503
 
 #define    NAME_RECORD_3_BMP                                          "RECORD_3_BMP"
-#define    ID_RECORD_3_BMP                                            502
+#define    ID_RECORD_3_BMP                                            504
 
 #define    NAME_RECORD_4_BMP                                          "RECORD_4_BMP"
-#define    ID_RECORD_4_BMP                                            503
+#define    ID_RECORD_4_BMP                                            505
 
 #define    NAME_RECORD_5_BMP                                          "RECORD_5_BMP"
-#define    ID_RECORD_5_BMP                                            504
+#define    ID_RECORD_5_BMP                                            506
 
 #define    NAME_RECORD_6_BMP                                          "RECORD_6_BMP"
-#define    ID_RECORD_6_BMP                                            505
+#define    ID_RECORD_6_BMP                                            507
 
 #define    NAME_RECORD_66_BMP                                         "RECORD_66_BMP"
-#define    ID_RECORD_66_BMP                                           506
+#define    ID_RECORD_66_BMP                                           508
 
 #define    NAME_RECORD_66_LEFT_BMP                                    "RECORD_66_LEFT_BMP"
-#define    ID_RECORD_66_LEFT_BMP                                      507
+#define    ID_RECORD_66_LEFT_BMP                                      509
 
 #define    NAME_RECORD_66_MID_BMP                                     "RECORD_66_MID_BMP"
-#define    ID_RECORD_66_MID_BMP                                       508
+#define    ID_RECORD_66_MID_BMP                                       510
 
 #define    NAME_RECORD_66_RIGHT_BMP                                   "RECORD_66_RIGHT_BMP"
-#define    ID_RECORD_66_RIGHT_BMP                                     509
+#define    ID_RECORD_66_RIGHT_BMP                                     511
 
 #define    NAME_RECORD_7_BMP                                          "RECORD_7_BMP"
-#define    ID_RECORD_7_BMP                                            510
+#define    ID_RECORD_7_BMP                                            512
 
 #define    NAME_RECORD_8_BMP                                          "RECORD_8_BMP"
-#define    ID_RECORD_8_BMP                                            511
+#define    ID_RECORD_8_BMP                                            513
 
 #define    NAME_RECORD_9_BMP                                          "RECORD_9_BMP"
-#define    ID_RECORD_9_BMP                                            512
+#define    ID_RECORD_9_BMP                                            514
 
 #define    NAME_RECORD_ANI_0_BMP                                      "RECORD_ANI_0_BMP"
-#define    ID_RECORD_ANI_0_BMP                                        513
+#define    ID_RECORD_ANI_0_BMP                                        515
 
 #define    NAME_RECORD_ANI_1_BMP                                      "RECORD_ANI_1_BMP"
-#define    ID_RECORD_ANI_1_BMP                                        514
+#define    ID_RECORD_ANI_1_BMP                                        516
 
 #define    NAME_RECORD_ANI_2_BMP                                      "RECORD_ANI_2_BMP"
-#define    ID_RECORD_ANI_2_BMP                                        515
+#define    ID_RECORD_ANI_2_BMP                                        517
 
 #define    NAME_RECORD_ANI_3_BMP                                      "RECORD_ANI_3_BMP"
-#define    ID_RECORD_ANI_3_BMP                                        516
+#define    ID_RECORD_ANI_3_BMP                                        518
 
 #define    NAME_RECORD_ANI_4_BMP                                      "RECORD_ANI_4_BMP"
-#define    ID_RECORD_ANI_4_BMP                                        517
+#define    ID_RECORD_ANI_4_BMP                                        519
 
 #define    NAME_RECORD_ANI_BG_BMP                                     "RECORD_ANI_BG_BMP"
-#define    ID_RECORD_ANI_BG_BMP                                       518
+#define    ID_RECORD_ANI_BG_BMP                                       520
 
 #define    NAME_RECORD_BACK_0_BMP                                     "RECORD_BACK_0_BMP"
-#define    ID_RECORD_BACK_0_BMP                                       519
+#define    ID_RECORD_BACK_0_BMP                                       521
 
 #define    NAME_RECORD_BACK_1_BMP                                     "RECORD_BACK_1_BMP"
-#define    ID_RECORD_BACK_1_BMP                                       520
+#define    ID_RECORD_BACK_1_BMP                                       522
 
 #define    NAME_RECORD_BAR_BOTTOM_BMP                                 "RECORD_BAR_BOTTOM_BMP"
-#define    ID_RECORD_BAR_BOTTOM_BMP                                   521
+#define    ID_RECORD_BAR_BOTTOM_BMP                                   523
 
 #define    NAME_RECORD_BAR_TOP_BMP                                    "RECORD_BAR_TOP_BMP"
-#define    ID_RECORD_BAR_TOP_BMP                                      522
+#define    ID_RECORD_BAR_TOP_BMP                                      524
 
 #define    NAME_RECORD_BATTERY_0_BMP                                  "RECORD_BATTERY_0_BMP"
-#define    ID_RECORD_BATTERY_0_BMP                                    523
+#define    ID_RECORD_BATTERY_0_BMP                                    525
 
 #define    NAME_RECORD_BATTERY_1_BMP                                  "RECORD_BATTERY_1_BMP"
-#define    ID_RECORD_BATTERY_1_BMP                                    524
+#define    ID_RECORD_BATTERY_1_BMP                                    526
 
 #define    NAME_RECORD_BATTERY_2_BMP                                  "RECORD_BATTERY_2_BMP"
-#define    ID_RECORD_BATTERY_2_BMP                                    525
+#define    ID_RECORD_BATTERY_2_BMP                                    527
 
 #define    NAME_RECORD_BATTERY_3_BMP                                  "RECORD_BATTERY_3_BMP"
-#define    ID_RECORD_BATTERY_3_BMP                                    526
+#define    ID_RECORD_BATTERY_3_BMP                                    528
 
 #define    NAME_RECORD_BATTERY_4_BMP                                  "RECORD_BATTERY_4_BMP"
-#define    ID_RECORD_BATTERY_4_BMP                                    527
+#define    ID_RECORD_BATTERY_4_BMP                                    529
 
 #define    NAME_RECORD_BATTERY_5_BMP                                  "RECORD_BATTERY_5_BMP"
-#define    ID_RECORD_BATTERY_5_BMP                                    528
+#define    ID_RECORD_BATTERY_5_BMP                                    530
 
 #define    NAME_RECORD_BATTERY_ADAPTER_BMP                            "RECORD_BATTERY_ADAPTER_BMP"
-#define    ID_RECORD_BATTERY_ADAPTER_BMP                              529
+#define    ID_RECORD_BATTERY_ADAPTER_BMP                              531
 
 #define    NAME_RECORD_BATTERY_ADD_BMP                                "RECORD_BATTERY_ADD_BMP"
-#define    ID_RECORD_BATTERY_ADD_BMP                                  530
+#define    ID_RECORD_BATTERY_ADD_BMP                                  532
 
 #define    NAME_RECORD_BATTERY_ADD0_BMP                               "RECORD_BATTERY_ADD0_BMP"
-#define    ID_RECORD_BATTERY_ADD0_BMP                                 531
+#define    ID_RECORD_BATTERY_ADD0_BMP                                 533
 
 #define    NAME_RECORD_BATTERY_ADD1_BMP                               "RECORD_BATTERY_ADD1_BMP"
-#define    ID_RECORD_BATTERY_ADD1_BMP                                 532
+#define    ID_RECORD_BATTERY_ADD1_BMP                                 534
 
 #define    NAME_RECORD_BATTERY_ADD2_BMP                               "RECORD_BATTERY_ADD2_BMP"
-#define    ID_RECORD_BATTERY_ADD2_BMP                                 533
+#define    ID_RECORD_BATTERY_ADD2_BMP                                 535
 
 #define    NAME_RECORD_BATTERY_ADD3_BMP                               "RECORD_BATTERY_ADD3_BMP"
-#define    ID_RECORD_BATTERY_ADD3_BMP                                 534
+#define    ID_RECORD_BATTERY_ADD3_BMP                                 536
 
 #define    NAME_RECORD_BATTERY_ADD4_BMP                               "RECORD_BATTERY_ADD4_BMP"
-#define    ID_RECORD_BATTERY_ADD4_BMP                                 535
+#define    ID_RECORD_BATTERY_ADD4_BMP                                 537
 
 #define    NAME_RECORD_BATTERY_ADD5_BMP                               "RECORD_BATTERY_ADD5_BMP"
-#define    ID_RECORD_BATTERY_ADD5_BMP                                 536
+#define    ID_RECORD_BATTERY_ADD5_BMP                                 538
 
 #define    NAME_RECORD_BATTERY_NO_BMP                                 "RECORD_BATTERY_NO_BMP"
-#define    ID_RECORD_BATTERY_NO_BMP                                   537
+#define    ID_RECORD_BATTERY_NO_BMP                                   539
 
 #define    NAME_RECORD_DEL_0_BMP                                      "RECORD_DEL_0_BMP"
-#define    ID_RECORD_DEL_0_BMP                                        538
+#define    ID_RECORD_DEL_0_BMP                                        540
 
 #define    NAME_RECORD_DEL_1_BMP                                      "RECORD_DEL_1_BMP"
-#define    ID_RECORD_DEL_1_BMP                                        539
+#define    ID_RECORD_DEL_1_BMP                                        541
 
 #define    NAME_RECORD_DEL_BOX_BMP                                    "RECORD_DEL_BOX_BMP"
-#define    ID_RECORD_DEL_BOX_BMP                                      540
+#define    ID_RECORD_DEL_BOX_BMP                                      542
 
 #define    NAME_RECORD_DEL_SEL_0_BMP                                  "RECORD_DEL_SEL_0_BMP"
-#define    ID_RECORD_DEL_SEL_0_BMP                                    541
+#define    ID_RECORD_DEL_SEL_0_BMP                                    543
 
 #define    NAME_RECORD_DEL_SEL_1_BMP                                  "RECORD_DEL_SEL_1_BMP"
-#define    ID_RECORD_DEL_SEL_1_BMP                                    542
+#define    ID_RECORD_DEL_SEL_1_BMP                                    544
 
 #define    NAME_RECORD_FORMAT_BK_BMP                                  "RECORD_FORMAT_BK_BMP"
-#define    ID_RECORD_FORMAT_BK_BMP                                    543
+#define    ID_RECORD_FORMAT_BK_BMP                                    545
 
 #define    NAME_RECORD_MENU_LIST_0_BMP                                "RECORD_MENU_LIST_0_BMP"
-#define    ID_RECORD_MENU_LIST_0_BMP                                  544
+#define    ID_RECORD_MENU_LIST_0_BMP                                  546
 
 #define    NAME_RECORD_MENU_LIST_1_BMP                                "RECORD_MENU_LIST_1_BMP"
-#define    ID_RECORD_MENU_LIST_1_BMP                                  545
+#define    ID_RECORD_MENU_LIST_1_BMP                                  547
 
 #define    NAME_RECORD_MENU_QUALITY_0_BMP                             "RECORD_MENU_QUALITY_0_BMP"
-#define    ID_RECORD_MENU_QUALITY_0_BMP                               546
+#define    ID_RECORD_MENU_QUALITY_0_BMP                               548
 
 #define    NAME_RECORD_MENU_QUALITY_1_BMP                             "RECORD_MENU_QUALITY_1_BMP"
-#define    ID_RECORD_MENU_QUALITY_1_BMP                               547
+#define    ID_RECORD_MENU_QUALITY_1_BMP                               549
 
 #define    NAME_RECORD_MENU_RECORD_0_BMP                              "RECORD_MENU_RECORD_0_BMP"
-#define    ID_RECORD_MENU_RECORD_0_BMP                                548
+#define    ID_RECORD_MENU_RECORD_0_BMP                                550
 
 #define    NAME_RECORD_MENU_RECORD_1_BMP                              "RECORD_MENU_RECORD_1_BMP"
-#define    ID_RECORD_MENU_RECORD_1_BMP                                549
+#define    ID_RECORD_MENU_RECORD_1_BMP                                551
 
 #define    NAME_RECORD_MENU_RECORD_2_BMP                              "RECORD_MENU_RECORD_2_BMP"
-#define    ID_RECORD_MENU_RECORD_2_BMP                                550
+#define    ID_RECORD_MENU_RECORD_2_BMP                                552
 
 #define    NAME_RECORD_MENU_SAVE_0_BMP                                "RECORD_MENU_SAVE_0_BMP"
-#define    ID_RECORD_MENU_SAVE_0_BMP                                  551
+#define    ID_RECORD_MENU_SAVE_0_BMP                                  553
 
 #define    NAME_RECORD_MENU_SAVE_1_BMP                                "RECORD_MENU_SAVE_1_BMP"
-#define    ID_RECORD_MENU_SAVE_1_BMP                                  552
+#define    ID_RECORD_MENU_SAVE_1_BMP                                  554
 
 #define    NAME_RECORD_MUSIC_BOUY_BMP                                 "RECORD_MUSIC_BOUY_BMP"
-#define    ID_RECORD_MUSIC_BOUY_BMP                                   553
+#define    ID_RECORD_MUSIC_BOUY_BMP                                   555
 
 #define    NAME_RECORD_MUSIC_PARTICLE_BMP                             "RECORD_MUSIC_PARTICLE_BMP"
-#define    ID_RECORD_MUSIC_PARTICLE_BMP                               554
+#define    ID_RECORD_MUSIC_PARTICLE_BMP                               556
 
 #define    NAME_RECORD_MUSIC_PROGRESS_BG_BMP                          "RECORD_MUSIC_PROGRESS_BG_BMP"
-#define    ID_RECORD_MUSIC_PROGRESS_BG_BMP                            555
+#define    ID_RECORD_MUSIC_PROGRESS_BG_BMP                            557
 
 #define    NAME_RECORD_MUSIC_PROGRESS_DOWN_BMP                        "RECORD_MUSIC_PROGRESS_DOWN_BMP"
-#define    ID_RECORD_MUSIC_PROGRESS_DOWN_BMP                          556
+#define    ID_RECORD_MUSIC_PROGRESS_DOWN_BMP                          558
 
 #define    NAME_RECORD_MUSIC_PROGRESS_FLAG_BMP                        "RECORD_MUSIC_PROGRESS_FLAG_BMP"
-#define    ID_RECORD_MUSIC_PROGRESS_FLAG_BMP                          557
+#define    ID_RECORD_MUSIC_PROGRESS_FLAG_BMP                          559
 
 #define    NAME_RECORD_MUSIC_PROGRESS_FOCUS_BMP                       "RECORD_MUSIC_PROGRESS_FOCUS_BMP"
-#define    ID_RECORD_MUSIC_PROGRESS_FOCUS_BMP                         558
+#define    ID_RECORD_MUSIC_PROGRESS_FOCUS_BMP                         560
 
 #define    NAME_RECORD_MUSIC_PROGRESS_UP_BMP                          "RECORD_MUSIC_PROGRESS_UP_BMP"
-#define    ID_RECORD_MUSIC_PROGRESS_UP_BMP                            559
+#define    ID_RECORD_MUSIC_PROGRESS_UP_BMP                            561
 
 #define    NAME_RECORD_NEXT_0_BMP                                     "RECORD_NEXT_0_BMP"
-#define    ID_RECORD_NEXT_0_BMP                                       560
+#define    ID_RECORD_NEXT_0_BMP                                       562
 
 #define    NAME_RECORD_NEXT_1_BMP                                     "RECORD_NEXT_1_BMP"
-#define    ID_RECORD_NEXT_1_BMP                                       561
+#define    ID_RECORD_NEXT_1_BMP                                       563
 
 #define    NAME_RECORD_PLAY_PAUSE_BMP                                 "RECORD_PLAY_PAUSE_BMP"
-#define    ID_RECORD_PLAY_PAUSE_BMP                                   562
+#define    ID_RECORD_PLAY_PAUSE_BMP                                   564
 
 #define    NAME_RECORD_PLAY_PAUSE_0_BMP                               "RECORD_PLAY_PAUSE_0_BMP"
-#define    ID_RECORD_PLAY_PAUSE_0_BMP                                 563
+#define    ID_RECORD_PLAY_PAUSE_0_BMP                                 565
 
 #define    NAME_RECORD_PLAY_PAUSE_1_BMP                               "RECORD_PLAY_PAUSE_1_BMP"
-#define    ID_RECORD_PLAY_PAUSE_1_BMP                                 564
+#define    ID_RECORD_PLAY_PAUSE_1_BMP                                 566
 
 #define    NAME_RECORD_PLAY_START_BMP                                 "RECORD_PLAY_START_BMP"
-#define    ID_RECORD_PLAY_START_BMP                                   565
+#define    ID_RECORD_PLAY_START_BMP                                   567
 
 #define    NAME_RECORD_PLAY_START_0_BMP                               "RECORD_PLAY_START_0_BMP"
-#define    ID_RECORD_PLAY_START_0_BMP                                 566
+#define    ID_RECORD_PLAY_START_0_BMP                                 568
 
 #define    NAME_RECORD_PLAY_START_1_BMP                               "RECORD_PLAY_START_1_BMP"
-#define    ID_RECORD_PLAY_START_1_BMP                                 567
+#define    ID_RECORD_PLAY_START_1_BMP                                 569
 
 #define    NAME_RECORD_PRE_0_BMP                                      "RECORD_PRE_0_BMP"
-#define    ID_RECORD_PRE_0_BMP                                        568
+#define    ID_RECORD_PRE_0_BMP                                        570
 
 #define    NAME_RECORD_PRE_1_BMP                                      "RECORD_PRE_1_BMP"
-#define    ID_RECORD_PRE_1_BMP                                        569
+#define    ID_RECORD_PRE_1_BMP                                        571
 
 #define    NAME_RECORD_QUALITY_BK_BMP                                 "RECORD_QUALITY_BK_BMP"
-#define    ID_RECORD_QUALITY_BK_BMP                                   570
+#define    ID_RECORD_QUALITY_BK_BMP                                   572
 
 #define    NAME_RECORD_QUALITY_FLAG_BMP                               "RECORD_QUALITY_FLAG_BMP"
-#define    ID_RECORD_QUALITY_FLAG_BMP                                 571
+#define    ID_RECORD_QUALITY_FLAG_BMP                                 573
 
 #define    NAME_RECORD_VOL_BAR_BG_BMP                                 "RECORD_VOL_BAR_BG_BMP"
-#define    ID_RECORD_VOL_BAR_BG_BMP                                   572
+#define    ID_RECORD_VOL_BAR_BG_BMP                                   574
 
 #define    NAME_RECORD_VOL_BAR_BODY_BMP                               "RECORD_VOL_BAR_BODY_BMP"
-#define    ID_RECORD_VOL_BAR_BODY_BMP                                 573
+#define    ID_RECORD_VOL_BAR_BODY_BMP                                 575
 
 #define    NAME_RECORD_VOL_LEFT_BMP                                   "RECORD_VOL_LEFT_BMP"
-#define    ID_RECORD_VOL_LEFT_BMP                                     574
+#define    ID_RECORD_VOL_LEFT_BMP                                     576
 
 #define    NAME_RECORD_VOL_MID_BMP                                    "RECORD_VOL_MID_BMP"
-#define    ID_RECORD_VOL_MID_BMP                                      575
+#define    ID_RECORD_VOL_MID_BMP                                      577
 
 #define    NAME_RECORD_VOL_OFF_BMP                                    "RECORD_VOL_OFF_BMP"
-#define    ID_RECORD_VOL_OFF_BMP                                      576
+#define    ID_RECORD_VOL_OFF_BMP                                      578
 
 #define    NAME_RECORD_VOL_ON_BMP                                     "RECORD_VOL_ON_BMP"
-#define    ID_RECORD_VOL_ON_BMP                                       577
+#define    ID_RECORD_VOL_ON_BMP                                       579
 
 #define    NAME_RECORD_VOL_RIGHT_BMP                                  "RECORD_VOL_RIGHT_BMP"
-#define    ID_RECORD_VOL_RIGHT_BMP                                    578
+#define    ID_RECORD_VOL_RIGHT_BMP                                    580
 
 #define    NAME_RECORD_VOL_SPEAKER_RIGHT_BMP                          "RECORD_VOL_SPEAKER_RIGHT_BMP"
-#define    ID_RECORD_VOL_SPEAKER_RIGHT_BMP                            579
+#define    ID_RECORD_VOL_SPEAKER_RIGHT_BMP                            581
 
 #define    NAME_RECORD_WKM_BMP                                        "RECORD_WKM_BMP"
-#define    ID_RECORD_WKM_BMP                                          580
+#define    ID_RECORD_WKM_BMP                                          582
 
 #define    NAME_DV_720_WATER_MARK_0_BMP                               "DV_720_WATER_MARK_0_BMP"
-#define    ID_DV_720_WATER_MARK_0_BMP                                 581
+#define    ID_DV_720_WATER_MARK_0_BMP                                 583
 
 #define    NAME_DV_720_WATER_MARK_1_BMP                               "DV_720_WATER_MARK_1_BMP"
-#define    ID_DV_720_WATER_MARK_1_BMP                                 582
+#define    ID_DV_720_WATER_MARK_1_BMP                                 584
 
 #define    NAME_DV_720_WATER_MARK_2_BMP                               "DV_720_WATER_MARK_2_BMP"
-#define    ID_DV_720_WATER_MARK_2_BMP                                 583
+#define    ID_DV_720_WATER_MARK_2_BMP                                 585
 
 #define    NAME_DV_720_WATER_MARK_3_BMP                               "DV_720_WATER_MARK_3_BMP"
-#define    ID_DV_720_WATER_MARK_3_BMP                                 584
+#define    ID_DV_720_WATER_MARK_3_BMP                                 586
 
 #define    NAME_DV_720_WATER_MARK_4_BMP                               "DV_720_WATER_MARK_4_BMP"
-#define    ID_DV_720_WATER_MARK_4_BMP                                 585
+#define    ID_DV_720_WATER_MARK_4_BMP                                 587
 
 #define    NAME_DV_720_WATER_MARK_5_BMP                               "DV_720_WATER_MARK_5_BMP"
-#define    ID_DV_720_WATER_MARK_5_BMP                                 586
+#define    ID_DV_720_WATER_MARK_5_BMP                                 588
 
 #define    NAME_DV_720_WATER_MARK_6_BMP                               "DV_720_WATER_MARK_6_BMP"
-#define    ID_DV_720_WATER_MARK_6_BMP                                 587
+#define    ID_DV_720_WATER_MARK_6_BMP                                 589
 
 #define    NAME_DV_720_WATER_MARK_7_BMP                               "DV_720_WATER_MARK_7_BMP"
-#define    ID_DV_720_WATER_MARK_7_BMP                                 588
+#define    ID_DV_720_WATER_MARK_7_BMP                                 590
 
 #define    NAME_DV_720_WATER_MARK_8_BMP                               "DV_720_WATER_MARK_8_BMP"
-#define    ID_DV_720_WATER_MARK_8_BMP                                 589
+#define    ID_DV_720_WATER_MARK_8_BMP                                 591
 
 #define    NAME_DV_720_WATER_MARK_9_BMP                               "DV_720_WATER_MARK_9_BMP"
-#define    ID_DV_720_WATER_MARK_9_BMP                                 590
+#define    ID_DV_720_WATER_MARK_9_BMP                                 592
 
 #define    NAME_DV_720_WATER_MARK_BLANK_BMP                           "DV_720_WATER_MARK_BLANK_BMP"
-#define    ID_DV_720_WATER_MARK_BLANK_BMP                             591
+#define    ID_DV_720_WATER_MARK_BLANK_BMP                             593
 
 #define    NAME_DV_720_WATER_MARK_DEC_BMP                             "DV_720_WATER_MARK_DEC_BMP"
-#define    ID_DV_720_WATER_MARK_DEC_BMP                               592
+#define    ID_DV_720_WATER_MARK_DEC_BMP                               594
 
 #define    NAME_DV_720_WATER_MARK_MAOHAO_BMP                          "DV_720_WATER_MARK_MAOHAO_BMP"
-#define    ID_DV_720_WATER_MARK_MAOHAO_BMP                            593
+#define    ID_DV_720_WATER_MARK_MAOHAO_BMP                            595
 
 #define    NAME_DV_HBAR_BACK_BMP                                      "DV_HBAR_BACK_BMP"
-#define    ID_DV_HBAR_BACK_BMP                                        594
+#define    ID_DV_HBAR_BACK_BMP                                        596
 
 #define    NAME_DV_HBAR_TEXT_BMP                                      "DV_HBAR_TEXT_BMP"
-#define    ID_DV_HBAR_TEXT_BMP                                        595
+#define    ID_DV_HBAR_TEXT_BMP                                        597
 
 #define    NAME_DV_IMAGE_SETTING_BK_BMP                               "DV_IMAGE_SETTING_BK_BMP"
-#define    ID_DV_IMAGE_SETTING_BK_BMP                                 596
+#define    ID_DV_IMAGE_SETTING_BK_BMP                                 598
 
 #define    NAME_DV_ITEM_FCS_BMP                                       "DV_ITEM_FCS_BMP"
-#define    ID_DV_ITEM_FCS_BMP                                         597
+#define    ID_DV_ITEM_FCS_BMP                                         599
 
 #define    NAME_DV_ITEM_UFCS_BMP                                      "DV_ITEM_UFCS_BMP"
-#define    ID_DV_ITEM_UFCS_BMP                                        598
+#define    ID_DV_ITEM_UFCS_BMP                                        600
 
 #define    NAME_DV_MENU_BACK_BMP                                      "DV_MENU_BACK_BMP"
-#define    ID_DV_MENU_BACK_BMP                                        599
+#define    ID_DV_MENU_BACK_BMP                                        601
 
 #define    NAME_DV_MP_FCS_BMP                                         "DV_MP_FCS_BMP"
-#define    ID_DV_MP_FCS_BMP                                           600
+#define    ID_DV_MP_FCS_BMP                                           602
 
 #define    NAME_DV_MSG_BACK_BMP                                       "DV_MSG_BACK_BMP"
-#define    ID_DV_MSG_BACK_BMP                                         601
+#define    ID_DV_MSG_BACK_BMP                                         603
 
 #define    NAME_DV_NOSINGLE0_BMP                                      "DV_NOSINGLE0_BMP"
-#define    ID_DV_NOSINGLE0_BMP                                        602
+#define    ID_DV_NOSINGLE0_BMP                                        604
 
 #define    NAME_DV_NOSINGLE1_BMP                                      "DV_NOSINGLE1_BMP"
-#define    ID_DV_NOSINGLE1_BMP                                        603
+#define    ID_DV_NOSINGLE1_BMP                                        605
 
 #define    NAME_DV_OPT_ITEM_BMP                                       "DV_OPT_ITEM_BMP"
-#define    ID_DV_OPT_ITEM_BMP                                         604
+#define    ID_DV_OPT_ITEM_BMP                                         606
 
 #define    NAME_DV_REC_FLASH1_BMP                                     "DV_REC_FLASH1_BMP"
-#define    ID_DV_REC_FLASH1_BMP                                       605
+#define    ID_DV_REC_FLASH1_BMP                                       607
 
 #define    NAME_DV_REC_FLASH2_BMP                                     "DV_REC_FLASH2_BMP"
-#define    ID_DV_REC_FLASH2_BMP                                       606
+#define    ID_DV_REC_FLASH2_BMP                                       608
 
 #define    NAME_DV_REC_SETTING_BK_BMP                                 "DV_REC_SETTING_BK_BMP"
-#define    ID_DV_REC_SETTING_BK_BMP                                   607
+#define    ID_DV_REC_SETTING_BK_BMP                                   609
 
 #define    NAME_DV_RF_SIGNAL_0_BMP                                    "DV_RF_SIGNAL_0_BMP"
-#define    ID_DV_RF_SIGNAL_0_BMP                                      608
+#define    ID_DV_RF_SIGNAL_0_BMP                                      610
 
 #define    NAME_DV_RF_SIGNAL_1_BMP                                    "DV_RF_SIGNAL_1_BMP"
-#define    ID_DV_RF_SIGNAL_1_BMP                                      609
+#define    ID_DV_RF_SIGNAL_1_BMP                                      611
 
 #define    NAME_DV_RF_SIGNAL_2_BMP                                    "DV_RF_SIGNAL_2_BMP"
-#define    ID_DV_RF_SIGNAL_2_BMP                                      610
+#define    ID_DV_RF_SIGNAL_2_BMP                                      612
 
 #define    NAME_DV_RF_SIGNAL_3_BMP                                    "DV_RF_SIGNAL_3_BMP"
-#define    ID_DV_RF_SIGNAL_3_BMP                                      611
+#define    ID_DV_RF_SIGNAL_3_BMP                                      613
 
 #define    NAME_DV_RF_SIGNAL_FULL_BMP                                 "DV_RF_SIGNAL_FULL_BMP"
-#define    ID_DV_RF_SIGNAL_FULL_BMP                                   612
+#define    ID_DV_RF_SIGNAL_FULL_BMP                                   614
 
 #define    NAME_DV_SIGNAL_LEVEL_FIVE_BMP                              "DV_SIGNAL_LEVEL_FIVE_BMP"
-#define    ID_DV_SIGNAL_LEVEL_FIVE_BMP                                613
+#define    ID_DV_SIGNAL_LEVEL_FIVE_BMP                                615
 
 #define    NAME_DV_SIGNAL_LEVEL_FOUR_BMP                              "DV_SIGNAL_LEVEL_FOUR_BMP"
-#define    ID_DV_SIGNAL_LEVEL_FOUR_BMP                                614
+#define    ID_DV_SIGNAL_LEVEL_FOUR_BMP                                616
 
 #define    NAME_DV_SIGNAL_LEVEL_NONE_BMP                              "DV_SIGNAL_LEVEL_NONE_BMP"
-#define    ID_DV_SIGNAL_LEVEL_NONE_BMP                                615
+#define    ID_DV_SIGNAL_LEVEL_NONE_BMP                                617
 
 #define    NAME_DV_SIGNAL_LEVEL_ONE_BMP                               "DV_SIGNAL_LEVEL_ONE_BMP"
-#define    ID_DV_SIGNAL_LEVEL_ONE_BMP                                 616
+#define    ID_DV_SIGNAL_LEVEL_ONE_BMP                                 618
 
 #define    NAME_DV_SIGNAL_LEVEL_THREE_BMP                             "DV_SIGNAL_LEVEL_THREE_BMP"
-#define    ID_DV_SIGNAL_LEVEL_THREE_BMP                               617
+#define    ID_DV_SIGNAL_LEVEL_THREE_BMP                               619
 
 #define    NAME_DV_SIGNAL_LEVEL_TWO_BMP                               "DV_SIGNAL_LEVEL_TWO_BMP"
-#define    ID_DV_SIGNAL_LEVEL_TWO_BMP                                 618
+#define    ID_DV_SIGNAL_LEVEL_TWO_BMP                                 620
 
 #define    NAME_DV_TOP1_CAM_BMP                                       "DV_TOP1_CAM_BMP"
-#define    ID_DV_TOP1_CAM_BMP                                         619
+#define    ID_DV_TOP1_CAM_BMP                                         621
 
 #define    NAME_DV_TOP_CAM_BMP                                        "DV_TOP_CAM_BMP"
-#define    ID_DV_TOP_CAM_BMP                                          620
+#define    ID_DV_TOP_CAM_BMP                                          622
 
 #define    NAME_DV_VGA_WATER_MARK_0_BMP                               "DV_VGA_WATER_MARK_0_BMP"
-#define    ID_DV_VGA_WATER_MARK_0_BMP                                 621
+#define    ID_DV_VGA_WATER_MARK_0_BMP                                 623
 
 #define    NAME_DV_VGA_WATER_MARK_1_BMP                               "DV_VGA_WATER_MARK_1_BMP"
-#define    ID_DV_VGA_WATER_MARK_1_BMP                                 622
+#define    ID_DV_VGA_WATER_MARK_1_BMP                                 624
 
 #define    NAME_DV_VGA_WATER_MARK_2_BMP                               "DV_VGA_WATER_MARK_2_BMP"
-#define    ID_DV_VGA_WATER_MARK_2_BMP                                 623
+#define    ID_DV_VGA_WATER_MARK_2_BMP                                 625
 
 #define    NAME_DV_VGA_WATER_MARK_3_BMP                               "DV_VGA_WATER_MARK_3_BMP"
-#define    ID_DV_VGA_WATER_MARK_3_BMP                                 624
+#define    ID_DV_VGA_WATER_MARK_3_BMP                                 626
 
 #define    NAME_DV_VGA_WATER_MARK_4_BMP                               "DV_VGA_WATER_MARK_4_BMP"
-#define    ID_DV_VGA_WATER_MARK_4_BMP                                 625
+#define    ID_DV_VGA_WATER_MARK_4_BMP                                 627
 
 #define    NAME_DV_VGA_WATER_MARK_5_BMP                               "DV_VGA_WATER_MARK_5_BMP"
-#define    ID_DV_VGA_WATER_MARK_5_BMP                                 626
+#define    ID_DV_VGA_WATER_MARK_5_BMP                                 628
 
 #define    NAME_DV_VGA_WATER_MARK_6_BMP                               "DV_VGA_WATER_MARK_6_BMP"
-#define    ID_DV_VGA_WATER_MARK_6_BMP                                 627
+#define    ID_DV_VGA_WATER_MARK_6_BMP                                 629
 
 #define    NAME_DV_VGA_WATER_MARK_7_BMP                               "DV_VGA_WATER_MARK_7_BMP"
-#define    ID_DV_VGA_WATER_MARK_7_BMP                                 628
+#define    ID_DV_VGA_WATER_MARK_7_BMP                                 630
 
 #define    NAME_DV_VGA_WATER_MARK_8_BMP                               "DV_VGA_WATER_MARK_8_BMP"
-#define    ID_DV_VGA_WATER_MARK_8_BMP                                 629
+#define    ID_DV_VGA_WATER_MARK_8_BMP                                 631
 
 #define    NAME_DV_VGA_WATER_MARK_9_BMP                               "DV_VGA_WATER_MARK_9_BMP"
-#define    ID_DV_VGA_WATER_MARK_9_BMP                                 630
+#define    ID_DV_VGA_WATER_MARK_9_BMP                                 632
 
 #define    NAME_DV_VGA_WATER_MARK_BLANK_BMP                           "DV_VGA_WATER_MARK_BLANK_BMP"
-#define    ID_DV_VGA_WATER_MARK_BLANK_BMP                             631
+#define    ID_DV_VGA_WATER_MARK_BLANK_BMP                             633
 
 #define    NAME_DV_VGA_WATER_MARK_DEC_BMP                             "DV_VGA_WATER_MARK_DEC_BMP"
-#define    ID_DV_VGA_WATER_MARK_DEC_BMP                               632
+#define    ID_DV_VGA_WATER_MARK_DEC_BMP                               634
 
 #define    NAME_DV_VGA_WATER_MARK_MAOHAO_BMP                          "DV_VGA_WATER_MARK_MAOHAO_BMP"
-#define    ID_DV_VGA_WATER_MARK_MAOHAO_BMP                            633
+#define    ID_DV_VGA_WATER_MARK_MAOHAO_BMP                            635
 
 #define    NAME_DV_WORK_CAM_BMP                                       "DV_WORK_CAM_BMP"
-#define    ID_DV_WORK_CAM_BMP                                         634
+#define    ID_DV_WORK_CAM_BMP                                         636
 
 #define    NAME_DV_WORK_REC_BMP                                       "DV_WORK_REC_BMP"
-#define    ID_DV_WORK_REC_BMP                                         635
+#define    ID_DV_WORK_REC_BMP                                         637
 
 
 //------------------------------------------------------------------------------------------------------------
