@@ -246,8 +246,7 @@ static __s32 pop_list_strsenior_title[] =
 {
     STRING_SET_COMMON_PRODUCTINFO_TITLE,
     STRING_SET_COMMON_CARDFOMART_TITLE,
-    STRING_SET_COMMON_FACTORY_DEFAULT_TITLE
-
+    STRING_SET_COMMON_FACTORY_DEFAULT_TITLE,
 };
 static __s32 pop_inf_title[] =
 {
@@ -295,7 +294,8 @@ static void setting_restore_default(__gui_msg_t *msg)
         }
     }
     //setting_general_paint(msg);
-    setting_pop_general_paint(msg);
+    setting_general_default_paint(msg);
+    //setting_pop_general_paint(msg);
 }
 /*
 	申请资源
@@ -338,6 +338,20 @@ static void _setting_pop_general_res_init(setting_general_attr_t *general_attr)
 #endif
 
     }
+//#ifdef SET_ITEM_PRO_INF
+//	else if(general_attr->new_focus == 3)
+//	{
+//		__msg("Contain one item for card format\n");
+//		general_attr->item_nr = 1;
+//	}
+//#endif
+//#ifdef SET_ITEM_CARD_INF
+//	else if(general_attr->new_focus == 4)
+//	{
+//		__msg("Contain one item for factory default\n");
+//		general_attr->item_nr = 1;
+//	}
+//#endif
 	
     for(i = 0; i < general_attr->item_nr; i++)
     {
@@ -381,6 +395,7 @@ static void _setting_pop_general_res_init(setting_general_attr_t *general_attr)
         {
             switch (i)
             {
+#ifdef    SET_ITEM_SENSOR            
             case 0:
                 p_item_res = &general_attr->res_jh_inf;
                 break;
@@ -390,12 +405,43 @@ static void _setting_pop_general_res_init(setting_general_attr_t *general_attr)
             case	2:
                 p_item_res = &general_attr->res_jh_defaultset;
                 break;
+#else
+	
+			case 0:
+				p_item_res = &general_attr->res_jh_inf;
+				break;
+#endif
             default:
                 break;
             }
-
-
         }
+//#ifdef SET_ITEM_PRO_INF
+//		else if(general_attr->new_focus == 3)
+//		{
+//			switch (i)
+//            {
+//            case 0:
+//                p_item_res = &general_attr->res_jh_cardformat;
+//                break;
+//            default:
+//                break;
+//            }
+//		}
+//#endif
+//#ifdef SET_ITEM_CARD_INF
+//		else if(general_attr->new_focus == 4)
+//		{
+//			switch (i)
+//            {
+//            case 0:
+//                p_item_res = &general_attr->res_jh_defaultset;
+//                break;
+//            default:
+//                break;
+//            }
+//		}		
+//#endif
+
         p_item_res->string_title_pos = general_attr->general_uipara->item[i].item_string_title_pos;
 #ifdef SET_ITEM_RIGHT_BMP
 		p_item_res->bmp_right_pos = general_attr->general_uipara->item[i].item_bmp_right_pos;
@@ -763,13 +809,12 @@ static void _setting_general_pop_content_res_reset(setting_general_attr_t *gener
         default:
             break;
         }
-
-
     }
     else if(general_attr->new_focus == 2)
     {
         switch (general_attr->pop_new_focus)
         {
+#ifdef SET_ITEM_SENSOR        
         case 0:
             p_item_res = &general_attr->res_jh_inf;
             break;
@@ -779,12 +824,41 @@ static void _setting_general_pop_content_res_reset(setting_general_attr_t *gener
         case 2:
             p_item_res = &general_attr->res_jh_defaultset;
             break;
+#else
+		case 0:
+			p_item_res = &general_attr->res_jh_inf;
+			break;
+#endif			
         default:
             break;
         }
-
-
     }
+//#ifdef SET_ITEM_PRO_INF
+//	else if(general_attr->new_focus == 3)
+//	{
+//		switch (general_attr->pop_new_focus)
+//        {
+//		case 0:
+//			p_item_res = &general_attr->res_jh_cardformat;
+//			break;
+//        default:
+//            break;
+//        }
+//	}
+//#endif
+//#ifdef SET_ITEM_CARD_INF
+//	else if(general_attr->new_focus == 4)
+//	{
+//		switch (general_attr->pop_new_focus)
+//        {
+//		case 0:
+//			p_item_res = &general_attr->res_jh_defaultset;
+//			break;
+//        default:
+//            break;
+//        }
+//	}
+//#endif
 
 }
 
@@ -886,9 +960,9 @@ static __s32 setting_generl_popinf_content_paint(__gui_msg_t *msg)
 #ifdef SET_ITEM_RIGHT_BMP
 	GUI_BMP_Draw(theme_hdl2buf(/*p_item_res->h_bmp_right*/general_attr->h_bmp_jh_right), p_item_res->bmp_right_pos.x, p_item_res->bmp_right_pos.y);
 #endif
-    GUI_DispStringAt(p_item_res->string_title, p_item_res->string_title_pos.x - 60, p_item_res->string_title_pos.y);
+    GUI_DispStringAt(p_item_res->string_title, p_item_res->string_title_pos.x - 40, p_item_res->string_title_pos.y);
 
-    GUI_DispStringAt(p_item_res->string_content, p_item_res->string_title_pos.x + 60, p_item_res->string_title_pos.y);
+    GUI_DispStringAt(p_item_res->string_content, p_item_res->string_title_pos.x + 70, p_item_res->string_title_pos.y);
 
 
     GUI_CloseAlphaBlend();
@@ -984,9 +1058,39 @@ static __s32 setting_general_pop_content_paint(__gui_msg_t *msg)
         default:
             break;
         }
-
-
     }
+#ifdef SET_ITEM_PRO_INF
+	else if(general_attr->new_focus == 3)
+	{
+        switch (general_attr->pop_new_focus)
+        {
+		case 0:
+		{
+			p_item_res = &general_attr->res_jh_cardformat;
+			break;
+        }
+        default:
+            break;
+        }
+    }	
+#endif
+#ifdef SET_ITEM_CARD_INF
+	else if(general_attr->new_focus == 4)
+	{
+        switch (general_attr->pop_new_focus)
+        {
+		case 0:
+		{
+			p_item_res = &general_attr->res_jh_defaultset;
+			break;
+        }
+        default:
+            break;
+        }
+    }	
+
+#endif
+
     GUI_SetBkColor(0x00);
     GUI_SetColor(general_attr->focus_txt_color);
 	if(general_attr->new_focus == 0)
@@ -1037,6 +1141,32 @@ static __s32 setting_general_pop_content_paint(__gui_msg_t *msg)
 		seting_pop_information_paint(msg);
 	}
 #endif
+//#ifdef SET_ITEM_PRO_INF
+//	else if(general_attr->new_focus == 3)
+//	{
+//		ES_DIR			*p_file;
+//        p_file = eLIBs_opendir(USER_DISK);
+//        if(!p_file)//没有卡
+//        {
+//			__msg("ID_SWITCH_TO_TIPS: TIPS_NOCARD_NOTE\n");
+//            main_cmd2parent(msg->h_deswin, ID_SWITCH_TO_TIPS, TIPS_NOCARD_NOTE, 256);
+//        }
+//        else
+//        {
+//        	__msg("ID_SWITCH_TO_TIPS: TIPS_FORMAT_CARD\n");
+//            main_cmd2parent(msg->h_deswin, ID_SWITCH_TO_TIPS, TIPS_FORMAT_CARD, 192);
+//        }
+//	}	
+//#endif
+//#ifdef SET_ITEM_CARD_INF
+//	else if(general_attr->new_focus == 4)
+//	{
+//		__msg("ID_SWITCH_TO_TIPS: TIPS_FACTORY_DEFAULT\n");
+//		
+//		main_cmd2parent(msg->h_deswin, ID_SWITCH_TO_TIPS, TIPS_FACTORY_DEFAULT, 64);
+//	}	
+//#endif
+
     else
     {
     	__msg("p_item_res->string_title: %s\n", p_item_res->string_title);
@@ -1392,30 +1522,33 @@ static __s32 setting_general_item_paint(__gui_msg_t *msg)
 #else			
 		case 2:
 		{
+			__msg("general_attr->res_jh_defaultset\n");
 			p_item_res = &general_attr->res_jh_defaultset; //高级
 			break;
 		}			
 #endif	
 #ifdef SET_ITEM_PRO_INF
-			case 3:
-			{
-				p_item_res = &general_attr->res_jh_inf; 		//产品信息
-				break;
-			}
+		case 3:
+		{
+			__msg("general_attr->res_jh_inf\n");
+			p_item_res = &general_attr->res_jh_inf; 		//产品信息
+			break;
+		}
 #endif		
 #ifdef SET_ITEM_CARD_INF
-			case 4:
-			{
-				p_item_res = &general_attr->res_jh_cardformat;			//卡信息
-				break;
-			}
+		case 4:
+		{
+			__msg("general_attr->res_jh_cardformat\n");
+			p_item_res = &general_attr->res_jh_cardformat;			//卡信息
+			break;
+		}
 #endif		
 #ifdef SET_ITEM_FACT_DEF
-			case 5:
-			{
-				p_item_res = &general_attr->res_jh_defaultset;			//出厂设置
-				break;
-			}
+		case 5:
+		{
+			p_item_res = &general_attr->res_jh_defaultset;			//出厂设置
+			break;
+		}
 #endif	
         default:
             break;
@@ -1511,9 +1644,9 @@ static __s32 seting_pop_information_paint(__gui_msg_t *msg)
             GUI_BMP_Draw(theme_hdl2buf(general_attr->h_bmp_unselect), 10, gui_rect.y0);
 #endif
             GUI_SetColor(general_attr->unfocus_txt_color);
-            GUI_DispStringAt(p_item_res->string_title, p_item_res->string_title_pos.x - 60, p_item_res->string_title_pos.y);
+            GUI_DispStringAt(p_item_res->string_title, p_item_res->string_title_pos.x - 40, p_item_res->string_title_pos.y);
 
-            GUI_DispStringAt(p_item_res->string_content, p_item_res->string_title_pos.x + 60, p_item_res->string_title_pos.y);
+            GUI_DispStringAt(p_item_res->string_content, p_item_res->string_title_pos.x + 70, p_item_res->string_title_pos.y);
         }
     }
 
@@ -1694,6 +1827,41 @@ static __s32 setting_pop_general_paint(__gui_msg_t *msg)
 
             get_menu_text(pop_list_strsenior_title[i], p_item_res->string_title, 128);
         }
+#ifdef  SET_ITEM_PRO_INF
+		else if(general_attr->new_focus == 3)
+		{
+            switch (i)
+            {
+			case 0:
+			{
+				p_item_res = &general_attr->res_jh_cardformat;
+				break;
+			}
+            default:
+                break;
+            }
+
+            get_menu_text(pop_list_strsenior_title[i], p_item_res->string_title, 128);
+        }	
+#endif
+#ifdef  SET_ITEM_CARD_INF
+		else if(general_attr->new_focus == 4)
+		{
+            switch (i)
+            {
+			case 0:
+			{
+				p_item_res = &general_attr->res_jh_defaultset;
+				break;
+			}
+            default:
+                break;
+            }
+
+            get_menu_text(pop_list_strsenior_title[i], p_item_res->string_title, 128);
+        }	
+#endif
+
     }
     GUI_LyrWinGetScnWindow(general_attr->layer, &rect);
     for(i = 0; i < general_attr->item_nr; i++)
@@ -1760,6 +1928,38 @@ static __s32 setting_pop_general_paint(__gui_msg_t *msg)
             }
 
         }
+#ifdef SET_ITEM_PRO_INF
+		else if(general_attr->new_focus == 3)
+        {
+            switch (i)
+            {
+			case 0:
+			{
+                p_item_res = &general_attr->res_jh_cardformat;
+                break;
+			}
+            default:
+                break;
+            }
+
+        }
+#endif
+#ifdef SET_ITEM_CARD_INF
+		else if(general_attr->new_focus == 4)
+        {
+            switch (i)
+            {
+			case 0:
+			{
+                p_item_res = &general_attr->res_jh_defaultset;
+                break;
+			}
+            default:
+                break;
+            }
+
+        }
+#endif
 
         if(i == general_attr->pop_new_focus)
         {
@@ -1803,6 +2003,179 @@ static __s32 setting_pop_general_paint(__gui_msg_t *msg)
 
     return EPDK_OK;
 }
+
+static __s32 setting_general_default_paint(__gui_msg_t *msg)
+{
+	setting_general_attr_t *general_attr;
+	setting_item_res_t	*p_item_res;
+	__s32 i;
+	GUI_RECT gui_rect;
+	RECT rect;
+
+	__msg("setting_general_default_paint\n");
+	general_attr = (setting_general_attr_t *)GUI_WinGetAddData(msg->h_deswin);
+	if (general_attr == NULL)
+		return EPDK_FAIL;
+
+	if (GUI_LyrWinGetSta(general_attr->layer) == GUI_LYRWIN_STA_SUSPEND)
+		return EPDK_FAIL;
+
+	GUI_LyrWinSel(general_attr->layer);
+	GUI_SetFont(general_attr->font);
+	GUI_UC_SetEncodeUTF8();
+	GUI_SetDrawMode(GUI_DRAWMODE_TRANS);
+
+	GUI_LyrWinCacheOn();
+	GUI_OpenAlphaBlend();
+
+	//setting_clear_screen();
+
+	for (i = 0; i < SET_PAGE_NUM; i++)
+	{
+		switch (i)
+		{
+		case 0:
+			p_item_res = &general_attr->res_jh_display; //显示设置
+			break;
+		case 1:
+			p_item_res = &general_attr->res_jh_language; //语音支持
+			if(setting_reg_para)
+			{
+				if(setting_reg_para->language == EPDK_LANGUAGE_ENM_CHINESES)
+					p_item_res->content_num = 0;
+				else if(setting_reg_para->language == EPDK_LANGUAGE_ENM_ENGLISH)
+					p_item_res->content_num = 1;
+#ifdef SUPPORT_KOREAN_LANGUAGE
+				else if(setting_reg_para->language == EPDK_LANGUAGE_ENM_CHINESET)
+				{
+					p_item_res->content_num = 2;
+				}
+#endif
+				else
+					p_item_res->content_num = 0;
+			}
+			else
+			{
+				p_item_res->content_num = 0;
+			}
+
+			p_item_res->content_nr = sizeof(content_lang_id) / sizeof(__s32);
+			get_menu_text(content_lang_id[p_item_res->content_num], p_item_res->string_content, 128);
+			break;
+#ifdef SET_ITEM_SENSOR		
+		case 2:
+			p_item_res = &general_attr->res_jh_senior; //高级
+			break;
+#else			
+		case 2:
+		{
+			p_item_res = &general_attr->res_jh_defaultset; //高级
+			break;
+		}			
+#endif	
+#ifdef SET_ITEM_PRO_INF
+			case 3:
+			{
+				p_item_res = &general_attr->res_jh_inf; 		//产品信息
+				break;
+			}
+#endif		
+#ifdef SET_ITEM_CARD_INF
+			case 4:
+			{
+				p_item_res = &general_attr->res_jh_cardformat;			//卡信息
+				break;
+			}
+#endif		
+#ifdef SET_ITEM_FACT_DEF
+			case 5:
+			{
+				p_item_res = &general_attr->res_jh_defaultset;			//出厂设置
+				break;
+			}
+#endif	
+		default:
+			break;
+		}
+		get_menu_text(one_list_str_title[i], p_item_res->string_title, 128);
+		__msg("p_item_res->string_title = %s\n", p_item_res->string_title);
+	}
+
+	GUI_LyrWinGetScnWindow(general_attr->layer, &rect);
+	//设置大图标下面那串文字
+	for(i = 0; i < SET_PAGE_NUM; i++)
+	{
+		switch (i + SET_PAGE_NUM * current_page)
+		{
+		case 0:
+			p_item_res = &general_attr->res_jh_display; //显示设置
+			break;
+		case 1:
+			p_item_res = &general_attr->res_jh_language; //语音支持
+			break;
+#ifdef SET_ITEM_SENSOR		
+		case 2:
+			p_item_res = &general_attr->res_jh_senior; //高级
+			break;
+#else			
+		case 2:
+		{
+			p_item_res = &general_attr->res_jh_defaultset; //高级
+			break;
+		}					
+#endif	
+#ifdef SET_ITEM_PRO_INF
+		case 3:
+		{
+			p_item_res = &general_attr->res_jh_inf; 		//产品信息
+			break;
+		}
+#endif		
+#ifdef SET_ITEM_CARD_INF
+		case 4:
+		{
+			p_item_res = &general_attr->res_jh_cardformat;			//卡信息
+			break;
+		}
+#endif		
+#ifdef SET_ITEM_FACT_DEF
+		case 5:
+		{
+			p_item_res = &general_attr->res_jh_defaultset;			//出厂设置
+			break;
+		}
+#endif	
+		default:
+			break;
+		}
+
+		if(i == general_attr->new_focus)
+		{
+			__msg("general_attr->new_focus:%d\n", general_attr->new_focus);
+			setting_general_content_paint(msg);
+		}
+		else
+		{
+			gui_rect.x0 = SET_ITEM_START_X;
+			gui_rect.y0 = SET_ITEM_START_Y + SET_ITEM_H * i;
+			gui_rect.x1 = gui_rect.x0 + SET_ITEM_W;
+			gui_rect.y1 = gui_rect.y0 + SET_ITEM_H;
+			
+			//__msg("gui_rect.x0;%d, gui_rect.y0:%d, gui_rect.x1:%d, gui_rect.y1:%d\n", gui_rect.x0, gui_rect.y0, gui_rect.x1, gui_rect.y1);
+			GUI_BMP_Draw(theme_hdl2buf(general_attr->h_bmp_unselect), 10, gui_rect.y0);
+
+			GUI_SetColor(general_attr->unfocus_txt_color);
+			__msg("i = %d, p_item_res->string_title: %s\n",i, p_item_res->string_title);
+			GUI_DispStringAt(p_item_res->string_title, p_item_res->string_title_pos.x, p_item_res->string_title_pos.y);
+		}
+
+	}
+	GUI_CloseAlphaBlend();
+	GUI_LyrWinCacheOff();
+	prev_page = current_page;
+	return EPDK_OK;
+}
+
 
 static __s32 setting_general_paint(__gui_msg_t *msg)
 {
@@ -1939,25 +2312,25 @@ static __s32 setting_general_paint(__gui_msg_t *msg)
 		}					
 #endif	
 #ifdef SET_ITEM_PRO_INF
-			case 3:
-			{
-				p_item_res = &general_attr->res_jh_inf; 		//产品信息
-				break;
-			}
+		case 3:
+		{
+			p_item_res = &general_attr->res_jh_inf; 		//产品信息
+			break;
+		}
 #endif		
 #ifdef SET_ITEM_CARD_INF
-			case 4:
-			{
-				p_item_res = &general_attr->res_jh_cardformat;			//卡信息
-				break;
-			}
+		case 4:
+		{
+			p_item_res = &general_attr->res_jh_cardformat;			//卡信息
+			break;
+		}
 #endif		
 #ifdef SET_ITEM_FACT_DEF
-			case 5:
-			{
-				p_item_res = &general_attr->res_jh_defaultset;			//出厂设置
-				break;
-			}
+		case 5:
+		{
+			p_item_res = &general_attr->res_jh_defaultset;			//出厂设置
+			break;
+		}
 #endif	
         default:
             break;
@@ -1974,10 +2347,12 @@ static __s32 setting_general_paint(__gui_msg_t *msg)
             gui_rect.y0 = SET_ITEM_START_Y + SET_ITEM_H * i;
             gui_rect.x1 = gui_rect.x0 + SET_ITEM_W;
             gui_rect.y1 = gui_rect.y0 + SET_ITEM_H;
-			__msg("gui_rect.x0;%d, gui_rect.y0:%d, gui_rect.x1:%d, gui_rect.y1:%d\n", gui_rect.x0, gui_rect.y0, gui_rect.x1, gui_rect.y1);
+			
+			//__msg("gui_rect.x0;%d, gui_rect.y0:%d, gui_rect.x1:%d, gui_rect.y1:%d\n", gui_rect.x0, gui_rect.y0, gui_rect.x1, gui_rect.y1);
             GUI_BMP_Draw(theme_hdl2buf(general_attr->h_bmp_unselect), 10, gui_rect.y0);
 
             GUI_SetColor(general_attr->unfocus_txt_color);
+			__msg("i = %d, p_item_res->string_title: %s\n",i, p_item_res->string_title);
             GUI_DispStringAt(p_item_res->string_title, p_item_res->string_title_pos.x, p_item_res->string_title_pos.y);
         }
 
@@ -2063,6 +2438,7 @@ static __s32  setting_general_key_proc(__gui_msg_t *msg)
 /*
 	回调
 */
+
 static __s32 _setting_general_Proc(__gui_msg_t *msg)
 {
     switch(msg->id)
@@ -2109,7 +2485,7 @@ static __s32 _setting_general_Proc(__gui_msg_t *msg)
         _setting_general_content_res_reset(general_attr);
 
         general_attr->focus_txt_color = APP_COLOR_WHITE;
-        general_attr->unfocus_txt_color = APP_COLOR_BLACK; 
+        general_attr->unfocus_txt_color = APP_COLOR_DARKGRAY;//APP_COLOR_BLACK; 
         general_attr->font = general_para->font;
         general_attr->layer = general_para->layer;
 
@@ -2302,6 +2678,34 @@ static __s32 _setting_general_Proc(__gui_msg_t *msg)
             current_list_layer = POP_LIST_LAYER;
 
 			__msg("POP_LIST_LAYER\n");
+			if((general_attr->new_focus  == 3) || (general_attr->new_focus  == 4))
+			{
+				current_list_layer = MAIN_LIST_LAYER;
+				general_attr->old_focus = general_attr->new_focus;
+				__msg("current_list_layer: %d\n", current_list_layer);
+				if(general_attr->new_focus  == 3)
+				{
+					ES_DIR			*p_file;
+                    p_file = eLIBs_opendir(USER_DISK);
+                    if(!p_file)//没有卡
+                    {
+						__msg("ID_SWITCH_TO_TIPS: TIPS_NOCARD_NOTE\n");
+                        main_cmd2parent(msg->h_deswin, ID_SWITCH_TO_TIPS, TIPS_NOCARD_NOTE, 256);
+                    }
+                    else
+                    {
+                    	__msg("ID_SWITCH_TO_TIPS: TIPS_FORMAT_CARD\n");
+                        main_cmd2parent(msg->h_deswin, ID_SWITCH_TO_TIPS, TIPS_FORMAT_CARD, 192);
+                    }
+				}
+				else
+				{			
+                    //default set
+                    __msg("ID_SWITCH_TO_TIPS: TIPS_FACTORY_DEFAULT\n");
+                    main_cmd2parent(msg->h_deswin, ID_SWITCH_TO_TIPS, TIPS_FACTORY_DEFAULT, 64);
+				}
+				return EPDK_OK;
+			}
             general_attr->pop_new_focus = 0;
             general_attr->pop_old_focus = 0;
             //_setting_general_res_uninit(general_attr);
@@ -2403,6 +2807,35 @@ static __s32 _setting_general_Proc(__gui_msg_t *msg)
                     main_cmd2parent(msg->h_deswin, ID_SWITCH_TO_TIPS, TIPS_FACTORY_DEFAULT, 64);
                 }
             }
+#ifdef	SET_ITEM_PRO_INF
+			else if(general_attr->new_focus == 3)
+			{
+				ES_DIR			*p_file;
+                p_file = eLIBs_opendir(USER_DISK);
+				__msg("Card format item\n");
+                if(!p_file)//没有卡
+                {
+					__msg("ID_SWITCH_TO_TIPS: TIPS_NOCARD_NOTE\n");
+                    main_cmd2parent(msg->h_deswin, ID_SWITCH_TO_TIPS, TIPS_NOCARD_NOTE, 256);
+                }
+                else
+                {
+                	__msg("ID_SWITCH_TO_TIPS: TIPS_FORMAT_CARD\n");
+                    main_cmd2parent(msg->h_deswin, ID_SWITCH_TO_TIPS, TIPS_FORMAT_CARD, 192);
+                }
+				
+			}
+#endif
+#ifdef	SET_ITEM_CARD_INF
+			else if(general_attr->new_focus == 4)
+			{
+				__msg("Factory Defaut item\n");
+				__msg("ID_SWITCH_TO_TIPS: TIPS_FACTORY_DEFAULT\n");
+				
+				main_cmd2parent(msg->h_deswin, ID_SWITCH_TO_TIPS, TIPS_FACTORY_DEFAULT, 64);
+			}
+#endif
+
         }
 
     }

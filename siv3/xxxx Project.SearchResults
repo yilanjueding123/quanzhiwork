@@ -1,4 +1,40 @@
----- setting_generl_popinf_content_paint Matches (3 in 1 files) ----
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):static __s32 setting_generl_popinf_content_paint(__gui_msg_t *msg)
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            setting_generl_popinf_content_paint(msg);
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            setting_generl_popinf_content_paint(msg);
+---- unfocus_txt_color Matches (39 in 7 files) ----
+Ebook_tips.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\ebook):    __s32 unfocus_txt_color;
+Ebook_tips.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\ebook):        GUI_SetColor(tips_ctrl->unfocus_txt_color);
+Ebook_tips.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\ebook):        GUI_SetColor(tips_ctrl->unfocus_txt_color);
+Ebook_tips.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\ebook):        GUI_SetColor(tips_ctrl->unfocus_txt_color);
+Ebook_tips.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\ebook):        GUI_SetColor(tips_ctrl->unfocus_txt_color);
+Ebook_tips.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\ebook):        tips_ctrl->unfocus_txt_color = APP_COLOR_WHITE;
+Fmtop_frmwin.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\fm):    __s32 unfocus_txt_color;
+Fmtop_frmwin.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\fm):    		GUI_SetColor(fmplay_menu_attr->unfocus_txt_color);
+Fmtop_frmwin.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\fm):        GUI_SetColor(fmplay_menu_attr->unfocus_txt_color);
+Fmtop_frmwin.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\fm):        GUI_SetColor(fmplay_menu_attr->unfocus_txt_color);
+Fmtop_frmwin.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\fm):        GUI_SetColor(fmplay_menu_attr->unfocus_txt_color);
+Fmtop_frmwin.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\fm):    GUI_SetColor(fmplay_menu_attr->unfocus_txt_color);
+Fmtop_frmwin.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\fm):    GUI_SetColor(fmplay_menu_attr->unfocus_txt_color);
+Fmtop_frmwin.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\fm):    		GUI_SetColor(fmplay_menu_attr->unfocus_txt_color);
+Fmtop_frmwin.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\fm):        GUI_SetColor(fmplay_menu_attr->unfocus_txt_color);
+Fmtop_frmwin.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\fm):        GUI_SetColor(fmplay_menu_attr->unfocus_txt_color);
+Fmtop_frmwin.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\fm):    fmplay_menu_attr->unfocus_txt_color = APP_COLOR_WHITE;
+Main_menu.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\home):    __s32 unfocus_txt_color;
+Main_menu.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\home):        mmenu_attr->unfocus_txt_color = APP_COLOR_WHITE;		//·Ç½¹µãÑÕÉ«
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):    __s32	unfocus_txt_color;
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            GUI_SetColor(general_attr->unfocus_txt_color);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            GUI_SetColor(general_attr->unfocus_txt_color);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            GUI_SetColor(general_attr->unfocus_txt_color);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            GUI_SetColor(general_attr->unfocus_txt_color);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            GUI_SetColor(general_attr->unfocus_txt_color);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):			GUI_SetColor(general_attr->unfocus_txt_color);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            GUI_SetColor(general_attr->unfocus_txt_color);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):        general_attr->unfocus_txt_color = APP_COLOR_BLACK; 
+Setting_power.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):    __s32	unfocus_txt_color;
+Setting_power.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):    GUI_SetColor(power_attr->unfocus_txt_color);
+Setting_power.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            GUI_SetColor(power_attr->unfocus_txt_color);
+Setting_power.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):    GUI_SetColor(power_attr->unfocus_txt_color);
+Setting_power.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            GUI_SetColor(power_attr->unfocus_txt_color);
+Setting_power.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):        power_attr->unfocus_txt_color = APP_COLOR_WHITE;
+Setting_tips.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):    __s32 unfocus_txt_color;
+Setting_tips.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):        tips_ctrl->unfocus_txt_color = APP_COLOR_WHITE;
+Sub_menu.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\home):    __s32 unfocus_txt_color;
+Sub_menu.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\home):            GUI_SetColor(smenu_attr->unfocus_txt_color);
+Sub_menu.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\home):    smenu_attr->unfocus_txt_color = APP_COLOR_WHITE;
