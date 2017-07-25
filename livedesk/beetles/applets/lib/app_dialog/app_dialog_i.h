@@ -88,9 +88,6 @@ typedef struct tag_APP_DIALOG_RES
     __s16          btn_count;
     __s16          icon_enable;
     __s32          txt_clr;
-#ifdef ADLG_BKLT_UI
-	__s16			bklt_focus;
-#endif
 } APP_DIALOG_RES_T;
 
 //dialog window parameter

@@ -20,7 +20,7 @@
 __u8   dialog_jh_tran_data;
 __u8   dialog_current_state;
 
-#if  1
+#if  0
 #define __inf(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
 								 eLIBs_printf(__VA_ARGS__)											)
 
@@ -28,7 +28,6 @@ __u8   dialog_current_state;
 //								 eLIBs_printf(__VA_ARGS__)											)
 #else
 #define __msg(...)   
-#define __log(...)
 #define __inf(...)
 #endif
 
@@ -135,7 +134,6 @@ static __s32 app_dialog_res_create(APP_DIALOG_RES_T *res, __u32 style, __s32 bmp
 #ifdef	ADLG_BKLT_UI
 	create_bmp_res(ID_DIALOG_BKLT_SELECT_BMP, res->bmp_bklt_select);
 	create_bmp_res(ID_DIALOG_BKLT_UNSELECT_BMP, res->bmp_bklt_unselect);
-	res->bklt_focus = 4;
 #endif
 
     //
@@ -262,8 +260,8 @@ static __s32 app_dialog_ui_init(dialog_wnd_t *wnd_para, GUI_RECT *dialog_rt)
     ui = &wnd_para->ui;
     res = &wnd_para->res;
 
-    ui->colour.txt_n = GUI_BLACK;
-    ui->colour.txt_f = GUI_RED;
+    ui->colour.txt_n = GUI_GRAY;
+    ui->colour.txt_f = GUI_WHITE;
 
     dsk_display_get_size(&lcd_w, &lcd_h);
 	__inf("lcd_w = %d, lcd_h = %d\n", lcd_w,lcd_h);
@@ -306,6 +304,7 @@ static __s32 app_dialog_ui_init(dialog_wnd_t *wnd_para, GUI_RECT *dialog_rt)
         ui->rt.height = dialog_rt->y1 - dialog_rt->y0;
     }
 /////////////////////////////////////////
+#ifdef ADLG_BKLT_UI
 	if(dialog_current_state == 0)
 	{
 		ui->rt.x      = 115;
@@ -313,7 +312,14 @@ static __s32 app_dialog_ui_init(dialog_wnd_t *wnd_para, GUI_RECT *dialog_rt)
         ui->rt.y      = 44;
         ui->rt.height = 168;
 	}
-	
+	else if(dialog_current_state == 1)
+	{
+		ui->rt.x      = 115;
+        ui->rt.width  = 250;
+        ui->rt.y      = 32;
+        ui->rt.height = 168+50;
+	}
+#endif
 /////////////////////////////////////////
 	__inf("ui->rt.x = %d, ui->rt.y = %d, ui->rt.width = %d, ui->rt.height = %d\n", ui->rt.x, ui->rt.y, ui->rt.width, ui->rt.height);
     ASSERT(res->btn_count > 0);
@@ -530,10 +536,6 @@ static __s32 on_dialog_key_up_action(H_WIN hwnd, __u32 keycode)
             dialog_jh_tran_data --;
         if(dialog_current_state == 0)
         {
-        	if(wnd_para->res.bklt_focus-->=0)
-        	{
-        		wnd_para->res.bklt_focus = 4;
-        	}
             dsk_display_set_lcd_bright((__lion_bright_t)(3 * (4 - dialog_jh_tran_data) + 2));
         }
         else if(dialog_current_state == 1)
@@ -565,10 +567,6 @@ static __s32 on_dialog_key_up_action(H_WIN hwnd, __u32 keycode)
         {
             if(dialog_jh_tran_data < 4)
                 dialog_jh_tran_data++;
-			if(wnd_para->res.bklt_focus++>=4)
-        	{
-        		wnd_para->res.bklt_focus = 0;
-        	}
             dsk_display_set_lcd_bright((__lion_bright_t)(3 * (4 - dialog_jh_tran_data) + 2));
         }
         else if(dialog_current_state == 1)
@@ -587,17 +585,26 @@ static __s32 on_dialog_key_up_action(H_WIN hwnd, __u32 keycode)
 
         wnd_para->result = ADLG_IDYES;//wnd_para->res.btn_result[ctrl->focus_id];
         if(dialog_current_state > 1)
+        {
             wnd_para->result = wnd_para->res.btn_result[ctrl->focus_id];
+        }
 
         if(dialog_current_state == 3)
         {
             if(wnd_para->result == ADLG_IDYES)
             {
                 __lion_bright_t  da_back_light;
+				GUI_RECT	rect;
                 GUI_SetColor(wnd_para->ui.colour.txt_f);
                 get_lang_res(STRING_DIALOG_DET, wnd_para->res.str_content);
-				__log("Format card...\n");
-                GUI_DispStringAt(wnd_para->res.str_content, 110 - 40, 53);
+
+				__inf("Format card...\n");
+				rect.x0 = wnd_para->ui.pos.title.x;
+				rect.y0 = wnd_para->ui.pos.title.y - 6;
+				rect.x1 = rect.x0 + 150;
+				rect.y1 = rect.y0 + 20;
+				GUI_ClearRectEx(&rect);
+                GUI_DispStringAt(wnd_para->res.str_content, rect.x0, rect.y0-5);
                 da_back_light = dsk_display_get_lcd_bright();
                 dsk_display_set_lcd_bright((__lion_bright_t)(14));
                 format_card();
@@ -610,15 +617,15 @@ static __s32 on_dialog_key_up_action(H_WIN hwnd, __u32 keycode)
 
         wnd_para->temp = 0;
         if(dialog_current_state == 1)
+        {
             wnd_para->temp	= dialog_jh_tran_data;
+        }
         notify_to_close_dialog(hwnd);
     }
     break;
     case VK_ESCAPE:
     case GUI_MSG_KEY_ESCAPE:
     {
-        //if(dialog_current_state == 4)
-        //	break;
         wnd_para->result = ADLG_IDNO;
         notify_to_close_dialog(hwnd);
     }
@@ -667,7 +674,186 @@ static __s32 on_dialog_command(__gui_msg_t *msg)
  *value: 0-->//背光亮度; 1-->//背光时间; 2-->//恢复出厂设置
  *3-->//卡格式化; 4-->//无卡; 5-->//从非设置界面来的; 6-->other
  ************************************************************/
+#ifdef ADLG_BKLT_UI
+/*char *pbuff_str[7] = {
+	"OFF",
+	"5 seconds",
+	"10 seconds",
+	"20 seconds",
+	"30 seconds",
+	"1 minutes",
+	"5 minutes",
+};
+*/
+char *pbuff_str[7] = {
+	"OFF",
+	"5 s",
+	"10 s",
+	"20 s",
+	"30 s",
+	"1 m",
+	"5 m",
+};
 
+static void draw_dialog(APP_DIALOG_RES_T *res, APP_DIALOG_UI_T *ui)
+{
+	__s32			  i, x, y;
+	void			 *bmp_data;
+	GUI_RECT		  rect;
+
+	//GUI_SetColor(ui->colour.txt_n);
+
+	GUI_SetDrawMode(GUI_DRAWMODE_NORMAL);
+	//背景
+
+	__inf("dialog_current_state = %d\n", dialog_current_state);
+
+	if(dialog_current_state == 0)
+	{
+		RECT rect, rect1;
+		char str_content[10];
+		for(i = 0; i < 5; i++)
+		{
+			rect.x = (250 - 128) / 2 - 15;
+			rect.y = 30*i + 4;
+			rect1.x = rect.x + 50 + 10;
+			rect1.y = rect.y + 5;
+
+			eLIBs_memset(str_content, 0, 10);
+			SLIB_int2str_dec(i+1, str_content);
+
+			if(i == dialog_jh_tran_data)
+			{
+				GUI_BMP_RES_Draw(res->bmp_bklt_select, rect.x, rect.y);
+				GUI_SetColor(ui->colour.txt_f);
+				GUI_DispStringAt(str_content, rect1.x, rect1.y);
+			}
+			else
+			{
+				GUI_BMP_RES_Draw(res->bmp_bklt_unselect, rect.x, rect.y);
+				GUI_SetColor(ui->colour.txt_n);
+				GUI_DispStringAt(str_content, rect1.x, rect1.y);
+			}
+		}
+		
+	}
+	else if(dialog_current_state == 1)
+	{
+		RECT rect, rect1;
+		
+		for(i = 0; i < 7; i++)
+		{
+			rect.x = (250 - 128) / 2 - 15;
+			rect.y = 30*i + 4;
+			rect1.x = rect.x + 50 - 5;
+			rect1.y = rect.y + 5;
+
+			if(i == dialog_jh_tran_data)//res->bklt_focus)
+			{
+				GUI_BMP_RES_Draw(res->bmp_bklt_select, rect.x, rect.y);
+				GUI_SetColor(ui->colour.txt_f);
+				GUI_DispStringAt(pbuff_str[i], rect1.x, rect1.y);
+			}
+			else
+			{
+				GUI_BMP_RES_Draw(res->bmp_bklt_unselect, rect.x, rect.y);	
+				GUI_SetColor(ui->colour.txt_n);
+				GUI_DispStringAt(pbuff_str[i], rect1.x, rect1.y);
+			}
+		}
+	}
+
+	if((dialog_current_state == 4)||(dialog_current_state == 3) || (dialog_current_state == 2))
+	{
+		GUI_SetColor(ui->colour.txt_n);
+		GUI_DispStringAt(res->str_title, ui->pos.title.x, ui->pos.title.y-6);
+	}
+
+	if(dialog_current_state == 0)
+	{
+		ui->pos.content.x = (ui->rt.width - 20) / 2;
+		ui->size.content.width	= 20; 
+	}
+	else if(dialog_current_state == 1)
+	{
+		ui->size.content.width = 60;
+		ui->pos.content.x = (ui->rt.width - 60) / 2;
+	}
+	__inf("ui->size.content.width: %d, ui->pos.content.x: %d\n", ui->size.content.width, ui->pos.content.x);
+
+	//内容
+	rect.x0 = ui->pos.content.x;
+	rect.y0 = ui->pos.content.y;
+	rect.x1 = rect.x0 + ui->size.content.width;
+	rect.y1 = rect.y0 + ui->size.content.height;
+	__inf("rect.x0:%d, rect.y0:%d, rect.x1:%d, rect.y1:%d\n", rect.x0, rect.y0, rect.x1, rect.y1);
+	
+	if(dialog_current_state != 6)
+	{
+		eLIBs_memset(res->str_content, 0, ADLG_STR_CONTENT_MEM_SIZE);
+	}
+
+	if(dialog_current_state == 6)
+	{
+		GUI_SetColor(ui->colour.txt_n);
+		GUI_DispStringInRectWrap(res->str_content, &rect, GUI_TA_HCENTER | GUI_TA_VCENTER, GUI_WRAPMODE_WORD);
+	}
+
+	if((dialog_current_state != 4)&& (dialog_current_state != 0)&&(dialog_current_state != 1))
+	{
+		for (i = 0; i < res->btn_count; i++)
+		{
+			x = ui->pos.btn_start.x;
+			y = ui->pos.btn_start.y - 50 + i*35;
+			
+			if (ui->ctrl.focus_id == i)
+			{
+				bmp_data = ResHandle2Data(res->bmp_bklt_select);
+			}
+			else
+			{
+				bmp_data = ResHandle2Data(res->bmp_bklt_unselect);
+			}
+			if(dialog_current_state == 3)
+			{
+				GUI_BMP_Draw(bmp_data, x - 20 - 5, y);	
+			}
+			else
+			{
+				GUI_BMP_Draw(bmp_data, x + 5, y);
+			}
+			if(dialog_current_state == 3)
+			{
+				rect.x0 = x + 23;
+				rect.y0 = rect.y0 - 15 + i*50;
+				rect.x1 = rect.x0 + ui->size.btn.width;
+				rect.y1 = rect.y1 -15 + i*50;
+			}
+			else if(dialog_current_state == 2)
+			{
+				rect.x0 = x + 53;
+				rect.y0 = rect.y0 - 15 + 5 + i*48;
+				rect.x1 = rect.x0 + ui->size.btn.width;
+				rect.y1 = rect.y1 -15 + 5 + i*48;
+			}
+			if(dialog_current_state > 1)
+			{
+				__inf("res->str_btn[%d]: %s\n",i, res->str_btn[i]);
+				if(ui->ctrl.focus_id == i)
+				{
+					GUI_SetColor(ui->colour.txt_f);
+				}
+				else
+				{
+					GUI_SetColor(ui->colour.txt_n);
+				}
+				GUI_DispStringInRect(res->str_btn[i], &rect, GUI_TA_HCENTER | GUI_TA_VCENTER);
+			}
+		}
+	}
+}
+
+#else
 static void draw_dialog(APP_DIALOG_RES_T *res, APP_DIALOG_UI_T *ui)
 {
     __s32             i, x, y;
@@ -679,59 +865,30 @@ static void draw_dialog(APP_DIALOG_RES_T *res, APP_DIALOG_UI_T *ui)
     GUI_SetDrawMode(GUI_DRAWMODE_NORMAL);
     //背景
     
-    /*******************tempory close*******************/
-    //GUI_BMP_RES_Draw(res->bmp_bg, 0, 0);
-    /**************************************************/
-	__inf("dialog_current_state = %d\n", dialog_current_state);
-/////////////////////////////////////////
-#ifdef ADLG_BKLT_UI
-	if(dialog_current_state == 0)
-	{
-		RECT rect, rect1;
-		char str_content[10];
-		for(i = 0; i < 5; i++)
-		{
-			rect.x = (250 - 128) / 2 - 15;
-			rect.y = 30*i + 4;
-			rect1.x = (250 - 128) / 2 - 15 + 50 + 10;
-			rect1.y = 30*i + 4 + 5;
+    GUI_BMP_RES_Draw(res->bmp_bg, 0, 0);
 
-			//res->str_content[0] = dialog_jh_tran_data + 0x30 + i - 3;
-			eLIBs_memset(str_content, 0, 10);
-			SLIB_int2str_dec(i+1, str_content);
-			__inf("str_content = %s, res->bklt_focus = %d\n", str_content, res->bklt_focus);
-			//str_content = '0' + i + 1;
-			if(i == res->bklt_focus)
-			{
-				GUI_BMP_RES_Draw(res->bmp_bklt_select, rect.x, rect.y);
-			}
-			else
-			{
-				GUI_BMP_RES_Draw(res->bmp_bklt_unselect, rect.x, rect.y);		
-			}
-			GUI_DispStringAt(str_content, rect1.x, rect1.y);
-		}
-		
-	}
-	else
-#endif
-/////////////////////////////////////////
+	__inf("dialog_current_state = %d\n", dialog_current_state);
+
     if(dialog_current_state < 2)
     {
         GUI_BMP_RES_Draw(res->bmp_select, (250 - 128) / 2, (126 - 28) / 2 - 10);
         GUI_BMP_RES_Draw(res->bmp_l_n, (250 - 128) / 2 - 37, (126 - 28) / 2 - 9);
         GUI_BMP_RES_Draw(res->bmp_r_n, (250 - 128) / 2 + 128 + 10, (126 - 28) / 2 - 9);
     }
+
     if(dialog_current_state == 3)
     {
         GUI_BMP_RES_Draw(res->bmp_storage, 2, (126 - 45) / 2);
     }
 
     //标题
-#ifndef ADLG_BKLT_UI
     GUI_DispStringAt(res->str_title, ui->pos.title.x, ui->pos.title.y);
 	__inf("res->str_title:%s----\n", res->str_title);
-#endif
+
+	if((dialog_current_state == 4)||(dialog_current_state == 3))
+	{
+		GUI_DispStringAt(res->str_title, ui->pos.title.x, ui->pos.title.y);
+	}
 
     if(dialog_current_state == 0)
     {
@@ -751,11 +908,13 @@ static void draw_dialog(APP_DIALOG_RES_T *res, APP_DIALOG_UI_T *ui)
     rect.x1 = rect.x0 + ui->size.content.width;
     rect.y1 = rect.y0 + ui->size.content.height;
 	__inf("rect.x0:%d, rect.y0:%d, rect.x1:%d, rect.y1:%d\n", rect.x0, rect.y0, rect.x1, rect.y1);
+	
     //GUI_DispStringInRect(res->str_content, &rect, GUI_TA_HCENTER | GUI_TA_VCENTER);
     if(dialog_current_state != 6)
     {
         eLIBs_memset(res->str_content, 0, ADLG_STR_CONTENT_MEM_SIZE);
     }
+
     if(dialog_current_state == 0)
     {
         res->str_content[0] = dialog_jh_tran_data + 0x30 + 1;
@@ -804,18 +963,12 @@ static void draw_dialog(APP_DIALOG_RES_T *res, APP_DIALOG_UI_T *ui)
             res->str_content[1] = 'm';
         }
     }
+
     if((dialog_current_state < 2) || (dialog_current_state == 6))
     {
-#ifdef ADLG_BKLT_UI    
-    	if(dialog_current_state != 0)
-#endif			
-        	GUI_DispStringInRectWrap(res->str_content, &rect, GUI_TA_HCENTER | GUI_TA_VCENTER, GUI_WRAPMODE_WORD);
+        GUI_DispStringInRectWrap(res->str_content, &rect, GUI_TA_HCENTER | GUI_TA_VCENTER, GUI_WRAPMODE_WORD);
     }
-#ifdef ADLG_BKLT_UI	
-	if((dialog_current_state != 4)&& (dialog_current_state != 0))
-#else    
     if(dialog_current_state != 4)
-#endif		
     {
         //按钮
         x = ui->pos.btn_start.x;
@@ -826,7 +979,8 @@ static void draw_dialog(APP_DIALOG_RES_T *res, APP_DIALOG_UI_T *ui)
 		__inf("x:Y:y0:y1,[%d:%d:%d:%d]\n", x, y, rect.y0, rect.y1);
         for (i = 0; i < res->btn_count; i++)
         {
-            //if (ui->ctrl.focus_id == i)
+        	x = ui->pos.btn_start.x;
+        	y = ui->pos.btn_start.y - 50 + i*35;
             if(dialog_current_state < 2)
             {
                 if(i == 0)
@@ -845,7 +999,9 @@ static void draw_dialog(APP_DIALOG_RES_T *res, APP_DIALOG_UI_T *ui)
                     bmp_data = ResHandle2Data(res->bmp_btn_yes);
                 }
                 else
+                {
                     bmp_data = ResHandle2Data(res->bmp_btn_no);
+                }
             }
             GUI_BMP_Draw(bmp_data, x, y);
             rect.x0 = x;
@@ -867,7 +1023,7 @@ static void draw_dialog(APP_DIALOG_RES_T *res, APP_DIALOG_UI_T *ui)
     }
     //GUI_CloseAlphaBlend();
 }
-
+#endif
 //
 static __s32 on_dialog_paint(__gui_msg_t *msg)
 {
@@ -903,7 +1059,7 @@ static __s32 on_dialog_timer(__gui_msg_t *msg)
     if (LOWORD(msg->dwAddData1) == ID_TIMER_DIALOG_TIMEOUT)
     {
         dialog_wnd_t *wnd_para;
-        //__log("---jh_dbg1018_1----\n");
+
         app_dialog_GetWndPara(wnd_para, dialog_wnd_t, msg->h_deswin);
         wnd_para->result = ADLG_IDM_TIMEROUT;
         notify_to_close_dialog(msg->h_deswin);
@@ -940,7 +1096,6 @@ static __s32 on_dialog_create(__gui_msg_t *msg)
 
     if (IsDialogTimerValid(wnd_para->timeout))
     {
-        //__log("---jh_dbg1018_timeout:%d",wnd_para->timeout);
         GUI_SetTimer(/*wnd_para->hwnd*/msg->h_deswin, ID_TIMER_DIALOG_TIMEOUT, wnd_para->timeout, NULL);
 
     }
@@ -981,12 +1136,11 @@ static __s32 app_dialog_proc(__gui_msg_t *msg)
     case GUI_MSG_PAINT:
         return on_dialog_paint(msg);
     case GUI_MSG_KEY:
-        //__log("---jh_dbg1018_8---\n");
         return dialog_key_proc(msg);
     case GUI_MSG_TOUCH:
         break;
     case GUI_MSG_TIMER:
-        __log("---jh_dbg1018_timer---\n");
+        __inf("---jh_dbg1018_timer---\n");
         if (on_dialog_timer(msg) == EPDK_OK)
         {
             return EPDK_OK;

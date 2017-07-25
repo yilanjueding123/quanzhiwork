@@ -1,7 +1,5 @@
----- bklt_focus Matches (7 in 2 files) ----
-App_dialog.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\lib\app_dialog):	res->bklt_focus = 0;
-App_dialog.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\lib\app_dialog):			__inf("str_content = %s, res->bklt_focus = %d\n", str_content, res->bklt_focus);
-App_dialog.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\lib\app_dialog):			if(i == res->bklt_focus)
-App_dialog.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\lib\app_dialog):		if(res->bklt_focus++>=4)
-App_dialog.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\lib\app_dialog):			res->bklt_focus = 0;
-App_dialog_i.h (f:\pri_f25\zhibo\work\livedesk\beetles\applets\lib\app_dialog):	__s16			bklt_focus;
+---- txt_n Matches (4 in 2 files) ----
+App_dialog.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\lib\app_dialog):    ui->colour.txt_n = GUI_DARKGRAY;
+App_dialog.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\lib\app_dialog):	GUI_SetColor(ui->colour.txt_n);
+App_dialog.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\lib\app_dialog):    GUI_SetColor(ui->colour.txt_n);
+App_dialog_i.h (f:\pri_f25\zhibo\work\livedesk\beetles\applets\lib\app_dialog):    GUI_COLOR txt_n;
