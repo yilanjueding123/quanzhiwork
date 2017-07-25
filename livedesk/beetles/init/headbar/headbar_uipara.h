@@ -68,6 +68,9 @@ typedef struct
     __u32 volume_id;
     __u32 tf_y_id;
     __u32 tf_n_id;
+#ifdef HBAR_SHOW_LOGO
+	__u32 logo_id;
+#endif
     //__u32 home_id;
 } __headbar_ui_para_res_t;
 
@@ -88,6 +91,9 @@ typedef struct
     __headbar_ui_para_item_t    battery;
     //__headbar_ui_para_item_t	  home;
     __headbar_ui_para_item_t	  title;
+#ifdef HBAR_SHOW_LOGO
+	__headbar_ui_para_item_t	logo;
+#endif
 
     __headbar_ui_para_res_t	  res_id;
 

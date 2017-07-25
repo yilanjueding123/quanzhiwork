@@ -38,6 +38,8 @@
 #else
 #error please select os platform!
 #endif
+
+#define HBAR_SHOW_LOGO
 #define HBAR_SHOW_BT
 
 //#define DV_FREQ_UPPER_ARRANGEMENT

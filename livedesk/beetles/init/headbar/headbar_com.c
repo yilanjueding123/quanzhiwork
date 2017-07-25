@@ -30,17 +30,18 @@
 #define MAX_VOL_LEVEL			6
 #define TBAR_VOL_TIMER_ID		1000
 
+
 typedef enum
 {
     HB_PAINT_INIT,
     HB_PAINT_TIME,
     HB_PAINT_DATA,
-    HB_PAINT_VOL,
+    HB_PAINT_VOL,			//3
     HB_PAINT_BRIGHT,
     HB_PAINT_VOLUME,
     HB_PAINT_MUSCI_BG,
     HB_PAINT_TITLE,
-    HB_PAINT_TF,
+    HB_PAINT_TF,			// 8
     HB_PAINT_
 } headbar_paint_e;
 
@@ -71,6 +72,9 @@ typedef struct
     RECT 	vol_rect;					// 电池坐标
     RECT 	home_rect;					// home坐标
     RECT	title_rect;					// title坐标
+#ifdef HBAR_SHOW_LOGO
+	RECT	logo_rect;
+#endif
 
     HTHEME	vol_htheme[MAX_VOL_LEVEL];
     HTHEME	vol_htheme_charge[MAX_VOL_LEVEL];
@@ -79,6 +83,9 @@ typedef struct
     HTHEME	volume_htheme;
     HTHEME  tf_y_htheme;
     HTHEME  tf_n_htheme;
+#ifdef HBAR_SHOW_LOGO
+	HTHEME	logo_htheme;
+#endif
 
     __u32 	vol_id[MAX_VOL_LEVEL];		// 电池资源
     __u32 	vol_id_charge[MAX_VOL_LEVEL];// 充电电池资源
@@ -93,6 +100,9 @@ typedef struct
     void   *volume_bmp;					// 音量图片
     void   *tf_y_bmp;
     void   *tf_n_bmp;
+#ifdef HBAR_SHOW_LOGO
+	void   *logo_bmp;
+#endif
 
     char    date_buf[32];				// 日期
     char 	time_buf[32];				// 时间
@@ -164,6 +174,8 @@ static void init_headbar_para(__gui_msg_t *p_msg, headbar_para_t *para)
 {
     int 				i;
 
+	__msg("init_headbar_para\n");
+	
     para->hbar   =  p_msg->h_deswin;
 
     para->music_rect.x 		= headbar_uipara.music.x;
@@ -210,6 +222,12 @@ static void init_headbar_para(__gui_msg_t *p_msg, headbar_para_t *para)
     para->title_rect.y				= headbar_uipara.title.y;
     para->title_rect.width			= headbar_uipara.title.w;
     para->title_rect.height			= headbar_uipara.title.h;
+#ifdef HBAR_SHOW_LOGO
+	para->logo_rect.x				= headbar_uipara.logo.x;
+	para->logo_rect.y				= headbar_uipara.logo.y;
+	para->logo_rect.width			= headbar_uipara.logo.w;
+	para->logo_rect.height			= headbar_uipara.logo.h;
+#endif
 
     para->vol_id[0] = headbar_uipara.res_id.vol_id0;
     para->vol_id[1] = headbar_uipara.res_id.vol_id1;
@@ -239,10 +257,16 @@ static void init_headbar_para(__gui_msg_t *p_msg, headbar_para_t *para)
 
     para->tf_n_htheme = dsk_theme_open(headbar_uipara.res_id.tf_n_id);
     para->tf_y_htheme = dsk_theme_open(headbar_uipara.res_id.tf_y_id);
+#ifdef HBAR_SHOW_LOGO
+	para->logo_htheme = dsk_theme_open(headbar_uipara.res_id.logo_id);
+#endif
 
     para->tf_y_bmp = dsk_theme_hdl2buf(para->tf_y_htheme);
 
     para->tf_n_bmp = dsk_theme_hdl2buf(para->tf_n_htheme);
+#ifdef HBAR_SHOW_LOGO
+	para->logo_bmp = dsk_theme_hdl2buf(para->logo_htheme);
+#endif
 
     para->music_bmp			= dsk_theme_hdl2buf(para->music_htheme);
     para->bright_bmp		= dsk_theme_hdl2buf(para->bright_htheme);
@@ -263,11 +287,15 @@ static void deinit_headbar_para(headbar_para_t *para)
         dsk_theme_close(para->vol_htheme[i]);
         dsk_theme_close(para->vol_htheme_charge[i]);
     }
+#ifdef HBAR_SHOW_LOGO
+	dsk_theme_close(para->logo_htheme);
+#endif
     dsk_theme_close(para->tf_n_htheme);
     dsk_theme_close(para->tf_y_htheme);
     dsk_theme_close(para->music_htheme);
     dsk_theme_close(para->bright_htheme);
     dsk_theme_close(para->volume_htheme);
+	
 }
 
 
@@ -556,14 +584,12 @@ static __s32 headbar_on_paint_argb(__gui_msg_t *msg, headbar_paint_e mode)
     font 	= p_ctrl->font;
 
     layer  	= (H_LYR)GUI_WinGetLyrWin(msg->h_deswin);
-    //__here__;
 
     if( GUI_LYRWIN_STA_SUSPEND == GUI_LyrWinGetSta(layer) )
     {
         return EPDK_OK;
     }
 
-    //__here__;
     GUI_LyrWinSel(layer);
     switch(mode)
     {
@@ -571,12 +597,8 @@ static __s32 headbar_on_paint_argb(__gui_msg_t *msg, headbar_paint_e mode)
     {
         GUI_SetBkColor(backcolor);
         GUI_ClearRect(fbrect.x, fbrect.y, fbrect.x + fbrect.width - 1, fbrect.y + fbrect.height);
+		GUI_SetDrawMode(GUI_DRAWMODE_NORMAL);
 
-        /*GUI_SetBkColor(0xBF4B4B4B);
-        GUI_ClearRect(fbrect.x, fbrect.y + fbrect.height -3, fbrect.x + fbrect.width -1, fbrect.y + fbrect.height -2);
-        GUI_SetBkColor(0xBF000000);
-        GUI_ClearRect(fbrect.x, fbrect.y + fbrect.height -2, fbrect.x + fbrect.width -1, fbrect.y + fbrect.height -1);*/
-        //GUI_OpenAlphaBlend();
         /* 画电池图标 */
         {
             __bool charge_sta;
@@ -598,7 +620,6 @@ static __s32 headbar_on_paint_argb(__gui_msg_t *msg, headbar_paint_e mode)
                 p_ctrl->data.charge_sta = dsk_get_charge_state();
                 __msg("p_ctrl->data.vol_level=%d\n", p_ctrl->data.vol_level);
                 __msg("p_ctrl->data.charge_sta=%d\n", p_ctrl->data.charge_sta);
-                GUI_SetDrawMode(GUI_DRAWMODE_NORMAL);
                 if(EPDK_TRUE == p_ctrl->data.charge_sta)
                 {
                     GUI_BMP_Draw(p_ctrl->vol_bmp_charge[p_ctrl->data.vol_level], p_ctrl->vol_rect.x, p_ctrl->vol_rect.y);
@@ -609,17 +630,33 @@ static __s32 headbar_on_paint_argb(__gui_msg_t *msg, headbar_paint_e mode)
                 }
             }
         }
+#ifdef HBAR_SHOW_LOGO		
+		/*Draw logo*/
+		{
+			GUI_ClearRect(
+                p_ctrl->logo_rect.x,
+                p_ctrl->logo_rect.y,
+                p_ctrl->logo_rect.x + p_ctrl->logo_rect.width - 1,
+                p_ctrl->logo_rect.y + p_ctrl->logo_rect.height - 1
+            );
 
-        /* 音量*/
-        //			GUI_BMP_Draw_Trans(p_ctrl->volume_bmp, p_ctrl->volume_rect.x, p_ctrl->volume_rect.y, 0, 0);
-
-        /* 亮度*/
-        //			GUI_BMP_Draw_Trans(p_ctrl->bright_bmp, p_ctrl->bright_rect.x, p_ctrl->bright_rect.y, 0, 0);
-
-        /* 后台播放 */
-        //			if( p_ctrl->data.music_bg )
-        //				GUI_BMP_Draw_Trans(p_ctrl->music_bmp, p_ctrl->music_rect.x, p_ctrl->music_rect.y, 0, 0);
-
+			__msg("Draw logo headbar\n");
+			GUI_BMP_Draw(p_ctrl->logo_bmp, p_ctrl->logo_rect.x, p_ctrl->logo_rect.y);
+		}
+#endif	
+		/*Draw TF card*/
+		{
+			GUI_ClearRect(350, 0, 32, 32);
+			__msg("Draw TF card, card_current_state = 0x%0x\n", card_current_state);
+	        if(card_current_state == 0x55)
+	        {
+	            GUI_BMP_Draw(p_ctrl->tf_y_bmp, 350, 9);
+	        }
+	        else if(card_current_state == 0x56)
+	        {
+	            GUI_BMP_Draw(p_ctrl->tf_n_bmp, 350, 9);
+	        }
+		}
         GUI_OpenAlphaBlend();
         GUI_SetFont(font);
         GUI_SetDrawMode(GUI_DRAWMODE_TRANS);
@@ -632,10 +669,6 @@ static __s32 headbar_on_paint_argb(__gui_msg_t *msg, headbar_paint_e mode)
         /* 写时间 */
         GUI_DispStringInRect(p_ctrl->time_buf, &p_ctrl->time_rect, GUI_TA_VCENTER | GUI_TA_HCENTER);
 #endif
-
-        //			GUI_DispStringAt(p_ctrl->volume_buf, p_ctrl->volume_data_rect.x, p_ctrl->volume_data_rect.y);
-        //			GUI_DispStringAt( p_ctrl->bright_buf ,p_ctrl->bright_data_rect.x, p_ctrl->bright_data_rect.y);
-        //			GUI_DispStringAt( p_ctrl->title_buf, p_ctrl->title_rect.x, p_ctrl->title_rect.y);
 
         GUI_LyrWinFlushFB(layer);
         GUI_CloseAlphaBlend();
@@ -678,21 +711,24 @@ static __s32 headbar_on_paint_argb(__gui_msg_t *msg, headbar_paint_e mode)
     }
     return EPDK_OK;
     case HB_PAINT_TF:
-        __log("----jh_dbg_1019_13----\n");
+        __msg("----jh_dbg_1019_13----\n");
         GUI_SetBkColor(backcolor);
         GUI_ClearRect(350, 0, 32, 32);
 
         if(card_current_state == 0x55)
-            GUI_BMP_Draw(p_ctrl->tf_y_bmp, 350, 0);
+        {
+            GUI_BMP_Draw(p_ctrl->tf_y_bmp, 350, 9);
+        }
         else if(card_current_state == 0x56)
-            GUI_BMP_Draw(p_ctrl->tf_n_bmp, 350, 0);
+        {
+            GUI_BMP_Draw(p_ctrl->tf_n_bmp, 350, 9);
+        }
 
         GUI_LyrWinFlushFB(layer);
         return EPDK_OK;
     case HB_PAINT_VOL:			/* 更新电量 */
     {
         __bool charge_sta;
-        //__here__;
 
         /* 画电池图标 */
         {
@@ -702,8 +738,7 @@ static __s32 headbar_on_paint_argb(__gui_msg_t *msg, headbar_paint_e mode)
             dsk_power_get_voltage_level(&level);
             vol_level = power_level_2_display(level);  	//电量级别
             charge_sta = dsk_get_charge_state();
-            // __msg("vol_level=%d\n", vol_level);
-            // __msg("charge_sta=%d\n", charge_sta);
+
             if(p_ctrl->data.vol_level != vol_level
                     || p_ctrl->data.charge_sta != charge_sta)
             {
@@ -725,6 +760,7 @@ static __s32 headbar_on_paint_argb(__gui_msg_t *msg, headbar_paint_e mode)
                 {
                     GUI_BMP_Draw(p_ctrl->vol_bmp[p_ctrl->data.vol_level], p_ctrl->vol_rect.x, p_ctrl->vol_rect.y);
                 }
+				
                 GUI_LyrWinFlushFB(layer);
             }
 
@@ -830,32 +866,21 @@ static __s32 headbar_on_paint(__gui_msg_t *msg, headbar_paint_e mode)
 
     layer  	= (H_LYR)GUI_WinGetLyrWin(msg->h_deswin);
     GUI_LyrWinGetFB(layer, &fb);
-
+	
+	__msg("fmt: %d, mode = %d\n", fb.fmt.fmt.rgb.pixelfmt, mode);
+	
     if( fb.fmt.fmt.rgb.pixelfmt == PIXEL_MONO_8BPP )
     {
-        //__here__;
         headbar_on_paint_8bpp(msg, mode);
     }
     else
     {
-        //__here__;
         headbar_on_paint_argb(msg, mode);
     }
 
     return EPDK_OK;
 }
 
-/*static __bool pt_in_rect(RECT *rect, __s32 x, __s32 y)
-{
-	if( ( x > rect->x)&&( y>rect->y )&&( x<(rect->x + rect->width) )&&( y<(rect->y + rect->height) ) )
-	{
-		return EPDK_TRUE;
-	}
-	else
-	{
-		return EPDK_FALSE;
-	}
-}*/
 
 static __s32 cb_headbar_framewin(__gui_msg_t *p_msg)
 {
@@ -872,7 +897,9 @@ static __s32 cb_headbar_framewin(__gui_msg_t *p_msg)
         }
         eLIBs_memset(p_ctrl, 0, sizeof(headbar_ctl_t));
         GUI_WinSetAttr(p_msg->h_deswin, p_ctrl);
-        //__wait__;
+		
+		__msg("cb_headbar_framewin, GUI_MSG_CREATE\n");
+		
         init_headbar_para(p_msg, &(p_ctrl->para));
 
         headbar_on_paint(p_msg, HB_PAINT_INIT);
@@ -932,10 +959,7 @@ static __s32 cb_headbar_framewin(__gui_msg_t *p_msg)
                 display_tf_flag = 0;
                 card_prev_state = card_current_state;
             }
-            //if(card_current_state != card_prev_state)
-            //{
-            //card_prev_state=card_current_state;
-            // if(card_current_state>=0x55)
+
             if(display_tf_flag == 0)
             {
 
@@ -950,14 +974,12 @@ static __s32 cb_headbar_framewin(__gui_msg_t *p_msg)
                 msgjh.p_arg	   		= NULL;
                 display_tf_flag = 1;
                 GUI_SendMessage(&msgjh);
-
-                __log("----jh_dbg_1019_11----\n");
             }
-
-            //}
         }
         else
+        {
             display_tf_flag = 0;
+        }
 
         if( p_msg->dwAddData1 == TBAR_VOL_TIMER_ID )
         {
@@ -965,7 +987,6 @@ static __s32 cb_headbar_framewin(__gui_msg_t *p_msg)
 
             lyr = GUI_WinGetLyrWin(p_msg->h_deswin);
 
-            //                __here__;
             if(GUI_LYRWIN_STA_ON == GUI_LyrWinGetSta(lyr))
             {
                 __bool charge_sta;
@@ -974,17 +995,8 @@ static __s32 cb_headbar_framewin(__gui_msg_t *p_msg)
                 headbar_ctl_t  *p_ctrl;
                 __gui_msg_t 	msgex;
 
-                //                  __here__;
-
                 p_ctrl = (headbar_ctl_t *)GUI_WinGetAttr(p_msg->h_deswin);
 
-                //dsk_power_get_voltage_level(&level);
-                //vol_level = power_level_2_display(level);  	//电量级别
-                //charge_sta = dsk_get_charge_state();
-                //__msg("vol_level=%d\n", vol_level);
-                // __msg("charge_sta=%d\n", charge_sta);
-                //if( vol_level != p_ctrl->para.data.vol_level
-                //    || charge_sta != p_ctrl->para.data.charge_sta)
                 {
                     // 更新电池图标
 
@@ -998,13 +1010,8 @@ static __s32 cb_headbar_framewin(__gui_msg_t *p_msg)
 
                     GUI_SendMessage(&msgex);
                 }
-
-                //p_ctrl->para.data.vol_level = vol_level;
-                //p_ctrl->para.data.charge_sta = charge_sta;
             }
-
         }
-
     }
     return EPDK_OK;
 

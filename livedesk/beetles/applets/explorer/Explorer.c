@@ -390,10 +390,10 @@ static __s32 _explorer_manager_win_cb(__gui_msg_t *msg)
     case GUI_MSG_CLOSE:
         __msg("----explorer manager window GUI_MSG_CLOSE begin----\n");
         app_explorer_on_close(msg);
+		gscene_hbar_set_state(HBAR_ST_HIDE);
         return EPDK_OK;
     case GUI_MSG_DESTROY:
         __msg("----explorer manager window GUI_MSG_DESTROY begin----\n");
-		gscene_hbar_set_state(HBAR_ST_HIDE);
         app_explorer_on_destroy(msg->h_deswin);			//release  layer,memory
         return EPDK_OK;
     case GUI_MSG_KEY:

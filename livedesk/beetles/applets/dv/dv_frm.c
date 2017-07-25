@@ -860,6 +860,7 @@ static __s32 __dv_frm_on_create(__gui_msg_t *msg)
 	//eLIBs_memset(freq_save_buff,0,32);
 	freq_save_flg = 0;
 	freq_save_switch = freq_save_cnt = 0;
+	key_flag = KEY_NONE_ACTION;
 #endif
 	
 	
@@ -915,7 +916,9 @@ static __s32 __dv_frm_on_destroy(__gui_msg_t *msg)
 
     GUI_KillTimer(msg->h_deswin, TIMER_STATUS_ID);
     if( GUI_IsTimerInstalled(msg->h_deswin, TIMER_DIALOAG_TIMEOUT_ID) )
+    {
         GUI_KillTimer(msg->h_deswin, TIMER_DIALOAG_TIMEOUT_ID);
+    }
 
     if( GUI_IsTimerInstalled(msg->h_deswin, TIMER_DV_SRCH_ID) )
 	{
@@ -1907,11 +1910,12 @@ static __s32 __app_dv_draw_signal_level(H_LYR hlyr, __u32 level)
 	GUI_SetBkColor(0);
 	GUI_ClearRectEx(&gui_rect);
 	GUI_SetDrawMode(GUI_DRAWMODE_NORMAL);
-
+	
 	if((next_signal_level == 1) || (next_signal_level == 2))
 	{
-		next_signal_level = 3;
+		next_signal_level = 2;
 	}
+	
 	GUI_BMP_RES_Draw(dv_subse_ui->bmp_subset_singal[next_signal_level], gui_rect.x0+20, gui_rect.y0+5);
 	
 	prev_signal_level = next_signal_level;

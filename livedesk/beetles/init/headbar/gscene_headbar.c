@@ -161,116 +161,6 @@ static __s32 cb_shbar_mwin(__gui_msg_t *msg)
         GUI_ManWinDelete(msg->h_deswin);
         return 0;
 
-    /*case GUI_MSG_COMMAND:
-    {
-    	__shbar_ctrl_t	*scene;
-
-    	scene = (__shbar_ctrl_t *)GUI_WinGetAddData(msg->h_deswin);
-
-    	switch(LOSWORD(msg->dwAddData1))
-    	{
-    		case ID_HEADBAR_COM:
-    		{
-    			switch( HISWORD(msg->dwAddData1) )
-    			{
-    				case HBAR_ADJUST_VOLUME:
-    				{
-    					if( NULL == scene->volume_frm )
-    					{
-    						RECT rect;
-
-    						GUI_LyrWinCacheOn();
-    						GUI_LyrWinSetTop(scene->shpara.layer);
-    						GUI_LyrWinGetSrcWindow(scene->shpara.layer,&rect);
-    						rect.height = headbar_uipara.headbar.h + headbar_uipara.volumebar.h;
-    						GUI_LyrWinSetSrcWindow(scene->shpara.layer,&rect);
-
-    						GUI_LyrWinGetScnWindow(scene->shpara.layer,&rect);
-    						rect.height = headbar_uipara.headbar.h + headbar_uipara.volumebar.h;
-    						GUI_LyrWinSetScnWindow(scene->shpara.layer,&rect);
-    						GUI_LyrWinCacheOff();
-
-    						scene->volume_frm = volume_frm_create(&(scene->vpara));
-    					}
-    					else
-    					{
-    						RECT rect;
-
-    						GUI_LyrWinCacheOn();
-    						GUI_LyrWinSetTop(scene->shpara.layer);
-    						GUI_LyrWinGetSrcWindow(scene->shpara.layer,&rect);
-    						rect.height = headbar_uipara.headbar.h;
-    						GUI_LyrWinSetSrcWindow(scene->shpara.layer,&rect);
-
-    						GUI_LyrWinGetScnWindow(scene->shpara.layer,&rect);
-    						rect.height = headbar_uipara.headbar.h;
-    						GUI_LyrWinSetScnWindow(scene->shpara.layer,&rect);
-    						GUI_LyrWinCacheOff();
-
-    						volume_frm_delete(scene->volume_frm);
-    						scene->volume_frm = NULL;
-    					}
-    				}
-    					break;
-    				default:
-    					break;
-    			}
-    		}
-    			break;
-
-    		case ID_VOLUME_COM:
-    		{
-    			switch( HISWORD(msg->dwAddData1) )
-    			{
-    				case VOLUME_COM_CHANGED:
-    				{
-    					__gui_msg_t tmp_msg;
-
-    					tmp_msg.id 			= HBAR_VOLUME_PAINT;
-    		        	tmp_msg.h_srcwin 	= NULL;
-    		        	tmp_msg.h_deswin 	= scene->headbar_frm;
-    		        	tmp_msg.dwAddData1 	= msg->dwAddData2;
-    		        	tmp_msg.dwAddData2 	= 0;
-    		        	tmp_msg.dwReserved 	= 0;
-    		        	tmp_msg.p_arg	   	= NULL;
-
-    		        	dsk_volume_set(msg->dwAddData2);
-
-    		        	GUI_SendMessage(&tmp_msg);
-    				}
-    					break;
-
-    				case VOLUME_COM_TIMEOUT:
-    				{
-    					RECT rect;
-
-    					scene->volume_frm = NULL;
-
-    					GUI_LyrWinCacheOn();
-    					GUI_LyrWinSetTop(scene->shpara.layer);
-    					GUI_LyrWinGetSrcWindow(scene->shpara.layer,&rect);
-    					rect.height = headbar_uipara.headbar.h;
-    					GUI_LyrWinSetSrcWindow(scene->shpara.layer,&rect);
-
-    					GUI_LyrWinGetScnWindow(scene->shpara.layer,&rect);
-    					rect.height = headbar_uipara.headbar.h;
-    					GUI_LyrWinSetScnWindow(scene->shpara.layer,&rect);
-    					GUI_LyrWinCacheOff();
-    				}
-    					break;
-
-    				default:
-    					break;
-    			}
-    		}
-    			break;
-
-    		default:
-    			break;
-    	}
-    	return 0;
-    }*/
-
     case HBAR_TITLE_PAINT:
     {
         __gui_msg_t msgex;
@@ -289,31 +179,6 @@ static __s32 cb_shbar_mwin(__gui_msg_t *msg)
 
         return EPDK_OK;
     }
-
-    /*case DSK_MSG_MAIN_CMD:
-    {
-    	__gui_msg_t 	msgex;
-    	__shbar_ctrl_t	*scene;
-
-    	scene = (__shbar_ctrl_t *)GUI_WinGetAddData(msg->h_deswin);
-
-    	eLIBs_memset(&msgex, 0, sizeof(__gui_msg_t));
-
-    	if( msg->dwAddData1 == HEADBAR_CMD_SET_VOLUME )
-    	{
-    		if( scene->volume_frm )
-    		{
-    			msgex.id 			= DSK_MSG_MAIN_CMD;
-    			msgex.h_srcwin 		= msg->h_srcwin;
-    			msgex.h_deswin		= scene->volume_frm;
-    			msgex.dwAddData1	= msg->dwAddData1;
-    			msgex.dwAddData2	= msg->dwAddData2;
-
-    			GUI_SendMessage(&msgex);
-    		}
-    	}
-    	return EPDK_OK;
-    }*/
 
     default:
         break;
@@ -346,7 +211,6 @@ __s32 gscene_hbar_create(H_WIN parent, __hbar_format_t format)
 
     headbar_win = hManWin;
 
-
     return 0;
 }
 
@@ -367,10 +231,8 @@ __s32 gscene_hbar_set_state(HBarState state)
     switch(state)
     {
     case HBAR_ST_SHOW:
-        //GUI_LyrWinCacheOn();
         GUI_LyrWinSetSta(hbar_layer, GUI_LYRWIN_STA_ON);
         GUI_LyrWinSetTop(hbar_layer);
-        //GUI_LyrWinCacheOff();
         break;
     case HBAR_ST_HIDE:
         GUI_LyrWinSetSta(hbar_layer, GUI_LYRWIN_STA_SUSPEND);
@@ -432,22 +294,6 @@ __s32 gscene_hbar_set_title(char *title, __u32 len)
     return 0;
 }
 
-/*__s32 gscene_hbar_set_volume(void)
-{
-	__gui_msg_t msgex;
-
-	eLIBs_memset(&msgex, 0, sizeof(__gui_msg_t));
-
-	msgex.id 			= DSK_MSG_MAIN_CMD;
-	msgex.h_srcwin 		= NULL;
-	msgex.h_deswin		= headbar_win;
-	msgex.dwAddData1	= HEADBAR_CMD_SET_VOLUME;
-	msgex.dwAddData2	= NULL;
-
-	GUI_SendMessage(&msgex);
-
-	return 0;
-}*/
 
 __s32 gscene_hbar_set_format(__hbar_format_t format)
 {

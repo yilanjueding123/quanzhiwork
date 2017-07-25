@@ -1,5 +1,12 @@
----- txt_n Matches (4 in 2 files) ----
-App_dialog.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\lib\app_dialog):    ui->colour.txt_n = GUI_DARKGRAY;
-App_dialog.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\lib\app_dialog):	GUI_SetColor(ui->colour.txt_n);
-App_dialog.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\lib\app_dialog):    GUI_SetColor(ui->colour.txt_n);
-App_dialog_i.h (f:\pri_f25\zhibo\work\livedesk\beetles\applets\lib\app_dialog):    GUI_COLOR txt_n;
+---- key_flag Matches (11 in 2 files) ----
+App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):static KEY_FLAG key_flag = KEY_NONE_ACTION;
+App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):			key_flag = KEY_PRESS_ACTION;
+App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):		if((LOWORD(msg->dwAddData1) == av1_ctrl->av1_spi_timmer_id)&&(key_flag == KEY_PRESS_ACTION))
+App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):			if(KEY_PRESS_ACTION == key_flag)
+App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):				key_flag = KEY_NONE_ACTION;
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):static KEY_FLAG key_flag = KEY_NONE_ACTION;
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):		key_flag = KEY_PRESS_ACTION;
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):	else if((msg->dwAddData1 == TIMER_DV_SRCH_ID)&&(key_flag == KEY_PRESS_ACTION))
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):		if(KEY_PRESS_ACTION == key_flag)
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):			//key_flag = KEY_NONE_ACTION;
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):		key_flag = KEY_NONE_ACTION;

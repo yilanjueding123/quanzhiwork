@@ -87,24 +87,24 @@ void headbar_init_uipara(__hbar_format_t format)
     case SCREEN_TYPE_400_240:
     {
         //layer
-        headbar_uipara.hbar_lyr.fb_w  = 480;//400;
+        headbar_uipara.hbar_lyr.fb_w  = 480;
         headbar_uipara.hbar_lyr.fb_h  = 32;
 
         headbar_uipara.hbar_lyr.src_x = 0;
         headbar_uipara.hbar_lyr.src_y = 0;
-        headbar_uipara.hbar_lyr.src_w = 480; // 400;
+        headbar_uipara.hbar_lyr.src_w = 480; 
         headbar_uipara.hbar_lyr.src_h = 32;
 
         headbar_uipara.hbar_lyr.scn_x = 0;
         headbar_uipara.hbar_lyr.scn_y = 0;
-        headbar_uipara.hbar_lyr.scn_w = 480;//400;
+        headbar_uipara.hbar_lyr.scn_w = 480;
         headbar_uipara.hbar_lyr.scn_h = 32;
 
         headbar_uipara.hbar_lyr.pipe  = 1;
         //
         headbar_uipara.hbar_frmwin.x = 0;
         headbar_uipara.hbar_frmwin.y = 0;
-        headbar_uipara.hbar_frmwin.w = 480;//400;
+        headbar_uipara.hbar_frmwin.w = 480;
         headbar_uipara.hbar_frmwin.h = 32;
 
         headbar_uipara.title.x	= 80;
@@ -126,6 +126,12 @@ void headbar_init_uipara(__hbar_format_t format)
         headbar_uipara.time.y = 0;
         headbar_uipara.time.w = 140;
         headbar_uipara.time.h = 16;
+#ifdef HBAR_SHOW_LOGO
+		headbar_uipara.logo.x = 15;
+		headbar_uipara.logo.y = 8;
+		headbar_uipara.logo.w = 98;
+		headbar_uipara.logo.h = 15;	
+#endif
 
         headbar_uipara.volume_icon.x 	= 0;
         headbar_uipara.volume_icon.y 	= 0;
@@ -175,6 +181,9 @@ void headbar_init_uipara(__hbar_format_t format)
         headbar_uipara.res_id.music_id 	= 0;
         headbar_uipara.res_id.bright_id	= 0;
         headbar_uipara.res_id.volume_id	= 0;
+#ifdef HBAR_SHOW_LOGO
+		headbar_uipara.res_id.logo_id	= ID_INIT_LOGO_BMP;
+#endif
 
         headbar_uipara.font 			= FONT16;
         break;
@@ -221,6 +230,12 @@ void headbar_init_uipara(__hbar_format_t format)
         headbar_uipara.time.y = 0;
         headbar_uipara.time.w = 140;
         headbar_uipara.time.h = 16;
+#ifdef HBAR_SHOW_LOGO
+		headbar_uipara.logo.x = 5;
+		headbar_uipara.logo.y = 2;
+		headbar_uipara.logo.w = 98;
+		headbar_uipara.logo.h = 15; 
+#endif
 
         headbar_uipara.volume_icon.x 	= 0;
         headbar_uipara.volume_icon.y 	= 0;
@@ -266,6 +281,9 @@ void headbar_init_uipara(__hbar_format_t format)
         headbar_uipara.res_id.music_id 	= 0;
         headbar_uipara.res_id.bright_id	= 0;
         headbar_uipara.res_id.volume_id	= 0;
+#ifdef HBAR_SHOW_LOGO
+		headbar_uipara.res_id.logo_id	= ID_INIT_LOGO_BMP;
+#endif
 
         headbar_uipara.font 			= FONT16;
         break;
@@ -313,6 +331,12 @@ void headbar_init_uipara(__hbar_format_t format)
         headbar_uipara.time.y = 0;
         headbar_uipara.time.w = 140;
         headbar_uipara.time.h = 16;
+#ifdef HBAR_SHOW_LOGO
+		headbar_uipara.logo.x = 5;
+		headbar_uipara.logo.y = 2;
+		headbar_uipara.logo.w = 98;
+		headbar_uipara.logo.h = 15; 
+#endif
 
         headbar_uipara.volume_icon.x 	= 0;
         headbar_uipara.volume_icon.y 	= 0;
@@ -360,6 +384,9 @@ void headbar_init_uipara(__hbar_format_t format)
         headbar_uipara.res_id.music_id 	= 0;
         headbar_uipara.res_id.bright_id	= 0;
         headbar_uipara.res_id.volume_id	= 0;
+#ifdef HBAR_SHOW_LOGO
+		headbar_uipara.res_id.logo_id	= ID_INIT_LOGO_BMP;
+#endif
 
         headbar_uipara.font 			= FONT16;
         break;
@@ -408,6 +435,12 @@ void headbar_init_uipara(__hbar_format_t format)
         headbar_uipara.time.y = 0;
         headbar_uipara.time.w = 100;
         headbar_uipara.time.h = 30;
+#ifdef HBAR_SHOW_LOGO
+		headbar_uipara.logo.x = 5;
+		headbar_uipara.logo.y = 2;
+		headbar_uipara.logo.w = 98;
+		headbar_uipara.logo.h = 15; 
+#endif
 
         headbar_uipara.volume_icon.x 	= 540;
         headbar_uipara.volume_icon.y 	= 6;
@@ -444,6 +477,9 @@ void headbar_init_uipara(__hbar_format_t format)
         headbar_uipara.res_id.music_id 	= 0;
         headbar_uipara.res_id.bright_id	= 0;
         headbar_uipara.res_id.volume_id	= 0;
+#ifdef HBAR_SHOW_LOGO
+		headbar_uipara.res_id.logo_id	= ID_INIT_LOGO_BMP;
+#endif
 
         headbar_uipara.font 			    = FONT16;
         break;
@@ -491,6 +527,12 @@ void headbar_init_uipara(__hbar_format_t format)
         headbar_uipara.time.y = 2;
         headbar_uipara.time.w = 100;
         headbar_uipara.time.h = 33;
+#ifdef HBAR_SHOW_LOGO
+		headbar_uipara.logo.x = 5;
+		headbar_uipara.logo.y = 2;
+		headbar_uipara.logo.w = 98;
+		headbar_uipara.logo.h = 15; 
+#endif
 
         headbar_uipara.volume_icon.x 	= 864;
         headbar_uipara.volume_icon.y 	= 4;
@@ -527,6 +569,9 @@ void headbar_init_uipara(__hbar_format_t format)
         headbar_uipara.res_id.music_id 	= 0;
         headbar_uipara.res_id.bright_id	= 0;
         headbar_uipara.res_id.volume_id	= 0;
+#ifdef HBAR_SHOW_LOGO
+		headbar_uipara.res_id.logo_id	= ID_INIT_LOGO_BMP;
+#endif
 
         headbar_uipara.font 				= FONT16;
         break;
@@ -574,6 +619,12 @@ void headbar_init_uipara(__hbar_format_t format)
         headbar_uipara.time.y = 2;
         headbar_uipara.time.w = 100;
         headbar_uipara.time.h = 33;
+#ifdef HBAR_SHOW_LOGO
+		headbar_uipara.logo.x = 5;
+		headbar_uipara.logo.y = 2;
+		headbar_uipara.logo.w = 98;
+		headbar_uipara.logo.h = 15; 
+#endif
 
         headbar_uipara.volume_icon.x 	= 1296;
         headbar_uipara.volume_icon.y 	= 4;
@@ -599,6 +650,9 @@ void headbar_init_uipara(__hbar_format_t format)
         headbar_uipara.battery.y 		= 6;
         headbar_uipara.battery.w 		= 62;
         headbar_uipara.battery.h 		= 28;
+#ifdef HBAR_SHOW_LOGO
+		headbar_uipara.res_id.logo_id	= ID_INIT_LOGO_BMP;
+#endif
 
         if( format == HBAR_FOARMAT_8BPP )
         {
