@@ -22,8 +22,10 @@ typedef struct __dv_sub_res
 {
 	load_bmp_res_t 	bmp_subset_singal[6];
 	load_bmp_res_t  bmp_subset_vol[6];
-	load_bmp_res_t  cam_play_pause[2];
-	
+//	load_bmp_res_t  cam_play_pause[2];
+	load_bmp_res_t	rec_cam_bmp[2];			//0: rec, 1: cam
+	load_bmp_res_t	rec_status_bmp;
+	load_bmp_res_t  sd_card_status[2];		// 0:no, 1:yes
 } *dv_sub_res;
 
 

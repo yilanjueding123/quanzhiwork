@@ -1,12 +1,3 @@
----- key_flag Matches (11 in 2 files) ----
-App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):static KEY_FLAG key_flag = KEY_NONE_ACTION;
-App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):			key_flag = KEY_PRESS_ACTION;
-App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):		if((LOWORD(msg->dwAddData1) == av1_ctrl->av1_spi_timmer_id)&&(key_flag == KEY_PRESS_ACTION))
-App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):			if(KEY_PRESS_ACTION == key_flag)
-App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):				key_flag = KEY_NONE_ACTION;
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):static KEY_FLAG key_flag = KEY_NONE_ACTION;
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):		key_flag = KEY_PRESS_ACTION;
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):	else if((msg->dwAddData1 == TIMER_DV_SRCH_ID)&&(key_flag == KEY_PRESS_ACTION))
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):		if(KEY_PRESS_ACTION == key_flag)
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):			//key_flag = KEY_NONE_ACTION;
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):		key_flag = KEY_NONE_ACTION;
+---- dv_dialog_search_creat Matches (2 in 1 files) ----
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):static void dv_dialog_search_creat( dv_frmwin_para_t *dv_frm_ctrl, RECT *dialoag_rect, HTHEME bg_res, __u32 string_id)
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):	dv_dialog_search_creat(dv_frm_ctrl, &rect, dv_frm_ctrl->uipara->msg_box_bg , dv_frm_ctrl->uipara->disk_full_id);

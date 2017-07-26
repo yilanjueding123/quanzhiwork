@@ -16,16 +16,6 @@
 #ifndef __DV_UIPARA_H__
 #define __DV_UIPARA_H__
 
-//typedef struct __dv_sub_res
-//{
-//	load_bmp_res_t 	bmp_subset_singal[6];
-//	//load_bmp_res_t  bmp_subset_charge[6];
-//	load_bmp_res_t  bmp_subset_vol[6];
-//	load_bmp_res_t  cam_play_pause[2];
-//	
-//} *dv_sub_res;
-
-
 typedef struct dv_uipara_para
 {
     __s32 				scn_w, 	scn_h ;
@@ -63,13 +53,14 @@ typedef struct dv_uipara_para
     HTHEME		single0_handle;
 
     HTHEME		msg_box_bg ;
+	HTHEME		msg_box_dialog;
     SIZE		msg_box_size ;
     __u32		no_sd_id ;
     __u32		disk_full_id ;
+	__u32		search_id;
 
     __u32  		rec_quantity_strid[2] ;
     __u32  		image_quantity_strid[3] ;
-//	dv_sub_res  sub_dv_res;
 } dv_uipara_para_t;
 
 void Dv_Uipara_Init( void );

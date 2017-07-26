@@ -22,7 +22,7 @@
 #define __putc(c)           esSIOS_putarg(c, 'c')
 #define __gets(s)          	esSIOS_gets(s)
 
-#if  1
+#if  0
 //#define __here__            eLIBs_printf("@L%d(%s)\n", __LINE__, __FILE__);
 //#define __log(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
 //						     eLIBs_printf(__VA_ARGS__)									        )

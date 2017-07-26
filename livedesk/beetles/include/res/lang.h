@@ -12,7 +12,7 @@
 *
 * By		: 
 * Version	: v1.00
-* Date		: 2017-7-25
+* Date		: 2017-7-26
 **********************************************************************************************************************
 */
 
@@ -369,6 +369,7 @@
 #define 	 STRING_DISK_FULL		0x2ee8
 #define 	 STRING_REC		0x2ee9
 #define 	 STRING_CAM		0x2eea
+#define 	 STRING_SEARCH_ID		0x2eeb
 
 
 #endif //__LANG__H__ 

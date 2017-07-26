@@ -102,8 +102,16 @@ static void DV_Uipara_Subset_Init(void)
     create_bmp_res(ID_INIT_ENERGY_4_BMP, sub_dv_res->bmp_subset_vol[4]);
     create_bmp_res(ID_INIT_ENERGY_5_BMP, sub_dv_res->bmp_subset_vol[5]);
 
-	create_bmp_res(ID_DV_TOP_CAM_BMP, sub_dv_res->cam_play_pause[0]);
-	create_bmp_res(ID_DV_TOP1_CAM_BMP, sub_dv_res->cam_play_pause[1]);
+//	create_bmp_res(ID_DV_TOP_CAM_BMP, sub_dv_res->cam_play_pause[0]);
+//	create_bmp_res(ID_DV_TOP1_CAM_BMP, sub_dv_res->cam_play_pause[1]);
+	
+	create_bmp_res(ID_DV_CAMERA_VIDEO_BMP, sub_dv_res->rec_cam_bmp[0]);
+	create_bmp_res(ID_DV_CAMERA_PHOTO_BMP, sub_dv_res->rec_cam_bmp[1]);
+	
+	create_bmp_res(ID_DV_RECORD_STATUS_BMP, sub_dv_res->rec_status_bmp);
+	
+	create_bmp_res(ID_INIT_SD_N_BMP, sub_dv_res->sd_card_status[0]);
+	create_bmp_res(ID_INIT_SD_Y_BMP, sub_dv_res->sd_card_status[1]);
 }
 
 /*****************************************************************************
@@ -135,8 +143,16 @@ static void DV_Uipara_Subset_UnInit(void)
 	destroy_bmp_res(sub_dv_res->bmp_subset_vol[5]);
 
 	
-	destroy_bmp_res(sub_dv_res->cam_play_pause[0]);
-	destroy_bmp_res(sub_dv_res->cam_play_pause[1]);
+//	destroy_bmp_res(sub_dv_res->cam_play_pause[0]);
+//	destroy_bmp_res(sub_dv_res->cam_play_pause[1]);
+	
+	destroy_bmp_res(sub_dv_res->rec_cam_bmp[0]);
+	destroy_bmp_res(sub_dv_res->rec_cam_bmp[1]);
+	
+	destroy_bmp_res(sub_dv_res->rec_status_bmp);
+	
+	destroy_bmp_res(sub_dv_res->sd_card_status[0]);
+	destroy_bmp_res(sub_dv_res->sd_card_status[1]);
 
 }
 
@@ -1396,7 +1412,7 @@ __s32 app_root_win_proc(__gui_msg_t *msg)
         root_ctrl->root_para = root_para;
         GUI_WinSetAddData(msg->h_deswin, (__u32)root_ctrl);
 
-		//GUI_SetTimer(msg->h_deswin, APP_ROOT_CHECK_MEM_INFO_ID, APP_ROOT_CHECK_MEM_INFO_TIMER_ID, NULL);
+		GUI_SetTimer(msg->h_deswin, APP_ROOT_CHECK_MEM_INFO_ID, APP_ROOT_CHECK_MEM_INFO_TIMER_ID, NULL);
         __root_scene_sem_init();
 
     }

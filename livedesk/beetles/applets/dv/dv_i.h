@@ -42,7 +42,6 @@ typedef enum dv_TIMER
     TIMER_DV_SRCH_ID = 0x21,
     TIMER_DV_SRCH_OVER_ID = 0x22,
     TIMER_DV_BATT_CHCK_ID = 0X25,
-    TIMER_DV_CAM_CNT_ID = 0x26,
 } dv_timer_e;
 
 // 录像分辨率, vga， 或者HD(720P)

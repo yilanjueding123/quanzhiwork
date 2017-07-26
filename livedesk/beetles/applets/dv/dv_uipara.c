@@ -56,11 +56,14 @@ void Dv_Uipara_Init( void )
     dv_para.single4_handle = dsk_theme_open(ID_DV_RF_SIGNAL_FULL_BMP);
 
     dv_para.msg_box_bg = dsk_theme_open(ID_DV_MSG_BACK_BMP);
+    dv_para.msg_box_dialog = dsk_theme_open(ID_DV_CAMERA_PHOTO_DIALOG_BMP);
     dv_para.msg_box_size.width = 220 ;
     dv_para.msg_box_size.height = 120 ;
 
     dv_para.no_sd_id = STRING_NO_SD ;
     dv_para.disk_full_id = STRING_DISK_FULL ;
+	
+    dv_para.search_id = STRING_SEARCH_ID ;
 
     dv_para.rec_quantity_strid[0] = STRING_REC_MP1 ;
     dv_para.rec_quantity_strid[1] = STRING_REC_MP1 ;
@@ -99,12 +102,18 @@ void Dv_Uipara_UnInit( void )
         dsk_theme_close(dv_para.single4_handle);
         dv_para.single4_handle = NULL ;
     }
+    if(dv_para.msg_box_dialog)
+    {
+        dsk_theme_close(dv_para.msg_box_dialog);
+        dv_para.msg_box_dialog = NULL ;
+    }
 
     if(dv_para.msg_box_bg)
     {
         dsk_theme_close(dv_para.msg_box_bg);
         dv_para.msg_box_bg = NULL ;
     }
+	
     if(dv_para.hbar_back_handle)
     {
         dsk_theme_close(dv_para.hbar_back_handle);

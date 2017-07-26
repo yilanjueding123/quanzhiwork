@@ -1803,131 +1803,137 @@
 #define    NAME_DV_720_WATER_MARK_MAOHAO_BMP                          "DV_720_WATER_MARK_MAOHAO_BMP"
 #define    ID_DV_720_WATER_MARK_MAOHAO_BMP                            596
 
+#define    NAME_DV_CAMERA_PHOTO_BMP                                   "DV_CAMERA_PHOTO_BMP"
+#define    ID_DV_CAMERA_PHOTO_BMP                                     597
+
+#define    NAME_DV_CAMERA_PHOTO_DIALOG_BMP                            "DV_CAMERA_PHOTO_DIALOG_BMP"
+#define    ID_DV_CAMERA_PHOTO_DIALOG_BMP                              598
+
+#define    NAME_DV_CAMERA_VIDEO_BMP                                   "DV_CAMERA_VIDEO_BMP"
+#define    ID_DV_CAMERA_VIDEO_BMP                                     599
+
 #define    NAME_DV_HBAR_BACK_BMP                                      "DV_HBAR_BACK_BMP"
-#define    ID_DV_HBAR_BACK_BMP                                        597
+#define    ID_DV_HBAR_BACK_BMP                                        600
 
 #define    NAME_DV_HBAR_TEXT_BMP                                      "DV_HBAR_TEXT_BMP"
-#define    ID_DV_HBAR_TEXT_BMP                                        598
+#define    ID_DV_HBAR_TEXT_BMP                                        601
 
 #define    NAME_DV_IMAGE_SETTING_BK_BMP                               "DV_IMAGE_SETTING_BK_BMP"
-#define    ID_DV_IMAGE_SETTING_BK_BMP                                 599
+#define    ID_DV_IMAGE_SETTING_BK_BMP                                 602
 
 #define    NAME_DV_ITEM_FCS_BMP                                       "DV_ITEM_FCS_BMP"
-#define    ID_DV_ITEM_FCS_BMP                                         600
+#define    ID_DV_ITEM_FCS_BMP                                         603
 
 #define    NAME_DV_ITEM_UFCS_BMP                                      "DV_ITEM_UFCS_BMP"
-#define    ID_DV_ITEM_UFCS_BMP                                        601
+#define    ID_DV_ITEM_UFCS_BMP                                        604
 
 #define    NAME_DV_MENU_BACK_BMP                                      "DV_MENU_BACK_BMP"
-#define    ID_DV_MENU_BACK_BMP                                        602
+#define    ID_DV_MENU_BACK_BMP                                        605
 
 #define    NAME_DV_MP_FCS_BMP                                         "DV_MP_FCS_BMP"
-#define    ID_DV_MP_FCS_BMP                                           603
+#define    ID_DV_MP_FCS_BMP                                           606
 
 #define    NAME_DV_MSG_BACK_BMP                                       "DV_MSG_BACK_BMP"
-#define    ID_DV_MSG_BACK_BMP                                         604
+#define    ID_DV_MSG_BACK_BMP                                         607
 
 #define    NAME_DV_NOSINGLE0_BMP                                      "DV_NOSINGLE0_BMP"
-#define    ID_DV_NOSINGLE0_BMP                                        605
+#define    ID_DV_NOSINGLE0_BMP                                        608
 
 #define    NAME_DV_NOSINGLE1_BMP                                      "DV_NOSINGLE1_BMP"
-#define    ID_DV_NOSINGLE1_BMP                                        606
+#define    ID_DV_NOSINGLE1_BMP                                        609
 
 #define    NAME_DV_OPT_ITEM_BMP                                       "DV_OPT_ITEM_BMP"
-#define    ID_DV_OPT_ITEM_BMP                                         607
+#define    ID_DV_OPT_ITEM_BMP                                         610
+
+#define    NAME_DV_RECORD_STATUS_BMP                                  "DV_RECORD_STATUS_BMP"
+#define    ID_DV_RECORD_STATUS_BMP                                    611
 
 #define    NAME_DV_REC_FLASH1_BMP                                     "DV_REC_FLASH1_BMP"
-#define    ID_DV_REC_FLASH1_BMP                                       608
+#define    ID_DV_REC_FLASH1_BMP                                       612
 
 #define    NAME_DV_REC_FLASH2_BMP                                     "DV_REC_FLASH2_BMP"
-#define    ID_DV_REC_FLASH2_BMP                                       609
+#define    ID_DV_REC_FLASH2_BMP                                       613
 
 #define    NAME_DV_REC_SETTING_BK_BMP                                 "DV_REC_SETTING_BK_BMP"
-#define    ID_DV_REC_SETTING_BK_BMP                                   610
+#define    ID_DV_REC_SETTING_BK_BMP                                   614
 
 #define    NAME_DV_RF_SIGNAL_0_BMP                                    "DV_RF_SIGNAL_0_BMP"
-#define    ID_DV_RF_SIGNAL_0_BMP                                      611
+#define    ID_DV_RF_SIGNAL_0_BMP                                      615
 
 #define    NAME_DV_RF_SIGNAL_1_BMP                                    "DV_RF_SIGNAL_1_BMP"
-#define    ID_DV_RF_SIGNAL_1_BMP                                      612
+#define    ID_DV_RF_SIGNAL_1_BMP                                      616
 
 #define    NAME_DV_RF_SIGNAL_2_BMP                                    "DV_RF_SIGNAL_2_BMP"
-#define    ID_DV_RF_SIGNAL_2_BMP                                      613
+#define    ID_DV_RF_SIGNAL_2_BMP                                      617
 
 #define    NAME_DV_RF_SIGNAL_3_BMP                                    "DV_RF_SIGNAL_3_BMP"
-#define    ID_DV_RF_SIGNAL_3_BMP                                      614
+#define    ID_DV_RF_SIGNAL_3_BMP                                      618
 
 #define    NAME_DV_RF_SIGNAL_FULL_BMP                                 "DV_RF_SIGNAL_FULL_BMP"
-#define    ID_DV_RF_SIGNAL_FULL_BMP                                   615
+#define    ID_DV_RF_SIGNAL_FULL_BMP                                   619
 
 #define    NAME_DV_SIGNAL_LEVEL_FIVE_BMP                              "DV_SIGNAL_LEVEL_FIVE_BMP"
-#define    ID_DV_SIGNAL_LEVEL_FIVE_BMP                                616
+#define    ID_DV_SIGNAL_LEVEL_FIVE_BMP                                620
 
 #define    NAME_DV_SIGNAL_LEVEL_FOUR_BMP                              "DV_SIGNAL_LEVEL_FOUR_BMP"
-#define    ID_DV_SIGNAL_LEVEL_FOUR_BMP                                617
+#define    ID_DV_SIGNAL_LEVEL_FOUR_BMP                                621
 
 #define    NAME_DV_SIGNAL_LEVEL_NONE_BMP                              "DV_SIGNAL_LEVEL_NONE_BMP"
-#define    ID_DV_SIGNAL_LEVEL_NONE_BMP                                618
+#define    ID_DV_SIGNAL_LEVEL_NONE_BMP                                622
 
 #define    NAME_DV_SIGNAL_LEVEL_ONE_BMP                               "DV_SIGNAL_LEVEL_ONE_BMP"
-#define    ID_DV_SIGNAL_LEVEL_ONE_BMP                                 619
+#define    ID_DV_SIGNAL_LEVEL_ONE_BMP                                 623
 
 #define    NAME_DV_SIGNAL_LEVEL_THREE_BMP                             "DV_SIGNAL_LEVEL_THREE_BMP"
-#define    ID_DV_SIGNAL_LEVEL_THREE_BMP                               620
+#define    ID_DV_SIGNAL_LEVEL_THREE_BMP                               624
 
 #define    NAME_DV_SIGNAL_LEVEL_TWO_BMP                               "DV_SIGNAL_LEVEL_TWO_BMP"
-#define    ID_DV_SIGNAL_LEVEL_TWO_BMP                                 621
-
-#define    NAME_DV_TOP1_CAM_BMP                                       "DV_TOP1_CAM_BMP"
-#define    ID_DV_TOP1_CAM_BMP                                         622
-
-#define    NAME_DV_TOP_CAM_BMP                                        "DV_TOP_CAM_BMP"
-#define    ID_DV_TOP_CAM_BMP                                          623
+#define    ID_DV_SIGNAL_LEVEL_TWO_BMP                                 625
 
 #define    NAME_DV_VGA_WATER_MARK_0_BMP                               "DV_VGA_WATER_MARK_0_BMP"
-#define    ID_DV_VGA_WATER_MARK_0_BMP                                 624
+#define    ID_DV_VGA_WATER_MARK_0_BMP                                 626
 
 #define    NAME_DV_VGA_WATER_MARK_1_BMP                               "DV_VGA_WATER_MARK_1_BMP"
-#define    ID_DV_VGA_WATER_MARK_1_BMP                                 625
+#define    ID_DV_VGA_WATER_MARK_1_BMP                                 627
 
 #define    NAME_DV_VGA_WATER_MARK_2_BMP                               "DV_VGA_WATER_MARK_2_BMP"
-#define    ID_DV_VGA_WATER_MARK_2_BMP                                 626
+#define    ID_DV_VGA_WATER_MARK_2_BMP                                 628
 
 #define    NAME_DV_VGA_WATER_MARK_3_BMP                               "DV_VGA_WATER_MARK_3_BMP"
-#define    ID_DV_VGA_WATER_MARK_3_BMP                                 627
+#define    ID_DV_VGA_WATER_MARK_3_BMP                                 629
 
 #define    NAME_DV_VGA_WATER_MARK_4_BMP                               "DV_VGA_WATER_MARK_4_BMP"
-#define    ID_DV_VGA_WATER_MARK_4_BMP                                 628
+#define    ID_DV_VGA_WATER_MARK_4_BMP                                 630
 
 #define    NAME_DV_VGA_WATER_MARK_5_BMP                               "DV_VGA_WATER_MARK_5_BMP"
-#define    ID_DV_VGA_WATER_MARK_5_BMP                                 629
+#define    ID_DV_VGA_WATER_MARK_5_BMP                                 631
 
 #define    NAME_DV_VGA_WATER_MARK_6_BMP                               "DV_VGA_WATER_MARK_6_BMP"
-#define    ID_DV_VGA_WATER_MARK_6_BMP                                 630
+#define    ID_DV_VGA_WATER_MARK_6_BMP                                 632
 
 #define    NAME_DV_VGA_WATER_MARK_7_BMP                               "DV_VGA_WATER_MARK_7_BMP"
-#define    ID_DV_VGA_WATER_MARK_7_BMP                                 631
+#define    ID_DV_VGA_WATER_MARK_7_BMP                                 633
 
 #define    NAME_DV_VGA_WATER_MARK_8_BMP                               "DV_VGA_WATER_MARK_8_BMP"
-#define    ID_DV_VGA_WATER_MARK_8_BMP                                 632
+#define    ID_DV_VGA_WATER_MARK_8_BMP                                 634
 
 #define    NAME_DV_VGA_WATER_MARK_9_BMP                               "DV_VGA_WATER_MARK_9_BMP"
-#define    ID_DV_VGA_WATER_MARK_9_BMP                                 633
+#define    ID_DV_VGA_WATER_MARK_9_BMP                                 635
 
 #define    NAME_DV_VGA_WATER_MARK_BLANK_BMP                           "DV_VGA_WATER_MARK_BLANK_BMP"
-#define    ID_DV_VGA_WATER_MARK_BLANK_BMP                             634
+#define    ID_DV_VGA_WATER_MARK_BLANK_BMP                             636
 
 #define    NAME_DV_VGA_WATER_MARK_DEC_BMP                             "DV_VGA_WATER_MARK_DEC_BMP"
-#define    ID_DV_VGA_WATER_MARK_DEC_BMP                               635
+#define    ID_DV_VGA_WATER_MARK_DEC_BMP                               637
 
 #define    NAME_DV_VGA_WATER_MARK_MAOHAO_BMP                          "DV_VGA_WATER_MARK_MAOHAO_BMP"
-#define    ID_DV_VGA_WATER_MARK_MAOHAO_BMP                            636
+#define    ID_DV_VGA_WATER_MARK_MAOHAO_BMP                            638
 
 #define    NAME_DV_WORK_CAM_BMP                                       "DV_WORK_CAM_BMP"
-#define    ID_DV_WORK_CAM_BMP                                         637
+#define    ID_DV_WORK_CAM_BMP                                         639
 
 #define    NAME_DV_WORK_REC_BMP                                       "DV_WORK_REC_BMP"
-#define    ID_DV_WORK_REC_BMP                                         638
+#define    ID_DV_WORK_REC_BMP                                         640
 
 
 //------------------------------------------------------------------------------------------------------------
