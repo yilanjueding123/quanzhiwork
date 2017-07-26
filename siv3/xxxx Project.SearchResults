@@ -1,3 +1,3 @@
----- dv_dialog_search_creat Matches (2 in 1 files) ----
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):static void dv_dialog_search_creat( dv_frmwin_para_t *dv_frm_ctrl, RECT *dialoag_rect, HTHEME bg_res, __u32 string_id)
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):	dv_dialog_search_creat(dv_frm_ctrl, &rect, dv_frm_ctrl->uipara->msg_box_bg , dv_frm_ctrl->uipara->disk_full_id);
+---- dsk_query_tvout_detect_pin Matches (2 in 1 files) ----
+App_root_scene.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\app_root):__u8 dsk_query_tvout_detect_pin(void)
+App_root_scene.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\app_root):			tvout_next_status = dsk_query_tvout_detect_pin();

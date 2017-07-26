@@ -233,6 +233,9 @@ SPI_MISO	    = port:PC2<2><default><default><default>
 [ir_para]
 IR_RX	        = port:PE11<4><default><default><default>
 
+[tv_in_para]
+DETECT_PIN	        = port:PE5<1><default><default><default>
+
 ;lcd2&lcd18 used by OTG
 [lcd0_para]
 lcd_power_used = 0

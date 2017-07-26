@@ -26,12 +26,15 @@ typedef struct __dv_sub_res
 	load_bmp_res_t	rec_cam_bmp[2];			//0: rec, 1: cam
 	load_bmp_res_t	rec_status_bmp;
 	load_bmp_res_t  sd_card_status[2];		// 0:no, 1:yes
+//	load_bmp_res_t	set_logo;
 } *dv_sub_res;
 
 
 #define APP_ROOT_CHECK_MEM_INFO_ID   0x33
 #define APP_ROOT_CHECK_MEM_INFO_TIMER_ID 100
 #define ID_ROOT_SETTIN_CMMD  6
+
+#define SUPPORT_TV_OUT
 
 H_WIN app_root_wincreate(Activity *activity);
 

@@ -21,6 +21,7 @@
 #include "setting_para.h"
 
 #define ITEM_Y	38
+//#define AREA_W 	40
 
 static tips_uipara_t setting_tips_uipara_800_480 =
 {

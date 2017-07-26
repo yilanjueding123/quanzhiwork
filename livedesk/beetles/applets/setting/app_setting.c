@@ -22,19 +22,14 @@
 #include "setting_general.h"
 #include "setting_power.h"
 #include "setting_tips.h"
-
-#if  0
-#define __msg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
-						     eLIBs_printf(__VA_ARGS__)									        )
-#else
-#define __msg(...)    	
-#endif
+#include "app_root_scene.h"
 
 
 /***********************************************************************************************************
 	建立图层
 ************************************************************************************************************/
 __u8  back_set_atate = 0; //0:背光亮度   1: 背光时间  2:恢复出厂设置 3:格式化卡，4:无卡
+
 static H_LYR setting_layer_palette_create(RECT *rect)
 {
     H_LYR layer = NULL;
@@ -96,7 +91,7 @@ static H_LYR setting_layer_palette_create(RECT *rect)
 static __s32 setting_win_create(__gui_msg_t *msg)
 {
     setting_ctrl_t	*setting_ctrl;
-    RECT rect;
+    RECT rect, rect_hbar;
     SIZE screen_size;
 
     setting_ctrl = (setting_ctrl_t *)GUI_WinGetAttr(msg->h_deswin);
@@ -115,6 +110,7 @@ static __s32 setting_win_create(__gui_msg_t *msg)
     rect.width = screen_size.width;
     rect.height = screen_size.height;
 #endif
+
     setting_ctrl->lyr_setting = setting_layer_palette_create(&rect);
 
     if (setting_ctrl->root_type == SETTING_GENERAL)
@@ -137,7 +133,7 @@ static __s32 setting_win_create(__gui_msg_t *msg)
         setting_ctrl->h_frm_power = setting_power_win_create(msg->h_deswin, &power_para);
         GUI_WinSetFocusChild(setting_ctrl->h_frm_power);
     }
-
+	//app_set_hbar_draw(setting_ctrl->lyr_hbar);
     return EPDK_OK;
 }
 
@@ -149,6 +145,11 @@ static __s32 _app_setting_Proc(__gui_msg_t *msg)
     {
         com_set_palette_by_id(ID_SETTING_WKM_BMP);
         setting_win_create(msg);
+#ifdef HBAR_SHOW_BT
+		gscene_hbar_set_state(HBAR_ST_SHOW);
+#else
+		gscene_hbar_set_state(HBAR_ST_HIDE);
+#endif		
     }
     return EPDK_OK;
     case GUI_MSG_CLOSE:
@@ -632,7 +633,6 @@ H_WIN app_setting_create(root_para_t *para)
     setting_ctrl = (setting_ctrl_t *)My_Balloc(sizeof(setting_ctrl_t));
     if(!setting_ctrl)
     {
-
         __msg("memory balloc fail.........\n");
         return EPDK_FAIL;
     }

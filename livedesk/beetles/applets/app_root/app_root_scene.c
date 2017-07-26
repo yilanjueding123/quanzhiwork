@@ -24,14 +24,14 @@
 #include "home/app_home.h"
 #include "explorer/explorer.h"
 #include "movie/app_movie.h"
-#include "music/music.h"
+//#include "music/music.h"
 #include "photo/app_photo.h"
 #include "setting/app_setting.h"
-#include "fm/app_fm.h"
+//#include "fm/app_fm.h"
 #include "ebook/app_ebook.h"
-#include "record/app_record.h"
+//#include "record/app_record.h"
 
-#if  0
+#if  1
 //#define __here__            eLIBs_printf("@L%d(%s)\n", __LINE__, __FILE__);
 #define __msg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
 						     eLIBs_printf(__VA_ARGS__)									        )
@@ -73,6 +73,188 @@ dv_sub_res  sub_dv_res;
 static __krnl_event_t *g_root_scene_sem = NULL;
 
 
+#ifdef SUPPORT_TV_OUT
+static __hdle tvout_detect_pin_hdl = 0;
+static __s32 __request_tvout_detect_pin(void)
+{
+	__s32 ret;
+	user_gpio_set_t  gpio_set[1];
+
+	__msg("__request_tvout_detect_pin\n");
+
+	eLIBs_memset(gpio_set, 0, sizeof(user_gpio_set_t));
+
+	ret = esCFG_GetKeyValue("tv_in_para", "DETECT_PIN", (int *)gpio_set, sizeof(user_gpio_set_t)/4);
+	if(ret)
+	{
+		__wrn("fetch DETECT_PIN script failed\n");
+	}
+	else
+	{
+		tvout_detect_pin_hdl = esPINS_PinGrpReq(gpio_set, 1);
+		if(!tvout_detect_pin_hdl)
+		{
+			__msg("request DETECT_PIN failed\n");
+			ret = EPDK_FAIL;
+		}
+		else
+		{
+			ret = esPINS_SetPinPull(tvout_detect_pin_hdl, PIN_PULL_UP, NULL);
+			if(ret)
+			{
+				__wrn("pull DETECT_PIN failed\n");
+			}
+			esPINS_SetPinIO(tvout_detect_pin_hdl, 1, NULL);
+		}
+	}
+	return ret;
+}
+
+void __release_tvout_detect_pin(void)
+{
+	if(tvout_detect_pin_hdl)
+	{
+		esPINS_PinGrpRel(tvout_detect_pin_hdl, 0);
+	}
+}
+
+
+
+#if 1
+#define PIOC_MEM_BASE   (0xf1c20800)
+
+#define PIO_REG_CFG(n, i)               ((volatile unsigned int *)( PIOC_MEM_BASE + ((n)-1)*0x24 + ((i)<<2) + 0x00))
+#define PIO_REG_DLEVEL(n, i)            ((volatile unsigned int *)( PIOC_MEM_BASE + ((n)-1)*0x24 + ((i)<<2) + 0x14))
+#define PIO_REG_PULL(n, i)              ((volatile unsigned int *)( PIOC_MEM_BASE + ((n)-1)*0x24 + ((i)<<2) + 0x1C))
+#define PIO_REG_DATA(n) 	            ((volatile unsigned int *)( PIOC_MEM_BASE + ((n)-1)*0x24 + 0x10))
+
+static __s32 get_gpio_status(__u32 port, __u32 port_num)
+{
+    volatile  __u32    *tmp_addr;
+    __u32               tmp_data;
+    __s32               ret;
+    __u32               tmp1;
+    __u32               tmp2;
+
+    //设置为输入
+    tmp1 = (port_num - ((port_num >> 3) << 3)) << 2;
+    tmp_addr = PIO_REG_CFG(port, (port_num >> 3));
+    tmp_data = *tmp_addr;
+    tmp_data &= ~(0x07 << tmp1);
+    tmp_data |=  (0x00 << tmp1);
+    *tmp_addr = tmp_data;
+
+    //设置为下拉
+    tmp2 = (port_num - ((port_num >> 4) << 4)) << 1;
+    tmp_addr = PIO_REG_PULL(port, (port_num >> 4));
+    tmp_data = *tmp_addr;
+    tmp_data &= ~(0x03 << tmp2);
+    tmp_data |=  (0x02 << tmp2);
+    *tmp_addr = tmp_data;
+
+
+    tmp_addr = PIO_REG_DATA(port);
+    tmp_data = *tmp_addr;
+
+    __wrn("tmp_data=0x%x\n", tmp_data);
+    ret = (tmp_data & (1 << port_num)) >> port_num;
+
+    return ret;
+}
+
+static void pull_down_gpio(__u32 port, __u32 port_num)
+{
+    volatile  __u32    *tmp_addr;
+    __u32               tmp_data;
+    __u32               tmp1;
+    __u32               tmp2;
+
+
+    //设置为输出
+    tmp1 = (port_num - ((port_num >> 3) << 3)) << 2;
+    tmp_addr = PIO_REG_CFG(port, (port_num >> 3));
+    tmp_data = *tmp_addr;
+    tmp_data &= ~(0x07 << tmp1);
+    tmp_data |=  (0x01 << tmp1);
+    *tmp_addr = tmp_data;
+
+    //设置为下拉
+    tmp2 = (port_num - ((port_num >> 4) << 4)) << 1;
+    tmp_addr = PIO_REG_PULL(port, (port_num >> 4));
+    tmp_data = *tmp_addr;
+    tmp_data &= ~(0x03 << tmp2);
+    tmp_data |=  (0x02 << tmp2);
+    *tmp_addr = tmp_data;
+
+    //输出低电平
+    tmp_addr = PIO_REG_DATA(port);
+    tmp_data = *tmp_addr;
+    tmp_data &= ~(1 << port_num);
+    //tmp_data |=  (1 << port_num);
+    *tmp_addr = tmp_data;
+
+}
+
+static void pull_up_gpio(__u32 port, __u32 port_num)
+{
+    volatile  __u32    *tmp_addr;
+    __u32               tmp_data;
+    __u32               tmp1;
+    __u32               tmp2;
+
+
+    //设置为输出
+    tmp1 = (port_num - ((port_num >> 3) << 3)) << 2;
+    tmp_addr = PIO_REG_CFG(port, (port_num >> 3));
+    tmp_data = *tmp_addr;
+    tmp_data &= ~(0x07 << tmp1);
+    tmp_data |=  (0x01 << tmp1);
+    *tmp_addr = tmp_data;
+
+    //设置为上拉
+    tmp2 = (port_num - ((port_num >> 4) << 4)) << 1;
+    tmp_addr = PIO_REG_PULL(port, (port_num >> 4));
+    tmp_data = *tmp_addr;
+    tmp_data &= ~(0x03 << tmp2);
+    tmp_data |=  (0x01 << tmp2);
+    *tmp_addr = tmp_data;
+
+    //输出高电平
+    tmp_addr = PIO_REG_DATA(port);
+    tmp_data = *tmp_addr;
+    tmp_data &= ~(1 << port_num);
+    tmp_data |=  (1 << port_num);
+    *tmp_addr = tmp_data;
+
+}
+
+static __s32 __lcd_bl_open(void)
+{
+
+    __msg("__lcd_bl_open ok\n");
+}
+#endif
+__u8 dsk_query_tvout_detect_pin(void)
+{
+	__u8 pin_valid;
+
+	pin_valid = 0;
+	/*if(tvout_detect_pin_hdl)
+	{
+		if(!esPINS_ReadPinData(tvout_detect_pin_hdl, 0))
+		{	
+			pin_valid = 1;
+		}
+		__msg("pin_valid = %d\n", pin_valid);
+	}*/
+	pin_valid = get_gpio_status(5,5);
+	__msg("pin_valid = %d\n", pin_valid);
+	return pin_valid;
+}
+
+
+#endif
+
 /*****************************************************************************
  * 函 数 名  : DV_Uipara_Subset_Init
  * 负 责 人  : Zhibo
@@ -112,6 +294,7 @@ static void DV_Uipara_Subset_Init(void)
 	
 	create_bmp_res(ID_INIT_SD_N_BMP, sub_dv_res->sd_card_status[0]);
 	create_bmp_res(ID_INIT_SD_Y_BMP, sub_dv_res->sd_card_status[1]);
+//	create_bmp_res(ID_INIT_LOGO_BMP, sub_dv_res->set_logo);
 }
 
 /*****************************************************************************
@@ -153,6 +336,7 @@ static void DV_Uipara_Subset_UnInit(void)
 	
 	destroy_bmp_res(sub_dv_res->sd_card_status[0]);
 	destroy_bmp_res(sub_dv_res->sd_card_status[1]);
+//	destroy_bmp_res(sub_dv_res->set_logo);
 
 }
 
@@ -401,6 +585,7 @@ static void __app_root_delete_bg_music(__gui_msg_t *msg)
 
 static void __app_root_create_bg_music(__gui_msg_t *msg)
 {
+/*
     H_WIN root, child;
     char  winname[256];
     __bool exist;
@@ -436,6 +621,7 @@ static void __app_root_create_bg_music(__gui_msg_t *msg)
         root_ctrl->root_para->h_parent = GUI_WinGetParent(root_ctrl->h_app_home);
         root_ctrl->h_app_music =  app_music_create(root_para);
     }
+	*/
 }
 
 
@@ -801,6 +987,7 @@ static __s32 app_root_command_proc(__gui_msg_t *msg)
         }
         case VIDEO_SW_TO_AUDIO:
         {
+			/*
             GUI_ManWinDelete(root_ctrl->h_app_movie);
             root_ctrl->h_app_movie = 0;
             DebugPrintf("music switch to movie ...........root_para->explr_root=%d\n", root_para->explr_root);
@@ -809,6 +996,7 @@ static __s32 app_root_command_proc(__gui_msg_t *msg)
             root_ctrl->root_para->h_parent = GUI_WinGetParent(root_ctrl->h_app_home);
             root_ctrl->h_app_music =  app_music_create(root_para);
             GUI_WinSetFocusChild(root_ctrl->h_app_music);
+			*/
             break;
         }
         default:
@@ -1411,7 +1599,9 @@ __s32 app_root_win_proc(__gui_msg_t *msg)
 
         root_ctrl->root_para = root_para;
         GUI_WinSetAddData(msg->h_deswin, (__u32)root_ctrl);
-
+#ifdef 	SUPPORT_TV_OUT	
+		__request_tvout_detect_pin();
+#endif
 		GUI_SetTimer(msg->h_deswin, APP_ROOT_CHECK_MEM_INFO_ID, APP_ROOT_CHECK_MEM_INFO_TIMER_ID, NULL);
         __root_scene_sem_init();
 
@@ -1444,6 +1634,10 @@ __s32 app_root_win_proc(__gui_msg_t *msg)
     	{
         	GUI_KillTimer(msg->h_deswin, APP_ROOT_CHECK_MEM_INFO_ID);
     	}
+#ifdef 	SUPPORT_TV_OUT	
+		__release_tvout_detect_pin();
+#endif
+		
         esMEMS_Bfree(root_para, sizeof(root_para_t));
         esMEMS_Bfree(root_ctrl, sizeof(root_ctrl_t));
 
@@ -1452,12 +1646,30 @@ __s32 app_root_win_proc(__gui_msg_t *msg)
     return EPDK_OK;
 	case GUI_MSG_TIMER:
 	{
+#ifdef SUPPORT_TV_OUT		
+		static __u8 tvout_prv_status = -1, tvout_next_status = -1;
+
 		if(LOWORD(msg->dwAddData1) == APP_ROOT_CHECK_MEM_INFO_ID)
 		{
-			//__msg("check_mem_inf: ");
-			esMEMS_Info();
-			//__msg("   \r\n");
+			//esMEMS_Info();
+			tvout_next_status = dsk_query_tvout_detect_pin();
+
+			__msg("tvout_next_status = %d,tvout_prv_status = %d\n", tvout_next_status, tvout_prv_status);
+			if(tvout_next_status != tvout_prv_status)
+			{
+				if(0 == tvout_next_status)
+				{
+					dsk_display_lcd_off();
+				}
+				else
+				{
+					dsk_display_lcd_on();
+				}
+			}
+			
+			tvout_prv_status = tvout_next_status;
 		}
+#endif		
 	}
     case GUI_MSG_COMMAND:
     {

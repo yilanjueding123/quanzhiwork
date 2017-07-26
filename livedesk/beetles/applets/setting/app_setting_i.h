@@ -20,6 +20,7 @@
 
 #include "beetles_app.h"
 
+
 #define SET_ITEM_START_X 10//150
 #define SET_ITEM_START_Y  40 - 38
 #define SET_ITEM_H 46

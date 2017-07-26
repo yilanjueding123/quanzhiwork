@@ -1,18 +1,15 @@
 <OSDTable>
-<Groups count="13">
+<Groups count="10">
 <OSDItem name="init" startid="1" maxid="1000" file="init\init.txt"/>
 <OSDItem name="home" startid="1001" maxid="2000" file="home\home.txt"/>
 <OSDItem name="explorer" startid="2001" maxid="3000" file="explorer\explorer.txt"/>
 <OSDItem name="movie" startid="3001" maxid="4000" file="movie\movie.txt"/>
-<OSDItem name="music" startid="4001" maxid="5000" file="music\music.txt"/>
-<OSDItem name="calendar" startid="5001" maxid="6000" file="calendar\calendar.txt"/>
-<OSDItem name="setting" startid="6001" maxid="7000" file="setting\setting.txt"/>
-<OSDItem name="photo" startid="7001" maxid="8000" file="photo\photo.txt"/>
-<OSDItem name="ebook" startid="8001" maxid="9000" file="ebook\ebook.txt"/>
-<OSDItem name="record" startid="9001" maxid="10000" file="record\record.txt"/>
-<OSDItem name="fm" startid="10001" maxid="11000" file="fm\fm.txt"/>
-<OSDItem name="dialog" startid="11001" maxid="12000" file="dialog\dialog.txt"/>
-<OSDItem name="dv" startid="12001" maxid="13000" file="dv\dv.txt"/>
+<OSDItem name="calendar" startid="4001" maxid="5000" file="calendar\calendar.txt"/>
+<OSDItem name="setting" startid="5001" maxid="6000" file="setting\setting.txt"/>
+<OSDItem name="photo" startid="6001" maxid="7000" file="photo\photo.txt"/>
+<OSDItem name="ebook" startid="7001" maxid="8000" file="ebook\ebook.txt"/>
+<OSDItem name="dialog" startid="8001" maxid="9000" file="dialog\dialog.txt"/>
+<OSDItem name="dv" startid="9001" maxid="10000" file="dv\dv.txt"/>
 </Groups>
 <LangType count="3">
 <LangItem name="ChineseS" langId="0x410"/>

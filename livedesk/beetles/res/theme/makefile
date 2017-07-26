@@ -29,15 +29,12 @@ buildtheme:
 	$(ESTUDIOROOT)/Softwares/Face200/MakeScript/MakeScript.exe ./home       1001    2000
 	$(ESTUDIOROOT)/Softwares/Face200/MakeScript/MakeScript.exe ./movie      2001    3000
 	$(ESTUDIOROOT)/Softwares/Face200/MakeScript/MakeScript.exe ./explorer   3001    4000
-	$(ESTUDIOROOT)/Softwares/Face200/MakeScript/MakeScript.exe ./music      4001    5000
-	$(ESTUDIOROOT)/Softwares/Face200/MakeScript/MakeScript.exe ./photo      5001    6000
-	$(ESTUDIOROOT)/Softwares/Face200/MakeScript/MakeScript.exe ./setting    6001    7000
-	$(ESTUDIOROOT)/Softwares/Face200/MakeScript/MakeScript.exe ./ebook      7001    8000
-	$(ESTUDIOROOT)/Softwares/Face200/MakeScript/MakeScript.exe ./fm         8001    9000
-	$(ESTUDIOROOT)/Softwares/Face200/MakeScript/MakeScript.exe ./calendar   9001    10000
-	$(ESTUDIOROOT)/Softwares/Face200/MakeScript/MakeScript.exe ./dialog     10001   11000
-	$(ESTUDIOROOT)/Softwares/Face200/MakeScript/MakeScript.exe ./record     11001   12000
-	$(ESTUDIOROOT)/Softwares/Face200/MakeScript/MakeScript.exe ./dv     		12001   13000
+	$(ESTUDIOROOT)/Softwares/Face200/MakeScript/MakeScript.exe ./photo      4001    5000
+	$(ESTUDIOROOT)/Softwares/Face200/MakeScript/MakeScript.exe ./setting    5001    6000
+	$(ESTUDIOROOT)/Softwares/Face200/MakeScript/MakeScript.exe ./ebook      6001    7000
+	$(ESTUDIOROOT)/Softwares/Face200/MakeScript/MakeScript.exe ./calendar   8001    9000
+	$(ESTUDIOROOT)/Softwares/Face200/MakeScript/MakeScript.exe ./dialog     9001   10000
+	$(ESTUDIOROOT)/Softwares/Face200/MakeScript/MakeScript.exe ./dv     		10001   11000
     
 	# create theme for the whole case
 	-rm touchtheme.script
@@ -46,14 +43,11 @@ buildtheme:
 		./home/home.script              \
 		./movie/movie.script            \
 		./explorer/explorer.script            \
-		./music/music.script            \
 		./photo/photo.script            \
 		./setting/setting.script            \
 		./ebook/ebook.script            \
-		./fm/fm.script            \
 		./calendar/calendar.script            \
 		./dialog/dialog.script            \
-		./record/record.script            \
 		./dv/dv.script            \
         >> touchtheme.script
 
@@ -73,13 +67,10 @@ clean:
 	-rm ./home/home.script
 	-rm ./explorer/explorer.script
 	-rm ./movie/movie.script
-	-rm ./music/music.script
 	-rm ./ebook/ebook.script
 	-rm ./setting/setting.script
 	-rm ./record/record.script
 	-rm ./calendar/calendar.script
-	-rm ./fm/fm.script
 	-rm ./dialog/dialog.script
 	-rm ./photo/photo.script
-	-rm ./record/record.script
 	-rm ./dv/dv.script

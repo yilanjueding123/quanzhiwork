@@ -2894,8 +2894,6 @@ static __s32 _setting_general_Proc(__gui_msg_t *msg)
         p_item_res = &general_attr->res_jh_bgtime;
         p_item_res->content_num = msg->dwReserved ;
         setting_general_pop_item_paint(msg);
-
-
     }
 #endif
     return EPDK_OK;
