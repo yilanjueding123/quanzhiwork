@@ -1170,9 +1170,6 @@ static __s32  explorer_list_win_on_command(__gui_msg_t *msg)
                         explorer_create_delete_failed_dialog(list_para->list_win);
                     }
                 }
-                else//ADLG_IDNO
-                {
-                }
                 list_para->h_dialog = NULL;
             }
             if(list_para->h_dialog_msg != NULL)
@@ -1249,7 +1246,7 @@ static __s32  explorer_list_win_key_proc(__gui_msg_t *msg)
 
     static __u8  key_cnt = 0;
     list_para = (explr_list_para_t *)GUI_WinGetAttr(msg->h_deswin);
-
+	__msg("msg->dwAddData1 = 0x%x, msg->dwAddData2 = %d\n", msg->dwAddData1, msg->dwAddData2);
     if((KEY_DOWN_ACTION == msg->dwAddData2) || (KEY_REPEAT_ACTION == msg->dwAddData2))
     {
         switch(msg->dwAddData1)
@@ -1328,7 +1325,7 @@ static __s32  explorer_list_win_key_proc(__gui_msg_t *msg)
             break;
         case GUI_MSG_KEY_LONGMENU:
             key_cnt++;
-            if(key_cnt > 5)
+            if(key_cnt > 3)
             {
                 if(last_key == GUI_MSG_KEY_MENU)
                 {
@@ -1343,7 +1340,7 @@ static __s32  explorer_list_win_key_proc(__gui_msg_t *msg)
                             explorer_clean_delete_file_hint_area();
                             // explorer_draw_file_info(list_para);
                         }
-                        __here__;
+                        
                         {
                             __s32 str[] = {STRING_EXPLR_DELETE_CONFIRM, STRING_EXPLR_DELETE_CONFIRM};
                             H_WIN parent = GUI_WinGetParent(msg->h_deswin);

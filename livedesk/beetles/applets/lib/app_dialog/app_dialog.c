@@ -20,7 +20,7 @@
 __u8   dialog_jh_tran_data;
 __u8   dialog_current_state;
 
-#if  0
+#if  1
 #define __inf(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
 								 eLIBs_printf(__VA_ARGS__)											)
 
@@ -319,6 +319,7 @@ static __s32 app_dialog_ui_init(dialog_wnd_t *wnd_para, GUI_RECT *dialog_rt)
         ui->rt.y      = 32;
         ui->rt.height = 168+50;
 	}
+	
 #endif
 /////////////////////////////////////////
 	__inf("ui->rt.x = %d, ui->rt.y = %d, ui->rt.width = %d, ui->rt.height = %d\n", ui->rt.x, ui->rt.y, ui->rt.width, ui->rt.height);
@@ -533,15 +534,12 @@ static __s32 on_dialog_key_up_action(H_WIN hwnd, __u32 keycode)
         }
 #endif
         if(dialog_jh_tran_data > 0)
+        {
             dialog_jh_tran_data --;
+        }
         if(dialog_current_state == 0)
         {
             dsk_display_set_lcd_bright((__lion_bright_t)(3 * (4 - dialog_jh_tran_data) + 2));
-        }
-        else if(dialog_current_state == 1)
-        {
-            //if(dialog_jh_tran_data>0)
-            // dialog_jh_tran_data --;
         }
         GUI_WinUpdate(hwnd, EPDK_TRUE);
     }
@@ -566,13 +564,17 @@ static __s32 on_dialog_key_up_action(H_WIN hwnd, __u32 keycode)
         if(dialog_current_state == 0)
         {
             if(dialog_jh_tran_data < 4)
+            {
                 dialog_jh_tran_data++;
+            }
             dsk_display_set_lcd_bright((__lion_bright_t)(3 * (4 - dialog_jh_tran_data) + 2));
         }
         else if(dialog_current_state == 1)
         {
             if(dialog_jh_tran_data < 6)
+            {
                 dialog_jh_tran_data++;
+            }
         }
         GUI_WinUpdate(hwnd, EPDK_TRUE);
     }
@@ -598,11 +600,11 @@ static __s32 on_dialog_key_up_action(H_WIN hwnd, __u32 keycode)
                 GUI_SetColor(wnd_para->ui.colour.txt_f);
                 get_lang_res(STRING_DIALOG_DET, wnd_para->res.str_content);
 
-				__inf("Format card...\n");
-				rect.x0 = wnd_para->ui.pos.title.x;
-				rect.y0 = wnd_para->ui.pos.title.y - 6;
-				rect.x1 = rect.x0 + 150;
-				rect.y1 = rect.y0 + 20;
+				__inf("Format card..., %s\n", wnd_para->res.str_content);
+				rect.x0 = wnd_para->ui.pos.title.x+ 150;
+				rect.y0 = wnd_para->ui.pos.title.y - 6 + 60;
+				rect.x1 = rect.x0 + 30;
+				rect.y1 = rect.y0 + 15;
 				GUI_ClearRectEx(&rect);
                 GUI_DispStringAt(wnd_para->res.str_content, rect.x0, rect.y0-5);
                 da_back_light = dsk_display_get_lcd_bright();
@@ -611,9 +613,6 @@ static __s32 on_dialog_key_up_action(H_WIN hwnd, __u32 keycode)
                 dsk_display_set_lcd_bright((__lion_bright_t)(da_back_light));
             }
         }
-
-
-
 
         wnd_para->temp = 0;
         if(dialog_current_state == 1)
@@ -763,7 +762,7 @@ static void draw_dialog(APP_DIALOG_RES_T *res, APP_DIALOG_UI_T *ui)
 		}
 	}
 
-	if((dialog_current_state == 4)||(dialog_current_state == 3) || (dialog_current_state == 2))
+	if((dialog_current_state >= 2) && (dialog_current_state <6))
 	{
 		GUI_SetColor(ui->colour.txt_n);
 		GUI_DispStringAt(res->str_title, ui->pos.title.x, ui->pos.title.y-6);
@@ -829,13 +828,14 @@ static void draw_dialog(APP_DIALOG_RES_T *res, APP_DIALOG_UI_T *ui)
 				rect.x1 = rect.x0 + ui->size.btn.width;
 				rect.y1 = rect.y1 -15 + i*50;
 			}
-			else if(dialog_current_state == 2)
+			else if((dialog_current_state == 2)||(dialog_current_state == 5))
 			{
 				rect.x0 = x + 53;
 				rect.y0 = rect.y0 - 15 + 5 + i*48;
 				rect.x1 = rect.x0 + ui->size.btn.width;
 				rect.y1 = rect.y1 -15 + 5 + i*48;
 			}
+
 			if(dialog_current_state > 1)
 			{
 				__inf("res->str_btn[%d]: %s\n",i, res->str_btn[i]);

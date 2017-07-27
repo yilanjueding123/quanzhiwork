@@ -1,3 +1,2 @@
----- dsk_query_tvout_detect_pin Matches (2 in 1 files) ----
-App_root_scene.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\app_root):__u8 dsk_query_tvout_detect_pin(void)
-App_root_scene.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\app_root):			tvout_next_status = dsk_query_tvout_detect_pin();
+---- ----channel = Matches (1 in 1 files) ----
+Dev_matrix_key.c (f:\pri_f25\zhibo\work\emod\drv_matrixkey):		eLIBs_printf("----channel = %d\n", *channel);

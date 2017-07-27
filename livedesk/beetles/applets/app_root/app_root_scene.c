@@ -31,7 +31,7 @@
 #include "ebook/app_ebook.h"
 //#include "record/app_record.h"
 
-#if  1
+#if  0
 //#define __here__            eLIBs_printf("@L%d(%s)\n", __LINE__, __FILE__);
 #define __msg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
 						     eLIBs_printf(__VA_ARGS__)									        )
@@ -1669,7 +1669,8 @@ __s32 app_root_win_proc(__gui_msg_t *msg)
 			
 			tvout_prv_status = tvout_next_status;
 		}
-#endif		
+#endif	
+		return EPDK_OK;
 	}
     case GUI_MSG_COMMAND:
     {
