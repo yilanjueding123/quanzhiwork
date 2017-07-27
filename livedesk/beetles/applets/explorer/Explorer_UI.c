@@ -710,7 +710,7 @@ void explorer_delete_file_draw_process_ext(void)
 {
     char str[64];
     GUI_RECT rect;
-
+	return;
     eLIBs_memclr(str, sizeof(str));
     //eLIBs_sprintf(str, "%d % ",op_info->percent);
 

@@ -149,7 +149,8 @@ static __s32 _app_setting_Proc(__gui_msg_t *msg)
 		gscene_hbar_set_state(HBAR_ST_SHOW);
 #else
 		gscene_hbar_set_state(HBAR_ST_HIDE);
-#endif		
+#endif	
+		
     }
     return EPDK_OK;
     case GUI_MSG_CLOSE:

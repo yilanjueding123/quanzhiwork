@@ -1,2 +1,0 @@
----- ----channel = Matches (1 in 1 files) ----
-Dev_matrix_key.c (f:\pri_f25\zhibo\work\emod\drv_matrixkey):		eLIBs_printf("----channel = %d\n", *channel);

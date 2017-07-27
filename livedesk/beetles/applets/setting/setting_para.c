@@ -21,6 +21,7 @@
 #include "setting_para.h"
 
 #define ITEM_Y	38
+#define ITEM_H_OFFSET 5
 //#define AREA_W 	40
 
 static tips_uipara_t setting_tips_uipara_800_480 =
@@ -174,7 +175,7 @@ static set_general_para setting_general_uipara_480_272 =
             {270, 53- ITEM_Y},		//bmp_left_pos;
             {380, 53- ITEM_Y},		//bmp_right_pos;
             {210, 48- ITEM_Y},		//string_title_pos;
-            {276, 30, 84, 36} //string_content_rect;
+            {210, 30, 84, 36} //string_content_rect;
         },
         {
             //item1;
@@ -182,8 +183,8 @@ static set_general_para setting_general_uipara_480_272 =
             {10, 86- ITEM_Y},		// bmp_unfocus_pos;
             {270, 109- ITEM_Y},		//bmp_left_pos;
             {380, 109- ITEM_Y},		//bmp_right_pos;
-            {220 - 10, 104- ITEM_Y},		//string_title_pos;
-            {276, 86, 84, 36} //string_content_rect;
+            {220 - 10 - 10, 104- ITEM_Y - ITEM_H_OFFSET},		//string_title_pos;
+            {210, 86, 84, 36} //string_content_rect;
         },
         {
             //item2;
@@ -191,8 +192,8 @@ static set_general_para setting_general_uipara_480_272 =
             {10, 132- ITEM_Y},		// bmp_unfocus_pos;
             {270, 165- ITEM_Y},		//bmp_left_pos;
             {380, 165- ITEM_Y},		//bmp_right_pos;
-            {220 - 15, 150- ITEM_Y},		//string_title_pos;
-            {276, 142, 84, 36} //string_content_rect;
+            {220 - 15 - 6, 150- ITEM_Y - ITEM_H_OFFSET},		//string_title_pos;
+            {210, 142, 84, 36} //string_content_rect;
         },
 #ifdef  SET_ITEM_PRO_INF    
         {
@@ -201,8 +202,8 @@ static set_general_para setting_general_uipara_480_272 =
             {10, 178- ITEM_Y},		// bmp_unfocus_pos;
             {270, 202- ITEM_Y},		//bmp_left_pos;
             {380, 198- ITEM_Y},		//bmp_right_pos;
-            {220 - 13, 194- ITEM_Y},		//string_title_pos;
-            {276, 198, 84, 36} //string_content_rect;
+            {220 - 13 - 6, 194- ITEM_Y - ITEM_H_OFFSET},		//string_title_pos;
+            {210, 198, 84, 36} //string_content_rect;
         },
 #endif  
 
@@ -213,8 +214,8 @@ static set_general_para setting_general_uipara_480_272 =
             {10, 224- ITEM_Y},		// bmp_unfocus_pos;
             {270, 249- ITEM_Y},		//bmp_left_pos;
             {380, 259- ITEM_Y},		//bmp_right_pos;
-            {220 - 22, 240- ITEM_Y},		//string_title_pos;
-            {276, 246, 84, 36} //string_content_rect;
+            {220 - 22 - 12, 240- ITEM_Y - ITEM_H_OFFSET},		//string_title_pos;
+            {210, 246, 84, 36} //string_content_rect;
         },
 #endif  
         
