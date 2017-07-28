@@ -1,19 +1,32 @@
----- main_get_ui_para Matches (18 in 2 files) ----
-Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):    main_get_ui_para
-Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):        0x000240e8:    0a000006    ....    BEQ      0x24108  ; main_get_ui_para + 64
-Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):        0x000240f0:    0a000017    ....    BEQ      0x24154  ; main_get_ui_para + 140
-Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):        0x000240f8:    0a000004    ....    BEQ      0x24110  ; main_get_ui_para + 72
-Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):        0x00024100:    1a000015    ....    BNE      0x2415c  ; main_get_ui_para + 148
-Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):        0x00024104:    ea000013    ....    B        0x24158  ; main_get_ui_para + 144
-Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):        0x00024118:    1a000004    ....    BNE      0x24130  ; main_get_ui_para + 104
-Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):        0x00024124:    1a000001    ....    BNE      0x24130  ; main_get_ui_para + 104
-Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):        0x00024138:    1a000004    ....    BNE      0x24150  ; main_get_ui_para + 136
-Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):        0x00024144:    1a000001    ....    BNE      0x24150  ; main_get_ui_para + 136
-Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):        0x0002414c:    eafffff6    ....    B        0x2412c  ; main_get_ui_para + 100
-Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):        0x00024164:    eafffff0    ....    B        0x2412c  ; main_get_ui_para + 100
-Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):        0x00024628:    ebfffea6    ....    BL       main_get_ui_para  ; 0x240c8
-Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):        0x000247b0:    ebfffe44    D...    BL       main_get_ui_para  ; 0x240c8
-Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):    5579  main_get_ui_para           0x000240c8   Lc    1  Code  De   0xa0
-Main_menu.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\home):static mm_res_id_t *main_get_ui_para(__s32 rotate)
-Main_menu.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\home):    main_ui_para = main_get_ui_para(GUI_GetScnDir());
-Main_menu.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\home):    main_ui_para = main_get_ui_para(GUI_GetScnDir());
+---- SWITCH_TO_MMENU Matches (31 in 12 files) ----
+App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):        av1_cmd2parent(msg->h_deswin, SWITCH_TO_MMENU, 0, 0 ); //直接退出
+App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):        av1_cmd2parent(msg->h_deswin, SWITCH_TO_MMENU, 0, 0 ); //直接退出
+App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):            //linein_cmd2parent(msg->h_deswin,SWITCH_TO_MMENU,0,1 );//进入后台模式
+App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):            av1_cmd2parent(msg->h_deswin, SWITCH_TO_MMENU, 0, 0 ); //直接退出
+App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):            av1_cmd2parent(msg->h_deswin, SWITCH_TO_MMENU, 0, 0);
+App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):            av1_cmd2parent(msg->h_deswin, SWITCH_TO_MMENU, 0, 0);
+App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):        av1_cmd2parent(msg->h_deswin, SWITCH_TO_MMENU, 0, 1 ); //进入后台模式
+App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):        av1_cmd2parent(msg->h_deswin, SWITCH_TO_MMENU, 0, 1 ); //进入后台模式
+App_calendar.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\calendar):        msg_send.dwAddData1 = MAKELONG(GUI_WinGetItemId(hwnd), SWITCH_TO_MMENU);
+App_ebook.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\ebook):            Ebook_cmd2parent(msg->h_deswin, SWITCH_TO_MMENU, 0, 0);
+App_fm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\fm):                fm_cmd2parent(msg->h_deswin, SWITCH_TO_MMENU, 0, 0);
+App_movie.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\movie):            movie_cmd2parent(msg->h_deswin, SWITCH_TO_MMENU, 0, 0);//退出movie
+App_photo.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\photo):            notify_to_close_photo(msg->h_deswin, SWITCH_TO_MMENU);
+App_record.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\record):        app_record_cmd2parent(msg->h_deswin, SWITCH_TO_MMENU, 0, 0);
+App_record.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\record):                app_record_cmd2parent(msg->h_deswin, SWITCH_TO_MMENU, 0, 0);
+App_record.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\record):                app_record_cmd2parent(msg->h_deswin, SWITCH_TO_MMENU, 0, 0);
+App_record.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\record):                app_record_cmd2parent(msg->h_deswin, SWITCH_TO_MMENU, 0, 0);
+App_record.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\record):            app_record_cmd2parent(msg->h_deswin, SWITCH_TO_MMENU, 0, 0);
+App_root_scene.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\app_root):        case SWITCH_TO_MMENU:
+App_root_scene.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\app_root):        case SWITCH_TO_MMENU:
+App_root_scene.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\app_root):        case SWITCH_TO_MMENU:
+App_root_scene.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\app_root):        case SWITCH_TO_MMENU:
+App_root_scene.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\app_root):        case SWITCH_TO_MMENU:
+Beetles_app.h (f:\pri_f25\zhibo\work\livedesk\beetles\applets\lib):    SWITCH_TO_MMENU,
+Dv_man.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):                Dv_cmd2parent(msg->h_deswin, SWITCH_TO_MMENU, 0, 0);
+Music.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\music):                app_music_send_command(msg->h_deswin, GUI_MSG_COMMAND, SWITCH_TO_MMENU, music_ctrl->mode);
+Music_player.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\music\musicplayer):        music_send_command(msg->h_deswin, GUI_MSG_COMMAND, SWITCH_TO_MMENU, MUSICPLAYER_BACKGROUND);
+Music_player.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\music\musicplayer):        //music_send_command(msg->h_deswin, GUI_MSG_COMMAND, SWITCH_TO_MMENU, 0);
+Music_player.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\music\musicplayer):            music_send_command(msg->h_deswin, 0, SWITCH_TO_MMENU, 0);
+Music_player.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\music\musicplayer):                    music_send_command(msg->h_deswin, GUI_MSG_COMMAND, SWITCH_TO_MMENU, 0);
+Music_player.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\music\musicplayer):            music_send_command(msg->h_deswin, 0, SWITCH_TO_MMENU, 0);

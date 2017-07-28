@@ -22,15 +22,18 @@
 #define __putc(c)           esSIOS_putarg(c, 'c')
 #define __gets(s)          	esSIOS_gets(s)
 
-#if  0
+#if  1
 //#define __here__            eLIBs_printf("@L%d(%s)\n", __LINE__, __FILE__);
 //#define __log(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
 //						     eLIBs_printf(__VA_ARGS__)									        )
-#define __msg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
+#define __mymsg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
 								 eLIBs_printf(__VA_ARGS__)											)
+//#define __msg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
+//									 eLIBs_printf(__VA_ARGS__)											)
 #else
 #define __log(...)   
 #define __msg(...)
+#define __mymsg(...)
 #endif
 
 
@@ -46,6 +49,10 @@ typedef struct tag_dv_ctrl
     dv_uipara_para_t 	*uipara ;
     dv_frmwin_para_t	*pfrm_para ;
     dv_mset_para_t		*pmset_para ;
+#ifdef APP_DV_SUPOORT_BREAK
+	DV_APP_CONVERT		switch_dv;
+#endif								
+	
 } dv_ctrl_t;
 
 static __s32 __dv_on_create(__gui_msg_t *msg)
@@ -64,6 +71,9 @@ static __s32 __dv_on_create(__gui_msg_t *msg)
 
     dv_frmwin_para.font = dv_ctrl->font ;
     dv_frmwin_para.txt_color = APP_COLOR_WHITE ;
+#ifdef APP_DV_SUPOORT_BREAK
+	dv_frmwin_para.switch_frm = dv_ctrl->switch_dv;
+#endif	
     dv_frmwin_para.h_parent = msg->h_deswin;//From Kok
     dv_ctrl->h_child_frm = dv_frm_create(&dv_frmwin_para);
     GUI_WinSetFocusChild(dv_ctrl->h_child_frm);
@@ -272,6 +282,10 @@ __s32 app_dv_create(root_para_t *para)
 		
     dv_ctrl->font = para->font;
     dv_ctrl->root_type = para->root_type;
+#ifdef APP_DV_SUPOORT_BREAK
+	dv_ctrl->switch_dv = para->srch_switch;
+#endif	
+	__mymsg("dv_ctrl->switch_dv = %d, para->srch_switch = %d\n", dv_ctrl->switch_dv, para->srch_switch);
     eLIBs_memset(&create_info, 0, sizeof(__gui_manwincreate_para_t));
 
     create_info.name            = APP_DV;

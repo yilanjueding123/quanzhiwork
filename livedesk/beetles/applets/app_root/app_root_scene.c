@@ -31,7 +31,7 @@
 #include "ebook/app_ebook.h"
 //#include "record/app_record.h"
 
-#if  0
+#if  1
 //#define __here__            eLIBs_printf("@L%d(%s)\n", __LINE__, __FILE__);
 #define __msg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
 						     eLIBs_printf(__VA_ARGS__)									        )
@@ -248,7 +248,7 @@ __u8 dsk_query_tvout_detect_pin(void)
 		__msg("pin_valid = %d\n", pin_valid);
 	}*/
 	pin_valid = get_gpio_status(5,5);
-	__msg("pin_valid = %d\n", pin_valid);
+	//__msg("pin_valid = %d\n", pin_valid);
 	return pin_valid;
 }
 
@@ -311,6 +311,7 @@ static void DV_Uipara_Subset_Init(void)
 *****************************************************************************/
 static void DV_Uipara_Subset_UnInit(void)
 {
+	__msg("DV_Uipara_Subset_UnInit\n");
 	destroy_bmp_res(sub_dv_res->bmp_subset_singal[0]);
 	destroy_bmp_res(sub_dv_res->bmp_subset_singal[1]);
 	destroy_bmp_res(sub_dv_res->bmp_subset_singal[2]);
@@ -489,7 +490,7 @@ static void __app_home_restore(__gui_msg_t *msg)
     if (root_ctrl->h_app_home)
     {
         __gui_msg_t mymsg;
-        __log("----jh_dbg1020_1---\n");
+        __msg("__app_home_restore, root_ctrl->h_app_home not null\n");
 
         mymsg.h_deswin = root_ctrl->h_app_home;
         mymsg.id = DSK_APP_RESTORE;
@@ -507,7 +508,7 @@ static void __app_home_restore(__gui_msg_t *msg)
     }
     else
     {
-        __log("----jh_dbg1020_2---\n");
+        __msg("__app_home_restore, recreate home app\n");
         root_ctrl->h_app_home = app_home_create(root_ctrl->root_para);
         __app_set_focus_child(root_ctrl->h_app_home, 0);
     }
@@ -677,7 +678,16 @@ static __s32 app_root_command_proc(__gui_msg_t *msg)
                 __app_root_change_to_default_bg();
 
                 __msg("ID_HOME_MOVIE: enter movie explorer\n");
-
+#ifdef APP_DV_SUPOORT_BREAK
+				root_para->font			= SWFFont;
+                root_para->root_type	= 0;
+				
+				root_para->srch_switch 	= DV_SRCH_APP;
+				
+                root_ctrl->h_app_dv	= app_dv_create(root_para);
+                root_ctrl->root_para->h_parent = GUI_WinGetParent(root_ctrl->h_app_home);
+                GUI_WinSetFocusChild(root_ctrl->h_app_dv);
+#else
                 //esMEMS_Info();
                 to_move_from = 0;
                 if(msg->dwReserved & 0x80)
@@ -696,6 +706,7 @@ static __s32 app_root_command_proc(__gui_msg_t *msg)
                 root_ctrl->root_para->h_parent = GUI_WinGetParent(root_ctrl->h_app_home);
                 root_ctrl->h_app_explorer =  app_explorer_create(root_para);
                 GUI_WinSetFocusChild(root_ctrl->h_app_explorer);
+#endif				
 #if EPDK_AUTO_PLAY_MOVIE_ENABLE
                 {
                     __gui_msg_t new_msg ;
@@ -724,6 +735,16 @@ static __s32 app_root_command_proc(__gui_msg_t *msg)
                 gscene_hbar_set_state(HBAR_ST_HIDE);
                 __app_root_change_to_default_bg();
                 __msg("enter photo explorer\n");
+#ifdef APP_DV_SUPOORT_BREAK
+				root_para->font 		= SWFFont;
+				root_para->root_type	= 0;
+				
+				root_para->srch_switch	= DV_VEDIO_CAMEREA_APP;
+				
+				root_ctrl->h_app_dv = app_dv_create(root_para);
+				root_ctrl->root_para->h_parent = GUI_WinGetParent(root_ctrl->h_app_home);
+				GUI_WinSetFocusChild(root_ctrl->h_app_dv);
+#else
 
                 __msg("root type=%d\n", msg->dwReserved);
                 root_para->root_type = msg->dwReserved;
@@ -733,6 +754,7 @@ static __s32 app_root_command_proc(__gui_msg_t *msg)
                 root_ctrl->h_app_explorer =  app_explorer_create(root_para);
                 __msg("root_ctrl->h_app_explorer = %x\n", root_ctrl->h_app_explorer);
                 GUI_WinSetFocusChild(root_ctrl->h_app_explorer);
+#endif				
                 break;
             }
             break;
@@ -741,19 +763,30 @@ static __s32 app_root_command_proc(__gui_msg_t *msg)
                 __s32 ret;
                 __s32 exist;
                 H_WIN hmusic;
-
+				
+				__msg("ID_HOME_DV\n");
+				
                 gscene_hbar_set_state(HBAR_ST_HIDE);
                 __app_root_change_to_default_bg();
-
+#ifdef APP_DV_SUPOORT_BREAK
+                root_para->data = ID_EXPLORER_ALL;
+                msg->dwReserved = msg->dwReserved & 0x7f;
+                root_para->root_type = msg->dwReserved;//RAT_TF;
+                root_para->explr_root = msg->dwReserved;
+                root_ctrl->root_para->h_parent = GUI_WinGetParent(root_ctrl->h_app_home);
+                root_ctrl->h_app_explorer =  app_explorer_create(root_para);
+                GUI_WinSetFocusChild(root_ctrl->h_app_explorer);
+#else
 				//__msg("ID_HOME_DV\n");
                 root_para->font			= SWFFont;
                 root_para->root_type	= 0;
-//                root_ctrl->h_app_av1	= app_av1_create(root_para);
-//                root_ctrl->root_para->h_parent = GUI_WinGetParent(root_ctrl->h_app_home);
-				
+#ifdef APP_DV_SUPOORT_BREAK
+				root_para->srch_switch 	= DV_VEDIO_CAMEREA_APP;
+#endif								
                 root_ctrl->h_app_dv	= app_dv_create(root_para);
                 root_ctrl->root_para->h_parent = GUI_WinGetParent(root_ctrl->h_app_home);
                 GUI_WinSetFocusChild(root_ctrl->h_app_dv);
+#endif				
             }
             break;
 			case ID_ROOT_SETTIN_CMMD:
@@ -1593,6 +1626,9 @@ __s32 app_root_win_proc(__gui_msg_t *msg)
         root_para->h_parent		= msg->h_deswin;
         root_para->font			= SWFFont;
         root_para->root_type	= 0;
+#ifdef APP_DV_SUPOORT_BREAK
+		root_para->srch_switch 	= DV_VEDIO_CAMEREA_APP;
+#endif		
 		
 		root_ctrl->h_app_dv	= app_dv_create(root_para);
 		GUI_WinSetFocusChild(root_ctrl->h_app_dv);
@@ -1623,7 +1659,7 @@ __s32 app_root_win_proc(__gui_msg_t *msg)
             __msg("******err****\n");
             return EPDK_OK;
         }
-		DV_Uipara_Subset_UnInit();
+		//DV_Uipara_Subset_UnInit();
         root_para = (root_para_t *)root_ctrl->root_para;
         if (!root_para)
         {
@@ -1654,7 +1690,7 @@ __s32 app_root_win_proc(__gui_msg_t *msg)
 			//esMEMS_Info();
 			tvout_next_status = dsk_query_tvout_detect_pin();
 
-			__msg("tvout_next_status = %d,tvout_prv_status = %d\n", tvout_next_status, tvout_prv_status);
+			//__msg("tvout_next_status = %d,tvout_prv_status = %d\n", tvout_next_status, tvout_prv_status);
 			if(tvout_next_status != tvout_prv_status)
 			{
 				if(0 == tvout_next_status)

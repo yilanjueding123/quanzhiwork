@@ -20,7 +20,7 @@
 __u8   dialog_jh_tran_data;
 __u8   dialog_current_state;
 
-#if  0
+#if  1
 #define __inf(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
 								 eLIBs_printf(__VA_ARGS__)											)
 
@@ -452,7 +452,7 @@ static __s32 notify_to_close_dialog(H_WIN hwnd/*, __s32 result*/)
     msg.id          = GUI_MSG_COMMAND;
     msg.dwAddData1  = MAKELONG(wnd_para->ID, ADLG_CMD_EXIT);
     msg.dwAddData2  = wnd_para->result;
-    msg.dwReserved  = wnd_para->temp;//0;
+    msg.dwReserved  = wnd_para->temp;
     msg.p_arg       = NULL;
 
     __msg("%x => %x (%d, %x, %x)\n", msg.h_srcwin, msg.h_deswin, msg.id, msg.dwAddData1, msg.dwAddData2);
@@ -736,9 +736,7 @@ static void draw_dialog(APP_DIALOG_RES_T *res, APP_DIALOG_UI_T *ui)
 {
 	__s32			  i, x, y;
 	void			 *bmp_data;
-	GUI_RECT		  rect;
-
-	//GUI_SetColor(ui->colour.txt_n);
+	GUI_RECT		  rect, rect1;
 
 	GUI_SetDrawMode(GUI_DRAWMODE_NORMAL);
 	//±³¾°
@@ -751,10 +749,6 @@ static void draw_dialog(APP_DIALOG_RES_T *res, APP_DIALOG_UI_T *ui)
 		char str_content[10];
 		for(i = 0; i < 5; i++)
 		{
-//			rect.x = (250 - 128) / 2 - 15;
-//			rect.y = 30*i + 4;
-//			rect1.x = rect.x + 50 + 10;
-//			rect1.y = rect.y + 5;
 			rect.x = 1;
 			rect.y = 30*i + 4;
 			rect1.x = rect.x + 50 + 10;
@@ -784,7 +778,6 @@ static void draw_dialog(APP_DIALOG_RES_T *res, APP_DIALOG_UI_T *ui)
 		
 		for(i = 0; i < 7; i++)
 		{
-			//rect.x = (250 - 128) / 2 - 15;
 			rect.x = 1;
 			rect.y = 30*i + 4;
 			rect1.x = rect.x + 50 - 5;
@@ -821,14 +814,12 @@ static void draw_dialog(APP_DIALOG_RES_T *res, APP_DIALOG_UI_T *ui)
 		ui->size.content.width = 60;
 		ui->pos.content.x = (ui->rt.width - 60) / 2;
 	}
-	//__inf("ui->size.content.width: %d, ui->pos.content.x: %d\n", ui->size.content.width, ui->pos.content.x);
 
 	//ÄÚÈÝ
 	rect.x0 = ui->pos.content.x;
 	rect.y0 = ui->pos.content.y;
 	rect.x1 = rect.x0 + ui->size.content.width;
 	rect.y1 = rect.y0 + ui->size.content.height;
-	//__inf("rect.x0:%d, rect.y0:%d, rect.x1:%d, rect.y1:%d\n", rect.x0, rect.y0, rect.x1, rect.y1);
 	
 	if(dialog_current_state != 6)
 	{
@@ -837,13 +828,26 @@ static void draw_dialog(APP_DIALOG_RES_T *res, APP_DIALOG_UI_T *ui)
 
 	if(dialog_current_state == 6)
 	{
+		rect1.x0= rect.x0 - 88;
+		rect1.y0 = ui->pos.content.y - 40;
+		rect1.x1 = rect1.x0 + ui->size.content.width;
+		rect1.y1 = rect1.y0 + ui->size.content.height;
+		
 		GUI_SetColor(ui->colour.txt_n);
-		GUI_DispStringInRectWrap(res->str_content, &rect, GUI_TA_HCENTER | GUI_TA_VCENTER, GUI_WRAPMODE_WORD);
-		__inf("res->str_content = %s\n", res->str_content);
+		if(res->btn_count == 2)
+		{
+			GUI_DispStringInRectWrap(res->str_content, &rect1, GUI_TA_HCENTER | GUI_TA_VCENTER, GUI_WRAPMODE_WORD);
+		}
+		else if(res->btn_count == 1)
+		{
+			GUI_DispStringInRectWrap(res->str_content, &rect, GUI_TA_HCENTER | GUI_TA_VCENTER, GUI_WRAPMODE_WORD);
+			return;
+		}
+		__inf("res->str_content = %s: %d, %d\n", res->str_content, rect.x0, rect.y0);
 	}
 
 	if((dialog_current_state != 4)&& (dialog_current_state != 0)\
-		&&(dialog_current_state !=6 )\
+		//&&(dialog_current_state !=6 )
 		&&(dialog_current_state != 1))
 	{
 		for (i = 0; i < res->btn_count; i++)
@@ -873,6 +877,13 @@ static void draw_dialog(APP_DIALOG_RES_T *res, APP_DIALOG_UI_T *ui)
 				rect.y0 = rect.y0 - 15 + i*50;
 				rect.x1 = rect.x0 + ui->size.btn.width;
 				rect.y1 = rect.y1 -15 + i*50;
+			}
+			else if(dialog_current_state == 6)
+			{
+				rect.x0 = x + 2+50;
+				rect.y0 = rect.y0 - 5 + i*47;
+				rect.x1 = rect.x0 + ui->size.btn.width;
+				rect.y1 = rect.y1 -15 + i*47;
 			}
 			else if((dialog_current_state == 2)||(dialog_current_state == 5))
 			{

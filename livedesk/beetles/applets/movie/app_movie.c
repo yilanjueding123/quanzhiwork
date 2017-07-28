@@ -1455,7 +1455,7 @@ static __s32 __movie_playerror_scene_create(movie_ctrl_t *movie_ctrl)
         if (NULL == movie_ctrl->playerror_scene)
         {
             __s32 lang_id[] = {STRING_MOVIE_TIPS, STRING_MOVIE_FILE_NOT_SUPPORT};
-
+			//default_dialog(movie_ctrl->playerror_scene, movie_ctrl->movie_manager, MOVIE_PLAYERROR_DIALOG_ID, ADLG_YESNO, lang_id);
             default_dialog(movie_ctrl->playerror_scene, movie_ctrl->movie_manager, MOVIE_PLAYERROR_DIALOG_ID, ADLG_OK, lang_id);
         }
 

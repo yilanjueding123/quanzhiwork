@@ -43,6 +43,10 @@ typedef struct tag_frmwin_para
 #ifdef	APP_DV_HBAR
 	H_LYR				subset;
 #endif
+#ifdef APP_DV_SUPOORT_BREAK
+	DV_APP_CONVERT		switch_frm;
+#endif
+
 
 } dv_frmwin_para_t;
 

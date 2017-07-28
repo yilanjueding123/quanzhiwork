@@ -41,6 +41,7 @@
 //#define __msg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
 //							     eLIBs_printf(__VA_ARGS__));test_flush_nor(0);//112350									        )
 
+#define APP_DV_SUPOORT_BREAK
 
 extern GUI_FONT    *SWFFont;
 
@@ -197,6 +198,14 @@ typedef enum
     MUSICPLAYER_BACKGROUND = 1,
 } musicplayer_mode_e;
 
+#ifdef APP_DV_SUPOORT_BREAK
+typedef enum
+{
+	DV_SRCH_APP = 0,
+	DV_VEDIO_CAMEREA_APP,
+}DV_APP_CONVERT;
+#endif
+
 
 typedef struct tag_root_para
 {
@@ -209,6 +218,9 @@ typedef struct tag_root_para
     __u32 record_opt;//为0代表正常进入录音，为1代表fm录音
     __s32	data;
     __s32  explorer_play_music;
+#ifdef APP_DV_SUPOORT_BREAK
+	DV_APP_CONVERT srch_switch;
+#endif
     char  music_file_name[RAT_MAX_FULL_PATH_LEN];
 } root_para_t;
 

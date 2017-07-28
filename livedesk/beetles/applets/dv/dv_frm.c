@@ -19,7 +19,7 @@
 #include "dv_common.h"
 #include "app_root_scene.h"
 
-#if  0
+#if  1
 //#define __here__            eLIBs_printf("@L%d(%s)\n", __LINE__, __FILE__);
 #define __mymsg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
 						     eLIBs_printf(__VA_ARGS__)									        )
@@ -895,6 +895,7 @@ static __s32 __dv_frm_on_create(__gui_msg_t *msg)
     dv_frm_ctrl = (dv_frmwin_para_t *)GUI_WinGetAttr(msg->h_deswin);
 
     __msg("__dv_frm_on_create\n");
+    __mymsg("dv_frm_ctrl->switch_frm = %d\n", dv_frm_ctrl->switch_frm);
 
     // 初始化水印图标资源
     cvr_water_mark_res_init();
@@ -921,6 +922,18 @@ static __s32 __dv_frm_on_create(__gui_msg_t *msg)
 	next_signal_level = prev_signal_level = 0;
 	
 #ifdef DV_FRM_SAVE_FREQ
+#ifdef APP_DV_SUPOORT_BREAK
+	if(dv_frm_ctrl->switch_frm == DV_SRCH_APP)
+	{
+		for(i = 0; i<2; i++)
+		{
+			for(j = 0; j<32; j++)
+			{	
+				freq_save_buff[j][i] = 0;
+			}
+		}
+	}
+#else
 	for(i = 0; i<2; i++)
 	{
 		for(j = 0; j<32; j++)
@@ -928,13 +941,14 @@ static __s32 __dv_frm_on_create(__gui_msg_t *msg)
 			freq_save_buff[j][i] = 0;
 		}
 	}
-	//eLIBs_memset(freq_save_buff,0,32);
+#endif	
+		
+
 	freq_save_flg = 0;
 	freq_save_switch = freq_save_cnt = 0;
 	next_signal_level = prev_signal_level = 0;
 	key_flag = KEY_NONE_ACTION;
 #endif
-	
 	
     return EPDK_OK;
 }
@@ -1086,7 +1100,7 @@ static __s32 __dv_frm_on_key_proc(__gui_msg_t *msg)
 {
     dv_frmwin_para_t        	*dv_frm_ctrl;
     dv_frm_ctrl = (dv_frmwin_para_t *)GUI_WinGetAttr(msg->h_deswin);
-
+	
 	if(((msg->dwAddData1 == GUI_MSG_KEY_LONGLEFT)||(msg->dwAddData1 == GUI_MSG_KEY_LONGRIGHT))\
 		&&(msg->dwAddData2 == KEY_REPEAT_ACTION))
 	{
@@ -1095,7 +1109,14 @@ static __s32 __dv_frm_on_key_proc(__gui_msg_t *msg)
 	    {
 	    	return EPDK_OK;
 		}
-		
+#ifdef APP_DV_SUPOORT_BREAK
+		if(dv_frm_ctrl->switch_frm == DV_VEDIO_CAMEREA_APP)
+		{
+			__mymsg("dv_frm_ctrl->switch_frm = %d\n", dv_frm_ctrl->switch_frm);
+			return EPDK_OK;
+		}
+#endif	
+
 #ifdef DV_FRM_SAVE_FREQ
 		for(i = 0; i<2; i++)
 		{
@@ -1121,21 +1142,13 @@ static __s32 __dv_frm_on_key_proc(__gui_msg_t *msg)
         {
         	if(Cvr_DvGetWorkMode() == DV_ON_REC )
         	{
-                if(RECORD_STOP == Cvr_DvGetRecState())
+                if(RECORD_STOP != Cvr_DvGetRecState())
                 {    
-                    Dv_cmd2parent(msg->h_deswin, ID_OP_DV_TO_HOME, 0, 0);
-                }
-				else
-				{
 					__dv_on_stop_record(msg);
 					esKRNL_TimeDly(5);
-                    Dv_cmd2parent(msg->h_deswin, ID_OP_DV_TO_HOME, 0, 0);
-				}
+                }
         	}
-			else if(Cvr_DvGetWorkMode() == DV_ON_CAM )
-			{
-				Dv_cmd2parent(msg->h_deswin, ID_OP_DV_TO_HOME, 0, 0);
-			}
+			Dv_cmd2parent(msg->h_deswin, ID_OP_DV_TO_HOME, 0, 0);
         }
 
 		return EPDK_OK;
@@ -1254,28 +1267,32 @@ static __s32 __dv_frm_on_key_proc(__gui_msg_t *msg)
 	
 	if(msg->dwAddData1 == GUI_MSG_KEY_SEETING)        // 切换模式(进入拍照模式)
     {
+#ifdef APP_DV_SUPOORT_BREAK
+		if(dv_frm_ctrl->switch_frm == DV_SRCH_APP)
+		{
+			__mymsg("dv_frm_ctrl->switch_frm = %d\n", dv_frm_ctrl->switch_frm);
+			return EPDK_OK;
+		}
+#endif	
+    
         if(msg->dwAddData2 == KEY_UP_ACTION)
         {
         	if(dv_frm_ctrl->cur_state == DV_ON_REC )
         	{
-	            if(RECORD_STOP == Cvr_DvGetRecState())
+	            if(RECORD_STOP != Cvr_DvGetRecState())
 	            {
 	                //__msg("Switch to photograph \n");
 	                // 切换至拍照状态
-	                Cvr_DvSetWorkMode(WORK_MODE_CAM);
-	                dv_frm_ctrl->cur_state = DV_ON_CAM ;
-	                //  UI 部分更新到从录像模式切换到拍照状态
-	                __dv_frm_on_paint( msg);
-	            }
-				else
-				{
-					__dv_on_stop_record(msg);
+	                __dv_on_stop_record(msg);
 					esKRNL_TimeDly(5);
-					Cvr_DvSetWorkMode(WORK_MODE_CAM);
-	                dv_frm_ctrl->cur_state = DV_ON_CAM ;
-	                //  UI 部分更新到从录像模式切换到拍照状态
-	                __dv_frm_on_paint( msg);
-				}
+					
+	            }
+				
+				Cvr_DvSetWorkMode(WORK_MODE_CAM);
+				dv_frm_ctrl->cur_state = DV_ON_CAM ;
+				//	UI 部分更新到从录像模式切换到拍照状态
+				__dv_frm_on_paint( msg);
+				
         	}
 			else if(dv_frm_ctrl->cur_state == DV_ON_CAM )
 			{
@@ -1299,12 +1316,19 @@ static __s32 __dv_frm_on_key_proc(__gui_msg_t *msg)
 	
     if(dv_frm_ctrl->cur_state == DV_ON_REC)
     {
+#ifdef APP_DV_SUPOORT_BREAK
+		if(dv_frm_ctrl->switch_frm == DV_SRCH_APP)
+		{
+			__mymsg("dv_frm_ctrl->switch_frm = %d\n", dv_frm_ctrl->switch_frm);
+			return EPDK_OK;
+		}
+#endif	
+
 #ifdef	APP_DV_HBAR
 		__app_dv_draw_mode_hbar(msg);
 #endif
         if(msg->dwAddData1 == GUI_MSG_KEY_ENTER)        // 录像的开始、停止
         {	
-#if 1
             if(msg->dwAddData2 == KEY_UP_ACTION)
             {
                 ES_DIR			*p_file;
@@ -1345,12 +1369,19 @@ static __s32 __dv_frm_on_key_proc(__gui_msg_t *msg)
                     __dv_frm_on_paint(msg);
                 }
             }
-#endif
         }
         return EPDK_OK;
     }
     else if(dv_frm_ctrl->cur_state == DV_ON_CAM)
     {
+#ifdef APP_DV_SUPOORT_BREAK
+		if(dv_frm_ctrl->switch_frm == DV_SRCH_APP)
+		{
+			__mymsg("dv_frm_ctrl->switch_frm = %d\n", dv_frm_ctrl->switch_frm);
+			return EPDK_OK;
+		}
+#endif	
+    
 #ifdef	APP_DV_HBAR
 		__app_dv_draw_mode_hbar(msg);
 #endif    
@@ -1476,7 +1507,7 @@ static void app_dv_search_dialog_create(dv_frmwin_para_t  *dv_frm_ctrl)
 {
 	
 	RECT rect ;
-	__mymsg("dsk_full\n");
+	__mymsg("app_dv_search_dialog_create\n");
 	rect.x = ( dv_frm_ctrl->uipara->scn_w - dv_frm_ctrl->uipara->msg_box_size.width ) >> 1 ;
 	rect.y = ( dv_frm_ctrl->uipara->scn_h - dv_frm_ctrl->uipara->msg_box_size.height ) >> 1 ;
 	rect.width = dv_frm_ctrl->uipara->msg_box_size.width ;
@@ -1523,9 +1554,10 @@ static __s32 __dv_frm_on_timer_proc(__gui_msg_t *msg)
 	{
 		ES_FILE *ktemp, *ktemp1;
 		single_t key_value;
-
-		app_dv_search_dialog_create(dv_frm_ctrl);
-		
+		if(spi_auto_srch->channel == 0)
+		{
+			app_dv_search_dialog_create(dv_frm_ctrl);
+		}
 		if(KEY_PRESS_ACTION == key_flag)
 		{
 			if(spi_auto_srch->channel)

@@ -314,7 +314,7 @@ static __s32 app_home_proc(__gui_msg_t *msg)
         eLIBs_memset((void *)home_para, 0, sizeof(home_para_t));
         home_para->main_font = root_para->font;
         home_para->h_app_main = msg->h_deswin;
-        home_para->focus_id = 2;//2;			//½¹µãÍ¼Æ¬
+        home_para->focus_id = 0;//2;			//½¹µãÍ¼Æ¬
         home_para->first_item = 0;
 
         com_set_palette_by_id(ID_HOME_PAL_BMP);
