@@ -962,7 +962,7 @@ static __s32 setting_generl_popinf_content_paint(__gui_msg_t *msg)
 #endif
     GUI_DispStringAt(p_item_res->string_title, p_item_res->string_title_pos.x - 45, p_item_res->string_title_pos.y + 45);
 
-    GUI_DispStringAt(p_item_res->string_content, p_item_res->string_title_pos.x + 70, p_item_res->string_title_pos.y + 45);
+    GUI_DispStringAt(p_item_res->string_content, p_item_res->string_title_pos.x + 80, p_item_res->string_title_pos.y + 45);
 
 
     GUI_CloseAlphaBlend();
@@ -1625,7 +1625,7 @@ static __s32 seting_pop_information_paint(__gui_msg_t *msg)
             GUI_SetColor(general_attr->focus_txt_color);
             GUI_DispStringAt(p_item_res->string_title, p_item_res->string_title_pos.x - 20, p_item_res->string_title_pos.y + 45);
 
-            GUI_DispStringAt(p_item_res->string_content, p_item_res->string_title_pos.x + 70, p_item_res->string_title_pos.y + 45);
+            GUI_DispStringAt(p_item_res->string_content, p_item_res->string_title_pos.x + 80, p_item_res->string_title_pos.y + 45);
         }
     }
 

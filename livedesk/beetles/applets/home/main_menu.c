@@ -508,9 +508,9 @@ static void paint_mmain_item_ex(mmenu_attr_t *mmenu_attr, __s32 index
         GUI_SetColor(GUI_DARKBLUE);
     }
     
-    gui_rect.x0 = (480 - home_ui_para->max_main_bmp_width)/2 + 15;
+    gui_rect.x0 = (480 - home_ui_para->max_main_bmp_width)/2;
     gui_rect.y0 = mmenu_attr->item_w * (index - mmenu_attr->first_item)+10;
-    gui_rect.x1 = gui_rect.x0 + 70; 
+    gui_rect.x1 = gui_rect.x0 + 160; 
     gui_rect.y1 = gui_rect.y0 + 32; 
     __msg("txt:gui_rect.x0=%d,gui_rect.y0=%d,gui_rect.x1=%d,gui_rect.y1=%d\n\n", gui_rect.x0, gui_rect.y0, gui_rect.x1, gui_rect.y1 );
     //GUI_ClearRectEx(&gui_rect);

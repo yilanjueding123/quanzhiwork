@@ -1,35 +1,19 @@
----- string_content_rect Matches (34 in 3 files) ----
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):    RECT  string_content_rect;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {290, 15, 70, 25} //string_content_rect;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {290, 45, 70, 25} //string_content_rect;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {290, 75, 70, 25} //string_content_rect;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {290, 105, 70, 25} //string_content_rect;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {290, 135, 70, 25} //string_content_rect;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {290, 165, 70, 25} //string_content_rect;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {290, 195, 70, 25} //string_content_rect;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {290, 30, 70, 24} //string_content_rect;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {290, 54, 70, 24} //string_content_rect;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {290, 78, 70, 24} //string_content_rect;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {276, 30, 84, 36} //string_content_rect;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {276, 86, 84, 36} //string_content_rect;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {276, 142, 84, 36} //string_content_rect;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {276, 198, 84, 36} //string_content_rect;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {276, 246, 84, 36} //string_content_rect;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {276, 292, 84, 36} //string_content_rect;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):        	{276,126,84,32} //string_content_rect;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):        	{276,158,84,32} //string_content_rect;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):        	{276,190,84,32} //string_content_rect;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):	{276,174,84,24} //string_content_rect;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {276, 30, 84, 24} //string_content_rect;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {276, 54, 84, 24} //string_content_rect;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {276, 78, 84, 24} //string_content_rect;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {276, 102, 84, 24} //string_content_rect;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {276, 126, 84, 24} //string_content_rect;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {276, 150, 84, 24} //string_content_rect;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {276, 174, 84, 24} //string_content_rect;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {276, 30, 84, 24} //string_content_rect;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {276, 54, 84, 24} //string_content_rect;
-Setting_para.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            {276, 78, 84, 24} //string_content_rect;
-Setting_power.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):    RECT  string_content_rect;
-Setting_power.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):        p_item_res->string_content_rect = power_attr->power_uipara->item[i].item_string_content_rect;
-Setting_power.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):    GUI_ClearRect(p_item_res->string_content_rect.x, p_item_res->string_content_rect.y, p_item_res->string_content_rect.x + p_item_res->string_content_rect.width, p_item_res->string_content_rect.y + p_item_res->string_content_rect.height);
+---- main_get_ui_para Matches (18 in 2 files) ----
+Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):    main_get_ui_para
+Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):        0x000240e8:    0a000006    ....    BEQ      0x24108  ; main_get_ui_para + 64
+Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):        0x000240f0:    0a000017    ....    BEQ      0x24154  ; main_get_ui_para + 140
+Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):        0x000240f8:    0a000004    ....    BEQ      0x24110  ; main_get_ui_para + 72
+Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):        0x00024100:    1a000015    ....    BNE      0x2415c  ; main_get_ui_para + 148
+Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):        0x00024104:    ea000013    ....    B        0x24158  ; main_get_ui_para + 144
+Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):        0x00024118:    1a000004    ....    BNE      0x24130  ; main_get_ui_para + 104
+Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):        0x00024124:    1a000001    ....    BNE      0x24130  ; main_get_ui_para + 104
+Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):        0x00024138:    1a000004    ....    BNE      0x24150  ; main_get_ui_para + 136
+Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):        0x00024144:    1a000001    ....    BNE      0x24150  ; main_get_ui_para + 136
+Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):        0x0002414c:    eafffff6    ....    B        0x2412c  ; main_get_ui_para + 100
+Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):        0x00024164:    eafffff0    ....    B        0x2412c  ; main_get_ui_para + 100
+Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):        0x00024628:    ebfffea6    ....    BL       main_get_ui_para  ; 0x240c8
+Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):        0x000247b0:    ebfffe44    D...    BL       main_get_ui_para  ; 0x240c8
+Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):    5579  main_get_ui_para           0x000240c8   Lc    1  Code  De   0xa0
+Main_menu.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\home):static mm_res_id_t *main_get_ui_para(__s32 rotate)
+Main_menu.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\home):    main_ui_para = main_get_ui_para(GUI_GetScnDir());
+Main_menu.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\home):    main_ui_para = main_get_ui_para(GUI_GetScnDir());
