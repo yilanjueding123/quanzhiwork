@@ -39,6 +39,8 @@
 #define LOW_POWER_CHECK_TIME_ID	1002
 #define CURSOR_TIME_ID			1003
 
+static __lion_bright_t  init_back_light = -1;
+
 static __bool g_b_enable_standby = 1;
 
 #define INIT_FW_UPDATE_MAX_ICON_RES_NUM 2
@@ -672,7 +674,7 @@ static __s32 init_voltage_check(__gui_msg_t *msg)
         activity_notify_top(&msgex);
     }
 
-    __msg("level=%d\n", level);
+    //__msg("level=%d\n", level);
 
     old_vol_level = level;
     old_charge_state = charge_state;
@@ -1131,10 +1133,7 @@ static __s32 init_mainwin_cb(__gui_msg_t *msg)
                 GUI_KillTimer(msg->h_deswin, init_ctr->low_power_check_time_id);
                 SEND_MSG(DSK_MSG_LOW_POWER, NULL, msg->h_deswin, 0, 0);
             }
-            else
-            {
-                __msg("**************not low power...*********\n");
-            }
+            
 
             ret = init_voltage_check(msg);
 
@@ -1511,7 +1510,9 @@ static __s32 init_mainwin_cb(__gui_msg_t *msg)
         break;
     }
     case DSK_MSG_SCREEN_OPEN:				/* ¿ªÆÁ */
+		__msg("DSK_MSG_SCREEN_OPEN, init_back_light = %d\n", init_back_light);
         init_open_screen(msg);
+		dsk_display_set_lcd_bright((init_back_light));
         break;
 
     case DSK_MSG_LOW_POWER:				/* low power */
@@ -1601,7 +1602,7 @@ static __s32 init_mainwin_cb(__gui_msg_t *msg)
     	break;
     }*/
     case DSK_MSG_STANDBY_WAKE_UP:
-        __here__
+		__msg("DSK_MSG_STANDBY_WAKE_UP\n");
         init_open_screen(msg);
         break;
 
@@ -1716,13 +1717,24 @@ static __s32 init_mainwin_cb(__gui_msg_t *msg)
     }
 
     case DSK_MSG_SET_SCN_CLOSE:
+	{
+		init_back_light = dsk_display_get_lcd_bright();
+		__msg("init_back_light = %d\n", init_back_light);
         init_set_close_scn(msg);
         break;
-
+    }
+	case DSK_MSG_SET_BACKLINGT_LEVEL:
+	{
+		init_back_light = dsk_display_get_lcd_bright();
+		__msg("init_back_light = %d\n", msg->dwAddData1);
+		break;
+	}
     case DSK_MSG_SCREEN_CLOSE:
     {
         __init_ctl_t *init_ctr = (__init_ctl_t *)GUI_WinGetAttr(msg->h_deswin);
-
+		//eLIBs_printf("DSK_MSG_SCREEN_CLOSE\n");
+		
+		__msg("init_back_light = %d\n", init_back_light);
         if(init_ctr->closescn_gate_on == EPDK_TRUE)
         {
             init_close_screen(msg);

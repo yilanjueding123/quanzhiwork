@@ -1,32 +1,3 @@
----- SWITCH_TO_MMENU Matches (31 in 12 files) ----
-App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):        av1_cmd2parent(msg->h_deswin, SWITCH_TO_MMENU, 0, 0 ); //直接退出
-App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):        av1_cmd2parent(msg->h_deswin, SWITCH_TO_MMENU, 0, 0 ); //直接退出
-App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):            //linein_cmd2parent(msg->h_deswin,SWITCH_TO_MMENU,0,1 );//进入后台模式
-App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):            av1_cmd2parent(msg->h_deswin, SWITCH_TO_MMENU, 0, 0 ); //直接退出
-App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):            av1_cmd2parent(msg->h_deswin, SWITCH_TO_MMENU, 0, 0);
-App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):            av1_cmd2parent(msg->h_deswin, SWITCH_TO_MMENU, 0, 0);
-App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):        av1_cmd2parent(msg->h_deswin, SWITCH_TO_MMENU, 0, 1 ); //进入后台模式
-App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):        av1_cmd2parent(msg->h_deswin, SWITCH_TO_MMENU, 0, 1 ); //进入后台模式
-App_calendar.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\calendar):        msg_send.dwAddData1 = MAKELONG(GUI_WinGetItemId(hwnd), SWITCH_TO_MMENU);
-App_ebook.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\ebook):            Ebook_cmd2parent(msg->h_deswin, SWITCH_TO_MMENU, 0, 0);
-App_fm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\fm):                fm_cmd2parent(msg->h_deswin, SWITCH_TO_MMENU, 0, 0);
-App_movie.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\movie):            movie_cmd2parent(msg->h_deswin, SWITCH_TO_MMENU, 0, 0);//退出movie
-App_photo.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\photo):            notify_to_close_photo(msg->h_deswin, SWITCH_TO_MMENU);
-App_record.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\record):        app_record_cmd2parent(msg->h_deswin, SWITCH_TO_MMENU, 0, 0);
-App_record.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\record):                app_record_cmd2parent(msg->h_deswin, SWITCH_TO_MMENU, 0, 0);
-App_record.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\record):                app_record_cmd2parent(msg->h_deswin, SWITCH_TO_MMENU, 0, 0);
-App_record.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\record):                app_record_cmd2parent(msg->h_deswin, SWITCH_TO_MMENU, 0, 0);
-App_record.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\record):            app_record_cmd2parent(msg->h_deswin, SWITCH_TO_MMENU, 0, 0);
-App_root_scene.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\app_root):        case SWITCH_TO_MMENU:
-App_root_scene.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\app_root):        case SWITCH_TO_MMENU:
-App_root_scene.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\app_root):        case SWITCH_TO_MMENU:
-App_root_scene.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\app_root):        case SWITCH_TO_MMENU:
-App_root_scene.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\app_root):        case SWITCH_TO_MMENU:
-Beetles_app.h (f:\pri_f25\zhibo\work\livedesk\beetles\applets\lib):    SWITCH_TO_MMENU,
-Dv_man.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):                Dv_cmd2parent(msg->h_deswin, SWITCH_TO_MMENU, 0, 0);
-Music.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\music):                app_music_send_command(msg->h_deswin, GUI_MSG_COMMAND, SWITCH_TO_MMENU, music_ctrl->mode);
-Music_player.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\music\musicplayer):        music_send_command(msg->h_deswin, GUI_MSG_COMMAND, SWITCH_TO_MMENU, MUSICPLAYER_BACKGROUND);
-Music_player.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\music\musicplayer):        //music_send_command(msg->h_deswin, GUI_MSG_COMMAND, SWITCH_TO_MMENU, 0);
-Music_player.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\music\musicplayer):            music_send_command(msg->h_deswin, 0, SWITCH_TO_MMENU, 0);
-Music_player.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\music\musicplayer):                    music_send_command(msg->h_deswin, GUI_MSG_COMMAND, SWITCH_TO_MMENU, 0);
-Music_player.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\music\musicplayer):            music_send_command(msg->h_deswin, 0, SWITCH_TO_MMENU, 0);
+---- exfat_read_test Matches (2 in 1 files) ----
+App_root_scene.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\app_root):void exfat_read_test(void *arg)
+App_root_scene.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\app_root):    eLIBs_printf("exfat_read_test.\n");

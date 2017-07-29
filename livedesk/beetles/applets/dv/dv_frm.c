@@ -2003,7 +2003,6 @@ static __s32 check_disk(void)
     }
 }
 
-
 static __s32 __app_dv_draw_card_status(H_LYR hlyr)
 {
 	GUI_RECT gui_rect;
@@ -2038,6 +2037,8 @@ static __s32 __app_dv_draw_card_status(H_LYR hlyr)
 	{
 		GUI_BMP_RES_Draw(dv_subse_ui->sd_card_status[0], gui_rect.x0, gui_rect.y0+5);
 	}
+
+	return EPDK_OK;
 }
 
 static __s32 __app_dv_draw_signal_level(H_LYR hlyr, __u32 level)
@@ -2331,6 +2332,33 @@ static __s32 __app_dv_draw_mode_hbar(__gui_msg_t *msg)
     return EPDK_OK;
 }
 
+static __s32 __app_dv_draw_hbar_on_plugout(__gui_msg_t *msg)
+{
+	GUI_RECT gui_rect;
+
+	dv_frmwin_para_t        	*dv_frm_ctrl;
+    dv_frm_ctrl = (dv_frmwin_para_t *)GUI_WinGetAttr(msg->h_deswin);
+	
+	if(NULL == dv_frm_ctrl->subset)
+	{
+		__err("invalid para\n");
+		return EPDK_FAIL;
+	}
+	gui_rect.x0 = 130;
+	gui_rect.y0 = 0;
+	gui_rect.x1 = 300;
+	gui_rect.y1 = 60;
+	GUI_ClearRectEx(&gui_rect);
+	__app_dv_draw_mode_hbar(msg);
+	if(dv_frm_ctrl->cur_state == DV_ON_REC)
+	{
+		__app_dv_draw_rec_time_hbar(msg, 0);
+	}
+	__app_dv_draw_card_status(dv_frm_ctrl->subset);
+
+	return EPDK_OK;
+}
+
 
 void app_dv_subscene_create(__gui_msg_t *msg)
 {
@@ -2503,20 +2531,21 @@ static __s32 __dv_frm_main_proc(__gui_msg_t *msg)
     case DSK_MSG_FS_PART_PLUGOUT:	// 文件系统分区拔出
     {
 		
-		dv_frmwin_para_t        	*dv_frm_ctrl;
+//		dv_frmwin_para_t        	*dv_frm_ctrl;
 
-	    dv_frm_ctrl = (dv_frmwin_para_t *)GUI_WinGetAttr(msg->h_deswin);
+//	    dv_frm_ctrl = (dv_frmwin_para_t *)GUI_WinGetAttr(msg->h_deswin);
 		
         __mymsg("File system plug out \n");
         // 停止当前录制
-#ifdef	APP_DV_HBAR
-		__app_dv_draw_card_status(dv_frm_ctrl->subset);
-#endif
         if(RECORD_START == Cvr_DvGetRecState())
 		{
 			__dv_on_stop_record(msg);
 		}
-		check_disk();
+#ifdef	APP_DV_HBAR
+		__app_dv_draw_hbar_on_plugout(msg);
+		//__app_dv_draw_card_status(dv_frm_ctrl->subset);
+#endif
+		//check_disk();
     }
     break;
     case CMD_DV_FRM_SET_RECORD_RESOLUTION:

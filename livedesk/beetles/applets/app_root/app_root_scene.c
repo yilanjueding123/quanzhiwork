@@ -31,7 +31,7 @@
 #include "ebook/app_ebook.h"
 //#include "record/app_record.h"
 
-#if  1
+#if  0
 //#define __here__            eLIBs_printf("@L%d(%s)\n", __LINE__, __FILE__);
 #define __msg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
 						     eLIBs_printf(__VA_ARGS__)									        )
@@ -1259,160 +1259,6 @@ static __s32  __app_root_send_msg2focus_child(__gui_msg_t *msg)
     return EPDK_OK;
 }
 
-static __hdle           g_pe0 = 0;
-static __hdle           g_pe1 = 0;
-static __hdle           g_pe2 = 0;
-static __hdle           g_pe3 = 0;
-
-static __s32 __app_request_pins(void)
-{
-    __s32            ret;
-    user_gpio_set_t  gpio_set[1];
-
-    /* 申请input_row1 */
-    eLIBs_memset(gpio_set, 0, sizeof(user_gpio_set_t));
-    ret = esCFG_GetKeyValue("matrixkey_para", "input_row1", (int *)gpio_set, sizeof(user_gpio_set_t) / 4);
-
-    __msg("ret= %d\n", ret);
-
-    {
-        __u32 *pTPCtrl = NULL;
-        __u32 data = 0;
-        pTPCtrl = (__u32 *)0xf1c24800; //必须打开AD模块，PE2口才会有效
-        data = *pTPCtrl;
-        __msg("tp ctrl registor is %d\n", data);
-        data |= 0x07;
-        *pTPCtrl = data;
-        __msg("tp ctrl registor is %d\n", data);
-    }
-
-    if(!g_pe0)
-    {
-        /* 申请tv_en */
-        eLIBs_memset(gpio_set, 0, sizeof(user_gpio_set_t));
-        ret = esCFG_GetKeyValue("test_peport", "test_pea", (int *)gpio_set, sizeof(user_gpio_set_t) / 4);
-        if (!ret)
-        {
-            g_pe0 = esPINS_PinGrpReq(gpio_set, 1);
-            if (!g_pe0)
-            {
-                __msg("request output_col pin failed\n");
-                return EPDK_FAIL;
-            }
-        }
-        else
-        {
-            __msg("fetch para from script failed\n");
-            return EPDK_FAIL;
-        }
-    }
-
-    if(!g_pe1)
-    {
-        /* 申请tv_en */
-        eLIBs_memset(gpio_set, 0, sizeof(user_gpio_set_t));
-        ret = esCFG_GetKeyValue("test_peport", "test_peb", (int *)gpio_set, sizeof(user_gpio_set_t) / 4);
-        if (!ret)
-        {
-            g_pe1 = esPINS_PinGrpReq(gpio_set, 1);
-            if (!g_pe1)
-            {
-                __msg("request output_col pin failed\n");
-                return EPDK_FAIL;
-            }
-        }
-        else
-        {
-            __msg("fetch para from script failed\n");
-            return EPDK_FAIL;
-        }
-    }
-
-    if(!g_pe2)
-    {
-        /* 申请tv_en */
-        eLIBs_memset(gpio_set, 0, sizeof(user_gpio_set_t));
-        ret = esCFG_GetKeyValue("test_peport", "test_pec", (int *)gpio_set, sizeof(user_gpio_set_t) / 4);
-        if (!ret)
-        {
-            g_pe2 = esPINS_PinGrpReq(gpio_set, 1);
-            if (!g_pe2)
-            {
-                __msg("request output_col pin failed\n");
-                return EPDK_FAIL;
-            }
-        }
-        else
-        {
-            __msg("fetch para from script failed\n");
-            return EPDK_FAIL;
-        }
-    }
-
-    if(!g_pe3)
-    {
-        /* 申请tv_en */
-        eLIBs_memset(gpio_set, 0, sizeof(user_gpio_set_t));
-        ret = esCFG_GetKeyValue("test_peport", "test_ped", (int *)gpio_set, sizeof(user_gpio_set_t) / 4);
-        if (!ret)
-        {
-            g_pe3 = esPINS_PinGrpReq(gpio_set, 1);
-            if (!g_pe3)
-            {
-                __msg("request output_col pin failed\n");
-                return EPDK_FAIL;
-            }
-        }
-        else
-        {
-            __msg("fetch para from script failed\n");
-            return EPDK_FAIL;
-        }
-    }
-
-    return EPDK_OK;
-}
-
-static __s32 __app_pullup_pe(void)
-{
-    __s32            ret;
-    user_gpio_set_t  gpio_set[16];
-
-    if(!g_pe0 || !g_pe1 || !g_pe2 || !g_pe3 )
-    {
-        __msg("__app_pullup_pe fail...\n");
-        return EPDK_FAIL;
-    }
-
-    __msg("__app_pullup_pe...\n");
-    esPINS_WritePinData(g_pe0, 1, 0);
-    esPINS_WritePinData(g_pe1, 1, 0);
-    esPINS_WritePinData(g_pe2, 1, 0);
-    esPINS_WritePinData(g_pe3, 1, 0);
-
-    return EPDK_OK;
-}
-
-static __s32 __app_pulldown_pe(void)
-{
-    __s32            ret;
-    user_gpio_set_t  gpio_set[16];
-
-    if(!g_pe0 || !g_pe1 || !g_pe2 || !g_pe3 )
-    {
-        __msg("__app_pullup_pe fail...\n");
-        return EPDK_FAIL;
-    }
-
-    __msg("__app_pulldown_pe...\n");
-    esPINS_WritePinData(g_pe0, 0, 0);
-    esPINS_WritePinData(g_pe1, 0, 0);
-    esPINS_WritePinData(g_pe2, 0, 0);
-    esPINS_WritePinData(g_pe3, 0, 0);
-
-    return EPDK_OK;
-}
-
 void exfat_read_test(void *arg)
 {
     ES_FILE *fp = NULL;
@@ -1684,7 +1530,8 @@ __s32 app_root_win_proc(__gui_msg_t *msg)
 	{
 #ifdef SUPPORT_TV_OUT		
 		static __u8 tvout_prv_status = -1, tvout_next_status = -1;
-
+		static __lion_bright_t  da_back_light = -1;
+		
 		if(LOWORD(msg->dwAddData1) == APP_ROOT_CHECK_MEM_INFO_ID)
 		{
 			//esMEMS_Info();
@@ -1695,11 +1542,17 @@ __s32 app_root_win_proc(__gui_msg_t *msg)
 			{
 				if(0 == tvout_next_status)
 				{
+					da_back_light = dsk_display_get_lcd_bright();
 					dsk_display_lcd_off();
 				}
 				else
 				{
 					dsk_display_lcd_on();
+					if(da_back_light != -1)
+					{
+						__msg("da_back_light = %d\n", da_back_light);
+						dsk_display_set_lcd_bright((__lion_bright_t)(da_back_light));
+					}
 				}
 			}
 			

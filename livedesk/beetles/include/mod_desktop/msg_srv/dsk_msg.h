@@ -92,6 +92,7 @@ typedef enum
     DSK_MSG_DISABLE_STANDBY,	// Ω˚÷πstandby
     DSK_MSG_GET_STANDBY_FLAG,	// ≤È—Ø «∑Ò‘ –Ìstandby
 
+	DSK_MSG_SET_BACKLINGT_LEVEL,
     DSK_MSG_LAST = GUI_MSG_DESKTOP + 0x1000 - 1
 } __msg_desktop_e;
 

@@ -2426,6 +2426,24 @@ static __s32  setting_general_key_proc(__gui_msg_t *msg)
     return EPDK_OK;
 }
 
+
+__s32 setting_send_msg_to_init(__u32 level)
+{
+	 __gui_msg_t msg;
+    __s32 ret;
+
+    eLIBs_memset(&msg, 0, sizeof(__gui_msg_t));
+    msg.id 			= DSK_MSG_SET_BACKLINGT_LEVEL;
+    msg.h_srcwin 	= NULL;
+    msg.h_deswin	= GUI_WinGetHandFromName("init");
+    msg.dwAddData1	= level;
+    msg.dwAddData2	= (__u32)0;
+
+    ret = GUI_SendNotifyMessage(&msg);
+    eLIBs_printf("setting_send_msg_to_init, level=%d\n", level);
+    return ret;
+}
+
 /*
 	»Øµ÷
 */
@@ -2853,6 +2871,9 @@ static __s32 _setting_general_Proc(__gui_msg_t *msg)
         setting_reg_para->backlight = dsk_display_get_lcd_bright();
         p_item_res = &general_attr->res_jh_bglight;
         p_item_res->content_num = 4 - (setting_reg_para->backlight - 2) / 3 ;
+		//eLIBs_printf("app_set: MSG_SET_BLACKLIGHT\n");
+
+		setting_send_msg_to_init(setting_reg_para->backlight);
         setting_general_pop_item_paint(msg);
     }
     return EPDK_OK;
@@ -2862,6 +2883,8 @@ static __s32 _setting_general_Proc(__gui_msg_t *msg)
         __u32 black_lightoff_time;
         setting_general_attr_t *general_attr;
         setting_item_res_t  *p_item_res;
+
+		//eLIBs_printf("app_set: MSG_SET_BLACKTIME\n");
         general_attr = (setting_general_attr_t *)GUI_WinGetAddData(msg->h_deswin);
         if(msg->dwReserved == 0)
             black_lightoff_time = 0;

@@ -157,7 +157,6 @@ __s32 dsk_display_set_lcd_bright(__lion_bright_t level)
     }
 
     /* get output type and format */
-    __log("-----jh_dbg1012_6:%d------", level);
 
     output = (__disp_output_type_t)eLIBs_fioctrl(p_disp, DISP_CMD_GET_OUTPUT_TYPE, 0, 0);
 

@@ -20,7 +20,7 @@
 __u8   dialog_jh_tran_data;
 __u8   dialog_current_state;
 
-#if  1
+#if  0
 #define __inf(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
 								 eLIBs_printf(__VA_ARGS__)											)
 
@@ -722,6 +722,18 @@ static __s32 on_dialog_command(__gui_msg_t *msg)
 	"5 minutes",
 };
 */
+
+static __s32 content_backlight_off_id[] = //ITEM2 (¹Ø±Õ±³¹â)
+{
+	STRING_SET_POWER_BGT_NEVER_CON,
+	STRING_SET_POWER_BGT_LAST5S_CON,
+	STRING_SET_POWER_BGT_LAST10S_CON,
+	STRING_SET_POWER_BGT_LAST20S_CON,
+	STRING_SET_POWER_BGT_LAST30S_CON,
+	STRING_SET_POWER_BGT_LAST60S_CON,
+	STRING_SET_POWER_BGT_LAST5M_CON
+};
+
 char *pbuff_str[7] = {
 	"OFF",
 	"5 s",
@@ -737,6 +749,7 @@ static void draw_dialog(APP_DIALOG_RES_T *res, APP_DIALOG_UI_T *ui)
 	__s32			  i, x, y;
 	void			 *bmp_data;
 	GUI_RECT		  rect, rect1;
+	char 			  str_content[128];
 
 	GUI_SetDrawMode(GUI_DRAWMODE_NORMAL);
 	//±³¾°
@@ -783,18 +796,19 @@ static void draw_dialog(APP_DIALOG_RES_T *res, APP_DIALOG_UI_T *ui)
 			rect1.x = rect.x + 50 - 5;
 			rect1.y = rect.y + 5;
 
+			//eLIBs_printf("i = %d, dialog_jh_tran_data = %d\n", i, dialog_jh_tran_data);
+			get_menu_text(content_backlight_off_id[i], str_content, 128);
 			if(i == dialog_jh_tran_data)//res->bklt_focus)
 			{
 				GUI_BMP_RES_Draw(res->bmp_bklt_select, rect.x, rect.y);
 				GUI_SetColor(ui->colour.txt_f);
-				GUI_DispStringAt(pbuff_str[i], rect1.x, rect1.y);
 			}
 			else
 			{
 				GUI_BMP_RES_Draw(res->bmp_bklt_unselect, rect.x, rect.y);	
 				GUI_SetColor(ui->colour.txt_n);
-				GUI_DispStringAt(pbuff_str[i], rect1.x, rect1.y);
 			}
+			GUI_DispStringAt(str_content, rect1.x, rect1.y);
 		}
 	}
 
