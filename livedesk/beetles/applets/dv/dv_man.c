@@ -64,7 +64,6 @@ static __s32 __dv_on_create(__gui_msg_t *msg)
 
     // 初始化图标资源
     Dv_Uipara_Init();
-
     eLIBs_memset((void *)(&dv_frmwin_para), 0, sizeof(dv_frmwin_para_t));
     dv_frmwin_para.user_data = esMEMS_Malloc(0, sizeof(reg_dv_para_t));
     eLIBs_memset((void *)(dv_frmwin_para.user_data), 0, sizeof(reg_dv_para_t));
@@ -96,7 +95,6 @@ static __s32 __dv_on_destroy(__gui_msg_t *msg)
         dv_mset_destroy(dv_ctrl->h_child_mset);
     }
     Dv_Uipara_UnInit();
-
     esMEMS_Mfree(0, dv_ctrl);
 
     return EPDK_OK;

@@ -1,3 +1,10 @@
----- exfat_read_test Matches (2 in 1 files) ----
-App_root_scene.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\app_root):void exfat_read_test(void *arg)
-App_root_scene.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\app_root):    eLIBs_printf("exfat_read_test.\n");
+---- res_jh_lanchn Matches (9 in 1 files) ----
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):    setting_item_res_t  res_jh_lanchn;
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):                p_item_res = &general_attr->res_jh_lanchn;
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):                p_item_res = &general_attr->res_jh_lanchn;
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            p_item_res = &general_attr->res_jh_lanchn;
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            p_item_res = &general_attr->res_jh_lanchn;
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            p_item_res = &general_attr->res_jh_lanchn;
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):                p_item_res = &general_attr->res_jh_lanchn;
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):                p_item_res = &general_attr->res_jh_lanchn;
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):                p_item_res = &general_attr->res_jh_lanchn;

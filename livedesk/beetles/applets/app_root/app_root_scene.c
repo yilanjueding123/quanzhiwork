@@ -69,7 +69,6 @@ typedef __s32 (*p_app_root_fun)(void *arg);
 
 dv_sub_res  sub_dv_res;
 
-
 static __krnl_event_t *g_root_scene_sem = NULL;
 
 
@@ -267,8 +266,13 @@ __u8 dsk_query_tvout_detect_pin(void)
  * 其    它  : 
 
 *****************************************************************************/
+//资源释放问题已经解决，暂时先放在这里，以后视情况而定
 static void DV_Uipara_Subset_Init(void)
 {
+	BallocType(sub_dv_res, __dv_sub_res);
+	ASSERT(sub_dv_res != NULL);
+	ZeroTypeMem(sub_dv_res, __dv_sub_res);
+	
 	create_bmp_res(ID_DV_SIGNAL_LEVEL_NONE_BMP, sub_dv_res->bmp_subset_singal[0]);
     create_bmp_res(ID_DV_SIGNAL_LEVEL_ONE_BMP, sub_dv_res->bmp_subset_singal[1]);
     create_bmp_res(ID_DV_SIGNAL_LEVEL_TWO_BMP, sub_dv_res->bmp_subset_singal[2]);
@@ -339,6 +343,8 @@ static void DV_Uipara_Subset_UnInit(void)
 	destroy_bmp_res(sub_dv_res->sd_card_status[1]);
 //	destroy_bmp_res(sub_dv_res->set_logo);
 
+	BFreeType(sub_dv_res, __dv_sub_res);
+
 }
 
 /*****************************************************************************
@@ -360,7 +366,6 @@ dv_sub_res dv_get_sub_res(void)
 		return sub_dv_res;
 	}
 }
-
 
 __s32 __root_scene_sem_init(void)
 {
@@ -1454,9 +1459,7 @@ __s32 app_root_win_proc(__gui_msg_t *msg)
         {
             return EPDK_FAIL;
         }
-		
 		DV_Uipara_Subset_Init();
-		
         eLIBs_memset(root_para, 0, sizeof(root_para_t));
 
         root_ctrl = esMEMS_Balloc(sizeof(root_ctrl_t));
@@ -1473,7 +1476,7 @@ __s32 app_root_win_proc(__gui_msg_t *msg)
         root_para->font			= SWFFont;
         root_para->root_type	= 0;
 #ifdef APP_DV_SUPOORT_BREAK
-		root_para->srch_switch 	= DV_VEDIO_CAMEREA_APP;
+		root_para->srch_switch 	= DV_SRCH_APP;
 #endif		
 		
 		root_ctrl->h_app_dv	= app_dv_create(root_para);
@@ -1505,7 +1508,7 @@ __s32 app_root_win_proc(__gui_msg_t *msg)
             __msg("******err****\n");
             return EPDK_OK;
         }
-		//DV_Uipara_Subset_UnInit();
+		DV_Uipara_Subset_UnInit();
         root_para = (root_para_t *)root_ctrl->root_para;
         if (!root_para)
         {

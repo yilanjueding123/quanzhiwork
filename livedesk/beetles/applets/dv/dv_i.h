@@ -81,7 +81,6 @@ typedef enum dv_STATE
     DV_ON_CAM_SET,                    // ≈ƒ’’…Ë÷√≥°æ∞
 } dv_state_e;
 
-
 #endif /* __DV_I_H__ */
 
 

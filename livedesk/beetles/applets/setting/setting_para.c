@@ -192,7 +192,7 @@ static set_general_para setting_general_uipara_480_272 =
             {10, 132- ITEM_Y},		// bmp_unfocus_pos;
             {270, 165- ITEM_Y},		//bmp_left_pos;
             {380, 165- ITEM_Y},		//bmp_right_pos;
-            {220 - 15 - 6, 150- ITEM_Y - ITEM_H_OFFSET},		//string_title_pos;
+            {220 - 15 - 5, 150- ITEM_Y - ITEM_H_OFFSET},		//string_title_pos;
             {210, 142, 84, 36} //string_content_rect;
         },
 #ifdef  SET_ITEM_PRO_INF    

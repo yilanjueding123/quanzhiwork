@@ -18,6 +18,7 @@
 
 /**********************************************************************************************************************/
 
+
 typedef struct __dv_sub_res
 {
 	load_bmp_res_t 	bmp_subset_singal[6];
@@ -27,8 +28,7 @@ typedef struct __dv_sub_res
 	load_bmp_res_t	rec_status_bmp;
 	load_bmp_res_t  sd_card_status[2];		// 0:no, 1:yes
 //	load_bmp_res_t	set_logo;
-} *dv_sub_res;
-
+} *dv_sub_res, __dv_sub_res;
 
 #define APP_ROOT_CHECK_MEM_INFO_ID   0x33
 #define APP_ROOT_CHECK_MEM_INFO_TIMER_ID 100

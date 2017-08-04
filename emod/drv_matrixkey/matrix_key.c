@@ -467,12 +467,14 @@ static __u32 adc_key_scan_X2()
             if(adc_valume >= 80 && adc_valume < 380) //184
             {
             	__msg("kpad_prev key pressed\n");
-                key = KPAD_PREV;
+                //key = KPAD_PREV;
+                key = KPAD_NEXT;
             }
             else if(adc_valume >= 380 && adc_valume < 780) //367
             {
             	__msg("kpad_next key pressed\n");
-                key = KPAD_NEXT;
+                //key = KPAD_NEXT;
+                key = KPAD_PREV;
             }
             else if(adc_valume >= 780 && adc_valume < 1100) //549
             {

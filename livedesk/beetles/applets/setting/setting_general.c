@@ -960,7 +960,7 @@ static __s32 setting_generl_popinf_content_paint(__gui_msg_t *msg)
 #ifdef SET_ITEM_RIGHT_BMP
 	GUI_BMP_Draw(theme_hdl2buf(/*p_item_res->h_bmp_right*/general_attr->h_bmp_jh_right), p_item_res->bmp_right_pos.x, p_item_res->bmp_right_pos.y);
 #endif
-    GUI_DispStringAt(p_item_res->string_title, p_item_res->string_title_pos.x - 45, p_item_res->string_title_pos.y + 45);
+    GUI_DispStringAt(p_item_res->string_title, p_item_res->string_title_pos.x - 45 - 40, p_item_res->string_title_pos.y + 45);
 
     GUI_DispStringAt(p_item_res->string_content, p_item_res->string_title_pos.x + 80, p_item_res->string_title_pos.y + 45);
 
@@ -1714,7 +1714,7 @@ static __s32 setting_pop_general_paint(__gui_msg_t *msg)
                     case 60:
                         p_item_res->content_num = 5;
                         break;
-                    case 300:
+                    case 120:
                         p_item_res->content_num = 6;
                         break;
                     default:
@@ -2899,7 +2899,7 @@ static __s32 _setting_general_Proc(__gui_msg_t *msg)
         else if(msg->dwReserved == 5)
             black_lightoff_time = 60;
         else
-            black_lightoff_time = 300;
+            black_lightoff_time = 120;
         g_set_close_scn_time(black_lightoff_time);
         if(setting_reg_para)
         {
