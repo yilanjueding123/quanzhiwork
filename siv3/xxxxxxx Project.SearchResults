@@ -1,5 +1,9 @@
----- set_folder_path Matches (4 in 1 files) ----
-Cvr_core.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv\core):static void set_folder_path(void)
-Cvr_core.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv\core):static void set_folder_path(void)
-Cvr_core.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv\core):        set_folder_path();
-Cvr_core.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv\core):		set_folder_path();
+---- EPDK_LANGUAGE_ENM_ENGLISH Matches (8 in 4 files) ----
+Dsk_reg.c (f:\pri_f25\zhibo\work\livedesk\beetles\mod_desktop\functions\reg):    para->system_para.language = EPDK_LANGUAGE_ENM_ENGLISH;//EPDK_LANGUAGE_ENM_CHINESES; //¼òÌåÖÐÎÄ
+Elibs_language.c (f:\pri_f25\zhibo\work\livedesk\beetles\mod_desktop\util):    { EPDK_LANGUAGE_NAME_ENGLISH   , EPDK_LANGUAGE_ENM_ENGLISH    },
+Elibs_language.h (f:\pri_f25\zhibo\work\livedesk\beetles\include\mod_desktop\util):    EPDK_LANGUAGE_ENM_ENGLISH    = 0x400,      // Ó¢Óï
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):			else if(setting_reg_para->language == EPDK_LANGUAGE_ENM_ENGLISH)
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):				else if(setting_reg_para->language == EPDK_LANGUAGE_ENM_ENGLISH)
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):                else if(setting_reg_para->language == EPDK_LANGUAGE_ENM_ENGLISH)
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):                        setting_reg_para->language = EPDK_LANGUAGE_ENM_ENGLISH;
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):					   setting_reg_para->language = EPDK_LANGUAGE_ENM_ENGLISH;
