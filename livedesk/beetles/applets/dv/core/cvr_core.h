@@ -22,9 +22,10 @@
 //#define RECORD_PATHA     "F:\\\xE5\x85\xA8\xE5\xBF\x97\\DCIMA"
 //#define RECORD_PATHB     "F:\\\xE5\x85\xA8\xE5\xBF\x97\\DCIMB"
 
+#define TWO_FOLDER
 #define FILE_PATH        "F:\\DCIM"
-#define FILE_VIDEO_PATH  "F:\\DCIM\\VIDEO"
-#define FILE_PHOTO_PATH  "F:\\DCIM\\PHOTO"
+#define FILE_VIDEO_PATH  "F:\\VIDEO"
+#define FILE_PHOTO_PATH  "F:\\PHOTO"
 
 #define MAX_PREFIX       16
 

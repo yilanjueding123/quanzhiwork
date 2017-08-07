@@ -103,7 +103,7 @@ __u32 month = 1;
 __u32 day   = 0;
 
 __u32   record_file_index = 0;
-//__u32	photo_file_index = 0;
+__u32	photo_file_index = 0;
 
 // creat filename :normally  the file is aw_yyyymmdd_hhmmss.mov
 static void __dv_create_file_name(char *path, char *suffix, char *prefix)
@@ -112,6 +112,7 @@ static void __dv_create_file_name(char *path, char *suffix, char *prefix)
     __time_t time;
     __u32    data;
     char	 str[32];
+	char *str_cmp = ".avi";
 
 #if 0///ckk
     if(day++ < 30)
@@ -150,109 +151,123 @@ static void __dv_create_file_name(char *path, char *suffix, char *prefix)
     __msg("minute = %d\n", time.minute);
     __msg("second = %d\n", time.second);
 #endif
-
-    // 创建录制目录
-    eLIBs_strcpy(path, FILE_PATH);
-    eLIBs_strcat(path, "\\");
-    eLIBs_strcat(path, prefix);
+	if(eLIBs_strncmp(suffix, str_cmp,4) == 0)
+	{
+	    // 创建录制目录
+	    //eLIBs_strcpy(path, FILE_PATH);
+	    eLIBs_strcpy(path, FILE_VIDEO_PATH);
+	    
+	    eLIBs_strcat(path, "\\");
+	    eLIBs_strcat(path, prefix);
 #if 1//ckk
-    if(record_file_index < 9999)
-	{
-	    record_file_index++;
-	}
-    else
-	{
-	    record_file_index = 0;
-	}
-	
-//	if(photo_file_index < 9999)
-//	{
-//	    photo_file_index++;
-//	}
-//    else
-//	{
-//	    photo_file_index = 0;
-//	}
+	    if(record_file_index < 9999)
+		{
+		    record_file_index++;
+		}
+	    else
+		{
+		    record_file_index = 0;
+		}
+		
 #if 0
-    str[0] = record_file_index / 1000 + 0x30;
-    str[1] = (record_file_index % 1000) / 100 + 0x30;
-    str[2] = (record_file_index % 100) / 10 + 0x30;
-    str[3] = record_file_index % 10 + 0x30;
-    eLIBs_strcat(path, str);
+	    str[0] = record_file_index / 1000 + 0x30;
+	    str[1] = (record_file_index % 1000) / 100 + 0x30;
+	    str[2] = (record_file_index % 100) / 10 + 0x30;
+	    str[3] = record_file_index % 10 + 0x30;
+	    eLIBs_strcat(path, str);
 #endif
-    if(record_file_index < 10)
-	{
-	    eLIBs_strcat(path, "000");
-	}
-    else if(record_file_index < 100)
-	{
-		eLIBs_strcat(path, "00");
-	}
-    else if(record_file_index < 1000)
-	{
-	    eLIBs_strcat(path, "0");
-	}
-	
-//	if(photo_file_index < 10)
-//	{
-//	    eLIBs_strcat(path, "000");
-//	}
-//    else if(photo_file_index < 100)
-//	{
-//		eLIBs_strcat(path, "00");
-//	}
-//    else if(photo_file_index < 1000)
-//	{
-//	    eLIBs_strcat(path, "0");
-//	}
-	
-    eLIBs_int2str_dec(record_file_index, str);
-	
-//	eLIBs_int2str_dec(photo_file_index, str);
-    eLIBs_strcat(path, str);
-
+	    if(record_file_index < 10)
+		{
+		    eLIBs_strcat(path, "000");
+		}
+	    else if(record_file_index < 100)
+		{
+			eLIBs_strcat(path, "00");
+		}
+	    else if(record_file_index < 1000)
+		{
+		    eLIBs_strcat(path, "0");
+		}
+			
+	    eLIBs_int2str_dec(record_file_index, str);
+		eLIBs_strcat(path, str);
 
 #endif
 #if 0//ckk
-    data = date.year * 10000 + date.month * 100 + date.day;
-    eLIBs_int2str_dec(data, str);
-    eLIBs_strcat(path, str);
-    eLIBs_strcat(path, "_");
+	    data = date.year * 10000 + date.month * 100 + date.day;
+	    eLIBs_int2str_dec(data, str);
+	    eLIBs_strcat(path, str);
+	    eLIBs_strcat(path, "_");
 
-    if(time.hour < 10)
-    {
-        eLIBs_strcat(path, "0");
-        eLIBs_int2str_dec(time.hour, str);
-        eLIBs_strcat(path, str);
-    }
-    else
-    {
-        eLIBs_int2str_dec(time.hour, str);
-        eLIBs_strcat(path, str);
-    }
-    if(time.minute < 10)
-    {
-        eLIBs_strcat(path, "0");
-        eLIBs_int2str_dec(time.minute, str);
-        eLIBs_strcat(path, str);
-    }
-    else
-    {
-        eLIBs_int2str_dec(time.minute, str);
-        eLIBs_strcat(path, str);
-    }
-    if(time.second < 10)
-    {
-        eLIBs_strcat(path, "0");
-        eLIBs_int2str_dec(time.second, str);
-        eLIBs_strcat(path, str);
-    }
-    else
-    {
-        eLIBs_int2str_dec(time.second, str);
-        eLIBs_strcat(path, str);
-    }
+	    if(time.hour < 10)
+	    {
+	        eLIBs_strcat(path, "0");
+	        eLIBs_int2str_dec(time.hour, str);
+	        eLIBs_strcat(path, str);
+	    }
+	    else
+	    {
+	        eLIBs_int2str_dec(time.hour, str);
+	        eLIBs_strcat(path, str);
+	    }
+	    if(time.minute < 10)
+	    {
+	        eLIBs_strcat(path, "0");
+	        eLIBs_int2str_dec(time.minute, str);
+	        eLIBs_strcat(path, str);
+	    }
+	    else
+	    {
+	        eLIBs_int2str_dec(time.minute, str);
+	        eLIBs_strcat(path, str);
+	    }
+	    if(time.second < 10)
+	    {
+	        eLIBs_strcat(path, "0");
+	        eLIBs_int2str_dec(time.second, str);
+	        eLIBs_strcat(path, str);
+	    }
+	    else
+	    {
+	        eLIBs_int2str_dec(time.second, str);
+	        eLIBs_strcat(path, str);
+	    }
 #endif
+	}
+	else
+	{
+	    // 创建录制目录
+	    eLIBs_strcpy(path, FILE_PHOTO_PATH);
+	    eLIBs_strcat(path, "\\");
+	    eLIBs_strcat(path, prefix);
+#if 1//ckk
+	    if(photo_file_index < 9999)
+		{
+		    photo_file_index++;
+		}
+	    else
+		{
+		    photo_file_index = 0;
+		}
+		
+	    if(photo_file_index < 10)
+		{
+		    eLIBs_strcat(path, "000");
+		}
+	    else if(photo_file_index < 100)
+		{
+			eLIBs_strcat(path, "00");
+		}
+	    else if(photo_file_index < 1000)
+		{
+		    eLIBs_strcat(path, "0");
+		}
+			
+	    eLIBs_int2str_dec(photo_file_index, str);
+		eLIBs_strcat(path, str);
+
+#endif
+	}
     eLIBs_strcat(path, suffix);
 	__msg("file path:%s\n", path);
 }
@@ -583,6 +598,48 @@ __s32   Cvr_DvOpen(void)
 
 if the folder DCM not ,creat it
 */
+#ifdef	TWO_FOLDER
+static void set_folder_path(void)
+{
+    ES_DIR *dir_v,*dir_p;
+    __s32 ret;
+
+	dir_p = g_opendir(FILE_PHOTO_PATH);
+	
+	if( dir_p == NULL )
+    {
+		ret = g_mkdir(FILE_PHOTO_PATH);
+		
+        if(!ret)
+    	{
+	        __msg("create photo sucess\n");
+    	}
+    }
+    else
+    {
+        __msg("file photo exist\n");
+        g_closedir(dir_p);
+        dir_p = NULL;
+    }
+	
+	dir_v = g_opendir(FILE_VIDEO_PATH);
+    if( dir_v == NULL )
+    {
+		ret = g_mkdir(FILE_VIDEO_PATH);
+		
+        if(!ret)
+    	{
+	        __msg("create video sucess\n");
+    	}
+    }
+    else
+    {
+        __msg("file video exist\n");
+        g_closedir(dir_v);
+        dir_v = NULL;
+    }
+}
+#else
 static void set_folder_path(void)
 {
     ES_DIR *dir;
@@ -606,7 +663,7 @@ static void set_folder_path(void)
         dir = NULL;
     }
 }
-
+#endif
 __s32   Cvr_DvConfigPara(__dv_config_t *para)
 {
     //char                file_path[256];
@@ -633,12 +690,14 @@ __s32   Cvr_DvConfigPara(__dv_config_t *para)
         __msg("----jh_dbg_0716_32----\n");
         set_folder_path();
         //ckk
-        record_file_index=__dv_get_last_file(FILE_PATH);
+        //record_file_index=__dv_get_last_file(FILE_PATH);
+        record_file_index=__dv_get_last_file(FILE_VIDEO_PATH);
 
         __dv_record_media_info(0);
         // not record this step
         if(record_file_index > 0)
             record_file_index--;
+		
         parrot_set_media_file(dv_core->dv_obj, &dv_core->media_info);
 
         parrot_set_preview_mode(dv_core->dv_obj, dv_core->csi_mode_rec.csi_mode + dv_core->rec_cur_mode_index);
@@ -652,17 +711,17 @@ __s32   Cvr_DvConfigPara(__dv_config_t *para)
         parrot_set_mode(dv_core->dv_obj, LOTUS_RECORD_MODE_IMAGE);
 		set_folder_path();
 				//ckk
-		record_file_index=__dv_get_last_file(FILE_PATH);
-//		photo_file_index=__dv_get_last_file(FILE_PATH);
+//		record_file_index=__dv_get_last_file(FILE_PATH);
+		photo_file_index=__dv_get_last_file(FILE_PHOTO_PATH);
         __dv_camera_media_info(0);
-		if(record_file_index > 0)
-		{
-	        record_file_index--;
-		}
-//		if(photo_file_index > 0)
+//		if(record_file_index > 0)
 //		{
-//	        photo_file_index--;
+//	        record_file_index--;
 //		}
+		if(photo_file_index > 0)
+		{
+	        photo_file_index--;
+		}
         parrot_set_media_file(dv_core->dv_obj, &dv_core->media_info);
 
         parrot_set_preview_mode(dv_core->dv_obj, dv_core->csi_mode_cam.csi_mode + dv_core->cam_cur_mode_index);

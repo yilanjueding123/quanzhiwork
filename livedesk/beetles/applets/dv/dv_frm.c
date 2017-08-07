@@ -738,7 +738,11 @@ static void __dv_delete_first_file_thread(void *p_arg)
             {
                 // 获取当前正在录制文件名
                 Cvr_DvGetFileName(cur_file, 0);
+			#ifdef TWO_FOLDER 
+				ret = __dv_get_first_file(FILE_VIDEO_PATH, file_path, cur_file);
+			#else
                 ret = __dv_get_first_file(FILE_PATH, file_path, cur_file);
+			#endif
                 if(ret == EPDK_OK)
                 {
                     // 删除文件失败
@@ -772,7 +776,11 @@ static __s32 __dv_on_start_record( __gui_msg_t *msg)
         if(tmp_size <= (long long)0)    // 磁盘满
         {
             // 获取最早录制的文件（非当前录制文件）
+        #ifdef TWO_FOLDER
+			__dv_get_first_file(FILE_VIDEO_PATH, file_path, NULL);
+		#else
             __dv_get_first_file(FILE_PATH, file_path, NULL);
+		#endif
             eLIBs_remove(file_path);
         }
         // 开始录像
@@ -1306,8 +1314,13 @@ static __s32 __dv_frm_on_key_proc(__gui_msg_t *msg)
                 // UI 部分更新到从拍照状态切换到录像模式
                 __dv_frm_on_paint( msg);
 			}
+#ifdef TWO_FOLDER
+			record_file_index=__dv_get_last_file(FILE_VIDEO_PATH);
+			photo_file_index=__dv_get_last_file(FILE_PHOTO_PATH);
+#else
 			record_file_index=__dv_get_last_file(FILE_PATH);
-//			photo_file_index=__dv_get_last_file(FILE_PATH);
+			photo_file_index=__dv_get_last_file(FILE_PATH);
+#endif			
         }
 #ifdef	APP_DV_HBAR
 		__app_dv_draw_rec_time_hbar(msg, 0);
@@ -2516,8 +2529,14 @@ static __s32 __dv_frm_main_proc(__gui_msg_t *msg)
 	    dv_frm_ctrl = (dv_frmwin_para_t *)GUI_WinGetAttr(msg->h_deswin);
 		
 		__mymsg("File system plug in \n");
+#ifdef TWO_FOLDER
+		record_file_index=__dv_get_last_file(FILE_VIDEO_PATH);
+		photo_file_index=__dv_get_last_file(FILE_PHOTO_PATH);
+#else
 		record_file_index=__dv_get_last_file(FILE_PATH);
-//		photo_file_index=__dv_get_last_file(FILE_PATH);
+		photo_file_index=__dv_get_last_file(FILE_PATH);
+#endif			
+		
 #ifdef	APP_DV_HBAR
 		__app_dv_draw_card_status(dv_frm_ctrl->subset);
 #endif
