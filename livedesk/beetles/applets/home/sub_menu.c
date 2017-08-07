@@ -19,6 +19,15 @@
 #include "sub_menu.h"
 #include "app_home_i.h"
 
+#if  0
+//#define __here__            eLIBs_printf("@L%d(%s)\n", __LINE__, __FILE__);
+#define __msg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
+						     eLIBs_printf(__VA_ARGS__)									        )
+#else
+#define __msg(...)   
+#endif
+
+
 enum
 {
     SMENU_PAINT_ALL,
@@ -233,6 +242,7 @@ static void smenu_init_res(smenu_attr_t *smenu_attr)
     case ID_HOME_DV:
         //case ID_HOME_EBOOK:
     {
+    	__msg("After push enter key, enter into this\n");
         if (smenu_attr->root_type == 0)
         {
             __log("jh_dbg_1\n");

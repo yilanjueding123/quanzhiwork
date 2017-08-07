@@ -96,6 +96,7 @@ __s32 dv_frm_create(dv_frmwin_para_t *para);
 __s32 dv_frm_destroy( H_WIN h_win );
 
 extern __u32   record_file_index;
+extern __u32   photo_file_index;
 
 #define  ID_OP_DV_TO_HOME     0
 #define 	LOOP_VIDEO_ONOFF

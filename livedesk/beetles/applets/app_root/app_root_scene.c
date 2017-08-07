@@ -1475,14 +1475,17 @@ __s32 app_root_win_proc(__gui_msg_t *msg)
         root_para->h_parent		= msg->h_deswin;
         root_para->font			= SWFFont;
         root_para->root_type	= 0;
-#ifdef APP_DV_SUPOORT_BREAK
-		root_para->srch_switch 	= DV_SRCH_APP;
-#endif		
 		
-		root_ctrl->h_app_dv	= app_dv_create(root_para);
-		GUI_WinSetFocusChild(root_ctrl->h_app_dv);
-
+//#ifdef APP_DV_SUPOORT_BREAK
+//		root_para->srch_switch 	= DV_SRCH_APP;
+//#endif		
+		
+		//root_ctrl->h_app_dv	= app_dv_create(root_para);
+		//GUI_WinSetFocusChild(root_ctrl->h_app_dv);
         root_ctrl->root_para = root_para;
+		root_ctrl->h_app_home = app_home_create(root_ctrl->root_para);
+		GUI_WinSetFocusChild(root_ctrl->h_app_home);
+		
         GUI_WinSetAddData(msg->h_deswin, (__u32)root_ctrl);
 #ifdef 	SUPPORT_TV_OUT	
 		__request_tvout_detect_pin();

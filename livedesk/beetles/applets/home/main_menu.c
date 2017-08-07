@@ -19,7 +19,7 @@
 #include "app_home_i.h"
 #include "main_menu.h"
 
-#if  0
+#if 0
 //#define __here__            eLIBs_printf("@L%d(%s)\n", __LINE__, __FILE__);
 #define __msg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
 						     eLIBs_printf(__VA_ARGS__)									        )

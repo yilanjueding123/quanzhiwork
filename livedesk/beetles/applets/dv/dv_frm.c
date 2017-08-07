@@ -932,6 +932,16 @@ static __s32 __dv_frm_on_create(__gui_msg_t *msg)
 				freq_save_buff[j][i] = 0;
 			}
 		}
+		
+		spi_auto_srch->channel = 0;
+		spi_auto_srch->max_value = 0;
+		spi_auto_srch->max_channel = 0;
+		spi_auto_srch->save_cnt = 0;
+		key_flag = KEY_PRESS_ACTION;
+	}
+	else
+	{
+		key_flag = KEY_NONE_ACTION;
 	}
 #else
 	for(i = 0; i<2; i++)
@@ -941,13 +951,14 @@ static __s32 __dv_frm_on_create(__gui_msg_t *msg)
 			freq_save_buff[j][i] = 0;
 		}
 	}
+	key_flag = KEY_NONE_ACTION;
 #endif	
 		
 
 	freq_save_flg = 0;
 	freq_save_switch = freq_save_cnt = 0;
 	next_signal_level = prev_signal_level = 0;
-	key_flag = KEY_NONE_ACTION;
+	//key_flag = KEY_NONE_ACTION;
 #endif
 	
     return EPDK_OK;
@@ -1101,6 +1112,14 @@ static __s32 __dv_frm_on_key_proc(__gui_msg_t *msg)
     dv_frmwin_para_t        	*dv_frm_ctrl;
     dv_frm_ctrl = (dv_frmwin_para_t *)GUI_WinGetAttr(msg->h_deswin);
 	
+#ifdef APP_DV_SUPOORT_BREAK
+	if(dv_frm_ctrl->switch_frm == DV_SRCH_APP)
+	{
+		__mymsg("dv_frm_ctrl->switch_frm = %d\n", dv_frm_ctrl->switch_frm);
+		return EPDK_OK;
+	}
+#endif	
+
 	if(((msg->dwAddData1 == GUI_MSG_KEY_LONGLEFT)||(msg->dwAddData1 == GUI_MSG_KEY_LONGRIGHT))\
 		&&(msg->dwAddData2 == KEY_REPEAT_ACTION))
 	{
@@ -1109,13 +1128,6 @@ static __s32 __dv_frm_on_key_proc(__gui_msg_t *msg)
 	    {
 	    	return EPDK_OK;
 		}
-#ifdef APP_DV_SUPOORT_BREAK
-		if(dv_frm_ctrl->switch_frm == DV_VEDIO_CAMEREA_APP)
-		{
-			__mymsg("dv_frm_ctrl->switch_frm = %d\n", dv_frm_ctrl->switch_frm);
-			return EPDK_OK;
-		}
-#endif	
 
 #ifdef DV_FRM_SAVE_FREQ
 		for(i = 0; i<2; i++)
@@ -1153,7 +1165,7 @@ static __s32 __dv_frm_on_key_proc(__gui_msg_t *msg)
 
 		return EPDK_OK;
     }
-	if((msg->dwAddData1 == GUI_MSG_KEY_LEFT)&&(msg->dwAddData2 == KEY_UP_ACTION))
+	if((msg->dwAddData1 == GUI_MSG_KEY_RIGHT/*GUI_MSG_KEY_LEFT*/)&&(msg->dwAddData2 == KEY_UP_ACTION))
 	{
 		ES_FILE *ktemp;
 		single_t key_value;
@@ -1209,7 +1221,7 @@ static __s32 __dv_frm_on_key_proc(__gui_msg_t *msg)
 		dv_save_value();
 		return EPDK_OK;
 	}
-	else if((msg->dwAddData1 == GUI_MSG_KEY_RIGHT)&&(msg->dwAddData2 == KEY_UP_ACTION))
+	else if((msg->dwAddData1 == GUI_MSG_KEY_LEFT/*GUI_MSG_KEY_RIGHT*/)&&(msg->dwAddData2 == KEY_UP_ACTION))
 	{
 		ES_FILE *ktemp;
 		single_t key_value;
@@ -1266,15 +1278,7 @@ static __s32 __dv_frm_on_key_proc(__gui_msg_t *msg)
 	}
 	
 	if(msg->dwAddData1 == GUI_MSG_KEY_SEETING)        // 切换模式(进入拍照模式)
-    {
-#ifdef APP_DV_SUPOORT_BREAK
-		if(dv_frm_ctrl->switch_frm == DV_SRCH_APP)
-		{
-			__mymsg("dv_frm_ctrl->switch_frm = %d\n", dv_frm_ctrl->switch_frm);
-			return EPDK_OK;
-		}
-#endif	
-    
+    {    
         if(msg->dwAddData2 == KEY_UP_ACTION)
         {
         	if(dv_frm_ctrl->cur_state == DV_ON_REC )
@@ -1303,6 +1307,7 @@ static __s32 __dv_frm_on_key_proc(__gui_msg_t *msg)
                 __dv_frm_on_paint( msg);
 			}
 			record_file_index=__dv_get_last_file(FILE_PATH);
+//			photo_file_index=__dv_get_last_file(FILE_PATH);
         }
 #ifdef	APP_DV_HBAR
 		__app_dv_draw_rec_time_hbar(msg, 0);
@@ -1316,14 +1321,6 @@ static __s32 __dv_frm_on_key_proc(__gui_msg_t *msg)
 	
     if(dv_frm_ctrl->cur_state == DV_ON_REC)
     {
-#ifdef APP_DV_SUPOORT_BREAK
-		if(dv_frm_ctrl->switch_frm == DV_SRCH_APP)
-		{
-			__mymsg("dv_frm_ctrl->switch_frm = %d\n", dv_frm_ctrl->switch_frm);
-			return EPDK_OK;
-		}
-#endif	
-
 #ifdef	APP_DV_HBAR
 		__app_dv_draw_mode_hbar(msg);
 #endif
@@ -1373,15 +1370,7 @@ static __s32 __dv_frm_on_key_proc(__gui_msg_t *msg)
         return EPDK_OK;
     }
     else if(dv_frm_ctrl->cur_state == DV_ON_CAM)
-    {
-#ifdef APP_DV_SUPOORT_BREAK
-		if(dv_frm_ctrl->switch_frm == DV_SRCH_APP)
-		{
-			__mymsg("dv_frm_ctrl->switch_frm = %d\n", dv_frm_ctrl->switch_frm);
-			return EPDK_OK;
-		}
-#endif	
-    
+    {    
 #ifdef	APP_DV_HBAR
 		__app_dv_draw_mode_hbar(msg);
 #endif    
@@ -1660,6 +1649,13 @@ static __s32 __dv_frm_on_timer_proc(__gui_msg_t *msg)
 		key_flag = KEY_NONE_ACTION;
 		__dv_frm_srch_finsh();
 		dv_dialog_destroy(dv_frm_ctrl);
+#ifdef APP_DV_SUPOORT_BREAK		
+		if(dv_frm_ctrl->switch_frm == DV_SRCH_APP)
+		{
+			dv_frm_ctrl->switch_frm = DV_VEDIO_CAMEREA_APP;
+			__mymsg("dv_frm_ctrl->switch_frm = %d\n", dv_frm_ctrl->switch_frm);
+		}
+#endif		
 		if( GUI_IsTimerInstalled(msg->h_deswin, TIMER_DV_SRCH_OVER_ID) )
 		{
 			GUI_KillTimer(msg->h_deswin, TIMER_DV_SRCH_OVER_ID);
@@ -2521,7 +2517,7 @@ static __s32 __dv_frm_main_proc(__gui_msg_t *msg)
 		
 		__mymsg("File system plug in \n");
 		record_file_index=__dv_get_last_file(FILE_PATH);
-		
+//		photo_file_index=__dv_get_last_file(FILE_PATH);
 #ifdef	APP_DV_HBAR
 		__app_dv_draw_card_status(dv_frm_ctrl->subset);
 #endif

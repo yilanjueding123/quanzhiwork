@@ -24,7 +24,7 @@
 #include "msgbox.h"
 #include "app_home_i.h"
 
-#if  0
+#if 0
 //#define __here__            eLIBs_printf("@L%d(%s)\n", __LINE__, __FILE__);
 #define __msg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
 						     eLIBs_printf(__VA_ARGS__)									        )
@@ -530,19 +530,17 @@ static __s32 app_home_proc(__gui_msg_t *msg)
                 case ID_HOME_DV:
                 {
                     __log("jh_dbg0722_1\n");
-                    if (home_para->root_type != 0)
+                    if(home_para->root_type != 0)
                     {
                         __s32 index;
 
                         index = msg->dwAddData2;
-                        //	tf_cardstate_set(0);
+
                         GUI_LyrWinSetSta(home_para->lyr_smenu, GUI_LYRWIN_STA_SUSPEND);
                         GUI_LyrWinSetSta(home_para->lyr_mmenu, GUI_LYRWIN_STA_SUSPEND);
                         main_menu_res_uninit(home_para->h_mmenu);
                         sub_menu_uninit_res(home_para->h_submenu);
-						
-                        //GUI_LyrWinSetSta(home_para->lyr_total_bg, GUI_LYRWIN_STA_SUSPEND);
-                        
+						                        
                         if ((home_para->root_type & 0xff) //USB
                                 && (home_para->root_type & 0xff00)) //SD
                         {
@@ -603,7 +601,7 @@ static __s32 app_home_proc(__gui_msg_t *msg)
                     }
                     else
                     {
-                        if(home_para->focus_id == ID_HOME_DV)
+                        if((home_para->focus_id == ID_HOME_MOVIE)||(home_para->focus_id == ID_HOME_PHOTO))//(home_para->focus_id == ID_HOME_DV)
                         {
                             __s32 index;
 

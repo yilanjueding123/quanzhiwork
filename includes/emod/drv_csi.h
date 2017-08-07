@@ -16,7 +16,7 @@
 #ifndef  _DRV_CSI_H_
 #define  _DRV_CSI_H_
 #define CSI_MODE_NUM 8
-#define CSI_BUFFER_NUM 6
+#define CSI_BUFFER_NUM 8
 #define CSI_DEV_MAX_NUM 2
 
 typedef enum
@@ -164,6 +164,10 @@ typedef enum  __DRV_CSI_CMD_SET
     DRV_CSI_CMD_GET_PROGRSSV_INFO,//ret = b_progr
     DRV_CSI_CMD_SET_MASTER_PORT = DRV_CSI_CMD_GET_PROGRSSV_INFO,
     DRV_CSI_CMD_GET_MASTER_PORT,
+    DRV_CSI_CMD_SET_DAY_NIGHT,
+    DRV_CSI_CMD_GET_INIT, 
+    DRV_CSI_CMD_SET_EXIT,
+	DRV_CSI_CMD_SET_MSG_Q = 0x200,	
     DRV_CSI_CMD_,
 } __drv_csi_cmd_set_t;
 

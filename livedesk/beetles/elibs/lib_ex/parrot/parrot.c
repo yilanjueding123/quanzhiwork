@@ -39,9 +39,9 @@ __s32   parrot_init(void)
 {
     __msg("parrot_init\n");
 
-    //	esDEV_Plugin("\\drv\\di.drv", 0, 0, 1);
+    esDEV_Plugin("\\drv\\di.drv", 0, 0, 1);
     __here__;
-    //	esDEV_Plugin("\\drv\\tvd.drv", 0, 0, 1);
+    esDEV_Plugin("\\drv\\tvd.drv", 0, 0, 1);
     __here__;
 RETRY:
     mid_lotus = esMODS_MInstall( "d:\\mod\\lotus\\lotus.mod", 0 );
@@ -94,8 +94,8 @@ __s32   parrot_uninit(void)
         esMODS_MUninstall(mid_lotus);
         mid_lotus = 0;
     }
-    //	esDEV_Plugout("\\drv\\tvd.drv", 0 );
-    //	esDEV_Plugout("\\drv\\di.drv", 0 );
+    esDEV_Plugout("\\drv\\tvd.drv", 0 );
+    esDEV_Plugout("\\drv\\di.drv", 0 );
     return EPDK_OK;
 }
 

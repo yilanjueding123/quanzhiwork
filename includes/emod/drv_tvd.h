@@ -20,7 +20,7 @@
 #define __DRIVER_TVD_H__
 
 #define TVD_MODE_NUM 1
-#define TVD_BUFFER_NUM 6
+#define TVD_BUFFER_NUM 8
 
 typedef enum tag_BUF_SCRAB_MODE_TVD
 {
@@ -37,7 +37,7 @@ typedef enum tag_BUF_SCRAB_MODE_TVD
     TVD0_TDM_4CH_2X2 = 7 ,     //TVD0 TDM CH0/1 + CH2/3 with same size and format
 
     TVD_SC_NA = 0xff,
-} __buf_scrab_mode_tvd_t;
+}__buf_scrab_mode_tvd_t;
 
 typedef struct tag_TVD_MODE
 {
@@ -49,16 +49,16 @@ typedef struct tag_TVD_MODE
     __u32               frame_rate;    //Hz, x1000
     __u32               frame_period;  //us
     __cs_mode_t    			color_space;
-    //=========add for TVD0+TVD1 ===============
+//=========add for TVD0+TVD1 ===============
     __buf_scrab_mode_tvd_t  tvd_buf_scrab_mode;
-    //========================
-} __tvd_mode_t;
+//========================
+}__tvd_mode_t;
 
 typedef struct tag_TVD_MODE_ALL
 {
     __u32             number;
     __tvd_mode_t      tvd_mode[TVD_MODE_NUM];
-} __tvd_mode_all_t;
+}__tvd_mode_all_t;
 
 typedef enum  __DRV_TVD_CMD_SET
 {
@@ -93,7 +93,7 @@ typedef enum  __DRV_TVD_CMD_SET
     DRV_TVD_CMD_SET_MASTER_PORT = DRV_TVD_CMD_GET_PROGRSSV_INFO,//**absence**
     DRV_TVD_CMD_GET_MASTER_PORT,			//**absence**
 
-    DRV_TVD_CMD_SET_TV_SEL = 0x100,               //tv0/tv1
+    DRV_TVD_CMD_SET_TV_SEL=0x100,                 //tv0/tv1
 
     DRV_TVD_CMD_SEL_CHANNEL,				//aux = __drv_TVD_sel_channel
     DRV_TVD_CMD_SEL_SOURCE,					//aux = TVD_SOURCE_CVBS, TVD_SOURCE_YPbPr
@@ -102,14 +102,16 @@ typedef enum  __DRV_TVD_CMD_SET
 
     DRV_TVD_CMD_SEL_FORMAT,					//aux = tvd_mod_fmt_t
     DRV_TVD_CMD_SET_INPUT_CHANNEL,			//aux = __drv_TVD_INPUT_CHANNEL
-    DRV_TVD_CMD_GET_ADC_STATUS,				// return : bit0: 1->plugin, 0->plugout ; bit4:1->pal,0:ntsc;bit8:
-    DRV_TVD_CMD_ENABLE_DI_FUNTION,			// 0: disable di ,1 : enable id
+    DRV_TVD_CMD_GET_ADC_STATUS,				// return : bit0: 1->plugin, 0->plugout ; bit4:1->pal,0:ntsc;bit8: 
+	DRV_TVD_CMD_ENABLE_DI_FUNTION,			// 0: disable di ,1 : enable id
     DRV_TVD_CMD_CONFIG, 					//ret = EPDK_OK/EPDK_FAIL,pbuffer = __tvd_config_para_t ;
     DRV_TVD_CMD_CHANGE_CHANNEL, 			//aux =  channel num , send command to change channel when tvd is work state
+
+	DRV_TVD_CMD_SET_MSG_Q = 0x200,			//Pbuffer = msg queue
     DRV_TVD_CMD_,
 
 
-} __drv_TVD_cmd_set_t;
+}__drv_TVD_cmd_set_t;
 typedef struct tag_TVD_FRAME
 {
     __s32               frame_id;
@@ -120,7 +122,7 @@ typedef struct tag_TVD_FRAME
     __rect_t            src_rect;           // source valid size, 宏块对齐的图像大小, 一般就是frame buffer了
     __rect_t            dst_rect;           // source display size,真实图像的位置大小
     __u32               addr[3];            // data buffer address
-
+    
     __u16               color_format; //same with __tvd_mode_t
     __u32               component_seq;//same with __tvd_mode_t
     __u32               store_mode;   //same with __tvd_mode_t
@@ -128,7 +130,7 @@ typedef struct tag_TVD_FRAME
 
     __s64               uPts;         //us
     __s32               bPtsValid;
-} __tvd_frame_t;
+}__tvd_frame_t;
 
 typedef struct tag_TVD_FRAME_QUEUE
 {
@@ -138,66 +140,69 @@ typedef struct tag_TVD_FRAME_QUEUE
 
 typedef enum  e_TVD_SEL_CHANNEL
 {
-    TVD_CHANNEL_0,
-    TVD_CHANNEL_1,
-    //TVD_CHANNEL_2,
-    //TVD_CHANNEL_3,
+	TVD_CHANNEL_0,
+	TVD_CHANNEL_1,
+	//TVD_CHANNEL_2,
+	//TVD_CHANNEL_3,
 
-    TVD_SEL_CHANNEL_MAX
+	TVD_SEL_CHANNEL_MAX
 
-} __drv_TVD_sel_channel;
+}__drv_TVD_sel_channel;
 
 typedef enum  e_TVD_SEL_SOURCE
 {
-    TVD_SOURCE_CVBS,
-    TVD_SOURCE_YPbPr,
+	TVD_SOURCE_CVBS,
+	TVD_SOURCE_YPbPr,
 
-    TVD_SEL_SOURCE_MAX
+	TVD_SEL_SOURCE_MAX
 
-} __drv_TVD_sel_source;
+}__drv_TVD_sel_source;
 
 typedef enum  e_TVD_PAL_NTSC
 {
-    TVD_SOURCE_NTSC,
-    TVD_SOURCE_PAL,
+	TVD_SOURCE_NTSC,
+	TVD_SOURCE_PAL,
+	TVD_SOURCE_PAL_M,
+	TVD_SOURCE_PAL_N,
+	TVD_SOURCE_SECAM,
+	TVD_SYSTEM_FORMAT_MAX
 
-    TVD_SYSTEM_FORMAT_MAX
-
-} __drv_TVD_system;
+}__drv_TVD_system;
 
 typedef enum  e_TVD_YPbPr_SIZE
 {
-    TVD_YPbPr_480i,
-    TVD_YPbPr_576i,
+	TVD_YPbPr_480i,
+	TVD_YPbPr_576i,
 
-    TVD_YPbPr_SIZE_MAX
+	TVD_YPbPr_SIZE_MAX
 
-} __drv_TVD_YPbPr_size;
+}__drv_TVD_YPbPr_size;
 
 typedef enum  e_TVD_INPUT_CHANNEL
 {
-    TVD_INPUT_CHANNEL_0,
-    TVD_INPUT_CHANNEL_1,
+	TVD_INPUT_CHANNEL_0,
+	TVD_INPUT_CHANNEL_1,
 
-    TVD_INPUT_CHANNEL_MAX
+	TVD_INPUT_CHANNEL_MAX
 
-} __drv_TVD_INPUT_CHANNEL;
+}__drv_TVD_INPUT_CHANNEL;
+
 typedef enum
 {
     TVD_UV_NON_MB_COMBINED_YUV420,
-    TVD_UV_NON_MB_COMBINED_YUV422,
+	TVD_UV_NON_MB_COMBINED_YUV422,
     TVD_UV_MB_COMBINED_YUV420,
-
+    
     TVD_MOD_FMT_MAX
 
-} __drv_TVD_mod_fmt_t;
+}__drv_TVD_mod_fmt_t;
 
 typedef struct tag_TVD_CONFIG_PARA
 {
-    __drv_TVD_INPUT_CHANNEL	tvd_channel;
-    __drv_TVD_mod_fmt_t		format ;
-    __drv_TVD_system 		system ;
-    __u32					filter_3D_en ;
+	__drv_TVD_sel_channel	tvd_channel;
+	__drv_TVD_mod_fmt_t		format ;
+	__drv_TVD_system 		system ;
+	__u32					filter_3D_en ;
 } __tvd_config_para_t;
 
 #endif	// __DRIVER_TVD_H__

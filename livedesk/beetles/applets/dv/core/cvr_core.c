@@ -103,6 +103,7 @@ __u32 month = 1;
 __u32 day   = 0;
 
 __u32   record_file_index = 0;
+//__u32	photo_file_index = 0;
 
 // creat filename :normally  the file is aw_yyyymmdd_hhmmss.mov
 static void __dv_create_file_name(char *path, char *suffix, char *prefix)
@@ -156,9 +157,22 @@ static void __dv_create_file_name(char *path, char *suffix, char *prefix)
     eLIBs_strcat(path, prefix);
 #if 1//ckk
     if(record_file_index < 9999)
-        record_file_index++;
+	{
+	    record_file_index++;
+	}
     else
-        record_file_index = 0;
+	{
+	    record_file_index = 0;
+	}
+	
+//	if(photo_file_index < 9999)
+//	{
+//	    photo_file_index++;
+//	}
+//    else
+//	{
+//	    photo_file_index = 0;
+//	}
 #if 0
     str[0] = record_file_index / 1000 + 0x30;
     str[1] = (record_file_index % 1000) / 100 + 0x30;
@@ -167,12 +181,34 @@ static void __dv_create_file_name(char *path, char *suffix, char *prefix)
     eLIBs_strcat(path, str);
 #endif
     if(record_file_index < 10)
-        eLIBs_strcat(path, "000");
+	{
+	    eLIBs_strcat(path, "000");
+	}
     else if(record_file_index < 100)
-        eLIBs_strcat(path, "00");
+	{
+		eLIBs_strcat(path, "00");
+	}
     else if(record_file_index < 1000)
-        eLIBs_strcat(path, "0");
+	{
+	    eLIBs_strcat(path, "0");
+	}
+	
+//	if(photo_file_index < 10)
+//	{
+//	    eLIBs_strcat(path, "000");
+//	}
+//    else if(photo_file_index < 100)
+//	{
+//		eLIBs_strcat(path, "00");
+//	}
+//    else if(photo_file_index < 1000)
+//	{
+//	    eLIBs_strcat(path, "0");
+//	}
+	
     eLIBs_int2str_dec(record_file_index, str);
+	
+//	eLIBs_int2str_dec(photo_file_index, str);
     eLIBs_strcat(path, str);
 
 
@@ -617,10 +653,16 @@ __s32   Cvr_DvConfigPara(__dv_config_t *para)
 		set_folder_path();
 				//ckk
 		record_file_index=__dv_get_last_file(FILE_PATH);
-
+//		photo_file_index=__dv_get_last_file(FILE_PATH);
         __dv_camera_media_info(0);
 		if(record_file_index > 0)
-            record_file_index--;
+		{
+	        record_file_index--;
+		}
+//		if(photo_file_index > 0)
+//		{
+//	        photo_file_index--;
+//		}
         parrot_set_media_file(dv_core->dv_obj, &dv_core->media_info);
 
         parrot_set_preview_mode(dv_core->dv_obj, dv_core->csi_mode_cam.csi_mode + dv_core->cam_cur_mode_index);

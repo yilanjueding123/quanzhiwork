@@ -1,10 +1,15 @@
----- res_jh_lanchn Matches (9 in 1 files) ----
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):    setting_item_res_t  res_jh_lanchn;
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):                p_item_res = &general_attr->res_jh_lanchn;
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):                p_item_res = &general_attr->res_jh_lanchn;
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            p_item_res = &general_attr->res_jh_lanchn;
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            p_item_res = &general_attr->res_jh_lanchn;
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            p_item_res = &general_attr->res_jh_lanchn;
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):                p_item_res = &general_attr->res_jh_lanchn;
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):                p_item_res = &general_attr->res_jh_lanchn;
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):                p_item_res = &general_attr->res_jh_lanchn;
+---- photo_file_index Matches (14 in 3 files) ----
+Cvr_core.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv\core):__u32	photo_file_index = 0;
+Cvr_core.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv\core):	if(photo_file_index < 9999)
+Cvr_core.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv\core):	    photo_file_index++;
+Cvr_core.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv\core):	    photo_file_index = 0;
+Cvr_core.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv\core):	if(photo_file_index < 10)
+Cvr_core.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv\core):    else if(photo_file_index < 100)
+Cvr_core.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv\core):    else if(photo_file_index < 1000)
+Cvr_core.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv\core):	eLIBs_int2str_dec(photo_file_index, str);
+Cvr_core.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv\core):		photo_file_index=__dv_get_last_file(FILE_PATH);
+Cvr_core.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv\core):		if(photo_file_index > 0)
+Cvr_core.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv\core):	        photo_file_index--;
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):			photo_file_index=__dv_get_last_file(FILE_PATH);
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):		photo_file_index=__dv_get_last_file(FILE_PATH);
+Dv_frm.h (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):extern __u32   photo_file_index;

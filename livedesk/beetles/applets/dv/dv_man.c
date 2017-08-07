@@ -195,7 +195,9 @@ static __s32 _app_dv_main_proc(__gui_msg_t *msg)
     }
     return EPDK_OK;
     case GUI_MSG_KEY:
+	{
         break;
+	}
     case GUI_MSG_COMMAND:
     {
         if(LOWORD(msg->dwAddData1) == DV_FRM_WIN_ID)
