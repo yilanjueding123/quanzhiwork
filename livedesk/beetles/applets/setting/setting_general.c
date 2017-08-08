@@ -330,6 +330,7 @@ static void setting_restore_default(__gui_msg_t *msg)
         }
     }
     //setting_general_paint(msg);
+    //setting_clear_screen();
     setting_general_default_paint(msg);
     //setting_pop_general_paint(msg);
 }
@@ -2243,7 +2244,7 @@ static __s32 setting_general_default_paint(__gui_msg_t *msg)
 	GUI_LyrWinCacheOn();
 	GUI_OpenAlphaBlend();
 
-	//setting_clear_screen();
+	setting_clear_screen();
 
 	for (i = 0; i < SET_PAGE_NUM; i++)
 	{

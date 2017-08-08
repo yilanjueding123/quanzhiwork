@@ -3,3 +3,4 @@
 2. 短按rewind返回。
 3. 短按enter 确定。
 4. 在dv模式下短按menu切换cam和rec模式，其他模式进入setting。
+

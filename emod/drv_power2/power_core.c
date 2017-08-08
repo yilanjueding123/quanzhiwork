@@ -162,7 +162,7 @@ void PowerTask(void *parg)
 
     __log("-----jh_Voltage=%d\n", Voltage);
 #if 1
-	if(Voltage <= 4074)
+	if(Voltage < 3992)
     {
         //低电关机电压
         pFuelguage->rest_vol = NO_PMU_BATTERY_LEVEL0;
@@ -171,12 +171,12 @@ void PowerTask(void *parg)
         //__msg("low power voltage detect...\n");
         //esKSRV_SendMsg(KMSG_USR_KEY_POWEROFF, KMSG_PRIO_HIGH);
     }
-    else if((Voltage > 4074) && (Voltage <= 4156))
+    else if((Voltage >= 3992) && (Voltage <= 4074))
     {
         //电池电量为20%
         pFuelguage->rest_vol = NO_PMU_BATTERY_LEVEL1;
     }
-    else if((Voltage > 4156) && (Voltage <= 4236))
+    else if((Voltage > 4074) && (Voltage <= 4236))
     {
         //电池电量为40%
         pFuelguage->rest_vol = NO_PMU_BATTERY_LEVEL2;

@@ -24,7 +24,7 @@
 
 #include "FileList.h"
 
-#if  0
+#if  1
 #define __msg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
 						     eLIBs_printf(__VA_ARGS__)									        )
 #else
@@ -1048,9 +1048,9 @@ static __s32  file_manager_list_on_enter_key(__gui_msg_t *msg)
 
         file_item = get_file_list_item( list_para->cur_file_list, list_para->rat.index );
         media_type = rat_get_file_type( file_item->name );
-
-        if( (media_type == RAT_MEDIA_TYPE_AUDIO) || (media_type == RAT_MEDIA_TYPE_VIDEO)
-                || (media_type == RAT_MEDIA_TYPE_PIC) || (media_type == RAT_MEDIA_TYPE_EBOOK ) )
+		__msg("media_type = %d\n", media_type);
+        if( /*(media_type == RAT_MEDIA_TYPE_AUDIO) || */(media_type == RAT_MEDIA_TYPE_VIDEO)
+                || (media_type == RAT_MEDIA_TYPE_PIC) /*|| (media_type == RAT_MEDIA_TYPE_EBOOK )*/ )
         {
             file_manager_set_current_file_for_play( msg );
         }

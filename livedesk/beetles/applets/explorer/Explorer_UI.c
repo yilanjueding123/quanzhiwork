@@ -55,7 +55,7 @@ static explorer_viewer_ui_t  explr_viewer_ui_400_240 =
         { 24, 8, 15, 15 },        				//icon rect
         { 0, 0, 50, 30 },       				//miniature rect, 缩略图 UI 参数
 
-        { 310, 0, 166, 40 }, 					//text rect
+        { 310, 0, 135, 40 }, 					//text rect
 
         { 7, 2, 445, 44 },      			//focus icon rect(select picture)
         { 24, 53, 88, 110},					//媒体类型图标位置(显示在左边区域的大图标)

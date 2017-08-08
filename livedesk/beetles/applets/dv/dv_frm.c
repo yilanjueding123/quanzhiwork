@@ -945,6 +945,8 @@ static __s32 __dv_frm_on_create(__gui_msg_t *msg)
 		spi_auto_srch->max_value = 0;
 		spi_auto_srch->max_channel = 0;
 		spi_auto_srch->save_cnt = 0;
+		freq_save_flg = 0;
+		freq_save_switch = freq_save_cnt = 0;
 		key_flag = KEY_PRESS_ACTION;
 	}
 	else
@@ -962,9 +964,8 @@ static __s32 __dv_frm_on_create(__gui_msg_t *msg)
 	key_flag = KEY_NONE_ACTION;
 #endif	
 		
-
-	freq_save_flg = 0;
-	freq_save_switch = freq_save_cnt = 0;
+	//freq_save_flg = 0;
+	//freq_save_switch = freq_save_cnt = 0;
 	next_signal_level = prev_signal_level = 0;
 	//key_flag = KEY_NONE_ACTION;
 #endif
