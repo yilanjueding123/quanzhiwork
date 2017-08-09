@@ -65,6 +65,7 @@ typedef enum
 
 static auto_search *spi_auto_srch;
 static KEY_FLAG key_flag = KEY_NONE_ACTION;
+static DV_APP_CONVERT destory_clear_flg = DV_VEDIO_CAMEREA_APP;
 
 //static __u32   dv_single_level = 0;
 //static __u32   dv_prevsingle_level = 0xff;
@@ -80,6 +81,7 @@ extern __u32  channel_freq[32];
 #endif
 static void __dv_frm_srch_begin(void);
 static void __dv_frm_srch_finsh(void);
+static void app_dv_search_dialog_create(dv_frmwin_para_t  *dv_frm_ctrl);
 
 #ifdef DV_FRM_SAVE_FREQ
 static void dv_frm_save_final_channel(__s32 buff[32][2])
@@ -927,8 +929,7 @@ static __s32 __dv_frm_on_create(__gui_msg_t *msg)
         esKRNL_TmrStart(dv_frm_ctrl->os_timer_hdl);
     }
     dv_frm_ctrl->delete_file_tsk = esKRNL_TCreate(__dv_delete_first_file_thread, dv_frm_ctrl, 0x2000, KRNL_priolevel3);
-	next_signal_level = prev_signal_level = 0;
-	
+	destory_clear_flg = DV_VEDIO_CAMEREA_APP;
 #ifdef DV_FRM_SAVE_FREQ
 #ifdef APP_DV_SUPOORT_BREAK
 	if(dv_frm_ctrl->switch_frm == DV_SRCH_APP)
@@ -948,6 +949,7 @@ static __s32 __dv_frm_on_create(__gui_msg_t *msg)
 		freq_save_flg = 0;
 		freq_save_switch = freq_save_cnt = 0;
 		key_flag = KEY_PRESS_ACTION;
+		app_dv_search_dialog_create(dv_frm_ctrl);
 	}
 	else
 	{
@@ -964,10 +966,7 @@ static __s32 __dv_frm_on_create(__gui_msg_t *msg)
 	key_flag = KEY_NONE_ACTION;
 #endif	
 		
-	//freq_save_flg = 0;
-	//freq_save_switch = freq_save_cnt = 0;
 	next_signal_level = prev_signal_level = 0;
-	//key_flag = KEY_NONE_ACTION;
 #endif
 	
     return EPDK_OK;
@@ -1130,7 +1129,7 @@ static __s32 __dv_frm_on_key_proc(__gui_msg_t *msg)
 #endif	
 
 	if(((msg->dwAddData1 == GUI_MSG_KEY_LONGLEFT)||(msg->dwAddData1 == GUI_MSG_KEY_LONGRIGHT))\
-		&&(msg->dwAddData2 == KEY_REPEAT_ACTION))
+		/*&&(msg->dwAddData2 == KEY_REPEAT_ACTION)*/)
 	{
 		__s32 i,j;
 		if(RECORD_STOP != Cvr_DvGetRecState())		//录像过程中禁止自动搜台
@@ -1138,22 +1137,31 @@ static __s32 __dv_frm_on_key_proc(__gui_msg_t *msg)
 	    	return EPDK_OK;
 		}
 
-#ifdef DV_FRM_SAVE_FREQ
-		for(i = 0; i<2; i++)
+		if(msg->dwAddData2 == KEY_REPEAT_ACTION)
 		{
-			for(j = 0; j<32; j++)
-			{	
-				freq_save_buff[j][i] = 0;
-			}
+			__mymsg("Show dialog of Search\n");
+			app_dv_search_dialog_create(dv_frm_ctrl);
 		}
+		else if(msg->dwAddData2 == KEY_UP_ACTION)
+		{
+			__mymsg("Search of KEY_UP_ACTION\n");
+#ifdef DV_FRM_SAVE_FREQ
+			for(i = 0; i<2; i++)
+			{
+				for(j = 0; j<32; j++)
+				{	
+					freq_save_buff[j][i] = 0;
+				}
+			}
 #endif
-		spi_auto_srch->channel = 0;
-		spi_auto_srch->max_value = 0;
-		spi_auto_srch->max_channel = 0;
-//		spi_auto_srch->key_save_flg = 1;
-		spi_auto_srch->save_cnt = 0;
-		key_flag = KEY_PRESS_ACTION;
-
+			
+			spi_auto_srch->channel = 0;
+			spi_auto_srch->max_value = 0;
+			spi_auto_srch->max_channel = 0;
+			spi_auto_srch->save_cnt = 0;
+			key_flag = KEY_PRESS_ACTION;
+			
+		}
 		return EPDK_OK;
 	}
 	
@@ -1557,15 +1565,13 @@ static __s32 __dv_frm_on_timer_proc(__gui_msg_t *msg)
 	{
 		ES_FILE *ktemp, *ktemp1;
 		single_t key_value;
-		if(spi_auto_srch->channel == 0)
-		{
-			app_dv_search_dialog_create(dv_frm_ctrl);
-		}
+
 		if(KEY_PRESS_ACTION == key_flag)
 		{
+			__dv_frm_srch_begin();
 			if(spi_auto_srch->channel)
 			{
-				__dv_frm_srch_begin();
+				//__dv_frm_srch_begin();
 				ktemp1 = eLIBs_fopen("b:\\INPUT\\MATRIX_KEY", "w");
 				if(!ktemp1)
 		    	{
@@ -1606,6 +1612,7 @@ static __s32 __dv_frm_on_timer_proc(__gui_msg_t *msg)
 			spi_auto_srch->search_end = 1;
 			spi_auto_srch->channel = 0;
 			//key_flag = KEY_NONE_ACTION;
+						
 			if(GUI_IsTimerInstalled(msg->h_deswin, TIMER_DV_SRCH_OVER_ID))
 	        {
 	            GUI_ResetTimer(msg->h_deswin,TIMER_DV_SRCH_OVER_ID,SEARCH_TIMER_PERIOD,NULL);
@@ -1667,6 +1674,7 @@ static __s32 __dv_frm_on_timer_proc(__gui_msg_t *msg)
 		if(dv_frm_ctrl->switch_frm == DV_SRCH_APP)
 		{
 			dv_frm_ctrl->switch_frm = DV_VEDIO_CAMEREA_APP;
+			destory_clear_flg = DV_SRCH_APP;
 			__mymsg("dv_frm_ctrl->switch_frm = %d\n", dv_frm_ctrl->switch_frm);
 		}
 #endif		
@@ -2029,9 +2037,9 @@ static __s32 __app_dv_draw_card_status(H_LYR hlyr)
 	
 	dv_subse_ui = dv_get_sub_res();
 	
-	gui_rect.x0 = 320;
+	gui_rect.x0 = 375;
     gui_rect.y0 = 0;
-    gui_rect.x1 = 350;
+    gui_rect.x1 = 414;
     gui_rect.y1 = 20;
 	
 	GUI_LyrWinSel(hlyr);
@@ -2070,9 +2078,9 @@ static __s32 __app_dv_draw_signal_level(H_LYR hlyr, __u32 level)
 	gui_rect.y1 = 20;
 	*/
 
-	gui_rect.x0 = 350;
+	gui_rect.x0 = 415;
     gui_rect.y0 = 0;
-    gui_rect.x1 = 400;
+    gui_rect.x1 = 440;
     gui_rect.y1 = 20;
 
 	next_signal_level = dv_signal_level_handle(level);
@@ -2091,7 +2099,7 @@ static __s32 __app_dv_draw_signal_level(H_LYR hlyr, __u32 level)
 		next_signal_level = 2;
 	}
 	*/
-	GUI_BMP_RES_Draw(dv_subse_ui->bmp_subset_singal[next_signal_level], gui_rect.x0+20, gui_rect.y0+5);
+	GUI_BMP_RES_Draw(dv_subse_ui->bmp_subset_singal[next_signal_level], gui_rect.x0, gui_rect.y0+5);
 	
 	prev_signal_level = next_signal_level;
 	return EPDK_OK;
@@ -2112,15 +2120,10 @@ static __s32 __app_dv_draw_rec_batt_status(H_LYR hlyr)
 	}
 	
     dv_subse_ui = dv_get_sub_res();
-	/*
-	gui_rect.x0 = 320;
-    gui_rect.y0 = 0;
-    gui_rect.x1 = 400;
-    gui_rect.y1 = 20;
-	*/
-	gui_rect.x0 = 400;
+
+	gui_rect.x0 = 445;
 	gui_rect.y0 = 0;
-	gui_rect.x1 = 460;
+	gui_rect.x1 = 480;
 	gui_rect.y1 = 20;
 	
 	dsk_power_get_voltage_level(&level);
@@ -2133,7 +2136,7 @@ static __s32 __app_dv_draw_rec_batt_status(H_LYR hlyr)
 	GUI_ClearRectEx(&gui_rect);
 	GUI_SetDrawMode(GUI_DRAWMODE_NORMAL);
 	
-	GUI_BMP_RES_Draw(dv_subse_ui->bmp_subset_vol[dv_batt_ctrl.vol_level], gui_rect.x0+20, gui_rect.y0+5);
+	GUI_BMP_RES_Draw(dv_subse_ui->bmp_subset_vol[dv_batt_ctrl.vol_level], gui_rect.x0, gui_rect.y0+5);
 
 	
 	return EPDK_OK;
@@ -2200,10 +2203,10 @@ static __s32 __app_dv_draw_rec_time_hbar(__gui_msg_t *msg, __u32 time)
 		return EPDK_FAIL;
 	}
 	
-	gui_rect.x0 = 220;
-    gui_rect.y0 = 0;
-    gui_rect.x1 = 300;
-    gui_rect.y1 = 20;
+	gui_rect.x0 = 280;
+    gui_rect.y0 = 3;
+    gui_rect.x1 = 375;
+    gui_rect.y1 = 23;
 	
 	eLIBs_memset(time_text, 0 ,sizeof(time_text));	
 	
@@ -2219,7 +2222,7 @@ static __s32 __app_dv_draw_rec_time_hbar(__gui_msg_t *msg, __u32 time)
 	{
 		__msg("WORK_MODE_CAM\n");
 		return EPDK_OK;
-		GUI_DispStringInRect(NULL, &gui_rect, GUI_TA_VCENTER|GUI_TA_HCENTER);
+		//GUI_DispStringInRect(NULL, &gui_rect, GUI_TA_VCENTER|GUI_TA_HCENTER);
 	}
 	else
 	{
@@ -2245,7 +2248,7 @@ static __s32 __app_dv_draw_freq_hbar(H_LYR hlyr, __u32 channel)
 	gui_rect.x0 = 0;
     gui_rect.y0 = 0;
     gui_rect.x1 = 120;
-    gui_rect.y1 = 20;
+    gui_rect.y1 = 30;
 	
 	//dsk_langres_get_menu_text(STRING_REC, text, sizeof(text));
 
@@ -2286,10 +2289,10 @@ static __s32 __app_dv_draw_rec_status(__gui_msg_t *msg)
 
 	dv_subse_ui = dv_get_sub_res();
 
-	gui_rect.x0 = 170;
-    gui_rect.y0 = 0;
-    gui_rect.x1 = 200;
-    gui_rect.y1 = 20;
+	gui_rect.x0 = 260;
+    gui_rect.y0 = 3;
+    gui_rect.x1 = 280;
+    gui_rect.y1 = 23;
 
 	GUI_LyrWinSel(dv_frm_ctrl->subset);
 	GUI_SetBkColor(0);
@@ -2320,10 +2323,10 @@ static __s32 __app_dv_draw_mode_hbar(__gui_msg_t *msg)
 	
 	dv_subse_ui = dv_get_sub_res();
 	
-	gui_rect.x0 = 130;
-    gui_rect.y0 = 0;
-    gui_rect.x1 = 160;
-    gui_rect.y1 = 20;
+	gui_rect.x0 = 226;
+    gui_rect.y0 = 3;
+    gui_rect.x1 = 260;
+    gui_rect.y1 = 30;
 
 	GUI_LyrWinSel(dv_frm_ctrl->subset);
 	GUI_SetBkColor(0);
@@ -2639,11 +2642,24 @@ __s32 dv_frm_create(dv_frmwin_para_t *para)
 
 __s32 dv_frm_destroy( H_WIN h_win )
 {
+	__s32 i,j;
     dv_frmwin_para_t        	*dv_frm_ctrl;
 
     __msg("dv_frm_destroy\n");
 
     dv_frm_ctrl = (dv_frmwin_para_t *)GUI_WinGetAttr(h_win);
+	if(destory_clear_flg == DV_SRCH_APP)
+	{
+		for(i = 0; i<2; i++)
+		{
+			for(j = 0; j<32; j++)
+			{	
+				freq_save_buff[j][i] = 0;
+			}
+		}
+		freq_save_flg = 0;
+		freq_save_switch = freq_save_cnt = 0;
+	}
     // for frame win ,there is no need to call  GUI_FrmWinDelete to destroy frame win ,because the function of  GUI_LyrWinDelete will do that
     GUI_LyrWinDelete(dv_frm_ctrl->frm_lyr_hdl);
 }

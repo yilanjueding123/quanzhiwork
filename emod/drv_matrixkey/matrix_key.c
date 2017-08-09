@@ -794,7 +794,7 @@ static void matrix_key_thread(void *p_arg)
 			{
 				__s32 read_cnt = 5;
 				__u32 single_temp_cnt = 0;
-				__u32 data_buff[5]; 
+				__u32 data_buff[5] = {0}; 
 				//eLIBs_printf("\n*********************************\n");
 				while(read_cnt--)
 				{

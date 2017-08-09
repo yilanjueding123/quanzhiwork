@@ -1,71 +1,75 @@
----- GUI_MSG_KEY_ENTER Matches (70 in 39 files) ----
-App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):        case  GUI_MSG_KEY_ENTER://enter
-App_movie.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\movie):                if ((GUI_MSG_KEY_ENTER == last_key) || (GUI_MSG_KEY_LONGENTER == last_key	))
-App_photo.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\photo):            if (msg->dwAddData1 == GUI_MSG_KEY_ENTER || msg->dwAddData1 == GUI_MSG_KEY_LONGENTER
-App_root_scene.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\app_root):                    new_msg.dwAddData1 = GUI_MSG_KEY_ENTER;
-App_root_scene.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\app_root):                    new_msg.dwAddData1 = GUI_MSG_KEY_ENTER;
-Button.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\button):        case GUI_MSG_KEY_ENTER:
-Button.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\button):                    notify_msg.dwAddData = GUI_MSG_KEY_ENTER;
-Calendar_adapter.h (f:\pri_f25\zhibo\work\livedesk\beetles\applets\calendar):4.GUI_MSG_KEY_ENTER
-Dialog.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\win\frmwin):        case GUI_MSG_KEY_ENTER:
-Dialog.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\win\frmwin):                    new_msg.dwAddData2  = GUI_MSG_KEY_ENTER;
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):        if(msg->dwAddData1 == GUI_MSG_KEY_ENTER)        // 录像的开始、停止
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):        if(msg->dwAddData1 == GUI_MSG_KEY_ENTER)        // 开始拍照
-Dv_mset.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):        if(msg->dwAddData1 == GUI_MSG_KEY_ENTER)        // 选项确定键
-Dv_mset.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):        if(msg->dwAddData1 == GUI_MSG_KEY_ENTER)        // 选项确定键
-Ebook_mset.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\ebook):        if ((last_key == GUI_MSG_KEY_ENTER) || (last_key ==  GUI_MSG_KEY_LONGENTER))
-Ebook_tips.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\ebook):        if (GUI_MSG_KEY_ENTER == last_key)
-Explorer_List.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):        case GUI_MSG_KEY_ENTER:
-Explorer_List.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):            last_key = GUI_MSG_KEY_ENTER;
-Explorer_List.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):            eLIBs_printf("[L%d](%s)GUI_MSG_KEY_ENTER.\n", __LINE__, __FILE__);
-Fmtop_frmwin.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\fm):        case GUI_MSG_KEY_ENTER:
-Gmsgbox.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\gmsgbox):                if(msg->dwAddData2 == GUI_MSG_KEY_ENTER
-Init.c (f:\pri_f25\zhibo\work\livedesk\beetles\init):        if(/*GUI_MSG_KEY_ENTER == msg->dwAddData1 && */(KEY_UP_ACTION == msg->dwAddData2) && (!(msg->dwAddData1 >= GUI_MASG_SINGLE0) && (msg->dwAddData1 <= GUI_MASG_SINGLE4)))
-Init.c (f:\pri_f25\zhibo\work\livedesk\beetles\init):        if(GUI_MSG_KEY_ENTER == msg->dwAddData1
-Listmenu.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\listmenu):        case GUI_MSG_KEY_ENTER:
-Main_menu.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\home):        if (GUI_MSG_KEY_ENTER == last_key)
-Main_menu.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\home):            if(last_key == GUI_MSG_KEY_ENTER)
-Message.h (f:\pri_f25\zhibo\work\includes\emod\mod_orange\gui\message):    GUI_MSG_KEY_ENTER,
-Misc.h (f:\pri_f25\zhibo\work\livedesk\beetles\applets\lib\common):#define VK_ENTER                            GUI_MSG_KEY_ENTER
-Msgbox.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\msgbox):        case GUI_MSG_KEY_ENTER:
-Msgbox.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\msgbox):        case GUI_MSG_KEY_ENTER:
-Msgbox.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\msgbox):        case GUI_MSG_KEY_ENTER:
-Msgbox.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\msgbox):        case GUI_MSG_KEY_ENTER:
-Msg_emit.c (f:\pri_f25\zhibo\work\livedesk\beetles\mod_desktop\msg_srv):                pmsg->id 	= GUI_MSG_KEY_ENTER;
-Msg_emit.c (f:\pri_f25\zhibo\work\livedesk\beetles\mod_desktop\msg_srv):                pmsg->id 	= GUI_MSG_KEY_ENTER;
-Msg_emit.c (f:\pri_f25\zhibo\work\livedesk\beetles\mod_desktop\msg_srv):                pmsg->id	    = GUI_MSG_KEY_ENTER;
-Music.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\music):        case GUI_MSG_KEY_ENTER:
-Music_player.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\music\musicplayer):        case GUI_MSG_KEY_ENTER:
-Music_player.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\music\musicplayer):        //case GUI_MSG_KEY_ENTER:	//因为现在不支持定时长按键，因此
-Music_player.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\music\musicplayer):        //case GUI_MSG_KEY_ENTER:
-Music_player.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\music\musicplayer):        case GUI_MSG_KEY_ENTER:
-Music_player.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\music\musicplayer):            last_key = GUI_MSG_KEY_ENTER;
-Music_player.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\music\musicplayer):        //case GUI_MSG_KEY_ENTER:
-Music_player.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\music\musicplayer):        case GUI_MSG_KEY_ENTER:
-Music_player.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\music\musicplayer):            if(last_key == GUI_MSG_KEY_ENTER)
-Page_com.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\ebook):        if ((last_key == GUI_MSG_KEY_ENTER) || (last_key == GUI_MSG_KEY_LONGENTER))
-Page_com.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\ebook):        case GUI_MSG_KEY_ENTER:
-Photo_mset.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\photo):    case GUI_MSG_KEY_ENTER:
-Photo_spsc.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\photo):    case GUI_MSG_KEY_ENTER:
-Photo_spsc.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\photo):        else if (last_key == GUI_MSG_KEY_ENTER || last_key == GUI_MSG_KEY_LONGENTER)
-Play_sta.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\movie\play_sta):            if (GUI_MSG_KEY_ENTER == last_key)
-Progsheet.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\progsheet):        case GUI_MSG_KEY_ENTER:
-Progsheet.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\progsheet):                notify_msg.dwAddData = GUI_MSG_KEY_ENTER;
-Record_list_view_frame.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\record\record_frame\record_list_view):        case GUI_MSG_KEY_ENTER:
-Record_list_view_frame.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\record\record_frame\record_list_view):        case GUI_MSG_KEY_ENTER:
-Record_list_view_frame.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\record\record_frame\record_list_view):        case GUI_MSG_KEY_ENTER:
-Record_list_view_frame.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\record\record_frame\record_list_view):        case GUI_MSG_KEY_ENTER:
-Record_view_frame.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\record\record_frame\record_view):        case GUI_MSG_KEY_ENTER:
-Record_view_frame.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\record\record_frame\record_view):        case GUI_MSG_KEY_ENTER:
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):        if (GUI_MSG_KEY_ENTER == last_key)
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):        	__msg("GUI_MSG_KEY_ENTER\n");
-Setting_power.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):        if(last_key == GUI_MSG_KEY_ENTER)
-Setting_tips.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):        if (GUI_MSG_KEY_ENTER == last_key)
-Sicons.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\sicons):        case GUI_MSG_KEY_ENTER:
-Slistbox.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\slistbox):        case GUI_MSG_KEY_ENTER:
-Spsc_ctrl.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\movie\spsc\spsc_ctrl):            else if (GUI_MSG_KEY_ENTER == last_key)
-Spsc_ctrl.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\movie\spsc\spsc_ctrl):            case GUI_MSG_KEY_ENTER:
-Spsc_prog.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\movie\spsc\spsc_prog):            else if (GUI_MSG_KEY_ENTER == last_key)
-Static.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\static):        case GUI_MSG_KEY_ENTER:
-Static.c (f:\pri_f25\zhibo\work\emod\mod_orange\gui\widget\static):                    notify_msg.dwAddData = GUI_MSG_KEY_ENTER;
-Sub_set.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\movie\sub_set):            else if (GUI_MSG_KEY_ENTER == last_key)
+---- pop_new_focus Matches (94 in 1 files) ----
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):    __s32 pop_new_focus;
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):        switch (general_attr->pop_new_focus)
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):        switch (general_attr->pop_new_focus)
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):        switch (general_attr->pop_new_focus)
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):        switch (general_attr->pop_new_focus)
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):        switch (general_attr->pop_new_focus)
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):        switch (general_attr->pop_new_focus)
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting)://		switch (general_attr->pop_new_focus)
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting)://		switch (general_attr->pop_new_focus)
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):        switch (general_attr->pop_new_focus)
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):        switch (general_attr->pop_new_focus)
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):        switch (general_attr->pop_new_focus)
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):        switch (general_attr->pop_new_focus)
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):        switch (general_attr->pop_new_focus)
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):    	__msg("draw: general_attr->h_backlight_select_bmp:%d\n", general_attr->pop_new_focus);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):		//GUI_BMP_Draw(theme_hdl2buf(general_attr->h_backlight_select_bmp), 10, 2 + general_attr->pop_new_focus*60);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):		GUI_BMP_Draw(theme_hdl2buf(general_attr->h_backlight_select_bmp), 10, 50 + general_attr->pop_new_focus*60);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):		if(0 == general_attr->pop_new_focus)
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):				__msg("general_attr->pop_new_focus: %d\n", general_attr->pop_new_focus);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):				__msg("general_attr->pop_new_focus: %d\n", general_attr->pop_new_focus);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):				GUI_DispStringAt(p_item_res->string_title, language_japanese_layer_display[general_attr->pop_new_focus], p_item_res->string_title_pos.y + 10 + 48);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):				__msg("general_attr->pop_new_focus: %d\n", general_attr->pop_new_focus);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):				GUI_DispStringAt(p_item_res->string_title, language_korean_layer_display[general_attr->pop_new_focus], p_item_res->string_title_pos.y + 10 + 48 );
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):				__msg("general_attr->pop_new_focus: %d\n", general_attr->pop_new_focus);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):				__msg("general_attr->pop_new_focus: %d\n", general_attr->pop_new_focus);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):				GUI_DispStringAt(p_item_res->string_title, language_japanese_layer_display[general_attr->pop_new_focus], p_item_res->string_title_pos.y + 10 + 4 + 46);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):				__msg("general_attr->pop_new_focus: %d\n", general_attr->pop_new_focus);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):				GUI_DispStringAt(p_item_res->string_title, language_korean_layer_display[general_attr->pop_new_focus], p_item_res->string_title_pos.y + 10 + 4 + 46);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):		if(current_language_set == general_attr->pop_new_focus)
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):			if(2 == general_attr->pop_new_focus)
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):			if(0 == general_attr->pop_new_focus)
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):        if(i == general_attr->pop_new_focus)
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):        	__msg("general_attr->pop_new_focus\n");
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):				if(0 == general_attr->pop_new_focus)
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):						__msg("general_attr->pop_new_focus: %d\n", general_attr->pop_new_focus);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):						__msg("general_attr->pop_new_focus: %d\n", general_attr->pop_new_focus);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):						__msg("general_attr->pop_new_focus: %d\n", general_attr->pop_new_focus);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):						__msg("general_attr->pop_new_focus: %d\n", general_attr->pop_new_focus);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):						__msg("general_attr->pop_new_focus: %d\n", general_attr->pop_new_focus);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):						__msg("general_attr->pop_new_focus: %d\n", general_attr->pop_new_focus);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):                general_attr->pop_new_focus = 0;
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):				general_attr->pop_new_focus = 1;
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):                general_attr->pop_new_focus = 2;
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):                general_attr->pop_new_focus = 1;
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):        if(i == general_attr->pop_new_focus)
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):        	__msg("general_attr->pop_new_focus = %d\n", general_attr->pop_new_focus);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):			__msg("general_attr->pop_new_focus = %d\n", general_attr->pop_new_focus);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):				if(0 == general_attr->pop_new_focus)
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):						__msg("general_attr->pop_new_focus: %d\n", general_attr->pop_new_focus);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):						__msg("general_attr->pop_new_focus: %d\n", general_attr->pop_new_focus);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):						__msg("general_attr->pop_new_focus: %d\n", general_attr->pop_new_focus);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):						__msg("general_attr->pop_new_focus: %d\n", general_attr->pop_new_focus);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):						__msg("general_attr->pop_new_focus: %d\n", general_attr->pop_new_focus);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):						__msg("general_attr->pop_new_focus: %d\n", general_attr->pop_new_focus);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            general_attr->pop_old_focus = general_attr->pop_new_focus;
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            if (general_attr->pop_new_focus <= 0)
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):                general_attr->pop_new_focus = general_attr->item_nr - 1;
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):                general_attr->pop_new_focus--;
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            general_attr->pop_old_focus = general_attr->pop_new_focus;
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            if (general_attr->pop_new_focus >= general_attr->item_nr - 1)
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):                general_attr->pop_new_focus = 0;
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):                general_attr->pop_new_focus++;
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            general_attr->pop_new_focus = 0;
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):            	__msg("general_attr->pop_new_focus\n");
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):                if(general_attr->pop_new_focus == 0)
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):                else if(general_attr->pop_new_focus == 1)
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):                    if(general_attr->pop_new_focus == 0)
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):                    else if(general_attr->pop_new_focus == 1)
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):					else if(general_attr->pop_new_focus == 2)
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):					if(general_attr->pop_new_focus == 0)
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):				   else if(general_attr->pop_new_focus == 1)
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):                if(general_attr->pop_new_focus == 0)//详细信息
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):						__msg("general_attr->pop_new_focus: 详细信息\n");
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):                else if(general_attr->pop_new_focus == 1)

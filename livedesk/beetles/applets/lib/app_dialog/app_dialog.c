@@ -764,7 +764,7 @@ static void draw_dialog(APP_DIALOG_RES_T *res, APP_DIALOG_UI_T *ui)
 		{
 			rect.x = 1;
 			rect.y = 30*i + 4;
-			rect1.x = rect.x + 50 + 10;
+			rect1.x = rect.x + 50 + 10 + 5 + 3;
 			rect1.y = rect.y + 5;
 
 			eLIBs_memset(str_content, 0, 10);
@@ -793,7 +793,7 @@ static void draw_dialog(APP_DIALOG_RES_T *res, APP_DIALOG_UI_T *ui)
 		{
 			rect.x = 1;
 			rect.y = 30*i + 4;
-			rect1.x = rect.x + 50 - 5;
+			rect1.x = rect.x + 50;
 			rect1.y = rect.y + 5;
 
 			//eLIBs_printf("i = %d, dialog_jh_tran_data = %d\n", i, dialog_jh_tran_data);
@@ -808,7 +808,14 @@ static void draw_dialog(APP_DIALOG_RES_T *res, APP_DIALOG_UI_T *ui)
 				GUI_BMP_RES_Draw(res->bmp_bklt_unselect, rect.x, rect.y);	
 				GUI_SetColor(ui->colour.txt_n);
 			}
-			GUI_DispStringAt(str_content, rect1.x, rect1.y);
+			if(i == 0)
+			{
+				GUI_DispStringAt(str_content, rect1.x + 15, rect1.y);
+			}
+			else
+			{
+				GUI_DispStringAt(str_content, rect1.x - 12, rect1.y);
+			}
 		}
 	}
 
