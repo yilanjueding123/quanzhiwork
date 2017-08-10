@@ -1160,6 +1160,7 @@ static __s32 __dv_frm_on_key_proc(__gui_msg_t *msg)
 			spi_auto_srch->max_channel = 0;
 			spi_auto_srch->save_cnt = 0;
 			key_flag = KEY_PRESS_ACTION;
+			destory_clear_flg = DV_SRCH_APP;
 			
 		}
 		return EPDK_OK;
@@ -1674,7 +1675,6 @@ static __s32 __dv_frm_on_timer_proc(__gui_msg_t *msg)
 		if(dv_frm_ctrl->switch_frm == DV_SRCH_APP)
 		{
 			dv_frm_ctrl->switch_frm = DV_VEDIO_CAMEREA_APP;
-			destory_clear_flg = DV_SRCH_APP;
 			__mymsg("dv_frm_ctrl->switch_frm = %d\n", dv_frm_ctrl->switch_frm);
 		}
 #endif		

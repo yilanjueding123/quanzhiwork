@@ -643,7 +643,18 @@ rat_media_type_t  get_file_list_item_file_type(file_item_t *item)
     }
     if(item->fatdirattr & FSYS_ATTR_DIRECTORY)
     {
-        return RAT_MEDIA_TYPE_FOLDER;
+    	if(eLIBs_memcmp(item->name,"VIDEO",sizeof("VIDEO")))
+    	{
+    		return RAT_MEDIA_TYPE_VIDEO;
+    	}
+		else if(eLIBs_memcmp(item->name,"PHOTO",sizeof("PHOTO")))
+		{
+			return RAT_MEDIA_TYPE_PIC;
+		}
+		else
+		{
+			return RAT_MEDIA_TYPE_FOLDER;
+		}
     }
     if(item->fatdirattr == RAT_MEDIA_TYPE_SD_DEVICE)
     {

@@ -77,7 +77,7 @@ static __s32 __reg_paramter_init(reg_app_para_t *para)
 
 	para->system_para.contrast= 55;
 	para->system_para.bright= 70;
-	para->system_para.saturation= 30;
+	para->system_para.saturation= 60;
 	para->system_para.hue= 50;
 
 

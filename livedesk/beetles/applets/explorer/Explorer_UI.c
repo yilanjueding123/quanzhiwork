@@ -17,7 +17,6 @@
 #define	C_DEL_FILE_PECENT_AREA_W	(130)
 #define	C_DEL_FILE_PECENT_AREA_H	(60)
 
-
 static explorer_viewer_ui_t  explr_viewer_ui_400_240 =
 {
     //layer window
@@ -833,7 +832,7 @@ void *explorer_get_file_item_icon(explorer_view_mode_e view_mode, rat_media_type
     case RAT_MEDIA_TYPE_FOLDER:
         if(status == FOCUSED)
         {
-            pic_buf = explorer_get_listview_icon_res(ID_EXP_FOLDER_ICON_FOCUSED);
+           pic_buf = explorer_get_listview_icon_res(ID_EXP_FOLDER_ICON_FOCUSED);
         }
         else
         {

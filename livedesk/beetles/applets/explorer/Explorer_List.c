@@ -24,13 +24,12 @@
 
 #include "FileList.h"
 
-#if  0
+#if  1
 #define __msg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
 						     eLIBs_printf(__VA_ARGS__)									        )
 #else
 #define __msg(...)    	
 #endif
-
 
 static   __u32 ExplorerTimerId = 0x16;
 #define	 C_EXP_TIMER_INTERVAL	300				// 2second
@@ -1810,7 +1809,7 @@ static __s32 draw_list_item_unfocus_icon(__lbar_draw_para_t *draw_param)
     pic_buf = explorer_get_listview_icon_res(ID_EXP_LIST_ITEM_UNFOCUS_BG);			//draw select border
     picX = draw_param->rect.x + FocusIconRect.x;
     picY = draw_param->rect.y + FocusIconRect.y;
-
+	
     GUI_BMP_Draw(pic_buf, picX, picY);
     return ret;
 }
@@ -1878,7 +1877,8 @@ static __s32 draw_listview_item_text(__lbar_draw_para_t *draw_param)
             {
                 eLIBs_strcpy(FileName, file_item->name);
             }
-
+			__msg("draw_listview_item_text: FileName: %s\n", FileName);
+			
             if(draw_param->mode == LBAR_MODE_FOCUS)
             {
                 list_para->cur_file_list->cur_item = file_item;		//保存当前条目信息
