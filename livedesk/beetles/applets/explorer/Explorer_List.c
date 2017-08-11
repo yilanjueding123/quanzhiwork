@@ -24,16 +24,15 @@
 
 #include "FileList.h"
 
-#if  1
-#define __msg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
-						     eLIBs_printf(__VA_ARGS__)									        )
-#else
-#define __msg(...)    	
-#endif
-
 static   __u32 ExplorerTimerId = 0x16;
 #define	 C_EXP_TIMER_INTERVAL	300				// 2second
 
+#if 1
+#define __msg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
+								 eLIBs_printf(__VA_ARGS__)											)
+#else
+#define __msg(...)   
+#endif
 
 
 H_WIN explorer_list_win_create(H_WIN h_parent, explr_list_para_t *para);
@@ -1767,9 +1766,9 @@ static __s32 draw_square_item_focus_icon(__lbar_draw_para_t *draw_param)
 
     ret = explorer_get_item_focus_icon_rect(list_para, &FocusIconRect);
 
-	__msg("draw_square_item_focus_icon\n");
+	__msg("draw_square_item_focus_icon, GUI_YELLOW\n");
     //»­½¹µã·½¿ò
-    GUI_SetColor(GUI_YELLOW);
+    GUI_SetColor(GUI_USER_DEFINE);
     X0 = draw_param->rect.x + FocusIconRect.x;
     Y0 = draw_param->rect.y + FocusIconRect.y;
     X1 = X0 + FocusIconRect.width;
@@ -1907,7 +1906,14 @@ static __s32 draw_listview_item_text(__lbar_draw_para_t *draw_param)
     //GUI_SetFont(GUI_GetDefaultFont());
     GUI_UC_SetEncodeUTF8();
     //GUI_SetBkColor(GUI_LIGHTGREEN);
-    GUI_SetColor(GUI_WHITE);
+    if(draw_param->mode == LBAR_MODE_FOCUS)
+    {
+		GUI_SetColor(GUI_WHITE);
+    }
+	else
+	{
+		GUI_SetColor(GUI_USER_DEFINE);	
+	}
     GUI_SetDrawMode(GUI_DRAWMODE_NORMAL);
 
     GUI_TextRect.x0 = draw_param->rect.x  + TextRect.x;

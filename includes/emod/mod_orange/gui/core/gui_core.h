@@ -296,6 +296,9 @@ Note that we have chosen the values to be close to existing
 #define GUI_DARKGRAY      0xff404040
 #define GUI_BLACK         0xff000000
 
+#define GUI_CUSTOMER_DEFINE	0xff5fc9e5
+#define GUI_USER_DEFINE		0xfffcbf12
+
 #define GUI_BROWN         0xff2A2AA5
 
 #define GUI_INVALID_COLOR 0xFFFFFFF      /* Invalid color - more than 24 bits */

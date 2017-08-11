@@ -16,11 +16,12 @@
 **************************************************************************************************************
 */
 #include "app_dialog_i.h"
+#include "setting_general.h"
 
 __u8   dialog_jh_tran_data;
 __u8   dialog_current_state;
 
-#if  0
+#if 1
 #define __inf(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
 								 eLIBs_printf(__VA_ARGS__)											)
 
@@ -256,13 +257,16 @@ static __s32 app_dialog_ui_init(dialog_wnd_t *wnd_para, GUI_RECT *dialog_rt)
     __s32 lcd_w, lcd_h;
     APP_DIALOG_UI_T  *ui;
     APP_DIALOG_RES_T *res;
+	__u32 language = EPDK_LANGUAGE_ENM_ENGLISH;
 
     ui = &wnd_para->ui;
     res = &wnd_para->res;
 
-    ui->colour.txt_n = GUI_GRAY;
+    ui->colour.txt_n = GUI_USER_DEFINE;//GUI_GRAY;
     ui->colour.txt_f = GUI_WHITE;
-
+	
+	language = dialog_get_font();
+		
     dsk_display_get_size(&lcd_w, &lcd_h);
 	__inf("lcd_w = %d, lcd_h = %d\n", lcd_w,lcd_h);
     if (dialog_rt == NULL)
@@ -307,10 +311,6 @@ static __s32 app_dialog_ui_init(dialog_wnd_t *wnd_para, GUI_RECT *dialog_rt)
 #ifdef ADLG_BKLT_UI
 	if(dialog_current_state == 0)
 	{
-//		ui->rt.x      = 115;
-//        ui->rt.width  = 250;
-//        ui->rt.y      = 44;
-//        ui->rt.height = 168;
 		ui->rt.x      = 160;
         ui->rt.width  = 157;
         ui->rt.y      = 44;
@@ -318,16 +318,32 @@ static __s32 app_dialog_ui_init(dialog_wnd_t *wnd_para, GUI_RECT *dialog_rt)
 	}
 	else if(dialog_current_state == 1)
 	{
-//		ui->rt.x      = 115;
-//        ui->rt.width  = 250;
-//        ui->rt.y      = 32;
-//        ui->rt.height = 168+50;
 		ui->rt.x      = 160;
         ui->rt.width  = 157;
         ui->rt.y      = 34;
         ui->rt.height = 168+50;
+	}	
+	else if(dialog_current_state == 2)
+	{
+		ui->rt.x      = 115;
+        ui->rt.width  = 250;
+        ui->rt.y      = 63;
+        ui->rt.height = 146;
+	}	
+	else if(dialog_current_state == 3)
+	{
+		ui->rt.x	  = 160;
+		ui->rt.width  = 173;
+		ui->rt.y	  = 73;
+		ui->rt.height = 145;
 	}
-	
+	else if(dialog_current_state == 5)
+	{
+		ui->rt.x	  = 140;
+		ui->rt.width  = 210;
+		ui->rt.y	  = 60;
+		ui->rt.height = 150;
+	}
 #endif
 /////////////////////////////////////////
 	__inf("ui->rt.x = %d, ui->rt.y = %d, ui->rt.width = %d, ui->rt.height = %d\n", ui->rt.x, ui->rt.y, ui->rt.width, ui->rt.height);
@@ -354,7 +370,11 @@ static __s32 app_dialog_ui_init(dialog_wnd_t *wnd_para, GUI_RECT *dialog_rt)
     }
     else if(dialog_current_state == 5)
     {
-        ui->pos.title.x    = (ui->rt.width - 120) / 2;
+        ui->pos.title.x    = (ui->rt.width - 140) / 2 + 10 + 35;
+    }
+    else if(dialog_current_state == 3)
+    {
+        ui->pos.title.x    = 25;
     }
     else if((dialog_current_state != 2))
     {
@@ -362,13 +382,26 @@ static __s32 app_dialog_ui_init(dialog_wnd_t *wnd_para, GUI_RECT *dialog_rt)
     }
     else if(dialog_current_state == 2)
     {
-        ui->pos.title.x    = (ui->rt.width - 160) / 2-40;
+    	if(language == EPDK_LANGUAGE_ENM_CHINESES)
+    	{
+    		__inf("language = 0x%x\n", language);
+    		ui->pos.title.x    = (ui->rt.width - 160) / 2-25 + 60;
+    	}
+		else
+		{
+        	ui->pos.title.x    = (ui->rt.width - 160) / 2-25;
+		}
     }
+	
 	__inf("dialog_current_state = %d,ui->pos.title.x:%d\n",dialog_current_state, ui->pos.title.x);
 
     if(dialog_current_state == 3)
     {
-        ui->pos.title.y       = TITLE_Y_OFFSET + 12;
+        ui->pos.title.y       = TITLE_Y_OFFSET + 18+8;
+    }
+    if(dialog_current_state == 2)
+    {
+        ui->pos.title.y       = TITLE_Y_OFFSET + 15;
     }
     else if(dialog_current_state == 4)
     {
@@ -616,10 +649,10 @@ static __s32 on_dialog_key_up_action(H_WIN hwnd, __u32 keycode)
                 get_lang_res(STRING_DIALOG_DET, wnd_para->res.str_content);
 
 				__inf("Format card, %s\n", wnd_para->res.str_content);
-				gui_rect.x0 = 2;
+				gui_rect.x0 = 10;
 				gui_rect.y0 = 1+10;
-				gui_rect.x1 = gui_rect.x0 + 100;
-				gui_rect.y1 = gui_rect.y0 + 16;
+				gui_rect.x1 = gui_rect.x0 + 145;
+				gui_rect.y1 = gui_rect.y0 + 36;
 				GUI_ClearRectEx(&gui_rect);
                 GUI_DispStringAt(wnd_para->res.str_content, gui_rect.x0, gui_rect.y0);
                 da_back_light = dsk_display_get_lcd_bright();
@@ -810,19 +843,35 @@ static void draw_dialog(APP_DIALOG_RES_T *res, APP_DIALOG_UI_T *ui)
 			}
 			if(i == 0)
 			{
-				GUI_DispStringAt(str_content, rect1.x + 15, rect1.y);
+				GUI_DispStringAt(str_content, rect1.x + 12, rect1.y);
+			}
+			else if(i >1 && i < 5)
+			{
+				GUI_DispStringAt(str_content, rect1.x - 14 - 7, rect1.y);	
 			}
 			else
 			{
-				GUI_DispStringAt(str_content, rect1.x - 12, rect1.y);
+				GUI_DispStringAt(str_content, rect1.x - 16, rect1.y);
 			}
 		}
 	}
-
-	if((dialog_current_state >= 2) && (dialog_current_state <6))
+	if(dialog_current_state == 5)
 	{
-		GUI_SetColor(ui->colour.txt_n);
+		GUI_SetColor(ui->colour.txt_f);
+		GUI_DispStringAt(res->str_title, ui->pos.title.x, ui->pos.title.y + 13);
+		__inf("res->str_title: %s\n", res->str_title);
+	}
+	if(dialog_current_state == 3)
+	{
+		GUI_SetColor(ui->colour.txt_f);
+		GUI_DispStringAt(res->str_title, ui->pos.title.x, ui->pos.title.y + 10);
+		__inf("res->str_title: %s\n", res->str_title);
+	}
+	else if((dialog_current_state == 4)||(dialog_current_state == 2))
+	{
+		GUI_SetColor(ui->colour.txt_f);
 		GUI_DispStringAt(res->str_title, ui->pos.title.x, ui->pos.title.y-6);
+		__inf("res->str_title: %s\n", res->str_title);
 	}
 
 	if(dialog_current_state == 0)
@@ -868,7 +917,6 @@ static void draw_dialog(APP_DIALOG_RES_T *res, APP_DIALOG_UI_T *ui)
 	}
 
 	if((dialog_current_state != 4)&& (dialog_current_state != 0)\
-		//&&(dialog_current_state !=6 )
 		&&(dialog_current_state != 1))
 	{
 		for (i = 0; i < res->btn_count; i++)
@@ -884,20 +932,30 @@ static void draw_dialog(APP_DIALOG_RES_T *res, APP_DIALOG_UI_T *ui)
 			{
 				bmp_data = ResHandle2Data(res->bmp_bklt_unselect);
 			}
-			if(dialog_current_state == 3)
+			
+			if(dialog_current_state == 2)
 			{
-				GUI_BMP_Draw(bmp_data, x - 20 - 5, y);	
+				GUI_BMP_Draw(bmp_data, x + 10, y + 22);	
+			}
+			else if(dialog_current_state == 3)
+			{
+				GUI_BMP_Draw(bmp_data, x - 20 - 5, y + 15);	
+			}
+			else if(dialog_current_state == 5)
+			{
+				GUI_BMP_Draw(bmp_data, x + 5, y + 20);
 			}
 			else
 			{
 				GUI_BMP_Draw(bmp_data, x + 5, y);
 			}
+			
 			if(dialog_current_state == 3)
 			{
 				rect.x0 = x + 23;
-				rect.y0 = rect.y0 - 15 + i*50;
+				rect.y0 = rect.y0 + 15 + i*21;
 				rect.x1 = rect.x0 + ui->size.btn.width;
-				rect.y1 = rect.y1 -15 + i*50;
+				rect.y1 = rect.y1 + 15 + i*21;
 			}
 			else if(dialog_current_state == 6)
 			{
@@ -906,12 +964,19 @@ static void draw_dialog(APP_DIALOG_RES_T *res, APP_DIALOG_UI_T *ui)
 				rect.x1 = rect.x0 + ui->size.btn.width;
 				rect.y1 = rect.y1 -15 + i*47;
 			}
-			else if((dialog_current_state == 2)||(dialog_current_state == 5))
+			else if(dialog_current_state == 5)
 			{
-				rect.x0 = x + 53;
-				rect.y0 = rect.y0 - 15 + 5 + i*48;
+				rect.x0 = x + 58;
+				rect.y0 = rect.y0 - 14 + 38 + i*12;
 				rect.x1 = rect.x0 + ui->size.btn.width;
-				rect.y1 = rect.y1 -15 + 5 + i*48;
+				rect.y1 = rect.y1 -14 + 38 + i*12;
+			}
+			else if(dialog_current_state == 2)
+			{
+				rect.x0 = x + 63;
+				rect.y0 = rect.y0 - 3 + 17 + i*23;
+				rect.x1 = rect.x0 + ui->size.btn.width;
+				rect.y1 = rect.y1 - 3 + 17 + i*23;
 			}
 			
 			if(dialog_current_state > 1)

@@ -128,7 +128,7 @@ void headbar_init_uipara(__hbar_format_t format)
         headbar_uipara.time.h = 16;
 #ifdef HBAR_SHOW_LOGO
 		headbar_uipara.logo.x = 15;
-		headbar_uipara.logo.y = 8;
+		headbar_uipara.logo.y = 8 + 3;
 		headbar_uipara.logo.w = 98;
 		headbar_uipara.logo.h = 15;	
 #endif

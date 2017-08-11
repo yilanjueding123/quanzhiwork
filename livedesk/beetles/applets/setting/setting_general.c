@@ -20,7 +20,7 @@
 #include "setting_para.h"
 
 
-#if 1
+#if 0
 #define __msg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
 						     eLIBs_printf(__VA_ARGS__)									        )
 #else
@@ -155,9 +155,9 @@ static reg_system_para_t *setting_reg_para;
 static __u32 language_english_layer_1[] = {
 	212,
 	200,
-	197,
-	194,
-	182,
+	195,
+	193,
+	183,
 };
 static __u32 language_japanese_layer_1[] = {
 	190,
@@ -234,6 +234,11 @@ static __s32 content_lang_id[] = //ITEM1 ( 设置语言)
 #endif
 };
 
+__u32 dialog_get_font(void)
+{
+	return setting_reg_para->language;
+}
+
 static __s32 content_style_id[] = //ITEM2 (设置主题风格)
 {
     STRING_SET_COMMON_TOPIC_STYLE1_CON,
@@ -292,7 +297,6 @@ static __s32 pop_list_strsenior_title[] =
 };
 static __s32 pop_inf_title[] =
 {
-
     STRING_SET_TIPS_SVERS,
     STRING_SET_TIPS_CARDT,
     STRING_SET_TIPS_CARDF
@@ -1010,21 +1014,21 @@ static __s32 setting_generl_popinf_content_paint(__gui_msg_t *msg)
 	if(setting_reg_para->language == EPDK_LANGUAGE_ENM_ENGLISH)
 	{
 		__msg("p_item_res->string_title_pos.x: %d\n", p_item_res->string_title_pos.x);
-		GUI_DispStringAt(p_item_res->string_title, p_item_res->string_title_pos.x - 45 - 40, p_item_res->string_title_pos.y + 45);
-		GUI_DispStringAt(p_item_res->string_content, p_item_res->string_title_pos.x + 80, p_item_res->string_title_pos.y + 45);
+		GUI_DispStringAt(p_item_res->string_title, p_item_res->string_title_pos.x - 45 - 40, p_item_res->string_title_pos.y + 45 + 15);
+		GUI_DispStringAt(p_item_res->string_content, p_item_res->string_title_pos.x + 80, p_item_res->string_title_pos.y + 45 + 15);
 	}
 	else if(setting_reg_para->language == EPDK_LANGUAGE_ENM_CHINESES)
 	{	
 		//language_japanese_layer_proinf
 		__msg("p_item_res->string_title_pos.x: %d\n", p_item_res->string_title_pos.x);
-		GUI_DispStringAt(p_item_res->string_title, language_japanese_layer_proinf[general_attr->pop_inf_new_focus], p_item_res->string_title_pos.y + 45);
-		GUI_DispStringAt(p_item_res->string_content, language_japanese_layer_proinf[general_attr->pop_inf_new_focus] + 100, p_item_res->string_title_pos.y + 45);
+		GUI_DispStringAt(p_item_res->string_title, language_japanese_layer_proinf[general_attr->pop_inf_new_focus], p_item_res->string_title_pos.y + 45 + 15);
+		GUI_DispStringAt(p_item_res->string_content, language_japanese_layer_proinf[general_attr->pop_inf_new_focus] + 100, p_item_res->string_title_pos.y + 45 + 15);
 	}
 	else if(setting_reg_para->language == EPDK_LANGUAGE_ENM_CHINESET)
 	{
 		__msg("p_item_res->string_title_pos.x: %d\n", p_item_res->string_title_pos.x);
-		GUI_DispStringAt(p_item_res->string_title, language_korean_layer_proinf[general_attr->pop_inf_new_focus], p_item_res->string_title_pos.y + 45);
-		GUI_DispStringAt(p_item_res->string_content, language_korean_layer_proinf[general_attr->pop_inf_new_focus] + 123, p_item_res->string_title_pos.y + 45);
+		GUI_DispStringAt(p_item_res->string_title, language_korean_layer_proinf[general_attr->pop_inf_new_focus], p_item_res->string_title_pos.y + 45 + 15);
+		GUI_DispStringAt(p_item_res->string_content, language_korean_layer_proinf[general_attr->pop_inf_new_focus] + 123, p_item_res->string_title_pos.y + 45 + 15);
 	}
 
     //GUI_DispStringAt(p_item_res->string_title, p_item_res->string_title_pos.x - 45 - 40, p_item_res->string_title_pos.y + 45);
@@ -1853,7 +1857,7 @@ static __s32 seting_pop_information_paint(__gui_msg_t *msg)
         else
         {
         	__msg("general_attr->pop_inf_new_focus = %d\n", general_attr->pop_inf_new_focus);
-            gui_rect.y0 = SET_ITEM_START_Y + SET_ITEM_H * i;
+            gui_rect.y0 = 70 + 20*i;//SET_ITEM_H * i;
 #ifdef SET_ITEM_SENSOR			
             GUI_BMP_Draw(theme_hdl2buf(general_attr->h_bmp_unselect), 10, gui_rect.y0);
 #endif
@@ -1861,34 +1865,34 @@ static __s32 seting_pop_information_paint(__gui_msg_t *msg)
 			if(setting_reg_para->language == EPDK_LANGUAGE_ENM_ENGLISH)
 			{
 				__msg("p_item_res->string_title_pos.x: %d\n", p_item_res->string_title_pos.x);
-				GUI_DispStringAt(p_item_res->string_title, p_item_res->string_title_pos.x - 20, p_item_res->string_title_pos.y + 45);
-				GUI_DispStringAt(p_item_res->string_content, p_item_res->string_title_pos.x + 80, p_item_res->string_title_pos.y + 45);
+				GUI_DispStringAt(p_item_res->string_title, p_item_res->string_title_pos.x - 20 - 20, gui_rect.y0);//p_item_res->string_title_pos.y + 45);
+				GUI_DispStringAt(p_item_res->string_content, p_item_res->string_title_pos.x + 80 - 20, gui_rect.y0);//p_item_res->string_title_pos.y + 45);
 			}
 			else if(setting_reg_para->language == EPDK_LANGUAGE_ENM_CHINESES)
 			{	
 				//language_japanese_layer_proinf
 				__msg("p_item_res->string_title_pos.x: %d\n", p_item_res->string_title_pos.x);
-				GUI_DispStringAt(p_item_res->string_title, language_japanese_layer_proinf[i], p_item_res->string_title_pos.y + 45);
+				GUI_DispStringAt(p_item_res->string_title, language_japanese_layer_proinf[i], gui_rect.y0);//p_item_res->string_title_pos.y + 45);
 				if(i == 2)
 				{
-					GUI_DispStringAt(p_item_res->string_content, language_japanese_layer_proinf[i] + 60, p_item_res->string_title_pos.y + 45);
+					GUI_DispStringAt(p_item_res->string_content, language_japanese_layer_proinf[i] + 60, gui_rect.y0);//p_item_res->string_title_pos.y + 45);
 				}
 				else
 				{
-					GUI_DispStringAt(p_item_res->string_content, language_japanese_layer_proinf[i] + 100, p_item_res->string_title_pos.y + 45);
+					GUI_DispStringAt(p_item_res->string_content, language_japanese_layer_proinf[i] + 100, gui_rect.y0);//p_item_res->string_title_pos.y + 45);
 				}
 			}
 			else if(setting_reg_para->language == EPDK_LANGUAGE_ENM_CHINESET)
 			{
 				__msg("p_item_res->string_title_pos.x: %d, %d\n", p_item_res->string_title_pos.x, sizeof(p_item_res->string_title));
-				GUI_DispStringAt(p_item_res->string_title, language_korean_layer_proinf[i], p_item_res->string_title_pos.y + 45);
+				GUI_DispStringAt(p_item_res->string_title, language_korean_layer_proinf[i], gui_rect.y0);//p_item_res->string_title_pos.y + 45);
 				if(1 == i)
 				{
-					GUI_DispStringAt(p_item_res->string_content, language_korean_layer_proinf[i] + 85, p_item_res->string_title_pos.y + 45);
+					GUI_DispStringAt(p_item_res->string_content, language_korean_layer_proinf[i] + 85, gui_rect.y0);//p_item_res->string_title_pos.y + 45);
 				}
 				else
 				{
-					GUI_DispStringAt(p_item_res->string_content, language_korean_layer_proinf[i] + 102, p_item_res->string_title_pos.y + 45);
+					GUI_DispStringAt(p_item_res->string_content, language_korean_layer_proinf[i] + 102, gui_rect.y0);//p_item_res->string_title_pos.y + 45);
 				}
 				//GUI_DispStringAt(p_item_res->string_content, language_korean_layer_proinf[i] + 100, p_item_res->string_title_pos.y + 45);
 			}

@@ -36,4 +36,6 @@ typedef struct tag_setting_general_para
 
 H_WIN setting_general_win_create(H_WIN h_parent, setting_general_para_t *para);
 __s32 setting_general_win_delete(H_WIN list_win);
+__u32 dialog_get_font(void);
+
 #endif

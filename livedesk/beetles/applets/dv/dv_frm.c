@@ -2289,7 +2289,7 @@ static __s32 __app_dv_draw_rec_status(__gui_msg_t *msg)
 
 	dv_subse_ui = dv_get_sub_res();
 
-	gui_rect.x0 = 260;
+	gui_rect.x0 = 255;
     gui_rect.y0 = 3;
     gui_rect.x1 = 280;
     gui_rect.y1 = 23;
@@ -2300,7 +2300,7 @@ static __s32 __app_dv_draw_rec_status(__gui_msg_t *msg)
 	GUI_SetDrawMode(GUI_DRAWMODE_NORMAL);
 	if(dv_frm_ctrl->rec_status != 0)
 	{
-		GUI_BMP_RES_Draw(dv_subse_ui->rec_status_bmp, gui_rect.x0, gui_rect.y0 + 3);
+		GUI_BMP_RES_Draw(dv_subse_ui->rec_status_bmp, gui_rect.x0+5, gui_rect.y0 + 3);
 	}
 	
 	return EPDK_OK;
@@ -2325,7 +2325,7 @@ static __s32 __app_dv_draw_mode_hbar(__gui_msg_t *msg)
 	
 	gui_rect.x0 = 226;
     gui_rect.y0 = 3;
-    gui_rect.x1 = 260;
+    gui_rect.x1 = 255;
     gui_rect.y1 = 30;
 
 	GUI_LyrWinSel(dv_frm_ctrl->subset);

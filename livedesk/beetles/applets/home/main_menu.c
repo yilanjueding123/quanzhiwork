@@ -501,11 +501,13 @@ static void paint_mmain_item_ex(mmenu_attr_t *mmenu_attr, __s32 index
     //draw text
     if(bfocus)
     {
-        GUI_SetColor(GUI_WHITE);
+        //GUI_SetColor(GUI_WHITE);
+        GUI_SetColor(mmenu_attr->focus_txt_color);
     }
     else
     {
-        GUI_SetColor(GUI_DARKBLUE);
+        //GUI_SetColor(GUI_DARKBLUE);
+        GUI_SetColor(mmenu_attr->unfocus_txt_color);
     }
     
     gui_rect.x0 = (480 - home_ui_para->max_main_bmp_width)/2;
@@ -714,8 +716,8 @@ static __s32 _main_menu_Proc(__gui_msg_t *msg)
         mmenu_attr->item_w = home_ui_para->item_width;
         mmenu_attr->focus_item = mmenu_para->focus_id;
         mmenu_attr->first_item = 0;
-        mmenu_attr->focus_txt_color = APP_COLOR_YELLOW;			//焦点颜色
-        mmenu_attr->unfocus_txt_color = APP_COLOR_WHITE;		//非焦点颜色
+        mmenu_attr->focus_txt_color = GUI_WHITE;//APP_COLOR_YELLOW;			//焦点颜色
+        mmenu_attr->unfocus_txt_color = GUI_USER_DEFINE;//APP_COLOR_WHITE;		//非焦点颜色
         mmenu_attr->res_init = EPDK_FALSE;
 
 

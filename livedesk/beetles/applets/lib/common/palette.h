@@ -37,6 +37,11 @@
 #define APP_COLOR_BLACK                 PALETTE_TEXT_COLOUR_INDEX_(2)
 #define APP_COLOR_GREEN                 PALETTE_TEXT_COLOUR_INDEX_(3)
 #define APP_COLOR_DARKGRAY				PALETTE_TEXT_COLOUR_INDEX_(4)
+#define APP_COLOR_X1					PALETTE_TEXT_COLOUR_INDEX_(5)
+#define APP_COLOR_X2					PALETTE_TEXT_COLOUR_INDEX_(6)
+#define APP_COLOR_X3					PALETTE_TEXT_COLOUR_INDEX_(7)
+#define APP_COLOR_X4					PALETTE_TEXT_COLOUR_INDEX_(8)
+#define APP_COLOR_X5					PALETTE_TEXT_COLOUR_INDEX_(9)
 
 __s32  com_set_palette_text_color(__u32 *palette, __u32 text_color_index,
                                   __u32 gui_color);

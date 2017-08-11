@@ -1,7 +1,4 @@
----- freq_save_flg Matches (6 in 1 files) ----
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):__u8  freq_save_flg = 0;
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):	freq_save_flg = 1;
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):		freq_save_flg = 0;
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):		if(freq_save_flg)
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):		if(freq_save_flg)
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):		freq_save_flg = 0;
+---- __app_dv_draw_rec_status Matches (3 in 1 files) ----
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):					__app_dv_draw_rec_status(msg);
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):					__app_dv_draw_rec_status(msg);
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):static __s32 __app_dv_draw_rec_status(__gui_msg_t *msg)
