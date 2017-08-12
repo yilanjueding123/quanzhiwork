@@ -21,7 +21,7 @@
 __u8   dialog_jh_tran_data;
 __u8   dialog_current_state;
 
-#if 1
+#if 0
 #define __inf(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
 								 eLIBs_printf(__VA_ARGS__)											)
 
@@ -783,12 +783,14 @@ static void draw_dialog(APP_DIALOG_RES_T *res, APP_DIALOG_UI_T *ui)
 	void			 *bmp_data;
 	GUI_RECT		  rect, rect1;
 	char 			  str_content[128];
-
+	__u32 				language = EPDK_LANGUAGE_ENM_ENGLISH;
 	GUI_SetDrawMode(GUI_DRAWMODE_NORMAL);
 	//±³¾°
 
 	__inf("dialog_current_state = %d\n", dialog_current_state);
-
+	
+	language = dialog_get_font();
+	
 	if(dialog_current_state == 0)
 	{
 		RECT rect, rect1;
@@ -829,7 +831,6 @@ static void draw_dialog(APP_DIALOG_RES_T *res, APP_DIALOG_UI_T *ui)
 			rect1.x = rect.x + 50;
 			rect1.y = rect.y + 5;
 
-			//eLIBs_printf("i = %d, dialog_jh_tran_data = %d\n", i, dialog_jh_tran_data);
 			get_menu_text(content_backlight_off_id[i], str_content, 128);
 			if(i == dialog_jh_tran_data)//res->bklt_focus)
 			{
@@ -843,15 +844,36 @@ static void draw_dialog(APP_DIALOG_RES_T *res, APP_DIALOG_UI_T *ui)
 			}
 			if(i == 0)
 			{
-				GUI_DispStringAt(str_content, rect1.x + 12, rect1.y);
+				if(language == EPDK_LANGUAGE_ENM_CHINESES)
+				{
+					GUI_DispStringAt(str_content, rect1.x + 2, rect1.y);
+				}
+				else
+				{
+					GUI_DispStringAt(str_content, rect1.x + 12, rect1.y);
+				}
 			}
 			else if(i >1 && i < 5)
 			{
-				GUI_DispStringAt(str_content, rect1.x - 14 - 7, rect1.y);	
+				if((language == EPDK_LANGUAGE_ENM_CHINESET)||(language == EPDK_LANGUAGE_ENM_CHINESES))
+				{
+					GUI_DispStringAt(str_content, rect1.x - 3, rect1.y);	
+				}
+				else
+				{
+					GUI_DispStringAt(str_content, rect1.x - 14 - 7, rect1.y);	
+				}
 			}
 			else
 			{
-				GUI_DispStringAt(str_content, rect1.x - 16, rect1.y);
+				if((language == EPDK_LANGUAGE_ENM_CHINESET)||(language == EPDK_LANGUAGE_ENM_CHINESES))
+				{
+					GUI_DispStringAt(str_content, rect1.x + 3, rect1.y);	
+				}
+				else 
+				{
+					GUI_DispStringAt(str_content, rect1.x - 16, rect1.y);
+				}
 			}
 		}
 	}

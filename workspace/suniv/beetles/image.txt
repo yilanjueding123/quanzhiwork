@@ -35,8 +35,8 @@ filecnt=15
  F:\pri_f25\zhibo\work\workspace\suniv\beetles\sunxi_mbr.fex, 12345678, 1234567890___MBR, 0
  F:\pri_f25\zhibo\work\workspace\suniv\eFex\\card\\dlinfo.fex, 12345678, 1234567890DLINFO, 0
 ret=0 111
-length=16155 0
-length=16155 0
+length=16153 0
+length=16153 0
 length=512 0
 length=1990 0
 length=24576 0

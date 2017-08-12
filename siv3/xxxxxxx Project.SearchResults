@@ -1,4 +1,10 @@
----- __app_dv_draw_rec_status Matches (3 in 1 files) ----
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):					__app_dv_draw_rec_status(msg);
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):					__app_dv_draw_rec_status(msg);
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):static __s32 __app_dv_draw_rec_status(__gui_msg_t *msg)
+---- language_japanese_layer_proinf Matches (9 in 1 files) ----
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):static __u32 language_japanese_layer_proinf[] = {
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):		//language_japanese_layer_proinf
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):		GUI_DispStringAt(p_item_res->string_title, language_japanese_layer_proinf[general_attr->pop_inf_new_focus], p_item_res->string_title_pos.y + 45 + 15);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):		GUI_DispStringAt(p_item_res->string_content, language_japanese_layer_proinf[general_attr->pop_inf_new_focus] + 100, p_item_res->string_title_pos.y + 45 + 15);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):				//language_japanese_layer_proinf
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):				//language_japanese_layer_proinf
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):				GUI_DispStringAt(p_item_res->string_title, language_japanese_layer_proinf[i], gui_rect.y0);//p_item_res->string_title_pos.y + 45);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):					GUI_DispStringAt(p_item_res->string_content, language_japanese_layer_proinf[i] + 60, gui_rect.y0);//p_item_res->string_title_pos.y + 45);
+Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):					GUI_DispStringAt(p_item_res->string_content, language_japanese_layer_proinf[i] + 100, gui_rect.y0);//p_item_res->string_title_pos.y + 45);

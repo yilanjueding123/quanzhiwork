@@ -24,7 +24,7 @@ include $(SDKROOT)/includes/cfgs/CROSSTOOL.CFG
 
 
 #生成输出目标文件
-#all:
+#all:buildres
 buildres:
 	make -C lang
 	make -C theme

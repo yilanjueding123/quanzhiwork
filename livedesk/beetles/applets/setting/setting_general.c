@@ -171,7 +171,7 @@ static __u32 language_korean_layer_1[] = {
 	220,
 	205,
 	205,
-	165,
+	195,
 };
 static __u32 language_japanese_layer_display[] = {
 	190 - 18 - 10,
@@ -183,12 +183,12 @@ static __u32 language_korean_layer_display[] = {
 };
 
 static __u32 language_japanese_layer_proinf[] = {
-	210 - 40,
+	210 - 80 - 100,
 	200 - 20 - 9,
 	200 + 10,
 };
 static __u32 language_korean_layer_proinf[] = {
-	210 - 40,
+	210 - 40 - 40,
 	208,
 	200 - 10 - 2,
 };
@@ -1022,13 +1022,13 @@ static __s32 setting_generl_popinf_content_paint(__gui_msg_t *msg)
 		//language_japanese_layer_proinf
 		__msg("p_item_res->string_title_pos.x: %d\n", p_item_res->string_title_pos.x);
 		GUI_DispStringAt(p_item_res->string_title, language_japanese_layer_proinf[general_attr->pop_inf_new_focus], p_item_res->string_title_pos.y + 45 + 15);
-		GUI_DispStringAt(p_item_res->string_content, language_japanese_layer_proinf[general_attr->pop_inf_new_focus] + 100, p_item_res->string_title_pos.y + 45 + 15);
+		GUI_DispStringAt(p_item_res->string_content, language_japanese_layer_proinf[general_attr->pop_inf_new_focus] + 240, p_item_res->string_title_pos.y + 45 + 15);
 	}
 	else if(setting_reg_para->language == EPDK_LANGUAGE_ENM_CHINESET)
 	{
 		__msg("p_item_res->string_title_pos.x: %d\n", p_item_res->string_title_pos.x);
 		GUI_DispStringAt(p_item_res->string_title, language_korean_layer_proinf[general_attr->pop_inf_new_focus], p_item_res->string_title_pos.y + 45 + 15);
-		GUI_DispStringAt(p_item_res->string_content, language_korean_layer_proinf[general_attr->pop_inf_new_focus] + 123, p_item_res->string_title_pos.y + 45 + 15);
+		GUI_DispStringAt(p_item_res->string_content, language_korean_layer_proinf[general_attr->pop_inf_new_focus] + 123 + 40, p_item_res->string_title_pos.y + 45 + 15);
 	}
 
     //GUI_DispStringAt(p_item_res->string_title, p_item_res->string_title_pos.x - 45 - 40, p_item_res->string_title_pos.y + 45);
@@ -1857,7 +1857,7 @@ static __s32 seting_pop_information_paint(__gui_msg_t *msg)
         else
         {
         	__msg("general_attr->pop_inf_new_focus = %d\n", general_attr->pop_inf_new_focus);
-            gui_rect.y0 = 70 + 20*i;//SET_ITEM_H * i;
+            gui_rect.y0 = 70 + POP_INFO_HEIGHT*i;//SET_ITEM_H * i;
 #ifdef SET_ITEM_SENSOR			
             GUI_BMP_Draw(theme_hdl2buf(general_attr->h_bmp_unselect), 10, gui_rect.y0);
 #endif

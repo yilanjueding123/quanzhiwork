@@ -31,7 +31,7 @@ typedef struct tag_setting_general_para
 
 } setting_general_para_t;
 
-
+#define POP_INFO_HEIGHT 35
 
 
 H_WIN setting_general_win_create(H_WIN h_parent, setting_general_para_t *para);

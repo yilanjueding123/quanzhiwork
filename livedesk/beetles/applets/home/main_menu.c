@@ -428,7 +428,7 @@ static void paint_mmain_item_ex(mmenu_attr_t *mmenu_attr, __s32 index
     GUI_UC_SetEncodeUTF8();
     GUI_SetBkColor(0);
 
-    GUI_SetDrawMode(GUI_DRAWMODE_NORMAL); //GUI_DRAWMODE_NORMAL
+    GUI_SetDrawMode(GUI_DRAWMODE_NORMAL);
     if(bfocus)
     {
         pbmp = dsk_theme_hdl2buf(mmenu_attr->focus_bmp[index]);
@@ -471,7 +471,7 @@ static void paint_mmain_item_ex(mmenu_attr_t *mmenu_attr, __s32 index
     }
 
     //clear bg rect	
-    __msg("\n----------------------1------------------------\n");
+    //__msg("\n----------------------1------------------------\n");
 	__msg("index = %d, mmenu_attr->first_item = %d\n", index, mmenu_attr->first_item);
 #ifdef MENU_BAR_ITEM
 	gui_rect.x0 = 6;
@@ -518,7 +518,7 @@ static void paint_mmain_item_ex(mmenu_attr_t *mmenu_attr, __s32 index
     //GUI_ClearRectEx(&gui_rect);
     dsk_langres_get_menu_text(main_ui_para[index].lang_id, mmenu_attr->item_str[index], GUI_TITLE_MAX);
     GUI_DispStringInRect(mmenu_attr->item_str[index], &gui_rect, GUI_TA_HCENTER | GUI_TA_VCENTER);
-    __msg("\n--------------------2--------------------------\n");
+    //__msg("\n--------------------2--------------------------\n");
 }
 
 /*
