@@ -21,7 +21,7 @@
 __u8   dialog_jh_tran_data;
 __u8   dialog_current_state;
 
-#if 1
+#if 0
 #define __inf(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
 								 eLIBs_printf(__VA_ARGS__)											)
 
@@ -639,7 +639,7 @@ static __s32 on_dialog_key_up_action(H_WIN hwnd, __u32 keycode)
             if(wnd_para->result == ADLG_IDYES)
             {
                 __lion_bright_t  da_back_light;
-				GUI_RECT	gui_rect;
+				GUI_RECT	gui_rect, gui_rect1;
 				
 				GUI_LyrWinSel(wnd_para->hlyr);
 				GUI_SetFont(SWFFont);
@@ -653,7 +653,12 @@ static __s32 on_dialog_key_up_action(H_WIN hwnd, __u32 keycode)
 				gui_rect.y0 = 1+10;
 				gui_rect.x1 = gui_rect.x0 + 145;
 				gui_rect.y1 = gui_rect.y0 + 36;
-				GUI_ClearRectEx(&gui_rect);
+				
+				gui_rect1.x0 = 1;
+				gui_rect1.y0 = 1+10;
+				gui_rect1.x1 = gui_rect.x0 + 165;
+				gui_rect1.y1 = gui_rect.y0 + 36;
+				GUI_ClearRectEx(&gui_rect1);
                 GUI_DispStringAt(wnd_para->res.str_content, gui_rect.x0, gui_rect.y0);
                 da_back_light = dsk_display_get_lcd_bright();
                 dsk_display_set_lcd_bright((__lion_bright_t)(14));
@@ -776,6 +781,8 @@ char *pbuff_str[7] = {
 	"1 m",
 	"5 m",
 };
+#define DIALOG_STATE_Y_0 6
+#define DIALOG_WITH 10
 
 static void draw_dialog(APP_DIALOG_RES_T *res, APP_DIALOG_UI_T *ui)
 {
@@ -809,13 +816,13 @@ static void draw_dialog(APP_DIALOG_RES_T *res, APP_DIALOG_UI_T *ui)
 			{
 				GUI_BMP_RES_Draw(res->bmp_bklt_select, rect.x, rect.y);
 				GUI_SetColor(ui->colour.txt_f);
-				GUI_DispStringAt(str_content, rect1.x, rect1.y);
+				GUI_DispStringAt(str_content, rect1.x, rect1.y - DIALOG_STATE_Y_0);
 			}
 			else
 			{
 				GUI_BMP_RES_Draw(res->bmp_bklt_unselect, rect.x, rect.y);
 				GUI_SetColor(ui->colour.txt_n);
-				GUI_DispStringAt(str_content, rect1.x, rect1.y);
+				GUI_DispStringAt(str_content, rect1.x, rect1.y - DIALOG_STATE_Y_0);
 			}
 		}
 		
@@ -846,33 +853,33 @@ static void draw_dialog(APP_DIALOG_RES_T *res, APP_DIALOG_UI_T *ui)
 			{
 				if(language == EPDK_LANGUAGE_ENM_CHINESES)
 				{
-					GUI_DispStringAt(str_content, rect1.x + 2, rect1.y);
+					GUI_DispStringAt(str_content, rect1.x + 2, rect1.y - DIALOG_STATE_Y_0);
 				}
 				else
 				{
-					GUI_DispStringAt(str_content, rect1.x + 12, rect1.y);
+					GUI_DispStringAt(str_content, rect1.x + 12, rect1.y - DIALOG_STATE_Y_0);
 				}
 			}
 			else if(i >1 && i < 5)
 			{
 				if((language == EPDK_LANGUAGE_ENM_CHINESET)||(language == EPDK_LANGUAGE_ENM_CHINESES))
 				{
-					GUI_DispStringAt(str_content, rect1.x - 3, rect1.y);	
+					GUI_DispStringAt(str_content, rect1.x - 3, rect1.y - DIALOG_STATE_Y_0);	
 				}
 				else
 				{
-					GUI_DispStringAt(str_content, rect1.x - 14 - 7, rect1.y);	
+					GUI_DispStringAt(str_content, rect1.x - 14 - 7, rect1.y - DIALOG_STATE_Y_0);	
 				}
 			}
 			else
 			{
 				if((language == EPDK_LANGUAGE_ENM_CHINESET)||(language == EPDK_LANGUAGE_ENM_CHINESES))
 				{
-					GUI_DispStringAt(str_content, rect1.x + 3, rect1.y);	
+					GUI_DispStringAt(str_content, rect1.x + 3, rect1.y - DIALOG_STATE_Y_0);	
 				}
 				else 
 				{
-					GUI_DispStringAt(str_content, rect1.x - 16, rect1.y);
+					GUI_DispStringAt(str_content, rect1.x - 16, rect1.y - DIALOG_STATE_Y_0);
 				}
 			}
 		}
@@ -886,13 +893,50 @@ static void draw_dialog(APP_DIALOG_RES_T *res, APP_DIALOG_UI_T *ui)
 	if(dialog_current_state == 3)
 	{
 		GUI_SetColor(ui->colour.txt_f);
-		GUI_DispStringAt(res->str_title, ui->pos.title.x, ui->pos.title.y + 10);
+		if(language == EPDK_LANGUAGE_ENM_CHINESES)
+		{
+			GUI_DispStringAt(res->str_title, 1/*ui->pos.title.x*/, ui->pos.title.y + 10);
+		}
+		else if(language == EPDK_LANGUAGE_ENM_CHINESET)
+		{
+			GUI_DispStringAt(res->str_title, ui->pos.title.x + 25, ui->pos.title.y + 10);
+		}
+		else
+		{
+			GUI_DispStringAt(res->str_title, ui->pos.title.x, ui->pos.title.y + 10);
+		}
 		__inf("res->str_title: %s\n", res->str_title);
 	}
-	else if((dialog_current_state == 4)||(dialog_current_state == 2))
+	else if(dialog_current_state == 4)
 	{
 		GUI_SetColor(ui->colour.txt_f);
-		GUI_DispStringAt(res->str_title, ui->pos.title.x, ui->pos.title.y-6);
+		if(language == EPDK_LANGUAGE_ENM_CHINESES)
+		{
+			GUI_DispStringAt(res->str_title, ui->pos.title.x + 70, ui->pos.title.y-6);
+		}
+		else if(language == EPDK_LANGUAGE_ENM_CHINESET)
+		{
+			GUI_DispStringAt(res->str_title, ui->pos.title.x + 35, ui->pos.title.y-6);
+		}
+		else
+		{
+			GUI_DispStringAt(res->str_title, ui->pos.title.x + 70, ui->pos.title.y-6);
+		}
+			
+		//GUI_DispStringAt(res->str_title, ui->pos.title.x, ui->pos.title.y-6);
+		__inf("res->str_title: %s\n", res->str_title);
+	}	
+	else if(dialog_current_state == 2)
+	{
+		GUI_SetColor(ui->colour.txt_f);
+		if(language == EPDK_LANGUAGE_ENM_CHINESES)
+		{
+			GUI_DispStringAt(res->str_title, 5/*ui->pos.title.x*/, ui->pos.title.y-6);
+		}
+		else
+		{
+			GUI_DispStringAt(res->str_title, ui->pos.title.x, ui->pos.title.y-6);
+		}
 		__inf("res->str_title: %s\n", res->str_title);
 	}
 
@@ -976,28 +1020,28 @@ static void draw_dialog(APP_DIALOG_RES_T *res, APP_DIALOG_UI_T *ui)
 			{
 				rect.x0 = x + 23;
 				rect.y0 = rect.y0 + 15 + i*21;
-				rect.x1 = rect.x0 + ui->size.btn.width;
+				rect.x1 = rect.x0 + ui->size.btn.width + DIALOG_WITH;
 				rect.y1 = rect.y1 + 15 + i*21;
 			}
 			else if(dialog_current_state == 6)
 			{
 				rect.x0 = x + 2+50;
 				rect.y0 = rect.y0 - 5 + i*47;
-				rect.x1 = rect.x0 + ui->size.btn.width;
+				rect.x1 = rect.x0 + ui->size.btn.width + DIALOG_WITH;
 				rect.y1 = rect.y1 -15 + i*47;
 			}
 			else if(dialog_current_state == 5)
 			{
 				rect.x0 = x + 58;
 				rect.y0 = rect.y0 - 14 + 38 + i*12;
-				rect.x1 = rect.x0 + ui->size.btn.width;
+				rect.x1 = rect.x0 + ui->size.btn.width + DIALOG_WITH;
 				rect.y1 = rect.y1 -14 + 38 + i*12;
 			}
 			else if(dialog_current_state == 2)
 			{
 				rect.x0 = x + 63;
 				rect.y0 = rect.y0 - 3 + 17 + i*23;
-				rect.x1 = rect.x0 + ui->size.btn.width;
+				rect.x1 = rect.x0 + ui->size.btn.width + DIALOG_WITH;
 				rect.y1 = rect.y1 - 3 + 17 + i*23;
 			}
 			
