@@ -21,7 +21,7 @@
 __u8   dialog_jh_tran_data;
 __u8   dialog_current_state;
 
-#if 0
+#if 1
 #define __inf(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
 								 eLIBs_printf(__VA_ARGS__)											)
 
