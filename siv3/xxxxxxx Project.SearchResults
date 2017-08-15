@@ -1,6 +1,5 @@
----- language_english_layer_1 Matches (5 in 1 files) ----
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):static __u32 language_english_layer_1[] = {
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):		GUI_DispStringAt(p_item_res->string_title, language_english_layer_1[general_attr->new_focus], p_item_res->string_title_pos.y - SET_LAYER_1_X_OFFSET);
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):				GUI_DispStringAt(p_item_res->string_title, language_english_layer_1[i], p_item_res->string_title_pos.y - SET_LAYER_1_X_OFFSET);
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):			GUI_DispStringAt(p_item_res->string_title, language_english_layer_1[i], p_item_res->string_title_pos.y - SET_LAYER_1_X_OFFSET);
-Setting_general.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\setting):				GUI_DispStringAt(p_item_res->string_title, language_english_layer_1[i], p_item_res->string_title_pos.y - SET_LAYER_1_X_OFFSET);
+---- no_sd_id Matches (4 in 3 files) ----
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):                    dv_dialog_creat(dv_frm_ctrl, &rect, dv_frm_ctrl->uipara->msg_box_bg , dv_frm_ctrl->uipara->no_sd_id);
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):                    dv_dialog_creat(dv_frm_ctrl, &rect, dv_frm_ctrl->uipara->msg_box_bg , dv_frm_ctrl->uipara->no_sd_id);
+Dv_uipara.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):    dv_para.no_sd_id = STRING_NO_SD ;
+Dv_uipara.h (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):    __u32		no_sd_id ;

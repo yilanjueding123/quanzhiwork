@@ -55,7 +55,7 @@ static __s32 __reg_paramter_init(reg_app_para_t *para)
     para->system_para.detect_gate = 1; //on
     para->system_para.saturation = 63;
     para->system_para.volume = 20;
-    para->system_para.language = EPDK_LANGUAGE_ENM_ENGLISH;//EPDK_LANGUAGE_ENM_CHINESES; //简体中文
+    para->system_para.language = EPDK_LANGUAGE_ENM_ENGLISH; //简体中文
     para->system_para.style = 0;
     para->system_para.backlight = 2; //11;//3;
     para->system_para.backlightoff = 0; //不自动关屏

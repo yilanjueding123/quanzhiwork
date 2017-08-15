@@ -24,15 +24,6 @@
 #include "headbar\\headbar_com.h"
 #include "assistant_scene\\assistant_scene.h"
 
-#if  0
-//#define __here__            eLIBs_printf("@L%d(%s)\n", __LINE__, __FILE__);
-#define __msg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
-						     eLIBs_printf(__VA_ARGS__)									        )
-#else
-#define __msg(...)    	
-#endif
-
-
 #define OPEN_CURSOR				0
 #define	AUTO_OFF_TIME_ID		1000
 #define CLOSE_SCN_TIME_ID		1001
@@ -1555,7 +1546,7 @@ static __s32 init_mainwin_cb(__gui_msg_t *msg)
     {
         __init_ctl_t *init_ctr = (__init_ctl_t *)GUI_WinGetAttr(msg->h_deswin);
 
-        __msg("jh_dbg_0623_1\n");
+        __msg("DSK_MSG_POWER_OFF\n");
 
         if(init_ctr->power_off == 0)
         {

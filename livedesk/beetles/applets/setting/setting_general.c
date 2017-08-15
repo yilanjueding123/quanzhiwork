@@ -20,7 +20,7 @@
 #include "setting_para.h"
 
 
-#if 1
+#if 0
 #define __msg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
 						     eLIBs_printf(__VA_ARGS__)									        )
 #else
@@ -154,15 +154,6 @@ extern void  main_cmd2parent(H_WIN hwin, __s32 id, __s32 data1, __s32 data2);
 static reg_system_para_t *setting_reg_para;
 #define SET_LAYER_1_X_OFFSET 3
 #define SET_LAYER_LANGUAGE_Y_OFFSET 3
-//static __u32 language_english_layer_1_y[] = {
-//	
-//};
-//static __u32 language_japanese_layer_1_y[] = {
-//	
-//};
-//static __u32 language_korean_layer_1_y[] = {
-//	
-//};
 
 static __u32 language_english_layer_1[] = {
 	212,
@@ -171,6 +162,16 @@ static __u32 language_english_layer_1[] = {
 	185,
 	174,
 };
+
+//static __u32 language_english_layer_1[] = {
+//	SET_ITEM_W/2,
+//	SET_ITEM_W/2,
+//	SET_ITEM_W/2,
+//	SET_ITEM_W/2,
+//	SET_ITEM_W/2,
+//};
+
+
 static __u32 language_japanese_layer_1[] = {
 	190,
 	220,
@@ -186,8 +187,8 @@ static __u32 language_korean_layer_1[] = {
 	195,
 };
 static __u32 language_japanese_layer_display[] = {
-	190 - 18 - 10,
-	180 - 10,
+	190 - 18 - 10 + 30,
+	180 - 10 + 40,
 };
 static __u32 language_korean_layer_display[] = {
 	210 - 18,
@@ -1410,20 +1411,25 @@ static __s32 setting_general_content_paint(__gui_msg_t *msg)
 	//__msg("setting_reg_para->language: %d\n", setting_reg_para->language);
 
 	if(setting_reg_para->language == EPDK_LANGUAGE_ENM_ENGLISH)
-	{
-		//GUI_DispStringAt(p_item_res->string_title, p_item_res->string_title_pos.x, p_item_res->string_title_pos.y);
+	{	
+		/*
+		GUI_RECT gui_rect;
+		gui_rect.x0 = language_english_layer_1[general_attr->new_focus];
+		gui_rect.y0 = general_attr->new_focus*SET_ITEM_H + 5;
+		gui_rect.x1 = gui_rect.x0 + 150;
+		gui_rect.y1 = gui_rect.y0 + SET_ITEM_H - 3;
+		GUI_DispStringInRect(p_item_res->string_title, &gui_rect, GUI_TA_HCENTER | GUI_TA_VCENTER);
+		*/
 		GUI_DispStringAt(p_item_res->string_title, language_english_layer_1[general_attr->new_focus], p_item_res->string_title_pos.y - SET_LAYER_1_X_OFFSET);
 		__msg("p_item_res->string_title_pos.y: %d\n", p_item_res->string_title_pos.y - SET_LAYER_1_X_OFFSET);
 	}
 	else if(setting_reg_para->language == EPDK_LANGUAGE_ENM_CHINESES)
 	{
-		//__msg("language_japanese_layer_1[general_attr->new_focus]:%d\n", language_japanese_layer_1[general_attr->new_focus]);
 		GUI_DispStringAt(p_item_res->string_title, language_japanese_layer_1[general_attr->new_focus], p_item_res->string_title_pos.y - SET_LAYER_1_X_OFFSET);
 		__msg("p_item_res->string_title_pos.y: %d\n", p_item_res->string_title_pos.y - SET_LAYER_1_X_OFFSET);
 	}
 	else if(setting_reg_para->language == EPDK_LANGUAGE_ENM_CHINESET)
 	{
-		//__msg("language_korean_layer_1[general_attr->new_focus]:%d\n", language_korean_layer_1[general_attr->new_focus]);
 		GUI_DispStringAt(p_item_res->string_title, language_korean_layer_1[general_attr->new_focus], p_item_res->string_title_pos.y - SET_LAYER_1_X_OFFSET);
 		__msg("p_item_res->string_title_pos.y: %d\n", p_item_res->string_title_pos.y - SET_LAYER_1_X_OFFSET);
 	}
@@ -1842,7 +1848,14 @@ static __s32 setting_general_item_paint(__gui_msg_t *msg)
             GUI_SetColor(general_attr->unfocus_txt_color);
 			if(setting_reg_para->language == EPDK_LANGUAGE_ENM_ENGLISH)
 			{
-				//GUI_DispStringAt(p_item_res->string_title, p_item_res->string_title_pos.x, p_item_res->string_title_pos.y);
+				/*
+				GUI_RECT gui_rect;
+				gui_rect.x0 = language_english_layer_1[i];
+				gui_rect.y0 = i*SET_ITEM_H + 5;
+				gui_rect.x1 = gui_rect.x0 + 150;
+				gui_rect.y1 = gui_rect.y0 + SET_ITEM_H - 3;
+				GUI_DispStringInRect(p_item_res->string_title, &gui_rect, GUI_TA_HCENTER | GUI_TA_VCENTER);
+				*/
 				GUI_DispStringAt(p_item_res->string_title, language_english_layer_1[i], p_item_res->string_title_pos.y - SET_LAYER_1_X_OFFSET);
 				__msg("p_item_res->string_title_pos.y: %d\n",p_item_res->string_title_pos.y - SET_LAYER_1_X_OFFSET);
 			}
@@ -2572,13 +2585,11 @@ static __s32 setting_general_default_paint(__gui_msg_t *msg)
 			gui_rect.x1 = gui_rect.x0 + SET_ITEM_W;
 			gui_rect.y1 = gui_rect.y0 + SET_ITEM_H;
 			
-			//__msg("gui_rect.x0;%d, gui_rect.y0:%d, gui_rect.x1:%d, gui_rect.y1:%d\n", gui_rect.x0, gui_rect.y0, gui_rect.x1, gui_rect.y1);
 			GUI_BMP_Draw(theme_hdl2buf(general_attr->h_bmp_unselect), 10, gui_rect.y0);
 
 			GUI_SetColor(general_attr->unfocus_txt_color);
-			//__msg("i = %d, p_item_res->string_title: %s\n",i, p_item_res->string_title);
 			GUI_DispStringAt(p_item_res->string_title, language_english_layer_1[i], p_item_res->string_title_pos.y - SET_LAYER_1_X_OFFSET);
-			__msg("p_item_res->string_title_pos.y: %d\n", p_item_res->string_title_pos.y - SET_LAYER_1_X_OFFSET);
+			//__msg("p_item_res->string_title_pos.y: %d\n", p_item_res->string_title_pos.y - SET_LAYER_1_X_OFFSET);
 		}
 
 	}
@@ -2767,7 +2778,14 @@ static __s32 setting_general_paint(__gui_msg_t *msg)
 			__msg("i = %d, p_item_res->string_title: %s\n",i, p_item_res->string_title);
 			if(setting_reg_para->language == EPDK_LANGUAGE_ENM_ENGLISH)
 			{
-				//GUI_DispStringAt(p_item_res->string_title, p_item_res->string_title_pos.x, p_item_res->string_title_pos.y);
+				/*
+				GUI_RECT gui_rect;
+				gui_rect.x0 = language_english_layer_1[i];
+				gui_rect.y0 = i*SET_ITEM_H + 5;
+				gui_rect.x1 = gui_rect.x0 + 150;
+				gui_rect.y1 = gui_rect.y0 + SET_ITEM_H - 3;
+				GUI_DispStringInRect(p_item_res->string_title, &gui_rect, GUI_TA_HCENTER | GUI_TA_VCENTER);
+				*/
 				GUI_DispStringAt(p_item_res->string_title, language_english_layer_1[i], p_item_res->string_title_pos.y - SET_LAYER_1_X_OFFSET);
 				__msg("p_item_res->string_title_pos.y: %d\n", p_item_res->string_title_pos.y - SET_LAYER_1_X_OFFSET);
 			}
@@ -2968,9 +2986,7 @@ static __s32 _setting_general_Proc(__gui_msg_t *msg)
         theme_close(general_attr->h_backlight_unselect_bmp);
         theme_close(general_attr->h_proinf_bmp);
 		
-		
-
-        //dsk_reg_flush();	//写进文件里面
+        dsk_reg_flush();	//写进文件里面
 
         general_para = general_attr->general_para;
         if(general_para)
@@ -3199,7 +3215,7 @@ static __s32 _setting_general_Proc(__gui_msg_t *msg)
 					}
 					else
 					{
-						setting_reg_para->language = EPDK_LANGUAGE_ENM_CHINESES;
+						setting_reg_para->language = EPDK_LANGUAGE_ENM_ENGLISH;
 					}
 					
 #else

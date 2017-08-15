@@ -32,14 +32,6 @@ __hdle csi_chice2 = NULL;
 
 extern __s32 g_adc_exp;
 
-#if 1
-
-#define __msg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
-							     eLIBs_printf(__VA_ARGS__)									        )
-#else
-#define __msg(...)
-#endif
-
 
 /*
 *********************************************************************************************************

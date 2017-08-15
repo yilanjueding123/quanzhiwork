@@ -97,7 +97,7 @@ __s32 live_init(void)
             __msg("para->poweroff=%d\n", para->poweroff);
 
             dsk_langres_set_type(para->language);
-            __msg("para->language=%d\n", para->language);
+            __msg("para->language=0x%x\n", para->language);
             para->output = LION_DISP_LCD;
 
 			dsk_set_contrast(para->contrast);

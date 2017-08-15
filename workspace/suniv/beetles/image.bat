@@ -111,6 +111,8 @@
     
     %DRAGONTOOLPATH%\compile -o image.bin image.cfg
     %DRAGONTOOLPATH%\dragon  image.cfg > image.txt
+    if exist melis100.bin del melis100.bin
+  	rename melis100.fex melis100.bin
     
     ::----------------------------------------------------------------
     ::      清理临时文件
