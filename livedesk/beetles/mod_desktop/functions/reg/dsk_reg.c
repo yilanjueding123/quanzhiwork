@@ -75,10 +75,10 @@ static __s32 __reg_paramter_init(reg_app_para_t *para)
     para->system_para.time.second = 0;
     para->system_para.tp_adjust_finish_flag = 0;
 
-	para->system_para.contrast= 55;
-	para->system_para.bright= 70;
-	para->system_para.saturation= 60;
-	para->system_para.hue= 50;
+	para->system_para.contrast= 40;//55;
+	para->system_para.bright= 20;//70;
+	para->system_para.saturation= 50;//60;
+	para->system_para.hue= 70;
 
 
     para->init_para.default_bgd_index = 0;

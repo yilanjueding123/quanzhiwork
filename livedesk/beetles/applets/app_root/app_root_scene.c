@@ -269,6 +269,7 @@ __u8 dsk_query_tvout_detect_pin(void)
 //资源释放问题已经解决，暂时先放在这里，以后视情况而定
 static void DV_Uipara_Subset_Init(void)
 {
+	//如果没有分配空间，则在释放内存时会出错
 	BallocType(sub_dv_res, __dv_sub_res);
 	ASSERT(sub_dv_res != NULL);
 	ZeroTypeMem(sub_dv_res, __dv_sub_res);

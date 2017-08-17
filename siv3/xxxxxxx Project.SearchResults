@@ -1,5 +1,12 @@
----- no_sd_id Matches (4 in 3 files) ----
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):                    dv_dialog_creat(dv_frm_ctrl, &rect, dv_frm_ctrl->uipara->msg_box_bg , dv_frm_ctrl->uipara->no_sd_id);
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):                    dv_dialog_creat(dv_frm_ctrl, &rect, dv_frm_ctrl->uipara->msg_box_bg , dv_frm_ctrl->uipara->no_sd_id);
-Dv_uipara.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):    dv_para.no_sd_id = STRING_NO_SD ;
-Dv_uipara.h (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):    __u32		no_sd_id ;
+---- explorer_clean_delete_file_hint_area Matches (11 in 4 files) ----
+Explorer_List.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):    explorer_clean_delete_file_hint_area();
+Explorer_List.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):        explorer_clean_delete_file_hint_area();
+Explorer_List.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):							explorer_clean_delete_file_hint_area();
+Explorer_List.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):									explorer_clean_delete_file_hint_area();
+Explorer_List.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):                        explorer_clean_delete_file_hint_area();
+Explorer_UI.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):void explorer_clean_delete_file_hint_area(void)
+Explorer_UI.h (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):extern void explorer_clean_delete_file_hint_area(void);
+Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):        0x0001b67c:    eb0009aa    ....    BL       explorer_clean_delete_file_hint_area  ; 0x1dd2c
+Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):        0x0001c364:    eb000670    p...    BL       explorer_clean_delete_file_hint_area  ; 0x1dd2c
+Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):    explorer_clean_delete_file_hint_area
+Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):    7331  explorer_clean_delete_file_hint_area

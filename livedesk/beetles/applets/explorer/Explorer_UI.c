@@ -721,7 +721,7 @@ void explorer_delete_file_draw_process_ext(void)
     GUI_ClearRect(rect.x0, rect.y0, rect.x1, rect.y1);
     //GUI_DispStringInRect(str, &rect, GUI_TA_VCENTER|GUI_TA_HCENTER);
     GUI_DispStringInRect(str, &rect, GUI_TA_VCENTER | GUI_TA_HCENTER);
-
+	//esKRNL_TimeDly(200);
     return;
 }
 

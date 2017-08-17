@@ -24,9 +24,6 @@
 
 #include "FileList.h"
 
-static   __u32 ExplorerTimerId = 0x16;
-#define	 C_EXP_TIMER_INTERVAL	300				// 2second
-
 #if 1
 #define __msg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
 								 eLIBs_printf(__VA_ARGS__)											)
@@ -34,6 +31,8 @@ static   __u32 ExplorerTimerId = 0x16;
 #define __msg(...)   
 #endif
 
+static   __u32 ExplorerTimerId = 0x16;
+#define	 C_EXP_TIMER_INTERVAL	300				// 2second
 
 H_WIN explorer_list_win_create(H_WIN h_parent, explr_list_para_t *para);
 static __s32 _explorer_list_win_cb(__gui_msg_t *msg);			//下划线开始表示为回调函数
@@ -425,7 +424,6 @@ static __s32  explorer_list_win_on_destroy(__gui_msg_t *msg)
     __here__;
     explorer_free_listview_icon_res();
     __here__;
-
     esMEMS_Bfree(list_para, sizeof(explr_list_para_t));
     __here__;
     //explorer_gui_long_string_deinit();
@@ -1134,51 +1132,82 @@ static __s32  explorer_list_win_on_command(__gui_msg_t *msg)
         switch(HIWORD(msg->dwAddData1))
         {
         case ADLG_CMD_EXIT:
-            if(list_para->h_dialog != NULL)
-            {
-                app_dialog_destroy(list_para->h_dialog); 		//to delete dialog
-                if (msg->dwAddData2 == ADLG_IDYES)
-                {
-                    //explorer_list_long_string_stop_roll(list_para);
-                    //file_manager_list_on_delete(msg);			//删除一个条目
-                    //rat_set_modify_flag_all(1);
-
-                    GetListItemFileFullPath(list_para, list_para->select_id, FileName);
-                    //	__log("%s",FileName);
-
-                    explorer_list_long_string_stop_roll(list_para);
-                    explorer_delete_file_draw_process_ext();
-                    ret = eLIBs_remove(FileName);
-                    if(ret == 0)
-                    {
-                        //explorer_list_long_string_stop_roll(list_para);
-                        explorer_clean_delete_file_hint_area();
-                        rat_set_modify_flag_all(1);
-                        explorer_rat_det_uninit(list_para);
-                        explorer_rat_init(list_para);
-                        explorer_get_last_para(list_para);
-                        explorer_listbar_uninit(list_para->list_win);							//重新创建listbar,因为Square为全屏模式
-                        explorer_listbar_init(list_para->list_win);
-                        LISTBAR_ShowPage(list_para->listbar_handle);
-
-                    }
-                    else
-                    {
-                        LISTBAR_ShowPage(list_para->listbar_handle);
-                        explorer_create_delete_failed_dialog(list_para->list_win);
-                    }
-                }
-                list_para->h_dialog = NULL;
-            }
-            if(list_para->h_dialog_msg != NULL)
-            {
-                app_dialog_destroy(list_para->h_dialog_msg); 		//to delete dialog
-                list_para->h_dialog_msg = NULL;
-                if(list_para->listbar_handle != NULL)
-                {
-                    LISTBAR_ShowPage(list_para->listbar_handle);
-                }
-            }
+			if(list_para->media_type == RAT_MEDIA_TYPE_ALL)
+			{
+				if(list_para->h_dialog!=NULL)
+				{
+					app_dialog_destroy(list_para->h_dialog); 		//to delete dialog				
+					if (msg->dwAddData2 == ADLG_IDYES)
+	 				{
+	 					explorer_list_long_string_stop_roll(list_para);
+	 					file_manager_list_on_delete(msg);			//删除一个条目
+	 					rat_set_modify_flag_all(1);
+	 				}
+	 				else//ADLG_IDNO
+	 				{
+	 				}								
+					list_para->h_dialog = NULL;
+				}
+				if(list_para->h_dialog_msg!=NULL)
+				{
+					app_dialog_destroy(list_para->h_dialog_msg); 		//to delete dialog				
+					list_para->h_dialog_msg = NULL;
+					if(list_para->listbar_handle != NULL)
+					{
+						LISTBAR_ShowPage(list_para->listbar_handle);
+					}
+				}
+			}
+			else 
+			{
+				if(list_para->h_dialog != NULL)
+				{
+					app_dialog_destroy(list_para->h_dialog);		//to delete dialog
+					if (msg->dwAddData2 == ADLG_IDYES)
+					{
+						//explorer_list_long_string_stop_roll(list_para);
+						//file_manager_list_on_delete(msg); 		//删除一个条目
+						//rat_set_modify_flag_all(1);
+	
+						__msg("list_para->select_id = %d\n", list_para->select_id); 				
+						GetListItemFileFullPath(list_para, list_para->select_id, FileName);
+						__msg("FileName: %s\n",FileName);
+	
+						explorer_list_long_string_stop_roll(list_para);
+						explorer_delete_file_draw_process_ext();
+						ret = eLIBs_remove(FileName);
+						__msg("ret = %d\n", ret);
+						if(ret == 0)
+						{
+							//explorer_list_long_string_stop_roll(list_para);
+							explorer_clean_delete_file_hint_area();
+							rat_set_modify_flag_all(1);
+							explorer_rat_det_uninit(list_para);
+							explorer_rat_init(list_para);
+							explorer_get_last_para(list_para);
+							explorer_listbar_uninit(list_para->list_win);							//重新创建listbar,因为Square为全屏模式
+							explorer_listbar_init(list_para->list_win);
+							LISTBAR_ShowPage(list_para->listbar_handle);
+	
+						}
+						else
+						{
+							LISTBAR_ShowPage(list_para->listbar_handle);
+							explorer_create_delete_failed_dialog(list_para->list_win);
+						}
+					}
+					list_para->h_dialog = NULL;
+				}
+				if(list_para->h_dialog_msg != NULL)
+				{
+					app_dialog_destroy(list_para->h_dialog_msg);		//to delete dialog
+					list_para->h_dialog_msg = NULL;
+					if(list_para->listbar_handle != NULL)
+					{
+						LISTBAR_ShowPage(list_para->listbar_handle);
+					}
+				}
+			}
             break;
         case ADLG_CMD_SET_UI:
         {
@@ -1298,7 +1327,7 @@ static __s32  explorer_list_win_key_proc(__gui_msg_t *msg)
             break;
         case GUI_MSG_KEY_ENTER:
             last_key = GUI_MSG_KEY_ENTER;
-            eLIBs_printf("[L%d](%s)GUI_MSG_KEY_ENTER.\n", __LINE__, __FILE__);
+
             if(list_para->media_type == RAT_MEDIA_TYPE_ALL)
             {
                 list_para->del_dlg_open = EPDK_FALSE;
@@ -1306,7 +1335,7 @@ static __s32  explorer_list_win_key_proc(__gui_msg_t *msg)
             }
             else
             {
-                eLIBs_printf("[L%d](%s).\n", __LINE__, __FILE__);
+                //eLIBs_printf("[L%d](%s).\n", __LINE__, __FILE__);
                 explorer_list_long_string_stop_roll(list_para);
                 explorer_list_win_on_enter_key(msg);
             }
@@ -1323,30 +1352,62 @@ static __s32  explorer_list_win_key_proc(__gui_msg_t *msg)
             break;
         case GUI_MSG_KEY_LONGMENU:
             key_cnt++;
+			__msg("key_cnt = %d\n", key_cnt);
             if(key_cnt > 3)
             {
-                if(last_key == GUI_MSG_KEY_MENU)
-                {
-                    if((list_para->media_type == RAT_MEDIA_TYPE_VIDEO) || (list_para->media_type == RAT_MEDIA_TYPE_PIC))
-                    {
+            	if(last_key == GUI_MSG_KEY_MENU)		//????????
+				{
+					if(list_para->media_type == RAT_MEDIA_TYPE_ALL)
+					{
+						if(list_para->cur_file_list == NULL)
+						{
+							return EPDK_OK;
+						}
+						if(list_para->cur_file_list == list_para->top_file_list)
+						{
+							return EPDK_OK;					//?????????
+						}					
+						if(list_para->cur_file_list->total < 1)
+						{
+							return EPDK_OK;
+						}
+						
+						//explorer_list_on_timer(msg);					
+						__here__;
+						if(list_para->del_dlg_open)
+						{
+							list_para->del_dlg_open = EPDK_FALSE;
+							explorer_draw_file_info(list_para);	
+							__msg("explorer list destory del file failed dialog\n");
+						}
+						__here__;
+						{
+	                            __s32 str[] = {STRING_EXPLR_DELETE_CONFIRM, STRING_EXPLR_DELETE_CONFIRM};
+	                            H_WIN parent = GUI_WinGetParent(msg->h_deswin);
+	                            jh_default_dialog(list_para->h_dialog, parent, DELETE_FILE_DIALOG_ID, ADLG_YESNO, str, 512);
 
-
-                        if(list_para->del_dlg_open)
-                        {
-
-                            list_para->del_dlg_open = EPDK_FALSE;
-                            explorer_clean_delete_file_hint_area();
-                            // explorer_draw_file_info(list_para);
-                        }
-                        
-                        {
-                            __s32 str[] = {STRING_EXPLR_DELETE_CONFIRM, STRING_EXPLR_DELETE_CONFIRM};
-                            H_WIN parent = GUI_WinGetParent(msg->h_deswin);
-                            jh_default_dialog(list_para->h_dialog, parent, DELETE_FILE_DIALOG_ID, ADLG_YESNO, str, 512);
-
-                        }
-                    }
-                }
+	                     }
+					}
+					else 
+					{
+						if((list_para->media_type == RAT_MEDIA_TYPE_VIDEO) || (list_para->media_type == RAT_MEDIA_TYPE_PIC))
+						{
+							if(list_para->del_dlg_open)
+							{
+								list_para->del_dlg_open = EPDK_FALSE;
+								explorer_clean_delete_file_hint_area();
+								// explorer_draw_file_info(list_para);
+							}
+					
+							{
+								__s32 str[] = {STRING_EXPLR_DELETE_CONFIRM, STRING_EXPLR_DELETE_CONFIRM};
+								H_WIN parent = GUI_WinGetParent(msg->h_deswin);
+								jh_default_dialog(list_para->h_dialog, parent, DELETE_FILE_DIALOG_ID, ADLG_YESNO, str, 512);
+					
+							}
+						}
+					}
+				}
                 last_key = GUI_MSG_KEY_LONGMENU;
             }
             break;
@@ -2012,8 +2073,9 @@ static __s32 draw_listview_item(__lbar_draw_para_t *draw_param)
         }
         else
         {
-        	__msg("get_file_list_item_file_type\n");
             media_type = get_file_list_item_file_type(list_para->file_item);
+			//list_para->media_type = media_type;
+        	__msg("get_file_list_item_file_type, media_type: %d\n", media_type);
         }
         {
             draw_listview_item_icon(draw_param, media_type);
@@ -2284,6 +2346,35 @@ static __s32 explorer_file_list_uninit(explr_list_para_t *list_para)
     rat_stop_miniature_decode();	//停止 缩略图线程
     __here__;
     return EPDK_FAIL;
+}
+
+static __s32 explorer_rat_delet_init(explr_list_para_t *list_para)
+{
+	if(list_para->rat.handle == NULL)
+	{
+		__log("************jhdbg0304-1************\n");
+		list_para->rat.handle = rat_open(list_para->search_path, list_para->media_type, 0);
+		if(list_para->rat.handle == NULL)
+		{
+			__wrn("open rat failed\n");
+		}
+		else
+		{
+			__msg("open rat successed\n");
+		}
+	}
+	else
+	{
+		__msg("!!!!!!!!!!!!!please dont open rat again!!!!!!!!!!!!!!!!!\n");
+	}
+
+	if(list_para->rat.handle == NULL)
+	{
+		__wrn("!!!!!!!!!!!!!open rat fail!!!!!!!!!!!!!!!!!\n");
+		return EPDK_FAIL;
+	}
+
+	return EPDK_OK;
 }
 
 /*
@@ -2586,7 +2677,6 @@ static __s32 explorer_listview_create(H_WIN  list_win)
         explorer_rat_init(list_para);
         explorer_get_last_para(list_para);
     }
-
     explorer_listbar_init(list_win);
     explorer_list_long_string_init(list_para);
 

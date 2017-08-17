@@ -899,7 +899,7 @@ static void draw_dialog(APP_DIALOG_RES_T *res, APP_DIALOG_UI_T *ui)
 		}
 		else if(language == EPDK_LANGUAGE_ENM_CHINESET)
 		{
-			GUI_DispStringAt(res->str_title, ui->pos.title.x + 25, ui->pos.title.y + 10);
+			GUI_DispStringAt(res->str_title, ui->pos.title.x + 20, ui->pos.title.y + 10);
 		}
 		else
 		{
@@ -932,6 +932,10 @@ static void draw_dialog(APP_DIALOG_RES_T *res, APP_DIALOG_UI_T *ui)
 		if(language == EPDK_LANGUAGE_ENM_CHINESES)
 		{
 			GUI_DispStringAt(res->str_title, 5/*ui->pos.title.x*/, ui->pos.title.y-6);
+		}
+		else if(language == EPDK_LANGUAGE_ENM_CHINESET)
+		{
+			GUI_DispStringAt(res->str_title, ui->pos.title.x + 15, ui->pos.title.y-6);
 		}
 		else
 		{
