@@ -1442,7 +1442,6 @@ __s32 set_volue(__u8 val)
     }
     eLIBs_fclose(fp);
 }
-
 __s32 app_root_win_proc(__gui_msg_t *msg)
 {
     //__msg("app_root_win_proc msg->id=%d, msg->h_deswin=%x, msg->dwAddData1=%d, msg->dwAddData2=%d\n"
@@ -1635,7 +1634,8 @@ __s32 app_root_win_proc(__gui_msg_t *msg)
         root_ctrl_t   *root_ctrl;
         root_ctrl = (root_ctrl_t *)GUI_WinGetAddData(msg->h_deswin);
 
-        eLIBs_printf("app_root_win_proc, DSK_MSG_FS_PART_PLUGIN\n");
+        eLIBs_printf("app_root_win_proc, DSK_MSG_FS_PART_PLUGIN\n");		
+
         if(('D' == msg->dwAddData1) && ('E' == msg->dwAddData1) && ('Z' == msg->dwAddData1))
         {
             __msg("internal disk, not need notify home app, msg->dwAddData1=%d\n", msg->dwAddData1);

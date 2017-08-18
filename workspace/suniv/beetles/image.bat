@@ -113,6 +113,8 @@
     %DRAGONTOOLPATH%\dragon  image.cfg > image.txt
     if exist melis100.bin del melis100.bin
   	rename melis100.fex melis100.bin
+	::if exist ePDKv500s.img del ePDKv500s.img
+  	::rename ePDKv100.img ePDKv500s.img
     
     ::----------------------------------------------------------------
     ::      清理临时文件

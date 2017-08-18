@@ -489,27 +489,6 @@ __s32 ExplorerListWinOnNextItem(explr_list_para_t *list_para)
 {
     __s32 ret;
     __s32 nStep = 1;
-    //__s32 PageCount = LISTBAR_GetPageItemCount(list_para->listbar_handle);	//获得一行的条目数
-
-    /*
-    	if(list_para->rat.index + 1 >= list_para->rat.total)
-    	{
-    		return EPDK_FAIL;			//only for test
-    	}
-    	ret = rat_move_cursor_forward(list_para->rat.handle, nStep);//返回实际移动的步数
-    	if(ret == 0)	//0，表示已经找不到文件了
-    	{
-    		if(rat_is_cursor_end(list_para->rat.handle))
-    		{
-    			return EPDK_FAIL;
-    		}
-    		else
-    		{
-    			__wrn("there is a exception in rat!!!\n");
-    			return EPDK_FAIL;
-    		}
-    	}
-    */
     {
         __listbar_scene_t ListBarScene;
 
@@ -538,19 +517,7 @@ __s32 ExplorerListWinOnPreviousItem(explr_list_para_t *list_para)
 {
     __s32 ret;
     __s32 nStep = 1;
-    /*
-    if(list_para->rat.index <= 0)
-    {
-    	return EPDK_FAIL;
-    }
 
-    ret = rat_move_cursor_backward(list_para->rat.handle, nStep);
-    if(ret == 0)//0，表示已经找不到文件了
-    {
-    	return EPDK_FAIL;
-    }
-    //list_para->rat.index--;
-    */
     {
         __listbar_scene_t ListBarScene;
 
@@ -685,13 +652,6 @@ __s32 ExplorerListWinOnNextPage(explr_list_para_t *list_para)
             return EPDK_FAIL;
         }
     }
-    /*
-    if(list_para->rat.index + ret >= list_para->rat.total)
-    {
-    	list_para->rat.total = list_para->rat.index;
-    	LISTBAR_SetTotalItem(list_para->listbar_handle,list_para->rat.total);
-    }
-    */
     {
         __listbar_scene_t ListBarScene;
         LISTBAR_GetScene(list_para->listbar_handle, &ListBarScene);
@@ -710,7 +670,6 @@ __s32 ExplorerListWinOnNextPage(explr_list_para_t *list_para)
 
         list_para->rat.index = ListBarScene.focus_id;
     }
-    //LISTBAR_SetFocusItem(list_para->listbar_handle, list_para->rat.index);
     return EPDK_OK;
 }
 
@@ -754,7 +713,6 @@ __s32 ExplorerListWinOnPreviousPage(explr_list_para_t *list_para)
         list_para->rat.index = ListBarScene.focus_id;
     }
 
-    //LISTBAR_SetFocusItem(list_para->listbar_handle, list_para->rat.index);
     return EPDK_OK;
 }
 
@@ -772,14 +730,6 @@ __s32 explorer_create_delete_failed_dialog(H_WIN list_win)
 
     list_para->del_dlg_open = EPDK_TRUE;
     explorer_draw_delete_file_failed();
-    __msg("--------------draw del file dialog!\n");
-
-    //if(GUI_IsTimerInstalled(list_win, ExplorerTimerId))
-    //{
-    //	GUI_ResetTimer(list_win, ExplorerTimerId, C_EXP_TIMER_INTERVAL, NULL);
-    //GUI_KillTimer(list_win, ExplorerTimerId);
-    //	__msg("GUI_reset timer\n");
-    //}
 }
 
 static __s32  file_manager_list_on_delete(__gui_msg_t *msg)
@@ -828,24 +778,13 @@ static __s32  file_manager_list_on_delete(__gui_msg_t *msg)
                 {
                     return EPDK_FAIL;
                 }
-                //op_info.OnDraw = explorer_delete_file_draw_process;
+
                 explorer_delete_file_draw_process_ext();
                 ret = delete_dir(path, &op_info);
                 if(ret != 0)
                 {
-#if 0
-                    {
-                        __s32 str[] = {0, STRING_EXPLR_DELETE_FAILED};
-                        H_WIN parent = GUI_WinGetParent(msg->h_deswin);
-                        //__wait__;
-                        default_dialog_timeout(list_para->h_dialog_msg, parent, DELETE_FILE_DIALOG_ID, ADLG_OK, str, 18000);
-                    }
-#endif
-                    //explorer_draw_delete_file_failed();
                     LISTBAR_ShowPage(list_para->listbar_handle);
                     explorer_create_delete_failed_dialog(list_para->list_win);
-                    //LISTBAR_ShowPage(list_para->listbar_handle);
-                    __here__;
                     return EPDK_FAIL;
                 }
             }
@@ -859,26 +798,15 @@ static __s32  file_manager_list_on_delete(__gui_msg_t *msg)
             ret = eLIBs_remove(path);
             if(ret != 0)
             {
-#if 0
-                {
-                    __s32 str[] = {0, STRING_EXPLR_DELETE_FAILED};
-                    H_WIN parent = GUI_WinGetParent(msg->h_deswin);
-                    //__wait__;
-                    default_dialog_timeout(list_para->h_dialog_msg, parent, DELETE_FILE_DIALOG_ID, ADLG_OK, str, 18000);
-                }
-#endif
-
-                //explorer_draw_delete_file_failed();
                 LISTBAR_ShowPage(list_para->listbar_handle);
                 explorer_create_delete_failed_dialog(list_para->list_win);
-                //LISTBAR_ShowPage(list_para->listbar_handle);
-                __here__;
+
                 return EPDK_FAIL;
             }
         }
     }
     __here__;
-    explorer_clean_delete_file_hint_area();
+    //explorer_clean_delete_file_hint_area();
 
     //保护现场
     LISTBAR_GetScene(list_para->listbar_handle, &ListBarScene);
@@ -1057,7 +985,6 @@ static __s32  file_manager_list_on_enter_key(__gui_msg_t *msg)
                 file_item_t *file_item = NULL;
                 char  path[RAT_MAX_FULL_PATH_LEN] = { 0 };
 
-                __here__ ;
                 file_item = list_para->cur_file_list->cur_item;
                 //eLIBs_memset(path, 0, sizeof(path));
                 eLIBs_strcpy(path, list_para->cur_file_list->file_path);
@@ -1164,23 +1091,15 @@ static __s32  explorer_list_win_on_command(__gui_msg_t *msg)
 				{
 					app_dialog_destroy(list_para->h_dialog);		//to delete dialog
 					if (msg->dwAddData2 == ADLG_IDYES)
-					{
-						//explorer_list_long_string_stop_roll(list_para);
-						//file_manager_list_on_delete(msg); 		//删除一个条目
-						//rat_set_modify_flag_all(1);
-	
-						__msg("list_para->select_id = %d\n", list_para->select_id); 				
+					{	
 						GetListItemFileFullPath(list_para, list_para->select_id, FileName);
-						__msg("FileName: %s\n",FileName);
 	
 						explorer_list_long_string_stop_roll(list_para);
 						explorer_delete_file_draw_process_ext();
 						ret = eLIBs_remove(FileName);
-						__msg("ret = %d\n", ret);
 						if(ret == 0)
 						{
-							//explorer_list_long_string_stop_roll(list_para);
-							explorer_clean_delete_file_hint_area();
+							//explorer_clean_delete_file_hint_area();
 							rat_set_modify_flag_all(1);
 							explorer_rat_det_uninit(list_para);
 							explorer_rat_init(list_para);
@@ -1282,8 +1201,6 @@ static __s32  explorer_list_win_key_proc(__gui_msg_t *msg)
         case GUI_MSG_KEY_LONGRIGHT:
         case GUI_MSG_KEY_UP:
         case GUI_MSG_KEY_LONGUP:
-            __msg("----explorer list window on UP key----\n");
-            //_long_string_stop_roll();
 
             explorer_list_long_string_stop_roll(list_para);
             ExplorerListWinOnNextItem(list_para);
@@ -1291,7 +1208,6 @@ static __s32  explorer_list_win_key_proc(__gui_msg_t *msg)
                 list_para->select_id++;
             else
                 list_para->select_id = 0;
-            __log("--next:%d\n", list_para->select_id);
             break;
         case GUI_MSG_KEY_LEFT:
         case GUI_MSG_KEY_LONGLEFT:
@@ -1304,11 +1220,8 @@ static __s32  explorer_list_win_key_proc(__gui_msg_t *msg)
                 list_para->select_id--;
             else
                 list_para->select_id = list_para->rat.total - 1;
-            __log("--prev:%d\n", list_para->select_id);
             break;
         case GUI_MSG_KEY_VADD:
-            //ExplorerListWinOnNextPage(list_para);
-            //__wait__;
             if(RAT_MEDIA_TYPE_PIC == list_para->media_type)
             {
                 explorer_list_long_string_stop_roll(list_para);
@@ -1323,7 +1236,6 @@ static __s32  explorer_list_win_key_proc(__gui_msg_t *msg)
             }
             break;
         case GUI_MSG_KEY_VDEC:
-            //ExplorerListWinOnPreviousPage(list_para);
             break;
         case GUI_MSG_KEY_ENTER:
             last_key = GUI_MSG_KEY_ENTER;
@@ -1335,18 +1247,13 @@ static __s32  explorer_list_win_key_proc(__gui_msg_t *msg)
             }
             else
             {
-                //eLIBs_printf("[L%d](%s).\n", __LINE__, __FILE__);
                 explorer_list_long_string_stop_roll(list_para);
                 explorer_list_win_on_enter_key(msg);
             }
             break;
         case GUI_MSG_KEY_MENU:
             key_cnt = 0;
-            __log("-----jh_dbg1019_5-----\n");
-            //case GUI_MSG_KEY_ESCAPE:
             last_key = GUI_MSG_KEY_MENU;
-            //explorer_list_long_string_stop_roll(list_para);
-            //explorer_cmd2parent(msg->h_deswin, SWITCH_TO_OTHER_APP, EXPLR_SW_TO_MAIN, 0);
             break;
         case GUI_MSG_KEY_RISE:
             break;
@@ -1423,113 +1330,19 @@ static __s32  explorer_list_win_key_proc(__gui_msg_t *msg)
         case GUI_MSG_KEY_MENU:
             if(last_key == GUI_MSG_KEY_MENU)		//回到上一级菜单.
             {
-                __here__;
                 explorer_list_long_string_stop_roll(list_para);
-                __here__;
+
                 if(list_para->media_type == RAT_MEDIA_TYPE_ALL)
                 {
-                    __here__;
-                    __log("-----jh_dbg1019_2-----\n");
                     file_manager_list_on_backspace(msg);
-                    __here__;
                 }
                 else
                 {
-                    __log("-----jh_dbg1019_3-----\n");
                     explorer_cmd2parent(msg->h_deswin, SWITCH_TO_OTHER_APP, EXPLR_SW_TO_MAIN, 0);
                 }
             }
             break;
-        //////////jh_dete_file
         case GUI_MSG_KEY_LONGMENU:
-
-#if 0
-            //__log("------log0227_1-----%d,%d\n",list_para->last_focused_id,list_para->last_start_id);
-
-            //__log("--display:%d\n",list_para->select_id);
-            if(last_key == GUI_MSG_KEY_MENU)
-            {
-                if((list_para->media_type == RAT_MEDIA_TYPE_VIDEO) || (list_para->media_type == RAT_MEDIA_TYPE_PIC))
-                {
-#if 0
-                    GetListItemFileFullPath(list_para, list_para->select_id, FileName);
-                    //	__log("%s",FileName);
-                    ret = eLIBs_remove(FileName);
-                    if(ret == 0)
-                    {
-                        explorer_list_long_string_stop_roll(list_para);
-                        rat_set_modify_flag_all(1);
-                        explorer_rat_det_uninit(list_para);
-                        explorer_rat_init(list_para);
-                        explorer_get_last_para(list_para);
-                        explorer_listbar_uninit(list_para->list_win);							//重新创建listbar,因为Square为全屏模式
-                        explorer_listbar_init(list_para->list_win);
-                        LISTBAR_ShowPage(list_para->listbar_handle);
-
-                        __log("--det_suc--\n");
-                    }
-                    else
-                        __log("--det_fail--\n");
-#endif
-
-                    if(list_para->del_dlg_open)
-                    {
-
-                        list_para->del_dlg_open = EPDK_FALSE;
-                        explorer_clean_delete_file_hint_area();
-                        // explorer_draw_file_info(list_para);
-                    }
-                    __here__;
-                    {
-                        __s32 str[] = {STRING_EXPLR_DELETE_CONFIRM, STRING_EXPLR_DELETE_CONFIRM};
-                        H_WIN parent = GUI_WinGetParent(msg->h_deswin);
-                        jh_default_dialog(list_para->h_dialog, parent, DELETE_FILE_DIALOG_ID, ADLG_YESNO, str, 512);
-
-                    }
-                }
-            }
-
-#if 0
-            if(last_key == GUI_MSG_KEY_MENU)		//删除文件夹或文件
-            {
-                if(list_para->cur_file_list == NULL)
-                {
-                    __log("------log0227_2-----\n");
-                    return EPDK_OK;
-                }
-                if(list_para->cur_file_list == list_para->top_file_list)
-                {
-                    __log("------log0227_3-----\n");
-                    return EPDK_OK;					//顶层目录不可以删除
-                }
-                if(list_para->cur_file_list->total < 1)
-                {
-                    __log("------log0227_4-----\n");
-                    return EPDK_OK;
-                }
-
-                //explorer_list_on_timer(msg);
-                __here__;
-                if(list_para->del_dlg_open)
-                {
-                    __log("------log0227_5-----\n");
-                    list_para->del_dlg_open = EPDK_FALSE;
-                    explorer_draw_file_info(list_para);
-                    __msg("explorer list destory del file failed dialog\n");
-                }
-                __here__;
-                {
-                    __s32 str[] = {STRING_EXPLR_DELETE_CONFIRM, STRING_EXPLR_DELETE_CONFIRM};
-                    H_WIN parent = GUI_WinGetParent(msg->h_deswin);
-                    __log("------log0227_6-----\n");
-                    //__wait__;
-                    jh_default_dialog(list_para->h_dialog, parent, DELETE_FILE_DIALOG_ID, ADLG_YESNO, str, 512);
-                    //	default_dialog(list_para->h_dialog,parent, DELETE_FILE_DIALOG_ID, ADLG_YESNO, str);
-                    //file_manager_list_on_delete(msg);	//删除一个条目
-                }
-            }
-#endif
-#endif
             break;
         }
     }

@@ -1,12 +1,25 @@
----- explorer_clean_delete_file_hint_area Matches (11 in 4 files) ----
-Explorer_List.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):    explorer_clean_delete_file_hint_area();
-Explorer_List.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):        explorer_clean_delete_file_hint_area();
-Explorer_List.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):							explorer_clean_delete_file_hint_area();
-Explorer_List.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):									explorer_clean_delete_file_hint_area();
-Explorer_List.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):                        explorer_clean_delete_file_hint_area();
-Explorer_UI.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):void explorer_clean_delete_file_hint_area(void)
-Explorer_UI.h (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):extern void explorer_clean_delete_file_hint_area(void);
-Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):        0x0001b67c:    eb0009aa    ....    BL       explorer_clean_delete_file_hint_area  ; 0x1dd2c
-Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):        0x0001c364:    eb000670    p...    BL       explorer_clean_delete_file_hint_area  ; 0x1dd2c
-Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):    explorer_clean_delete_file_hint_area
-Image.txt (f:\pri_f25\zhibo\work\livedesk\beetles\applets):    7331  explorer_clean_delete_file_hint_area
+---- add by libaiao Matches (24 in 8 files) ----
+Bsp_uart.h (f:\pri_f25\zhibo\work\includes\arch\suniv\bsp):#define UART_DMA_MODE                   0           //add by libaiao
+Drv_audio.h (f:\pri_f25\zhibo\work\includes\emod)://add by libaiao,2013.3.05
+Explorer_List.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):    __u8  fatdirattr;					//add by libaiao,2011.8.24
+Explorer_List.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):    __u8  fatdirattr;					//add by libaiao,2011.8.24
+Explorer_List.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):    //add by libaiao,2011.8.24
+Listbar.c (f:\pri_f25\zhibo\work\livedesk\beetles\libapps\scene\listbar):            //add by libaiao
+Listbar.c (f:\pri_f25\zhibo\work\livedesk\beetles\libapps\scene\listbar):            p_listbar->lbar_focus_sta = 1;		//add by libaiao,2011.5.14
+Listbar.c (f:\pri_f25\zhibo\work\livedesk\beetles\libapps\scene\listbar):            //p_listbar->lbar_focus_sta = 0;		//add by libaiao,2011.5.14
+Listbar.c (f:\pri_f25\zhibo\work\livedesk\beetles\libapps\scene\listbar):            //p_listbar->lbar_focus_sta = 1;		//add by libaiao,2011.5.14
+Listbar.c (f:\pri_f25\zhibo\work\livedesk\beetles\libapps\scene\listbar):            //p_listbar->lbar_focus_sta = 0;		//add by libaiao,2011.5.14
+Listbar.c (f:\pri_f25\zhibo\work\livedesk\beetles\libapps\scene\listbar):        //add by libaiao, 2011.5.14
+Listbar.c (f:\pri_f25\zhibo\work\livedesk\beetles\libapps\scene\listbar):    LISTBAR_SuspendPage(hdle);				//add by libaiao,2011.4.22
+Listbar.c (f:\pri_f25\zhibo\work\livedesk\beetles\libapps\scene\listbar):    LISTBAR_ResumePage(hdle);				//add by libaiao,2011.4.22
+Listbar.c (f:\pri_f25\zhibo\work\livedesk\beetles\libapps\scene\listbar):    LISTBAR_SuspendPage(hdle);			//add by libaiao,2011.4.22
+Listbar.c (f:\pri_f25\zhibo\work\livedesk\beetles\libapps\scene\listbar):    LISTBAR_ResumePage(hdle);			//add by libaiao,2011.4.22
+Misc.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\lib\common)://add by libaiao, 2011.5.8
+Misc.h (f:\pri_f25\zhibo\work\livedesk\beetles\applets\lib\common)://add by libaiao, 2011.5.8;
+Misc.h (f:\pri_f25\zhibo\work\livedesk\beetles\applets\lib\common):extern void filesize2str(__u32 size, char *str);									//add by libaiao, 2011.5.8
+Misc.h (f:\pri_f25\zhibo\work\livedesk\beetles\applets\lib\common):extern void time2str_by_format(__u32 ms, char *str, time_format_e format);		//add by libaiao, 2011.5.8
+Misc.h (f:\pri_f25\zhibo\work\livedesk\beetles\applets\lib\common):extern void time2str_by_format_hour_show(__u32 ms, char *str, time_format_e format);		//add by libaiao, 2011.5.8
+Misc.h (f:\pri_f25\zhibo\work\livedesk\beetles\applets\lib\common):extern __s32 GetClippedString(GUI_RECT *region, char *src_str, char *dst_str, const char *append);//add by libaiao
+Misc.h (f:\pri_f25\zhibo\work\livedesk\beetles\applets\lib\common):extern __u32 get_memory_info(char *title, void *pExtPara);			//add by libaiao,2011.6.26
+Spctrm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\music\spctrm)://add by libaiao,2011.5.10
+Spctrm.h (f:\pri_f25\zhibo\work\livedesk\beetles\applets\music\spctrm):void  SPCTRM_Clear(__u32 value);					//add by libaiao,2011.5.10

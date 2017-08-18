@@ -2136,7 +2136,7 @@ static __s32 __app_dv_draw_rec_batt_status(H_LYR hlyr)
 	GUI_ClearRectEx(&gui_rect);
 	GUI_SetDrawMode(GUI_DRAWMODE_NORMAL);
 	
-	GUI_BMP_RES_Draw(dv_subse_ui->bmp_subset_vol[dv_batt_ctrl.vol_level], gui_rect.x0, gui_rect.y0+5);
+	GUI_BMP_RES_Draw(dv_subse_ui->bmp_subset_vol[dv_batt_ctrl.vol_level], gui_rect.x0, gui_rect.y0+8);
 
 	
 	return EPDK_OK;
@@ -2300,7 +2300,7 @@ static __s32 __app_dv_draw_rec_status(__gui_msg_t *msg)
 	GUI_SetDrawMode(GUI_DRAWMODE_NORMAL);
 	if(dv_frm_ctrl->rec_status != 0)
 	{
-		GUI_BMP_RES_Draw(dv_subse_ui->rec_status_bmp, gui_rect.x0+5, gui_rect.y0 + 3);
+		GUI_BMP_RES_Draw(dv_subse_ui->rec_status_bmp, gui_rect.x0+5, gui_rect.y0 + 6);
 	}
 	
 	return EPDK_OK;
@@ -2335,7 +2335,7 @@ static __s32 __app_dv_draw_mode_hbar(__gui_msg_t *msg)
 	
 	if(dv_frm_ctrl->cur_state == DV_ON_REC)
 	{
-		GUI_BMP_RES_Draw(dv_subse_ui->rec_cam_bmp[0], gui_rect.x0, gui_rect.y0 + 3);
+		GUI_BMP_RES_Draw(dv_subse_ui->rec_cam_bmp[0], gui_rect.x0, gui_rect.y0 + 5);
 	}
 	else if(dv_frm_ctrl->cur_state == DV_ON_CAM)
 	{
