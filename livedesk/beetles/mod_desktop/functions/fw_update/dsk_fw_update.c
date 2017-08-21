@@ -131,7 +131,7 @@ __s32 dsk_start_fw_update(const char *path)
 
     /*disable device monitor */
     //防止usb消息过来
-    if(0)	// if usb is connetected ,we can'nt disable monitor
+    if(0)	// if usb is connetected ,we cann't disable monitor
     {
         ES_FILE     *pHwsc;
 

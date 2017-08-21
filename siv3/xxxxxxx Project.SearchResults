@@ -1,25 +1,33 @@
----- add by libaiao Matches (24 in 8 files) ----
-Bsp_uart.h (f:\pri_f25\zhibo\work\includes\arch\suniv\bsp):#define UART_DMA_MODE                   0           //add by libaiao
-Drv_audio.h (f:\pri_f25\zhibo\work\includes\emod)://add by libaiao,2013.3.05
-Explorer_List.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):    __u8  fatdirattr;					//add by libaiao,2011.8.24
-Explorer_List.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):    __u8  fatdirattr;					//add by libaiao,2011.8.24
-Explorer_List.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\explorer):    //add by libaiao,2011.8.24
-Listbar.c (f:\pri_f25\zhibo\work\livedesk\beetles\libapps\scene\listbar):            //add by libaiao
-Listbar.c (f:\pri_f25\zhibo\work\livedesk\beetles\libapps\scene\listbar):            p_listbar->lbar_focus_sta = 1;		//add by libaiao,2011.5.14
-Listbar.c (f:\pri_f25\zhibo\work\livedesk\beetles\libapps\scene\listbar):            //p_listbar->lbar_focus_sta = 0;		//add by libaiao,2011.5.14
-Listbar.c (f:\pri_f25\zhibo\work\livedesk\beetles\libapps\scene\listbar):            //p_listbar->lbar_focus_sta = 1;		//add by libaiao,2011.5.14
-Listbar.c (f:\pri_f25\zhibo\work\livedesk\beetles\libapps\scene\listbar):            //p_listbar->lbar_focus_sta = 0;		//add by libaiao,2011.5.14
-Listbar.c (f:\pri_f25\zhibo\work\livedesk\beetles\libapps\scene\listbar):        //add by libaiao, 2011.5.14
-Listbar.c (f:\pri_f25\zhibo\work\livedesk\beetles\libapps\scene\listbar):    LISTBAR_SuspendPage(hdle);				//add by libaiao,2011.4.22
-Listbar.c (f:\pri_f25\zhibo\work\livedesk\beetles\libapps\scene\listbar):    LISTBAR_ResumePage(hdle);				//add by libaiao,2011.4.22
-Listbar.c (f:\pri_f25\zhibo\work\livedesk\beetles\libapps\scene\listbar):    LISTBAR_SuspendPage(hdle);			//add by libaiao,2011.4.22
-Listbar.c (f:\pri_f25\zhibo\work\livedesk\beetles\libapps\scene\listbar):    LISTBAR_ResumePage(hdle);			//add by libaiao,2011.4.22
-Misc.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\lib\common)://add by libaiao, 2011.5.8
-Misc.h (f:\pri_f25\zhibo\work\livedesk\beetles\applets\lib\common)://add by libaiao, 2011.5.8;
-Misc.h (f:\pri_f25\zhibo\work\livedesk\beetles\applets\lib\common):extern void filesize2str(__u32 size, char *str);									//add by libaiao, 2011.5.8
-Misc.h (f:\pri_f25\zhibo\work\livedesk\beetles\applets\lib\common):extern void time2str_by_format(__u32 ms, char *str, time_format_e format);		//add by libaiao, 2011.5.8
-Misc.h (f:\pri_f25\zhibo\work\livedesk\beetles\applets\lib\common):extern void time2str_by_format_hour_show(__u32 ms, char *str, time_format_e format);		//add by libaiao, 2011.5.8
-Misc.h (f:\pri_f25\zhibo\work\livedesk\beetles\applets\lib\common):extern __s32 GetClippedString(GUI_RECT *region, char *src_str, char *dst_str, const char *append);//add by libaiao
-Misc.h (f:\pri_f25\zhibo\work\livedesk\beetles\applets\lib\common):extern __u32 get_memory_info(char *title, void *pExtPara);			//add by libaiao,2011.6.26
-Spctrm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\music\spctrm)://add by libaiao,2011.5.10
-Spctrm.h (f:\pri_f25\zhibo\work\livedesk\beetles\applets\music\spctrm):void  SPCTRM_Clear(__u32 value);					//add by libaiao,2011.5.10
+---- max_channel Matches (40 in 2 files) ----
+App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):	__u8 max_channel;
+App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):			spi_auto_srch->max_channel = 0;
+App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):						spi_auto_srch->max_channel = spi_auto_srch->channel - 1;
+App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):						__msg("spi_auto_srch->max_channel = %d\n", spi_auto_srch->max_channel);
+App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):				spi_auto_srch->max_channel = 31;
+App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):			__msg("spi_auto_srch->max_channel = %d\n", spi_auto_srch->max_channel);
+App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):			eLIBs_fioctrl(ktemp, DRV_KEY_CMD_AUTO_SEARCH_SPI, NULL, &spi_auto_srch->max_channel);
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):	__u8 max_channel;
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):		spi_auto_srch->max_channel = 0;
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):	__msg("dv_save_value, spi_auto_srch->max_channel = %d\n", spi_auto_srch->max_channel);
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):	dv_para->channel = spi_auto_srch->max_channel;
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):	spi_auto_srch->max_channel = channel;
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):			spi_auto_srch->max_channel = 0;
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):			spi_auto_srch->max_channel = freq_save_buff[freq_save_switch][0]-1;
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):			__mymsg("spi_auto_srch->max_channel = %d, freq_save_switch = %d\n", spi_auto_srch->max_channel, freq_save_switch);
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):			spi_auto_srch->max_channel += 1;
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):		if((spi_auto_srch->max_channel > 15)||(spi_auto_srch->max_channel < 0))
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):			spi_auto_srch->max_channel = 0;
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):		eLIBs_fioctrl(ktemp, DRV_KEY_CMD_AUTO_SEARCH_SPI, NULL, &spi_auto_srch->max_channel);
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):		__app_dv_draw_freq_hbar(dv_frm_ctrl->subset, channel_freq[spi_auto_srch->max_channel]);
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):			spi_auto_srch->max_channel = freq_save_buff[freq_save_switch][0]-1;
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):			__mymsg("spi_auto_srch->max_channel = %d, freq_save_switch = %d\n", spi_auto_srch->max_channel, freq_save_switch);
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):			spi_auto_srch->max_channel -= 1;
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):		if((spi_auto_srch->max_channel > 15)||(spi_auto_srch->max_channel < 0))
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):			spi_auto_srch->max_channel = 15;
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):		eLIBs_fioctrl(ktemp, DRV_KEY_CMD_AUTO_SEARCH_SPI, NULL, &spi_auto_srch->max_channel);
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):		__app_dv_draw_freq_hbar(dv_frm_ctrl->subset, channel_freq[spi_auto_srch->max_channel]);
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):					spi_auto_srch->max_channel = spi_auto_srch->channel - 1;
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):			spi_auto_srch->max_channel = 15;
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):		__mymsg("spi_auto_srch->max_value = %d,spi_auto_srch->max_channel = %d\n",spi_auto_srch->max_value, spi_auto_srch->max_channel);
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):		eLIBs_fioctrl(ktemp, DRV_KEY_CMD_AUTO_SEARCH_SPI, NULL, &spi_auto_srch->max_channel);
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):		__app_dv_draw_freq_hbar(dv_frm_ctrl->subset, channel_freq[spi_auto_srch->max_channel]);			

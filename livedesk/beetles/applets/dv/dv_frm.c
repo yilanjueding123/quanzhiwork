@@ -19,7 +19,7 @@
 #include "dv_common.h"
 #include "app_root_scene.h"
 
-#if  0
+#if  1
 //#define __here__            eLIBs_printf("@L%d(%s)\n", __LINE__, __FILE__);
 #define __mymsg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
 						     eLIBs_printf(__VA_ARGS__)									        )
@@ -77,21 +77,21 @@ static __u32 next_signal_level, prev_signal_level;
 #ifdef APP_DV_HBAR
 static __s32 __app_dv_draw_rec_time_hbar(__gui_msg_t *msg, __u32 time);
 static __s32 __app_dv_draw_rec_batt_status(H_LYR hlyr);
-extern __u32  channel_freq[32];
+extern __u32  channel_freq[16];
 #endif
 static void __dv_frm_srch_begin(void);
 static void __dv_frm_srch_finsh(void);
 static void app_dv_search_dialog_create(dv_frmwin_para_t  *dv_frm_ctrl);
 
 #ifdef DV_FRM_SAVE_FREQ
-static void dv_frm_save_final_channel(__s32 buff[32][2])
+static void dv_frm_save_final_channel(__s32 buff[16][2])
 {
 	__s32 i,j;
 	__s32 tmp = 0;
 
-	for(i = 0; i < 32; i++)
+	for(i = 0; i < 16; i++)
 	{
-		for(j = i; j < 32; j++)
+		for(j = i; j < 16; j++)
 		{
 			if(buff[i][1] < buff[j][1])
 			{
@@ -102,7 +102,7 @@ static void dv_frm_save_final_channel(__s32 buff[32][2])
 		}
 	}
 
-	for(i = 0; i < 32; i++)
+	for(i = 0; i < 16; i++)
 	{
 		__mymsg("buff[%d] = %d, value = %d\n", i, buff[i][0], buff[i][1]);
 	}
@@ -119,7 +119,7 @@ static void dv_frm_save_freq(__u32 channel, __u32 value)
 	while(freq_save_buff[i][0])
 	{
 		i++;
-		if(i>32)
+		if(i>16)
 		{
 			break;
 		}
@@ -129,7 +129,7 @@ static void dv_frm_save_freq(__u32 channel, __u32 value)
 	freq_save_buff[i][0] = channel;
 	freq_save_buff[i][1] = value;
 	
-	for(i = 0; i < 32; i++)
+	for(i = 0; i < 16; i++)
 	{	
 		if(freq_save_buff[i][0])
 		{
@@ -1221,7 +1221,7 @@ static __s32 __dv_frm_on_key_proc(__gui_msg_t *msg)
 		{
 			spi_auto_srch->max_channel += 1;
 		}
-		if((spi_auto_srch->max_channel > 31)||(spi_auto_srch->max_channel < 0))
+		if((spi_auto_srch->max_channel > 15)||(spi_auto_srch->max_channel < 0))
 		{
 			spi_auto_srch->max_channel = 0;
 		}
@@ -1277,9 +1277,9 @@ static __s32 __dv_frm_on_key_proc(__gui_msg_t *msg)
 		{
 			spi_auto_srch->max_channel -= 1;
 		}
-		if((spi_auto_srch->max_channel > 31)||(spi_auto_srch->max_channel < 0))
+		if((spi_auto_srch->max_channel > 15)||(spi_auto_srch->max_channel < 0))
 		{
-			spi_auto_srch->max_channel = 31;
+			spi_auto_srch->max_channel = 15;
 		}
 		eLIBs_fioctrl(ktemp, DRV_KEY_CMD_AUTO_SEARCH_SPI, NULL, &spi_auto_srch->max_channel);
 		esKRNL_TimeDly(35);
@@ -1481,7 +1481,7 @@ static __s32 __dv_frm_on_key_proc(__gui_msg_t *msg)
     return EPDK_OK;
 }
 
-extern __u32  channel_freq[32];
+extern __u32  channel_freq[16];
 static void __dv_frm_srch_begin(void)
 {
 	ES_FILE *ktemp;
@@ -1608,7 +1608,8 @@ static __s32 __dv_frm_on_timer_proc(__gui_msg_t *msg)
 #endif
 			eLIBs_fclose( ktemp );
 		}
-		if(++spi_auto_srch->channel >31)
+		//if(++spi_auto_srch->channel >31)
+		if(++spi_auto_srch->channel > 15)
 		{
 			spi_auto_srch->search_end = 1;
 			spi_auto_srch->channel = 0;
@@ -1640,14 +1641,14 @@ static __s32 __dv_frm_on_timer_proc(__gui_msg_t *msg)
 #ifdef DV_FRM_SAVE_FREQ
 		if(key_value.single_value >= MAX_FREQ_SAVE_VALUE)
 		{
-			dv_frm_save_freq(32, key_value.single_value);
+			dv_frm_save_freq(16, key_value.single_value);
 		}
 #endif
 		
 		if(spi_auto_srch->max_value < key_value.single_value)
 		{
 			spi_auto_srch->max_value = key_value.single_value; 
-			spi_auto_srch->max_channel = 31;
+			spi_auto_srch->max_channel = 15;
 		}
 		__mymsg("spi_auto_srch->max_value = %d,spi_auto_srch->max_channel = %d\n",spi_auto_srch->max_value, spi_auto_srch->max_channel);
 
@@ -1657,7 +1658,9 @@ static __s32 __dv_frm_on_timer_proc(__gui_msg_t *msg)
 
 		dly_nop();
 		dly_nop();
-
+		dly_nop();
+		dly_nop();
+		
 		eLIBs_fioctrl(ktemp, DRV_KEY_CMD_AUTO_SEARCH_SPI, NULL, &spi_auto_srch->max_channel);
 		dly_nop();
 		dly_nop();
@@ -1768,7 +1771,7 @@ __u32  channel_freq[32]=
 	5945,
 };
 
-#else
+#elif 0
 __u32  channel_freq[32]=
 {
 	5945,		// 1	5945
@@ -1854,6 +1857,27 @@ __u32  channel_freq[32]=
 
 };
 */
+	#else
+	__u32  channel_freq[16]=
+		{
+                5657,
+			   	5676,
+		        5695,
+		        5714,
+		        5733,
+		        5752,
+		        5771,
+		        5790,
+		        5809,
+		        5828,
+		        5847,
+		        5866,
+		        5885,
+		        5904,
+		        5923,
+		        5942
+		        
+		};
 #endif
 
 static H_LYR dv_32bpp_layer_create(RECT *rect, __s32 pipe)
