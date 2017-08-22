@@ -1,33 +1,3 @@
----- max_channel Matches (40 in 2 files) ----
-App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):	__u8 max_channel;
-App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):			spi_auto_srch->max_channel = 0;
-App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):						spi_auto_srch->max_channel = spi_auto_srch->channel - 1;
-App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):						__msg("spi_auto_srch->max_channel = %d\n", spi_auto_srch->max_channel);
-App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):				spi_auto_srch->max_channel = 31;
-App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):			__msg("spi_auto_srch->max_channel = %d\n", spi_auto_srch->max_channel);
-App_av1.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\av1):			eLIBs_fioctrl(ktemp, DRV_KEY_CMD_AUTO_SEARCH_SPI, NULL, &spi_auto_srch->max_channel);
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):	__u8 max_channel;
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):		spi_auto_srch->max_channel = 0;
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):	__msg("dv_save_value, spi_auto_srch->max_channel = %d\n", spi_auto_srch->max_channel);
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):	dv_para->channel = spi_auto_srch->max_channel;
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):	spi_auto_srch->max_channel = channel;
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):			spi_auto_srch->max_channel = 0;
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):			spi_auto_srch->max_channel = freq_save_buff[freq_save_switch][0]-1;
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):			__mymsg("spi_auto_srch->max_channel = %d, freq_save_switch = %d\n", spi_auto_srch->max_channel, freq_save_switch);
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):			spi_auto_srch->max_channel += 1;
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):		if((spi_auto_srch->max_channel > 15)||(spi_auto_srch->max_channel < 0))
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):			spi_auto_srch->max_channel = 0;
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):		eLIBs_fioctrl(ktemp, DRV_KEY_CMD_AUTO_SEARCH_SPI, NULL, &spi_auto_srch->max_channel);
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):		__app_dv_draw_freq_hbar(dv_frm_ctrl->subset, channel_freq[spi_auto_srch->max_channel]);
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):			spi_auto_srch->max_channel = freq_save_buff[freq_save_switch][0]-1;
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):			__mymsg("spi_auto_srch->max_channel = %d, freq_save_switch = %d\n", spi_auto_srch->max_channel, freq_save_switch);
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):			spi_auto_srch->max_channel -= 1;
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):		if((spi_auto_srch->max_channel > 15)||(spi_auto_srch->max_channel < 0))
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):			spi_auto_srch->max_channel = 15;
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):		eLIBs_fioctrl(ktemp, DRV_KEY_CMD_AUTO_SEARCH_SPI, NULL, &spi_auto_srch->max_channel);
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):		__app_dv_draw_freq_hbar(dv_frm_ctrl->subset, channel_freq[spi_auto_srch->max_channel]);
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):					spi_auto_srch->max_channel = spi_auto_srch->channel - 1;
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):			spi_auto_srch->max_channel = 15;
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):		__mymsg("spi_auto_srch->max_value = %d,spi_auto_srch->max_channel = %d\n",spi_auto_srch->max_value, spi_auto_srch->max_channel);
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):		eLIBs_fioctrl(ktemp, DRV_KEY_CMD_AUTO_SEARCH_SPI, NULL, &spi_auto_srch->max_channel);
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):		__app_dv_draw_freq_hbar(dv_frm_ctrl->subset, channel_freq[spi_auto_srch->max_channel]);			
+---- dv_signal_level_handle Matches (2 in 1 files) ----
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):static __u32 dv_signal_level_handle(__u32 level)
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):	next_signal_level = dv_signal_level_handle(level);

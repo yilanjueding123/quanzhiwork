@@ -65,7 +65,7 @@ typedef enum
 
 enum
 {
-    DV_LEVEL_NOSIGNAL = 0,
+    DV_LEVEL_NOSIGNAL = 2,
     DV_LEVEL_SIGNAL_1,
     DV_LEVEL_SIGNAL_2,
     DV_LEVEL_SIGNAL_3,

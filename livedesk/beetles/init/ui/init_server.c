@@ -1024,7 +1024,7 @@ static __s32 init_mainwin_cb(__gui_msg_t *msg)
         init_ctr->close_scn_time_id	   		= CLOSE_SCN_TIME_ID;
         init_ctr->auto_off_time_id			= AUTO_OFF_TIME_ID;
         /* 低电查询定时器 */
-        init_ctr->low_power_check_timeout	= 100;							// 1s
+        init_ctr->low_power_check_timeout	= 150;							// 1s
         /* cursor 隐藏定时器 */
         init_ctr->cursor_timeout   			= 500;							// 5s
 

@@ -19,7 +19,7 @@
 #include "dv_common.h"
 #include "app_root_scene.h"
 
-#if  1
+#if 1
 //#define __here__            eLIBs_printf("@L%d(%s)\n", __LINE__, __FILE__);
 #define __mymsg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
 						     eLIBs_printf(__VA_ARGS__)									        )
@@ -65,6 +65,7 @@ typedef enum
 
 static auto_search *spi_auto_srch;
 static KEY_FLAG key_flag = KEY_NONE_ACTION;
+static __u8 draw_single_flg = 1;
 static DV_APP_CONVERT destory_clear_flg = DV_VEDIO_CAMEREA_APP;
 
 //static __u32   dv_single_level = 0;
@@ -1527,7 +1528,7 @@ static void app_dv_search_dialog_create(dv_frmwin_para_t  *dv_frm_ctrl)
 
 	dv_dialog_search_creat(dv_frm_ctrl, &rect, dv_frm_ctrl->uipara->msg_box_bg , dv_frm_ctrl->uipara->search_id);
 }
-
+static __u8 clear_redcnt=0;
 static __s32 __dv_frm_on_timer_proc(__gui_msg_t *msg)
 {
     dv_frmwin_para_t        	*dv_frm_ctrl;
@@ -1535,6 +1536,24 @@ static __s32 __dv_frm_on_timer_proc(__gui_msg_t *msg)
 
     dv_frm_ctrl = (dv_frmwin_para_t *)GUI_WinGetAttr(msg->h_deswin);
 
+
+
+/////////////////////////////////////////////////////////////////////////////
+
+	if(draw_single_flg)
+	{
+		if(clear_redcnt)
+		{
+		  	clear_redcnt--;
+			if(!clear_redcnt)
+			{
+			 	__dv_frm_srch_finsh();
+			}
+		}
+	}
+
+
+/////////////////////////////////////////////////////////////////////////////
     if(msg->dwAddData1 == TIMER_STATUS_ID)    // 录像时，更新当前已录制时间;回放时，更新当前播放时间和进度
     {
         // 录像状态检测
@@ -1557,6 +1576,35 @@ static __s32 __dv_frm_on_timer_proc(__gui_msg_t *msg)
 			spi_auto_srch->key_save_flg = 0;
 		}
 
+		if(draw_single_flg)
+		{
+			__s32 i;
+			ES_FILE *ktemp;
+			single_t key_value;
+			
+			ktemp = eLIBs_fopen("b:\\INPUT\\MATRIX_KEY", "w");
+			if(!ktemp)
+	    	{
+				return EPDK_OK;
+	    	}
+			__dv_frm_srch_begin();
+			clear_redcnt=15;
+			for(i = 0; i<5; i++)
+			{
+				dly_nop();			
+			}
+			eLIBs_fioctrl(ktemp, DRV_KEY_CMD_SET_FIRST_DEBOUNCE_TIME, NULL, &key_value);
+			__mymsg("key_value.single_value = %d\n", key_value.single_value);
+#ifdef	APP_DV_HBAR
+			__app_dv_draw_signal_level(dv_frm_ctrl->subset, key_value.single_value);
+#endif
+			//dly_nop();
+			//dly_nop();
+			//dly_nop();
+			//__dv_frm_srch_finsh();
+			eLIBs_fclose(ktemp);
+		}
+
     }
     else if(msg->dwAddData1 == TIMER_DIALOAG_TIMEOUT_ID)
     {
@@ -1569,6 +1617,7 @@ static __s32 __dv_frm_on_timer_proc(__gui_msg_t *msg)
 
 		if(KEY_PRESS_ACTION == key_flag)
 		{
+			draw_single_flg = 0;
 			__dv_frm_srch_begin();
 			if(spi_auto_srch->channel)
 			{
@@ -1579,9 +1628,9 @@ static __s32 __dv_frm_on_timer_proc(__gui_msg_t *msg)
 					return EPDK_OK;
 		    	}
 				eLIBs_fioctrl(ktemp1, DRV_KEY_CMD_SET_FIRST_DEBOUNCE_TIME, NULL, &key_value);
-#ifdef	APP_DV_HBAR
-				__app_dv_draw_signal_level(dv_frm_ctrl->subset, key_value.single_value);
-#endif
+//#ifdef	APP_DV_HBAR
+//				__app_dv_draw_signal_level(dv_frm_ctrl->subset, key_value.single_value);
+//#endif
 				__mymsg("spi_auto_srch->channel = %d,key_value.single_value = %d\n",spi_auto_srch->channel - 1, key_value.single_value);
 #ifdef DV_FRM_SAVE_FREQ
 				if(key_value.single_value >= MAX_FREQ_SAVE_VALUE)
@@ -1608,6 +1657,7 @@ static __s32 __dv_frm_on_timer_proc(__gui_msg_t *msg)
 #endif
 			eLIBs_fclose( ktemp );
 		}
+//		draw_single_flg = 0;
 		//if(++spi_auto_srch->channel >31)
 		if(++spi_auto_srch->channel > 15)
 		{
@@ -1630,6 +1680,7 @@ static __s32 __dv_frm_on_timer_proc(__gui_msg_t *msg)
 	{
 		ES_FILE *ktemp;
 		single_t key_value;
+		__s32 i = 0;
 		
 		ktemp = eLIBs_fopen("b:\\INPUT\\MATRIX_KEY", "w");
 		if(!ktemp)
@@ -1655,15 +1706,15 @@ static __s32 __dv_frm_on_timer_proc(__gui_msg_t *msg)
 #ifdef	APP_DV_HBAR
 		__app_dv_draw_signal_level(dv_frm_ctrl->subset, spi_auto_srch->max_value);
 #endif
-
-		dly_nop();
-		dly_nop();
-		dly_nop();
-		dly_nop();
-		
+	
+		for(i = 0; i<25; i++)
+		{
+			dly_nop();
+		}
 		eLIBs_fioctrl(ktemp, DRV_KEY_CMD_AUTO_SEARCH_SPI, NULL, &spi_auto_srch->max_channel);
 		dly_nop();
 		dly_nop();
+		
 #ifdef	APP_DV_HBAR	
 		__app_dv_draw_freq_hbar(dv_frm_ctrl->subset, channel_freq[spi_auto_srch->max_channel]);			
 #endif
@@ -1673,6 +1724,7 @@ static __s32 __dv_frm_on_timer_proc(__gui_msg_t *msg)
 		spi_auto_srch->key_save_flg = 1;
 		key_flag = KEY_NONE_ACTION;
 		__dv_frm_srch_finsh();
+		draw_single_flg = 1;
 		dv_dialog_destroy(dv_frm_ctrl);
 #ifdef APP_DV_SUPOORT_BREAK		
 		if(dv_frm_ctrl->switch_frm == DV_SRCH_APP)
@@ -1857,27 +1909,27 @@ __u32  channel_freq[32]=
 
 };
 */
-	#else
-	__u32  channel_freq[16]=
-		{
-                5657,
-			   	5676,
-		        5695,
-		        5714,
-		        5733,
-		        5752,
-		        5771,
-		        5790,
-		        5809,
-		        5828,
-		        5847,
-		        5866,
-		        5885,
-		        5904,
-		        5923,
-		        5942
-		        
-		};
+#else
+__u32  channel_freq[16]=
+{
+    5657,
+   	5676,
+    5695,
+    5714,
+    5733,
+    5752,
+    5771,
+    5790,
+    5809,
+    5828,
+    5847,
+    5866,
+    5885,
+    5904,
+    5923,
+    5942
+    
+};
 #endif
 
 static H_LYR dv_32bpp_layer_create(RECT *rect, __s32 pipe)
@@ -1989,7 +2041,7 @@ static __u32 dv_signal_level_handle(__u32 level)
 			ret = DV_LEVEL_SIGNAL_5;
 			break;
 	}
-	return ret;
+	return ret - 2;
 }
 
 static __s32 check_disk(void)
