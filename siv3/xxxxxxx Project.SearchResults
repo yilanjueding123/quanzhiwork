@@ -1,3 +1,6 @@
----- dv_signal_level_handle Matches (2 in 1 files) ----
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):static __u32 dv_signal_level_handle(__u32 level)
-Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv):	next_signal_level = dv_signal_level_handle(level);
+---- setup_dv_flg Matches (5 in 2 files) ----
+App_root_scene.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\app_root)://__u8 setup_dv_flg = 0;		//开机的时候最小频率
+App_root_scene.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\app_root)://		setup_dv_flg = 1;
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv)://extern __u8 setup_dv_flg;
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv)://	if(setup_dv_flg)
+Dv_frm.c (f:\pri_f25\zhibo\work\livedesk\beetles\applets\dv)://	setup_dv_flg = 0;

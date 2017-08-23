@@ -97,8 +97,8 @@ twi_sda         = port:PA7<2>
 ;uart_debug_tx   = port:PF2<3>
 ;uart_debug_rx   = port:PF4<3>
 
-uart_debug_port = 1
-uart_debug_tx   = port:PA3<5>
+;uart_debug_port = 1
+;uart_debug_tx   = port:PA3<5>
 ;uart_debug_rx   = port:PA2<5>
 
 ;uart_debug_port = 2

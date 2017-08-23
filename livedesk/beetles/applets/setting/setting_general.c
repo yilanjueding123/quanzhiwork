@@ -20,7 +20,7 @@
 #include "setting_para.h"
 
 
-#if 1
+#if 0
 #define __msg(...)    		(eLIBs_printf("MSG:L%d(%s):", __LINE__, __FILE__),                 \
 						     eLIBs_printf(__VA_ARGS__)									        )
 #else
@@ -324,6 +324,12 @@ static void setting_clear_screen(void)
 {
 	GUI_ClearRect(0, 0, 480, 232);
 }
+
+static void setting_popinf_clear_screen(void)
+{
+	GUI_ClearRect(30, 30, 440 , 202);
+}
+
 
 static void setting_restore_default(__gui_msg_t *msg)
 {
@@ -1002,6 +1008,7 @@ static __s32 setting_generl_popinf_content_paint(__gui_msg_t *msg)
     GUI_LyrWinCacheOn();
     GUI_OpenAlphaBlend();
     GUI_LyrWinGetScnWindow(general_attr->layer, &rect);
+	setting_popinf_clear_screen();
     switch (general_attr->pop_inf_new_focus)
     {
     case 0:
@@ -1465,6 +1472,7 @@ static __s32 setting_general_popinf_item_paint(__gui_msg_t *msg)
     GUI_LyrWinCacheOn();
     GUI_OpenAlphaBlend();
     GUI_LyrWinGetScnWindow(general_attr->layer, &rect);
+	setting_popinf_clear_screen();
     for(i = 0; i < 3; i++)
     {
         switch(i)
@@ -1904,7 +1912,7 @@ static __s32 seting_pop_information_paint(__gui_msg_t *msg)
 
     GUI_LyrWinGetScnWindow(general_attr->layer, &rect);
 
-
+	setting_popinf_clear_screen();
     for(i = 0; i < 3; i++)
     {
         switch(i)
@@ -2831,6 +2839,7 @@ static __s32  setting_general_key_proc(__gui_msg_t *msg)
         case GUI_MSG_KEY_LONGLEFT:
         {
 			__msg("GUI_MSG_KEY_LEFT\n");
+			
             main_cmd2parent(msg->h_deswin, ID_OP_UP, general_attr->new_focus, 0);
         }
         break;
@@ -2838,6 +2847,7 @@ static __s32  setting_general_key_proc(__gui_msg_t *msg)
         case GUI_MSG_KEY_LONGRIGHT:
         {
 			__msg("GUI_MSG_KEY_RIGHT\n");
+			
             main_cmd2parent(msg->h_deswin, ID_OP_DOWN, general_attr->new_focus, 0);
         }
         break;

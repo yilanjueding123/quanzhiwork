@@ -41,7 +41,7 @@ typedef struct   valuet
 __u8  freq_save_flg = 0;
 __u8  freq_save_cnt = 0;
 __u8  freq_save_switch = 0;
-__s32 freq_save_buff[32][2] = {0};
+__s32 freq_save_buff[DV_FREQ_CNT][2] = {0};
 #endif
 
 typedef struct __auto_search
@@ -67,10 +67,9 @@ static auto_search *spi_auto_srch;
 static KEY_FLAG key_flag = KEY_NONE_ACTION;
 static __u8 draw_single_flg = 1;
 static DV_APP_CONVERT destory_clear_flg = DV_VEDIO_CAMEREA_APP;
-
 //static __u32   dv_single_level = 0;
 //static __u32   dv_prevsingle_level = 0xff;
-static __u32 next_signal_level, prev_signal_level;
+static __s32 next_signal_level, prev_signal_level;
 #define SEARCH_TIMER_PERIOD		40
 #define TIMER_CAM_PERIOD 10
 
@@ -78,7 +77,7 @@ static __u32 next_signal_level, prev_signal_level;
 #ifdef APP_DV_HBAR
 static __s32 __app_dv_draw_rec_time_hbar(__gui_msg_t *msg, __u32 time);
 static __s32 __app_dv_draw_rec_batt_status(H_LYR hlyr);
-extern __u32  channel_freq[16];
+extern __u32  channel_freq[DV_FREQ_CNT];
 #endif
 static void __dv_frm_srch_begin(void);
 static void __dv_frm_srch_finsh(void);
@@ -120,7 +119,7 @@ static void dv_frm_save_freq(__u32 channel, __u32 value)
 	while(freq_save_buff[i][0])
 	{
 		i++;
-		if(i>16)
+		if(i>DV_FREQ_CNT)
 		{
 			break;
 		}
@@ -130,7 +129,7 @@ static void dv_frm_save_freq(__u32 channel, __u32 value)
 	freq_save_buff[i][0] = channel;
 	freq_save_buff[i][1] = value;
 	
-	for(i = 0; i < 16; i++)
+	for(i = 0; i < DV_FREQ_CNT; i++)
 	{	
 		if(freq_save_buff[i][0])
 		{
@@ -937,7 +936,7 @@ static __s32 __dv_frm_on_create(__gui_msg_t *msg)
 	{
 		for(i = 0; i<2; i++)
 		{
-			for(j = 0; j<32; j++)
+			for(j = 0; j<DV_FREQ_CNT; j++)
 			{	
 				freq_save_buff[j][i] = 0;
 			}
@@ -959,7 +958,7 @@ static __s32 __dv_frm_on_create(__gui_msg_t *msg)
 #else
 	for(i = 0; i<2; i++)
 	{
-		for(j = 0; j<32; j++)
+		for(j = 0; j<DV_FREQ_CNT; j++)
 		{	
 			freq_save_buff[j][i] = 0;
 		}
@@ -967,7 +966,7 @@ static __s32 __dv_frm_on_create(__gui_msg_t *msg)
 	key_flag = KEY_NONE_ACTION;
 #endif	
 		
-	next_signal_level = prev_signal_level = 0;
+	next_signal_level = prev_signal_level = -1;
 #endif
 	
     return EPDK_OK;
@@ -1137,6 +1136,13 @@ static __s32 __dv_frm_on_key_proc(__gui_msg_t *msg)
 	    {
 	    	return EPDK_OK;
 		}
+		
+#ifdef APP_DV_SUPOORT_BREAK
+		if((dv_frm_ctrl->switch_frm == DV_VEDIO_CAMEREA_APP)&&(!dv_frm_ctrl->longChSearch))
+		{
+			return EPDK_OK;
+		}
+#endif	
 
 		if(msg->dwAddData2 == KEY_REPEAT_ACTION)
 		{
@@ -1149,7 +1155,7 @@ static __s32 __dv_frm_on_key_proc(__gui_msg_t *msg)
 #ifdef DV_FRM_SAVE_FREQ
 			for(i = 0; i<2; i++)
 			{
-				for(j = 0; j<32; j++)
+				for(j = 0; j<DV_FREQ_CNT; j++)
 				{	
 					freq_save_buff[j][i] = 0;
 				}
@@ -1222,7 +1228,7 @@ static __s32 __dv_frm_on_key_proc(__gui_msg_t *msg)
 		{
 			spi_auto_srch->max_channel += 1;
 		}
-		if((spi_auto_srch->max_channel > 15)||(spi_auto_srch->max_channel < 0))
+		if((spi_auto_srch->max_channel > DV_FREQ_CNT - 1)||(spi_auto_srch->max_channel < 0))
 		{
 			spi_auto_srch->max_channel = 0;
 		}
@@ -1278,9 +1284,9 @@ static __s32 __dv_frm_on_key_proc(__gui_msg_t *msg)
 		{
 			spi_auto_srch->max_channel -= 1;
 		}
-		if((spi_auto_srch->max_channel > 15)||(spi_auto_srch->max_channel < 0))
+		if((spi_auto_srch->max_channel > DV_FREQ_CNT - 1)||(spi_auto_srch->max_channel < 0))
 		{
-			spi_auto_srch->max_channel = 15;
+			spi_auto_srch->max_channel = DV_FREQ_CNT - 1;
 		}
 		eLIBs_fioctrl(ktemp, DRV_KEY_CMD_AUTO_SEARCH_SPI, NULL, &spi_auto_srch->max_channel);
 		esKRNL_TimeDly(35);
@@ -1482,7 +1488,7 @@ static __s32 __dv_frm_on_key_proc(__gui_msg_t *msg)
     return EPDK_OK;
 }
 
-extern __u32  channel_freq[16];
+extern __u32  channel_freq[DV_FREQ_CNT];
 static void __dv_frm_srch_begin(void)
 {
 	ES_FILE *ktemp;
@@ -1594,7 +1600,7 @@ static __s32 __dv_frm_on_timer_proc(__gui_msg_t *msg)
 				dly_nop();			
 			}
 			eLIBs_fioctrl(ktemp, DRV_KEY_CMD_SET_FIRST_DEBOUNCE_TIME, NULL, &key_value);
-			__mymsg("key_value.single_value = %d\n", key_value.single_value);
+			//__mymsg("key_value.single_value = %d\n", key_value.single_value);
 #ifdef	APP_DV_HBAR
 			__app_dv_draw_signal_level(dv_frm_ctrl->subset, key_value.single_value);
 #endif
@@ -1659,7 +1665,7 @@ static __s32 __dv_frm_on_timer_proc(__gui_msg_t *msg)
 		}
 //		draw_single_flg = 0;
 		//if(++spi_auto_srch->channel >31)
-		if(++spi_auto_srch->channel > 15)
+		if(++spi_auto_srch->channel > DV_FREQ_CNT - 1)
 		{
 			spi_auto_srch->search_end = 1;
 			spi_auto_srch->channel = 0;
@@ -1692,14 +1698,14 @@ static __s32 __dv_frm_on_timer_proc(__gui_msg_t *msg)
 #ifdef DV_FRM_SAVE_FREQ
 		if(key_value.single_value >= MAX_FREQ_SAVE_VALUE)
 		{
-			dv_frm_save_freq(16, key_value.single_value);
+			dv_frm_save_freq(DV_FREQ_CNT, key_value.single_value);
 		}
 #endif
 		
 		if(spi_auto_srch->max_value < key_value.single_value)
 		{
 			spi_auto_srch->max_value = key_value.single_value; 
-			spi_auto_srch->max_channel = 15;
+			spi_auto_srch->max_channel = DV_FREQ_CNT - 1;
 		}
 		__mymsg("spi_auto_srch->max_value = %d,spi_auto_srch->max_channel = %d\n",spi_auto_srch->max_value, spi_auto_srch->max_channel);
 
@@ -1730,6 +1736,7 @@ static __s32 __dv_frm_on_timer_proc(__gui_msg_t *msg)
 		if(dv_frm_ctrl->switch_frm == DV_SRCH_APP)
 		{
 			dv_frm_ctrl->switch_frm = DV_VEDIO_CAMEREA_APP;
+			dv_frm_ctrl->longChSearch = 1;
 			__mymsg("dv_frm_ctrl->switch_frm = %d\n", dv_frm_ctrl->switch_frm);
 		}
 #endif		
@@ -1910,8 +1917,51 @@ __u32  channel_freq[32]=
 };
 */
 #else
-__u32  channel_freq[16]=
+__u32  channel_freq[DV_FREQ_CNT]=
 {
+	5645,
+	5658,
+	5665,
+	5685,
+	5695,
+	5705,
+	5725,
+	5732,
+	5733,
+	5740,
+	5745,
+	5752,
+	5760,
+	5765,
+	5769,
+	5771,
+	5780,
+	5785,
+	5790,
+	5800,
+	5805,
+	5806,
+	5809,
+	5820,
+	5825,
+	5828,
+	5840,
+	5843,
+	5845,
+	5847,
+	5860,
+	5865,
+	5866,
+	5880,
+	//5880,
+	5885,
+	5905,
+	5917,
+	5925,
+	5945,
+
+};
+/*{
     5657,
    	5676,
     5695,
@@ -1930,6 +1980,107 @@ __u32  channel_freq[16]=
     5942
     
 };
+*/
+//{
+//	5865,// 1		5865
+//	5733,// 2		5733
+//	5705,// 3		5705
+//	5740,// 4		5740
+//	5658,// 5		5658
+
+//	5845,// 6		5845
+//	5752,// 7		5752
+//	5685,// 8		5685
+//	5760,// 9		5760
+//	5695,// 10		5695
+
+//	5825,// 11		5825
+//	5771,// 12		5771
+//	5665,// 13		5665
+//	5780,// 14		5780
+//	5732,// 15		5732
+
+//	5805,// 16		5805
+//	5790,// 17		5790
+//	5645,// 18		5645
+//	5800,// 19		5800
+//	5769,// 20		5769
+
+//	5785,// 21		5785
+//	5809,// 22		5809
+//	5885,// 23		5885
+//	5820,// 24		5820
+//	5806,// 25		5806
+
+//	5765,// 26		5765
+//	5828,// 27		5828
+//	5905,// 28		5905
+//	5840,// 29		5840
+//	5843,// 30		5843
+
+//	5745,// 31		5745
+//	5847,// 32		5847
+//	5925,// 33		5925
+//	5860,// 34		5860
+//	5880,// 35		5880
+
+//	5725,// 36		5725
+//	5866,// 37		5866
+//	5945,// 38		5945
+//	5880,// 39		5880
+//	5917,// 40		5917
+//	
+//};
+/*
+{
+	5865,
+	5845,
+	5825,
+	5805,
+	5785,
+	5765,
+	5745,
+	5725,
+
+	
+	5733,
+	5752,
+	5771,
+	5790,
+	5809,
+	5828,
+	5847,
+	5866,
+	
+	5705,
+	5685,
+	5665,
+	5645,
+	5885,
+	5905,
+	5925,
+	5945,
+	
+	5740,
+	5760,
+	5780,
+	5800,
+	5820,
+	5840,
+	5860,
+	5880,
+	
+	5658,
+	5695,
+	5732,
+	5769,
+	5806,
+	5843,
+	5880,
+	5917,
+};
+*/
+
 #endif
 
 static H_LYR dv_32bpp_layer_create(RECT *rect, __s32 pipe)
@@ -2722,19 +2873,22 @@ __s32 dv_frm_destroy( H_WIN h_win )
     dv_frmwin_para_t        	*dv_frm_ctrl;
 
     __msg("dv_frm_destroy\n");
-
     dv_frm_ctrl = (dv_frmwin_para_t *)GUI_WinGetAttr(h_win);
 	if(destory_clear_flg == DV_SRCH_APP)
 	{
 		for(i = 0; i<2; i++)
 		{
-			for(j = 0; j<32; j++)
+			for(j = 0; j<DV_FREQ_CNT; j++)
 			{	
 				freq_save_buff[j][i] = 0;
 			}
 		}
 		freq_save_flg = 0;
 		freq_save_switch = freq_save_cnt = 0;
+	}
+	if(dv_frm_ctrl->dialoag_lyr_hdl)
+	{
+		dv_dialog_destroy(dv_frm_ctrl);
 	}
     // for frame win ,there is no need to call  GUI_FrmWinDelete to destroy frame win ,because the function of  GUI_LyrWinDelete will do that
     GUI_LyrWinDelete(dv_frm_ctrl->frm_lyr_hdl);

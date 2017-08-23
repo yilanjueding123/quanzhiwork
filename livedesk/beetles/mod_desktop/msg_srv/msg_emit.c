@@ -137,7 +137,7 @@ __s32 msg_srv_init_key_channel(__memit_ctr_t *emit)
     __msg("LdevID=%d\n", LdevID);
 
     //设置时间间隔单位为1ms，
-    if (esINPUT_LdevCtl(LdevID, INPUT_SET_REP_PERIOD, 500, NULL) != EPDK_OK)
+    if (esINPUT_LdevCtl(LdevID, INPUT_SET_REP_PERIOD, 700, NULL) != EPDK_OK)
     {
         eLIBs_printf("logical device ioctl failed\n");
         return EPDK_FAIL;

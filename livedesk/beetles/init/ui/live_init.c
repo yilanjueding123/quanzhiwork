@@ -80,7 +80,13 @@ __s32 live_init(void)
 #ifndef  BOOT_FROM_SDMMC	   //¿¨Á¿²ú
     {
         reg_system_para_t *para;
+		reg_dv_para_t * dv_para;
         para = (reg_system_para_t *)dsk_reg_get_para_by_app(REG_APP_SYSTEM);
+		dv_para = (reg_dv_para_t *)dsk_reg_get_para_by_app(REG_APP_DV);
+		if(dv_para)
+		{
+			dv_para->channel = 0;
+		}
         if(para)
         {
             //dsk_set_gamma(lion_reg_gamma_get());

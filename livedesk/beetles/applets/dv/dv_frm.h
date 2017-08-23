@@ -45,6 +45,7 @@ typedef struct tag_frmwin_para
 #endif
 #ifdef APP_DV_SUPOORT_BREAK
 	DV_APP_CONVERT		switch_frm;
+	__u8				longChSearch;
 #endif
 
 
