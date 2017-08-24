@@ -180,7 +180,7 @@ __s32 dev_matrix_key_ioctrl(__hdle hKey, __u32 cmd, __s32 aux, void *pbuffer)
 	case DRV_KEY_CMD_AUTO_SEARCH_SPI:
 	{
 		__u8* channel = (__u8*)pbuffer;
-		//eLIBs_printf("----channel = %d\n", *channel);
+		eLIBs_printf("----channel = %d\n", *channel);
 		spi_write_chanelfreq(*channel);
 		//read_single_flag = 1;
 		break;

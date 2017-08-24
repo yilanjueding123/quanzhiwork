@@ -101,5 +101,6 @@ extern __u32   photo_file_index;
 
 #define  ID_OP_DV_TO_HOME     0
 #define 	LOOP_VIDEO_ONOFF
+#define LONG_KEY_BROSER
 
 #endif /* __DV_FRMWIN_H__ */
