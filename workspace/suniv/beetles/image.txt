@@ -1,39 +1,39 @@
-image.cfgF:\pri_f25\zhibo\eStudio\Softwares\eDragonEx220\
-F:\pri_f25\zhibo\work\workspace\suniv\beetles 529
+image.cfgF:\pri_f25\zhibo\5633\eStudio\Softwares\eDragonEx220\
+F:\pri_f25\zhibo\5633\work\workspace\suniv\beetles 529
 szSysconfig = (null)
 0000000000 szFileList=FILELIST
 filecnt=15
 1111111111111szFileName=ePDKv100.img
-2222222szFileName=F:\pri_f25\zhibo\work\workspace\suniv\eFex\\sys_config.fex
-2222222szFileName=F:\pri_f25\zhibo\work\workspace\suniv\eFex\\sys_config.fex
-2222222szFileName=F:\pri_f25\zhibo\work\workspace\suniv\eFex\\usb\\split_xxxx.fex
-2222222szFileName=F:\pri_f25\zhibo\work\workspace\suniv\eFex\\sys_partition.fex
-2222222szFileName=F:\pri_f25\zhibo\work\workspace\suniv\beetles\boot0.bin
-2222222szFileName=F:\pri_f25\zhibo\work\workspace\suniv\beetles\boot0.bin
-2222222szFileName=F:\pri_f25\zhibo\work\workspace\suniv\beetles\u-boot.fex
-2222222szFileName=F:\pri_f25\zhibo\work\workspace\suniv\beetles\fes1.fex
-2222222szFileName=F:\pri_f25\zhibo\work\workspace\suniv\beetles\melis100.fex
-2222222szFileName=F:\pri_f25\zhibo\work\workspace\suniv\beetles\verify.fex
-2222222szFileName=F:\pri_f25\zhibo\work\workspace\suniv\eFex\\usb\\usbtool.fex
-2222222szFileName=F:\pri_f25\zhibo\work\workspace\suniv\eFex\\card\\cardtool.fex
-2222222szFileName=F:\pri_f25\zhibo\work\workspace\suniv\eFex\\card\\cardscript.fex
-2222222szFileName=F:\pri_f25\zhibo\work\workspace\suniv\beetles\sunxi_mbr.fex
-2222222szFileName=F:\pri_f25\zhibo\work\workspace\suniv\eFex\\card\\dlinfo.fex
- F:\pri_f25\zhibo\work\workspace\suniv\eFex\\sys_config.fex, COMMON  , SYS_CONFIG100000, 0
- F:\pri_f25\zhibo\work\workspace\suniv\eFex\\sys_config.fex, COMMON  , SYS_CONFIG_BIN00, 0
- F:\pri_f25\zhibo\work\workspace\suniv\eFex\\usb\\split_xxxx.fex, COMMON  , SPLIT_0000000000, 0
- F:\pri_f25\zhibo\work\workspace\suniv\eFex\\sys_partition.fex, COMMON  , SYS_CONFIG000000, 0
- F:\pri_f25\zhibo\work\workspace\suniv\beetles\boot0.bin, BOOT    , BOOT0_0000000000, 0
- F:\pri_f25\zhibo\work\workspace\suniv\beetles\boot0.bin, 12345678, 1234567890BOOT_0, 0
- F:\pri_f25\zhibo\work\workspace\suniv\beetles\u-boot.fex, 12345678, UBOOT_0000000000, 0
- F:\pri_f25\zhibo\work\workspace\suniv\beetles\fes1.fex, FES     , FES_1-0000000000, 0
- F:\pri_f25\zhibo\work\workspace\suniv\beetles\melis100.fex, 12345678, FULLIMG_00000000, 0
- F:\pri_f25\zhibo\work\workspace\suniv\beetles\verify.fex, RFSFAT16, VFULLIMG_0000000, 0
- F:\pri_f25\zhibo\work\workspace\suniv\eFex\\usb\\usbtool.fex, PXTOOLSB, xxxxxxxxxxxxxxxx, 0
- F:\pri_f25\zhibo\work\workspace\suniv\eFex\\card\\cardtool.fex, 12345678, 1234567890cardtl, 0
- F:\pri_f25\zhibo\work\workspace\suniv\eFex\\card\\cardscript.fex, 12345678, 1234567890script, 0
- F:\pri_f25\zhibo\work\workspace\suniv\beetles\sunxi_mbr.fex, 12345678, 1234567890___MBR, 0
- F:\pri_f25\zhibo\work\workspace\suniv\eFex\\card\\dlinfo.fex, 12345678, 1234567890DLINFO, 0
+2222222szFileName=F:\pri_f25\zhibo\5633\work\workspace\suniv\eFex\\sys_config.fex
+2222222szFileName=F:\pri_f25\zhibo\5633\work\workspace\suniv\eFex\\sys_config.fex
+2222222szFileName=F:\pri_f25\zhibo\5633\work\workspace\suniv\eFex\\usb\\split_xxxx.fex
+2222222szFileName=F:\pri_f25\zhibo\5633\work\workspace\suniv\eFex\\sys_partition.fex
+2222222szFileName=F:\pri_f25\zhibo\5633\work\workspace\suniv\beetles\boot0.bin
+2222222szFileName=F:\pri_f25\zhibo\5633\work\workspace\suniv\beetles\boot0.bin
+2222222szFileName=F:\pri_f25\zhibo\5633\work\workspace\suniv\beetles\u-boot.fex
+2222222szFileName=F:\pri_f25\zhibo\5633\work\workspace\suniv\beetles\fes1.fex
+2222222szFileName=F:\pri_f25\zhibo\5633\work\workspace\suniv\beetles\melis100.fex
+2222222szFileName=F:\pri_f25\zhibo\5633\work\workspace\suniv\beetles\verify.fex
+2222222szFileName=F:\pri_f25\zhibo\5633\work\workspace\suniv\eFex\\usb\\usbtool.fex
+2222222szFileName=F:\pri_f25\zhibo\5633\work\workspace\suniv\eFex\\card\\cardtool.fex
+2222222szFileName=F:\pri_f25\zhibo\5633\work\workspace\suniv\eFex\\card\\cardscript.fex
+2222222szFileName=F:\pri_f25\zhibo\5633\work\workspace\suniv\beetles\sunxi_mbr.fex
+2222222szFileName=F:\pri_f25\zhibo\5633\work\workspace\suniv\eFex\\card\\dlinfo.fex
+ F:\pri_f25\zhibo\5633\work\workspace\suniv\eFex\\sys_config.fex, COMMON  , SYS_CONFIG100000, 0
+ F:\pri_f25\zhibo\5633\work\workspace\suniv\eFex\\sys_config.fex, COMMON  , SYS_CONFIG_BIN00, 0
+ F:\pri_f25\zhibo\5633\work\workspace\suniv\eFex\\usb\\split_xxxx.fex, COMMON  , SPLIT_0000000000, 0
+ F:\pri_f25\zhibo\5633\work\workspace\suniv\eFex\\sys_partition.fex, COMMON  , SYS_CONFIG000000, 0
+ F:\pri_f25\zhibo\5633\work\workspace\suniv\beetles\boot0.bin, BOOT    , BOOT0_0000000000, 0
+ F:\pri_f25\zhibo\5633\work\workspace\suniv\beetles\boot0.bin, 12345678, 1234567890BOOT_0, 0
+ F:\pri_f25\zhibo\5633\work\workspace\suniv\beetles\u-boot.fex, 12345678, UBOOT_0000000000, 0
+ F:\pri_f25\zhibo\5633\work\workspace\suniv\beetles\fes1.fex, FES     , FES_1-0000000000, 0
+ F:\pri_f25\zhibo\5633\work\workspace\suniv\beetles\melis100.fex, 12345678, FULLIMG_00000000, 0
+ F:\pri_f25\zhibo\5633\work\workspace\suniv\beetles\verify.fex, RFSFAT16, VFULLIMG_0000000, 0
+ F:\pri_f25\zhibo\5633\work\workspace\suniv\eFex\\usb\\usbtool.fex, PXTOOLSB, xxxxxxxxxxxxxxxx, 0
+ F:\pri_f25\zhibo\5633\work\workspace\suniv\eFex\\card\\cardtool.fex, 12345678, 1234567890cardtl, 0
+ F:\pri_f25\zhibo\5633\work\workspace\suniv\eFex\\card\\cardscript.fex, 12345678, 1234567890script, 0
+ F:\pri_f25\zhibo\5633\work\workspace\suniv\beetles\sunxi_mbr.fex, 12345678, 1234567890___MBR, 0
+ F:\pri_f25\zhibo\5633\work\workspace\suniv\eFex\\card\\dlinfo.fex, 12345678, 1234567890DLINFO, 0
 ret=0 111
 length=16155 0
 length=16155 0

@@ -45,7 +45,7 @@ typedef struct tag_frmwin_para
 #endif
 #ifdef APP_DV_SUPOORT_BREAK
 	DV_APP_CONVERT		switch_frm;
-	__u8				longChSearch;
+	__u8				longChSearch;		//用以控制search模式和camera模式中按键的不同功能
 #endif
 
 

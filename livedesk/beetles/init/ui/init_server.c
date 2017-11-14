@@ -665,7 +665,7 @@ static __s32 init_voltage_check(__gui_msg_t *msg)
         activity_notify_top(&msgex);
     }
 
-    //__msg("level=%d\n", level);
+    //eLIBs_printf("level=%d\n", level);
 
     old_vol_level = level;
     old_charge_state = charge_state;

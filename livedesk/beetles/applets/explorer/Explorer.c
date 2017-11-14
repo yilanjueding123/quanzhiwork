@@ -115,7 +115,7 @@ __s32 app_explorer_create(root_para_t  *para)
     explr_ctrl->explr_font = para->font;
 	
     __msg("para->root_type = %d\n", para->root_type);
-	
+		
     switch(para->data)
     {
     case ID_EXPLORER_ALL:

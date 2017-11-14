@@ -160,8 +160,43 @@ void PowerTask(void *parg)
     //计算实际电池电压(mV)
     Voltage = CalcVoltage(tmpVal);
 
-    __log("-----jh_Voltage=%d\n", Voltage);
+    eLIBs_printf("-----jh_Voltage=%d\n", Voltage);
 #if 1
+	if(Voltage < 4074)
+    {
+        //低电关机电压
+        pFuelguage->rest_vol = NO_PMU_BATTERY_LEVEL0;
+
+        //发送低电关机系统消息
+        //__msg("low power voltage detect...\n");
+        //esKSRV_SendMsg(KMSG_USR_KEY_POWEROFF, KMSG_PRIO_HIGH);
+    }
+    else if((Voltage >= 4074) && (Voltage <= 4156))
+    {
+        //电池电量为20%
+        pFuelguage->rest_vol = NO_PMU_BATTERY_LEVEL1;
+    }
+    else if((Voltage > 4156) && (Voltage <= 4318))
+    {
+        //电池电量为40%
+        pFuelguage->rest_vol = NO_PMU_BATTERY_LEVEL2;
+    }
+    else if((Voltage > 4318) && (Voltage <= 4482))
+    {
+        //电池电量为60%
+        pFuelguage->rest_vol = NO_PMU_BATTERY_LEVEL3;
+    }
+    else if((Voltage > 4482) && (Voltage <= 4644))
+    {
+        //电池电量为80%
+        pFuelguage->rest_vol = NO_PMU_BATTERY_LEVEL4;
+    }
+    else if(Voltage > 4644)
+    {
+        //电池电量为100%
+        pFuelguage->rest_vol = NO_PMU_BATTERY_LEVEL5;
+    }
+/*
 	if(Voltage < 3992)
     {
         //低电关机电压
@@ -196,6 +231,7 @@ void PowerTask(void *parg)
         //电池电量为100%
         pFuelguage->rest_vol = NO_PMU_BATTERY_LEVEL5;
     }
+	*/
 #else
     if(Voltage <= 3096)
     {
