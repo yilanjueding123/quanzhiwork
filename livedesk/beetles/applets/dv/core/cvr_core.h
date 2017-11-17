@@ -61,6 +61,7 @@ typedef enum tag_RECORD_QUALITY
     RECORD_QUALITY_640_480,
     RECORD_QUALITY_1280_720,
     RECORD_QUALITY_1920_1080,
+    RECORD_QUALITY_OTHER,
 } __record_quality_e;
 
 typedef enum tag_CAMERA_QUALITY

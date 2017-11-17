@@ -327,6 +327,7 @@ static void __dv_get_record_size(__u32 sensorID)
         dv_core->video_bps = 10000000;
     }
     break;
+	case RECORD_QUALITY_OTHER:
     default:
     {
         dv_core->rec_source_size.width = 720;

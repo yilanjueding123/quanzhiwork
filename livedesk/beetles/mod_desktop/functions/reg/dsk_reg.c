@@ -106,7 +106,7 @@ static __s32 __reg_paramter_init(reg_app_para_t *para)
     //  para->root_para.last_ebook_path_ud =0;
 
     para->movie_para.rotate_mode = 2; //ROTATE_ALL
-    para->movie_para.zoom_mode = 0; //VIDEO_RATIO
+    para->movie_para.zoom_mode = 1;//0; //VIDEO_RATIO
     para->movie_para.sub_state = 1; //on
     para->movie_para.sub_color = GUI_WHITE;
     para->movie_para.sub_stream = 0;

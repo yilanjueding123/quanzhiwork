@@ -66,6 +66,15 @@ typedef enum
 }KEY_FLAG;
 
 __u32  auto_srch_ch[] = {
+	1,
+	2,
+	3,
+	4,
+	5,
+	6,
+	7,
+	8,
+	/*
 	2 - 1,
 	5 - 1,
 	8 - 1,
@@ -74,6 +83,7 @@ __u32  auto_srch_ch[] = {
 	28 - 1,
 	34 - 1,
 	37 - 1,
+	*/
 };
 
 
@@ -469,7 +479,7 @@ static void  __dv_init(dv_frmwin_para_t *dv_frm_ctrl)
     if(dv_frm_ctrl->cur_state == DV_ON_REC)
     {
         tmp_config.work_mode    = WORK_MODE_REC;
-        tmp_config.rec_quality  = RECORD_QUALITY_1280_720 ;
+        tmp_config.rec_quality  = RECORD_QUALITY_OTHER;//RECORD_QUALITY_1280_720 ;
     }
     else if(dv_frm_ctrl->cur_state == DV_ON_CAM)
     {
@@ -1347,7 +1357,7 @@ static __s32 __dv_frm_on_key_proc(__gui_msg_t *msg)
 		}
 		//spi_auto_srch->key_save_flg = 1;
 		spi_auto_srch->save_cnt = 0;
-#ifdef	 DV_FRM_SAVE_FREQ
+#ifndef	 DV_FRM_SAVE_FREQ
 		if(freq_save_flg && dv_frm_ctrl->longChSearch)
 		{
 			
@@ -1381,9 +1391,9 @@ static __s32 __dv_frm_on_key_proc(__gui_msg_t *msg)
 		__app_dv_draw_signal_level(dv_frm_ctrl->subset, key_value.single_value);
 		__app_dv_draw_freq_hbar(dv_frm_ctrl->subset, channel_freq[spi_auto_srch->max_channel]);
 #endif
+		dv_save_value();
 		spi_auto_srch->key_save_flg = 1;
 		__dv_frm_srch_finsh();
-		dv_save_value();
 		return EPDK_OK;
 	}
 	else if((msg->dwAddData1 == /*GUI_MSG_KEY_LEFT*/GUI_MSG_KEY_RIGHT)&&(msg->dwAddData2 == KEY_UP_ACTION))
@@ -1403,7 +1413,7 @@ static __s32 __dv_frm_on_key_proc(__gui_msg_t *msg)
 		}
 		//spi_auto_srch->key_save_flg = 1;
 		spi_auto_srch->save_cnt = 0;
-#ifdef	 DV_FRM_SAVE_FREQ
+#ifndef	 DV_FRM_SAVE_FREQ
 		if(freq_save_flg && dv_frm_ctrl->longChSearch)
 		{
 			
@@ -1436,9 +1446,9 @@ static __s32 __dv_frm_on_key_proc(__gui_msg_t *msg)
 		__app_dv_draw_signal_level(dv_frm_ctrl->subset, key_value.single_value);
 		__app_dv_draw_freq_hbar(dv_frm_ctrl->subset, channel_freq[spi_auto_srch->max_channel]);
 #endif
+		dv_save_value();
 		spi_auto_srch->key_save_flg = 1;
 		__dv_frm_srch_finsh();
-		dv_save_value();
 		return EPDK_OK;
 	}
 	
@@ -1803,7 +1813,7 @@ static __s32 __dv_frm_on_timer_proc(__gui_msg_t *msg)
 		//if(++spi_auto_srch->channel >31)
 		/*if(++spi_auto_srch->channel > DV_FREQ_CNT - 1)*/
 		++autoSrch_Increase;
-		if( autoSrch_Increase > 7)
+		if( autoSrch_Increase >= 7)
 		{
 			spi_auto_srch->search_end = 1;
 			spi_auto_srch->channel = auto_srch_ch[0] - 1;//0;
@@ -2071,45 +2081,53 @@ __u32  channel_freq[32]=
 
 __u32  channel_freq[DV_FREQ_CNT]=
 {
-	5645,							// 1
-	5658,							////// 2	
-	5665,							// 3
-	5685,							// 4
-	5695,							////// 5
-	5705,							// 6
-	5725,							// 7
-	5732,							////// 8
-	5733,							// 9
-	5740,							// 10
-	5745,							// 11
-	5752,							// 12
-	5760,							// 13
-	5765,							// 14
-	5769,							////// 15
-	5771,							// 16
-	5780,							// 17
-	5785,							// 18
-	5790,							// 19
-	5800,							// 20
-	5805,							// 21
-	5806,							////// 22
-	5809,							// 23
-	5820,							// 24
-	5825,							// 25
-	5828,							// 26
-	5840,							// 27
-	5843,							////// 28
-	5845,							// 29
-	5847,							// 30
-	5860,							// 31
-	5865,							// 32
-	5866,							// 33
-	5880,							////// 34
-	5885,							// 35
-	5905,							// 36
-	5917,							////// 37
-	5925,							// 38
-	5945,							// 39	
+//	5645,							// 1
+	5150,							//...1
+	//5658,							////// 2	
+//	5665,							// 3
+//	5685,							// 4
+	5170,							//...2
+	//5695,							////// 5
+//	5705,							// 6
+//	5725,							// 7
+	5190,							//...3
+	//5732,							////// 8
+//	5733,							// 9
+//	5740,							// 10
+//	5745,							// 11
+//	5752,							// 12
+//	5760,							// 13
+//	5765,							// 14
+	5200,							//...4
+	//5769,							////// 15
+//	5771,							// 16
+//	5780,							// 17
+//	5785,							// 18
+//	5790,							// 19
+//	5800,							// 20
+//	5805,							// 21
+	5210,							//...5
+	//5806,							////// 22
+//	5809,							// 23
+//	5820,							// 24
+//	5825,							// 25
+//	5828,							// 26
+//	5840,							// 27
+	5230,							//...6
+	//5843,							////// 28
+//	5845,							// 29
+//	5847,							// 30
+//	5860,							// 31
+//	5865,							// 32
+//	5866,							// 33
+	5240,							//...7
+	//5880,							////// 34
+//	5885,							// 35
+//	5905,							// 36
+	5250,							//...8
+	//5917,							////// 37
+//	5925,							// 38
+//	5945,							// 39	
 };
 /*{
     5657,
@@ -3024,6 +3042,7 @@ __s32 dv_frm_destroy( H_WIN h_win )
 
     __msg("dv_frm_destroy\n");
     dv_frm_ctrl = (dv_frmwin_para_t *)GUI_WinGetAttr(h_win);
+	//dsk_reg_flush();
 #ifdef DV_FRM_SAVE_FREQ	
 	//if(destory_clear_flg == DV_SRCH_APP)
 	{
@@ -3042,7 +3061,7 @@ __s32 dv_frm_destroy( H_WIN h_win )
 	{
 		dv_dialog_destroy(dv_frm_ctrl);
 	}
-
+	
     // for frame win ,there is no need to call  GUI_FrmWinDelete to destroy frame win ,because the function of  GUI_LyrWinDelete will do that
     GUI_LyrWinDelete(dv_frm_ctrl->frm_lyr_hdl);
 }

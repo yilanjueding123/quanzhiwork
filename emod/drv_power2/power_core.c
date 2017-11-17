@@ -160,7 +160,7 @@ void PowerTask(void *parg)
     //计算实际电池电压(mV)
     Voltage = CalcVoltage(tmpVal);
 
-    eLIBs_printf("-----jh_Voltage=%d\n", Voltage);
+    //eLIBs_printf("-----jh_Voltage=%d\n", Voltage);
 #if 1
 	if(Voltage < 4074)
     {

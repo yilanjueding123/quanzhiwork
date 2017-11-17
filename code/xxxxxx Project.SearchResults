@@ -1,14 +1,11 @@
----- Cvr_DvConfigPara Matches (13 in 4 files) ----
-Cvr_core.c (f:\pri_f25\zhibo\5633\work\livedesk\beetles\applets\dv\core):*                                               Cvr_DvConfigPara
-Cvr_core.c (f:\pri_f25\zhibo\5633\work\livedesk\beetles\applets\dv\core):__s32   Cvr_DvConfigPara(__dv_config_t *para)
-Cvr_core.h (f:\pri_f25\zhibo\5633\work\livedesk\beetles\applets\dv\core):*                                               Cvr_DvConfigPara
-Cvr_core.h (f:\pri_f25\zhibo\5633\work\livedesk\beetles\applets\dv\core):__s32   Cvr_DvConfigPara(__dv_config_t *para);
-Dv_frm.c (f:\pri_f25\zhibo\5633\work\livedesk\beetles\applets\dv):    Cvr_DvConfigPara(&tmp_config);
-Image.txt (f:\pri_f25\zhibo\5633\work\livedesk\beetles\applets):        0x00008548:    eb0010c0    ....    BL       Cvr_DvConfigPara  ; 0xc850
-Image.txt (f:\pri_f25\zhibo\5633\work\livedesk\beetles\applets):    Cvr_DvConfigPara
-Image.txt (f:\pri_f25\zhibo\5633\work\livedesk\beetles\applets):        0x0000c8d8:    1a000023    #...    BNE      0xc96c  ; Cvr_DvConfigPara + 284
-Image.txt (f:\pri_f25\zhibo\5633\work\livedesk\beetles\applets):        0x0000c968:    ea000028    (...    B        0xca10  ; Cvr_DvConfigPara + 448
-Image.txt (f:\pri_f25\zhibo\5633\work\livedesk\beetles\applets):        0x0000c97c:    1a00001f    ....    BNE      0xca00  ; Cvr_DvConfigPara + 432
-Image.txt (f:\pri_f25\zhibo\5633\work\livedesk\beetles\applets):        0x0000c9fc:    ea000003    ....    B        0xca10  ; Cvr_DvConfigPara + 448
-Image.txt (f:\pri_f25\zhibo\5633\work\livedesk\beetles\applets):        0x0000ca14:    eafffffc    ....    B        0xca0c  ; Cvr_DvConfigPara + 444
-Image.txt (f:\pri_f25\zhibo\5633\work\livedesk\beetles\applets):    7173  Cvr_DvConfigPara           0x0000c850   Gb    1  Code  Hi   0x1c8
+---- auto_srch_ch Matches (10 in 1 files) ----
+Dv_frm.c (f:\pri_f25\zhibo\5633\work\livedesk\beetles\applets\dv):__u32  auto_srch_ch[] = {
+Dv_frm.c (f:\pri_f25\zhibo\5633\work\livedesk\beetles\applets\dv):		spi_auto_srch->channel = auto_srch_ch[autoSrch_Increase];
+Dv_frm.c (f:\pri_f25\zhibo\5633\work\livedesk\beetles\applets\dv):			spi_auto_srch->channel = auto_srch_ch[autoSrch_Increase];
+Dv_frm.c (f:\pri_f25\zhibo\5633\work\livedesk\beetles\applets\dv):		spi_auto_srch->channel = auto_srch_ch[autoSrch_Increase];
+Dv_frm.c (f:\pri_f25\zhibo\5633\work\livedesk\beetles\applets\dv):		if(spi_auto_srch->channel !=  auto_srch_ch[0])
+Dv_frm.c (f:\pri_f25\zhibo\5633\work\livedesk\beetles\applets\dv):				dv_frm_save_freq(auto_srch_ch[autoSrch_Increase - 1]/*spi_auto_srch->channel*/, key_value.single_value);
+Dv_frm.c (f:\pri_f25\zhibo\5633\work\livedesk\beetles\applets\dv):			__mymsg("spi_auto_srch->channel = %d, %d\n", auto_srch_ch[autoSrch_Increase - 1], key_value.single_value);
+Dv_frm.c (f:\pri_f25\zhibo\5633\work\livedesk\beetles\applets\dv):				spi_auto_srch->max_channel = auto_srch_ch[autoSrch_Increase - 1];//spi_auto_srch->channel - 1;
+Dv_frm.c (f:\pri_f25\zhibo\5633\work\livedesk\beetles\applets\dv):			spi_auto_srch->channel = auto_srch_ch[0] - 1;//0;
+Dv_frm.c (f:\pri_f25\zhibo\5633\work\livedesk\beetles\applets\dv):			spi_auto_srch->max_channel = auto_srch_ch[autoSrch_Increase - 1];//DV_FREQ_CNT - 1;
